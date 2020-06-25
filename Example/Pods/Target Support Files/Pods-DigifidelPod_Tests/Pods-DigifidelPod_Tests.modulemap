@@ -1,0 +1,6 @@
+framework module Pods_DigifidelPod_Tests {
+  umbrella header "Pods-DigifidelPod_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

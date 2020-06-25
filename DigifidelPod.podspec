@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DigifidelPod'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of DigifidelPod.'
+  s.version          = '1.3.0'
+  s.summary          = 'The pod of Digifidel version 1.3.0'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,25 +18,27 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+  This is the official Digifidel pod. This version is for testing.
                        DESC
 
-  s.homepage         = 'https://github.com/deventuredev@gmail.com/DigifidelPod'
+  s.homepage         = 'https://github.com/deventuredev/DigifidelPod'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'deventuredev@gmail.com' => 'razvan.tamazlicariu@deventure.com' }
-  s.source           = { :git => 'https://github.com/deventuredev@gmail.com/DigifidelPod.git', :tag => s.version.to_s }
+  s.author           = { 'deventuredev@gmail.com' => 'razvan.tamazlicariu@deventure.co' }
+  s.source           = { :git => 'https://github.com/deventuredev/DigifidelPod.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '11.0'
+  s.swift_version = '5.0'
 
-  s.source_files = 'DigifidelPod/Classes/**/*'
+  #s.source_files = 'DigifidelPod/Classes/**/*'
   
   # s.resource_bundles = {
-  #   'DigifidelPod' => ['DigifidelPod/Assets/*.png']
+  #   'LooootPod' => ['DigifidelPod/Assets/*.png']
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  # s.frameworks = 'UIKit', 'MapKit', 'Loooot'
   # s.dependency 'AFNetworking', '~> 2.3'
+  s.vendored_frameworks = 'Loooot.framework'
 end

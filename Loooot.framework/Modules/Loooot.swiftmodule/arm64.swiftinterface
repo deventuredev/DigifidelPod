@@ -1,0 +1,3098 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Loooot
+import ARKit
+import AVFoundation
+import CoreLocation
+import Dispatch
+import Foundation
+import GoogleMaps
+@_exported import Loooot
+import MapKit
+import MobileCoreServices
+import SceneKit
+import Swift
+import SystemConfiguration
+import UIKit
+import UserNotifications
+public class PreferencesConstants {
+  public static let firstUse: Swift.String
+  public static let termsAndConditions: Swift.String
+  @objc deinit
+}
+@available(iOS 11.0, *)
+extension SceneLocationView : ARKit.ARSCNViewDelegate {
+  @objc dynamic public func renderer(_ renderer: SceneKit.SCNSceneRenderer, nodeFor anchor: ARKit.ARAnchor) -> SceneKit.SCNNode?
+  @objc dynamic public func renderer(_ renderer: SceneKit.SCNSceneRenderer, didAdd node: SceneKit.SCNNode, for anchor: ARKit.ARAnchor)
+  @objc dynamic public func renderer(_ renderer: SceneKit.SCNSceneRenderer, willUpdate node: SceneKit.SCNNode, for anchor: ARKit.ARAnchor)
+  @objc dynamic public func renderer(_ renderer: SceneKit.SCNSceneRenderer, didUpdate node: SceneKit.SCNNode, for anchor: ARKit.ARAnchor)
+  @objc dynamic public func renderer(_ renderer: SceneKit.SCNSceneRenderer, didRemove node: SceneKit.SCNNode, for anchor: ARKit.ARAnchor)
+}
+@available(iOS 11.0, *)
+extension SceneLocationView {
+  @objc dynamic public func session(_ session: ARKit.ARSession, didFailWithError error: Swift.Error)
+  @objc dynamic public func session(_ session: ARKit.ARSession, cameraDidChangeTrackingState camera: ARKit.ARCamera)
+  @objc dynamic public func sessionWasInterrupted(_ session: ARKit.ARSession)
+  @objc dynamic public func sessionInterruptionEnded(_ session: ARKit.ARSession)
+  @available(iOS 11.3, *)
+  @objc dynamic public func sessionShouldAttemptRelocalization(_ session: ARKit.ARSession) -> Swift.Bool
+  @objc dynamic public func session(_ session: ARKit.ARSession, didOutputAudioSampleBuffer audioSampleBuffer: CoreMedia.CMSampleBuffer)
+}
+@available(iOS 11.0, *)
+extension SceneLocationView {
+  @objc dynamic public func renderer(_ renderer: SceneKit.SCNSceneRenderer, didRenderScene scene: SceneKit.SCNScene, atTime time: Foundation.TimeInterval)
+  @objc dynamic public func renderer(_ renderer: SceneKit.SCNSceneRenderer, updateAtTime time: Foundation.TimeInterval)
+  @objc dynamic public func renderer(_ renderer: SceneKit.SCNSceneRenderer, didApplyAnimationsAtTime time: Foundation.TimeInterval)
+  @objc dynamic public func renderer(_ renderer: SceneKit.SCNSceneRenderer, didSimulatePhysicsAtTime time: Foundation.TimeInterval)
+  @objc dynamic public func renderer(_ renderer: SceneKit.SCNSceneRenderer, didApplyConstraintsAtTime time: Foundation.TimeInterval)
+  @objc dynamic public func renderer(_ renderer: SceneKit.SCNSceneRenderer, willRenderScene scene: SceneKit.SCNScene, atTime time: Foundation.TimeInterval)
+}
+public class ThemeImages {
+  public init(logo: Swift.String, cameraPermission: Swift.String, cameraPermissionDenied: Swift.String, locationPermission: Swift.String, locationPermissionDenied: Swift.String, noInternet: Swift.String, placeholderImage: Swift.String, campaignTab: Swift.String, homeTab: Swift.String, walletTab: Swift.String, startExperience: Swift.String, emptyCampaignList: Swift.String, emptyTokenList: Swift.String, emptyWallet: Swift.String, notifications: Swift.String, pinTab: Swift.String, faqTab: Swift.String)
+  public func getAppLogo() -> UIKit.UIImage
+  public func setAppLogo(name: Swift.String)
+  public func getCameraPermissionImage() -> UIKit.UIImage
+  public func setCameraPermissionImage(name: Swift.String)
+  public func getCameraDeniedImage() -> UIKit.UIImage
+  public func setCameraDeniedImage(name: Swift.String)
+  public func getLocationPermissionImage() -> UIKit.UIImage
+  public func setLocationPermissionImage(name: Swift.String)
+  public func getLocationDeniedImage() -> UIKit.UIImage
+  public func setlocationDeniedImage(name: Swift.String)
+  public func getNoInternetImage() -> UIKit.UIImage
+  public func setNoInternetImage(name: Swift.String)
+  public func getImagePlaceholder() -> UIKit.UIImage
+  public func setImagePlaceholder(name: Swift.String)
+  public func getPinTabImage() -> UIKit.UIImage
+  public func setPinTabImage(name: Swift.String)
+  public func getFAQTabImage() -> UIKit.UIImage
+  public func setFAQTabImage(name: Swift.String)
+  public func getCampaignTabImage() -> UIKit.UIImage
+  public func setCampaignTabImage(name: Swift.String)
+  public func getHomeTabImage() -> UIKit.UIImage
+  public func setHomeTabImage(name: Swift.String)
+  public func getWalletTabImage() -> UIKit.UIImage
+  public func setWalletTabImage(name: Swift.String)
+  public func getStartExperienceImage() -> UIKit.UIImage
+  public func setStartExperienceImage(name: Swift.String)
+  public func getEmptyCampaignImage() -> UIKit.UIImage
+  public func setEmptyCampaignImage(name: Swift.String)
+  public func getEmptyTokenListImage() -> UIKit.UIImage
+  public func getEmptyTokenListImage(name: Swift.String)
+  public func getEmptyWalletImage() -> UIKit.UIImage
+  public func setEmptyWalletImage(name: Swift.String)
+  public func getNotificationsImage() -> UIKit.UIImage
+  public func setNotificationsImage(name: Swift.String)
+  public func getBackIcon() -> UIKit.UIImage
+  public func getMenuIcon() -> UIKit.UIImage
+  @objc deinit
+}
+extension UIImageView {
+  public func setImage(imageUrl: Swift.String?, placeholder: UIKit.UIImage)
+}
+extension UIWindow {
+  public var visibleViewController: UIKit.UIViewController? {
+    get
+  }
+  public static func getVisibleViewControllerFrom(_ vc: UIKit.UIViewController?) -> UIKit.UIViewController?
+}
+@objc @IBDesignable public class RewardDetailsViewController : UIKit.UIViewController, UIKit.UINavigationBarDelegate, Loooot.RewardDetailsViewInitializeDelegate {
+  public static let StoryboardName: Swift.String
+  public var delegateView: Loooot.RewardDetailsDelegate!
+  @objc override dynamic public func viewDidLoad()
+  public func setNavigationBarTitle(title: Swift.String)
+  public func setDelegateView(view: Loooot.RewardDetailsDelegate)
+  public func setRewardIds(rewardId: Foundation.UUID?, rewardTypeId: Foundation.UUID)
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public protocol RewardDetailsViewInitializeDelegate {
+  func setNavigationBarTitle(title: Swift.String)
+}
+public protocol RewardDetailsDelegate {
+  func removeRewardFromWallet(rewardIdToRemove: Foundation.UUID)
+}
+@objc @IBDesignable public class RewardDetailsView : UIKit.UIView {
+  public var viewInitializeDelegate: Loooot.RewardDetailsViewInitializeDelegate?
+  public var delegate: Loooot.RewardDetailsDelegate?
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  public func setById(rewardId: Foundation.UUID?, typeId: Foundation.UUID)
+  public func setViewBackgroundColor(color: Swift.Int)
+  public func setRedeemButtonTextColor(color: Swift.Int)
+  public func setRedeemButtonColor(color: Swift.Int)
+  public func setDescriptionTextColor(color: Swift.Int)
+  public func setTokenNameTextColor(color: Swift.Int)
+  public func setRedemptionTextColor(color: Swift.Int)
+  public func setLoadingViewColor(color: Swift.Int)
+  public func setRedeemButtonText(text: Swift.String)
+  public func setRedemptionRulesText(text: Swift.String)
+  @objc deinit
+}
+public class ResponseCode {
+  public static let notSet: Swift.Int
+  public static let success: Swift.Int
+  public static let error: Swift.Int
+  public static let errorEmailInvalid: Swift.Int
+  public static let errorSavingEntity: Swift.Int
+  public static let errorNameCollision: Swift.Int
+  public static let errorFailedToUpdateMedia: Swift.Int
+  public static let errorGetCampaignTokenType: Swift.Int
+  public static let errorGetCampaigns: Swift.Int
+  public static let errorGetTokenType: Swift.Int
+  public static let errorGetLocationTokens: Swift.Int
+  public static let errorGetTokenToClaim: Swift.Int
+  public static let errorClaimingToken: Swift.Int
+  public static let errorUpdateClaimedTokenStatus: Swift.Int
+  public static let noTokensInWallet: Swift.Int
+  public static let errorGetTokenToRedeem: Swift.Int
+  public static let errorUpdateRedeemedTokenStatus: Swift.Int
+  public static let errorGetWalletTokens: Swift.Int
+  public static let errorRedeemingToken: Swift.Int
+  public static let errorTokenAlreadyClaimed: Swift.Int
+  public static let errorCannotCollectMoreTokensPerCampaign: Swift.Int
+  public static let errorCannotCollectMoreTokensPerDay: Swift.Int
+  public static let errorCannotCollectMoreTokensPerHour: Swift.Int
+  public static let errorCannotClaimTokensBecauseOfProximity: Swift.Int
+  public static let successHourlyLimitReached: Swift.Int
+  public static let successDailyLimitReached: Swift.Int
+  public static let successCampaignLimitReached: Swift.Int
+  public static func cannotCollectMoreTokens(statusCode: Swift.Int) -> Swift.Bool
+  public static func limitReached(statusCode: Swift.Int) -> Swift.Bool
+  @objc deinit
+}
+extension FloatingPoint {
+  public var degreesToRadians: Self {
+    get
+  }
+  public var radiansToDegrees: Self {
+    get
+  }
+}
+public class EndPoint {
+  public static let initializeLooootManager: Swift.String
+  public static let startSession: Swift.String
+  public static let downloadTerms: Swift.String
+  public static let getCampaigns: Swift.String
+  public static let redeemToken: Swift.String
+  public static let getTokenTypeById: Swift.String
+  public static let getTokenTypeByCampaign: Swift.String
+  public static let claimToken: Swift.String
+  public static let getTokensByLocation: Swift.String
+  public static let getTokens: Swift.String
+  public static let getWallet: Swift.String
+  public static let getNextAd: Swift.String
+  public static let adShown: Swift.String
+  public static let adTapped: Swift.String
+  @objc deinit
+}
+@objc @IBDesignable public class ExtendedItemTableViewCell : UIKit.UITableViewCell {
+  public static let Identifier: Swift.String
+  @objc override dynamic public func awakeFromNib()
+  public func setData(extendedItemModel: Loooot.ExtendedItemModel)
+  public func setViewBackgroundColor(color: Swift.Int)
+  public func setPictureBorderColor(color: Swift.Int)
+  public func setPictureBackgroundColor(color: Swift.Int)
+  public func setTitleTextColor(color: Swift.Int)
+  public func setSubtitleTextColor(color: Swift.Int)
+  public func setMessageTextColor(color: Swift.Int)
+  public func setArrowTintColor(color: Swift.Int)
+  @available(iOS 3.0, *)
+  @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public class ARItem {
+  public init(id: Foundation.UUID, name: Swift.String, location: CoreLocation.CLLocationCoordinate2D, image: UIKit.UIImage?)
+  public func getId() -> Foundation.UUID
+  public func setId(id: Foundation.UUID)
+  public func getName() -> Swift.String
+  public func setName(name: Swift.String)
+  public func getLocation() -> CoreLocation.CLLocationCoordinate2D
+  public func setLocation(location: CoreLocation.CLLocationCoordinate2D)
+  public func getImage() -> UIKit.UIImage?
+  public func setImage(image: UIKit.UIImage)
+  @objc deinit
+}
+public class Request {
+  public enum State {
+    case initialized
+    case resumed
+    case suspended
+    case cancelled
+    case finished
+    public static func == (a: Loooot.Request.State, b: Loooot.Request.State) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  final public let id: Foundation.UUID
+  final public let underlyingQueue: Dispatch.DispatchQueue
+  final public let serializationQueue: Dispatch.DispatchQueue
+  final public let eventMonitor: Loooot.EventMonitor?
+  final public let interceptor: Loooot.RequestInterceptor?
+  weak public var delegate: Loooot.RequestDelegate? {
+    get
+    }
+  public var state: Loooot.Request.State {
+    get
+  }
+  public var isInitialized: Swift.Bool {
+    get
+  }
+  public var isResumed: Swift.Bool {
+    get
+  }
+  public var isSuspended: Swift.Bool {
+    get
+  }
+  public var isCancelled: Swift.Bool {
+    get
+  }
+  public var isFinished: Swift.Bool {
+    get
+  }
+  public typealias ProgressHandler = (Foundation.Progress) -> Swift.Void
+  final public let uploadProgress: Foundation.Progress
+  final public let downloadProgress: Foundation.Progress
+  public var redirectHandler: Loooot.RedirectHandler? {
+    get
+  }
+  public var cachedResponseHandler: Loooot.CachedResponseHandler? {
+    get
+  }
+  public var credential: Foundation.URLCredential? {
+    get
+  }
+  public var requests: [Foundation.URLRequest] {
+    get
+  }
+  public var firstRequest: Foundation.URLRequest? {
+    get
+  }
+  public var lastRequest: Foundation.URLRequest? {
+    get
+  }
+  public var request: Foundation.URLRequest? {
+    get
+  }
+  public var performedRequests: [Foundation.URLRequest] {
+    get
+  }
+  public var response: Foundation.HTTPURLResponse? {
+    get
+  }
+  public var tasks: [Foundation.URLSessionTask] {
+    get
+  }
+  public var firstTask: Foundation.URLSessionTask? {
+    get
+  }
+  public var lastTask: Foundation.URLSessionTask? {
+    get
+  }
+  public var task: Foundation.URLSessionTask? {
+    get
+  }
+  public var allMetrics: [Foundation.URLSessionTaskMetrics] {
+    get
+  }
+  public var firstMetrics: Foundation.URLSessionTaskMetrics? {
+    get
+  }
+  public var lastMetrics: Foundation.URLSessionTaskMetrics? {
+    get
+  }
+  public var metrics: Foundation.URLSessionTaskMetrics? {
+    get
+  }
+  public var retryCount: Swift.Int {
+    get
+  }
+  public var error: Loooot.AFError? {
+    get
+  }
+  @discardableResult
+  public func cancel() -> Self
+  @discardableResult
+  public func suspend() -> Self
+  @discardableResult
+  public func resume() -> Self
+  @discardableResult
+  public func authenticate(username: Swift.String, password: Swift.String, persistence: Foundation.URLCredential.Persistence = .forSession) -> Self
+  @discardableResult
+  public func authenticate(with credential: Foundation.URLCredential) -> Self
+  @discardableResult
+  public func downloadProgress(queue: Dispatch.DispatchQueue = .main, closure: @escaping Loooot.Request.ProgressHandler) -> Self
+  @discardableResult
+  public func uploadProgress(queue: Dispatch.DispatchQueue = .main, closure: @escaping Loooot.Request.ProgressHandler) -> Self
+  @discardableResult
+  public func redirect(using handler: Loooot.RedirectHandler) -> Self
+  @discardableResult
+  public func cacheResponse(using handler: Loooot.CachedResponseHandler) -> Self
+  @discardableResult
+  public func cURLDescription(calling handler: @escaping (Swift.String) -> Swift.Void) -> Self
+  @objc deinit
+}
+extension Request : Swift.Equatable {
+  public static func == (lhs: Loooot.Request, rhs: Loooot.Request) -> Swift.Bool
+}
+extension Request : Swift.Hashable {
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension Request : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension Request {
+  public func cURLDescription() -> Swift.String
+}
+public protocol RequestDelegate : AnyObject {
+  var sessionConfiguration: Foundation.URLSessionConfiguration { get }
+  func cleanup(after request: Loooot.Request)
+  func retryResult(for request: Loooot.Request, dueTo error: Loooot.AFError, completion: @escaping (Loooot.RetryResult) -> Swift.Void)
+  func retryRequest(_ request: Loooot.Request, withDelay timeDelay: Foundation.TimeInterval?)
+}
+public class DataRequest : Loooot.Request {
+  final public let convertible: Loooot.URLRequestConvertible
+  public var data: Foundation.Data? {
+    get
+  }
+  @discardableResult
+  public func validate(_ validation: @escaping Loooot.DataRequest.Validation) -> Self
+  @objc deinit
+}
+public class DownloadRequest : Loooot.Request {
+  public struct Options : Swift.OptionSet {
+    public static let createIntermediateDirectories: Loooot.DownloadRequest.Options
+    public static let removePreviousFile: Loooot.DownloadRequest.Options
+    public let rawValue: Swift.Int
+    public init(rawValue: Swift.Int)
+    public typealias Element = Loooot.DownloadRequest.Options
+    public typealias ArrayLiteralElement = Loooot.DownloadRequest.Options
+    public typealias RawValue = Swift.Int
+  }
+  public typealias Destination = (Foundation.URL, Foundation.HTTPURLResponse) -> (destinationURL: Foundation.URL, options: Loooot.DownloadRequest.Options)
+  public class func suggestedDownloadDestination(for directory: Foundation.FileManager.SearchPathDirectory = .documentDirectory, in domain: Foundation.FileManager.SearchPathDomainMask = .userDomainMask, options: Loooot.DownloadRequest.Options = []) -> Loooot.DownloadRequest.Destination
+  public enum Downloadable {
+    case request(Loooot.URLRequestConvertible)
+    case resumeData(Foundation.Data)
+  }
+  public var resumeData: Foundation.Data? {
+    get
+  }
+  public var fileURL: Foundation.URL? {
+    get
+  }
+  final public let downloadable: Loooot.DownloadRequest.Downloadable
+  public func task(forResumeData data: Foundation.Data, using session: Foundation.URLSession) -> Foundation.URLSessionTask
+  @discardableResult
+  override public func cancel() -> Self
+  @discardableResult
+  public func cancel(producingResumeData shouldProduceResumeData: Swift.Bool) -> Self
+  @discardableResult
+  public func cancel(byProducingResumeData completionHandler: @escaping (Foundation.Data?) -> Swift.Void) -> Self
+  @discardableResult
+  public func validate(_ validation: @escaping Loooot.DownloadRequest.Validation) -> Self
+  @objc deinit
+}
+public class UploadRequest : Loooot.DataRequest {
+  public enum Uploadable {
+    case data(Foundation.Data)
+    case file(Foundation.URL, shouldRemove: Swift.Bool)
+    case stream(Foundation.InputStream)
+  }
+  final public let upload: Loooot.UploadableConvertible
+  final public let fileManager: Foundation.FileManager
+  public var uploadable: Loooot.UploadRequest.Uploadable?
+  override public func cleanup()
+  @objc deinit
+}
+public protocol UploadableConvertible {
+  func createUploadable() throws -> Loooot.UploadRequest.Uploadable
+}
+extension UploadRequest.Uploadable : Loooot.UploadableConvertible {
+  public func createUploadable() throws -> Loooot.UploadRequest.Uploadable
+}
+public protocol UploadConvertible : Loooot.URLRequestConvertible, Loooot.UploadableConvertible {
+}
+@objc @IBDesignable public class DigiFidelSimpleItemTableViewCell : UIKit.UITableViewCell {
+  public static let Identifier: Swift.String
+  @objc override dynamic public func awakeFromNib()
+  public func setData(simpleItemModel: Loooot.SimpleItemModel)
+  public func setViewBackgroundColor(color: Swift.Int)
+  public func setRewardTypeTextColor(color: Swift.Int)
+  public func setTitleTextColor(color: Swift.Int)
+  public func setSubtitleTextColor(color: Swift.Int)
+  @available(iOS 3.0, *)
+  @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc @IBDesignable public class SimpleItemTableViewCell : UIKit.UITableViewCell {
+  public static let Identifier: Swift.String
+  @objc override dynamic public func awakeFromNib()
+  public func setData(simpleItemModel: Loooot.SimpleItemModel)
+  public func setViewBackgroundColor(color: Swift.Int)
+  public func setPictureBorderColor(color: Swift.Int)
+  public func setPictureBackgroundColor(color: Swift.Int)
+  public func setTitleTextColor(color: Swift.Int)
+  public func setSubtitleTextColor(color: Swift.Int)
+  public func setArrowTintColor(color: Swift.Int)
+  @available(iOS 3.0, *)
+  @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public protocol LNTouchDelegate : AnyObject {
+  func locationNodeTouched(node: Loooot.AnnotationNode)
+}
+@available(iOS 11.0, *)
+public protocol SceneLocationViewEstimateDelegate : AnyObject {
+  func didAddSceneLocationEstimate(sceneLocationView: Loooot.SceneLocationView, position: SceneKit.SCNVector3, location: CoreLocation.CLLocation)
+  func didRemoveSceneLocationEstimate(sceneLocationView: Loooot.SceneLocationView, position: SceneKit.SCNVector3, location: CoreLocation.CLLocation)
+}
+@available(iOS 11.0, *)
+extension SceneLocationViewEstimateDelegate {
+  public func didAddSceneLocationEstimate(sceneLocationView: Loooot.SceneLocationView, position: SceneKit.SCNVector3, location: CoreLocation.CLLocation)
+  public func didRemoveSceneLocationEstimate(sceneLocationView: Loooot.SceneLocationView, position: SceneKit.SCNVector3, location: CoreLocation.CLLocation)
+}
+@available(iOS 11.0, *)
+public protocol SceneLocationViewDelegate : AnyObject {
+  func didConfirmLocationOfNode(sceneLocationView: Loooot.SceneLocationView, node: Loooot.LocationNode)
+  func didSetupSceneNode(sceneLocationView: Loooot.SceneLocationView, sceneNode: SceneKit.SCNNode)
+  func didUpdateLocationAndScaleOfLocationNode(sceneLocationView: Loooot.SceneLocationView, locationNode: Loooot.LocationNode)
+}
+@available(iOS 11.0, *)
+public protocol SceneTrackingDelegate : AnyObject {
+  func sessionWasInterrupted(_ session: ARKit.ARSession)
+  func sessionInterruptionEnded(_ session: ARKit.ARSession)
+  func session(_ session: ARKit.ARSession, didFailWithError error: Swift.Error)
+  func session(_ session: ARKit.ARSession, cameraDidChangeTrackingState camera: ARKit.ARCamera)
+}
+@available(iOS 11.0, *)
+extension SceneLocationViewDelegate {
+  public func didAddSceneLocationEstimate(sceneLocationView: Loooot.SceneLocationView, position: SceneKit.SCNVector3, location: CoreLocation.CLLocation)
+  public func didRemoveSceneLocationEstimate(sceneLocationView: Loooot.SceneLocationView, position: SceneKit.SCNVector3, location: CoreLocation.CLLocation)
+  public func didConfirmLocationOfNode(sceneLocationView: Loooot.SceneLocationView, node: Loooot.LocationNode)
+  public func didSetupSceneNode(sceneLocationView: Loooot.SceneLocationView, sceneNode: SceneKit.SCNNode)
+  public func didUpdateLocationAndScaleOfLocationNode(sceneLocationView: Loooot.SceneLocationView, locationNode: Loooot.LocationNode)
+}
+public protocol ParameterEncoder {
+  func encode<Parameters>(_ parameters: Parameters?, into request: Foundation.URLRequest) throws -> Foundation.URLRequest where Parameters : Swift.Encodable
+}
+open class JSONParameterEncoder : Loooot.ParameterEncoder {
+  public static var `default`: Loooot.JSONParameterEncoder {
+    get
+  }
+  public static var prettyPrinted: Loooot.JSONParameterEncoder {
+    get
+  }
+  @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+  public static var sortedKeys: Loooot.JSONParameterEncoder {
+    get
+  }
+  final public let encoder: Foundation.JSONEncoder
+  public init(encoder: Foundation.JSONEncoder = JSONEncoder())
+  open func encode<Parameters>(_ parameters: Parameters?, into request: Foundation.URLRequest) throws -> Foundation.URLRequest where Parameters : Swift.Encodable
+  @objc deinit
+}
+open class URLEncodedFormParameterEncoder : Loooot.ParameterEncoder {
+  public enum Destination {
+    case methodDependent
+    case queryString
+    case httpBody
+    public static func == (a: Loooot.URLEncodedFormParameterEncoder.Destination, b: Loooot.URLEncodedFormParameterEncoder.Destination) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public static var `default`: Loooot.URLEncodedFormParameterEncoder {
+    get
+  }
+  final public let encoder: Loooot.URLEncodedFormEncoder
+  final public let destination: Loooot.URLEncodedFormParameterEncoder.Destination
+  public init(encoder: Loooot.URLEncodedFormEncoder = URLEncodedFormEncoder(), destination: Loooot.URLEncodedFormParameterEncoder.Destination = .methodDependent)
+  open func encode<Parameters>(_ parameters: Parameters?, into request: Foundation.URLRequest) throws -> Foundation.URLRequest where Parameters : Swift.Encodable
+  @objc deinit
+}
+public class MinifiedMapToken {
+  public func setId(id: Foundation.UUID)
+  public func getId() -> Foundation.UUID
+  public func setGroupId(groupId: Foundation.UUID)
+  public func getGroupId() -> Foundation.UUID
+  public func setLatitude(lat: Swift.Double)
+  public func getLatitude() -> Swift.Double
+  public func setLongitude(long: Swift.Double)
+  public func getLongitude() -> Swift.Double
+  public init(json: [Swift.String : Any])
+  @objc deinit
+}
+public protocol RewardsTableViewDelegate {
+  func onRewardClicked(rewardTypeId: Foundation.UUID)
+}
+@objc @IBDesignable public class RewardListView : UIKit.UIView, UIKit.UITableViewDataSource, UIKit.UITableViewDelegate {
+  public var delegate: Loooot.RewardsTableViewDelegate?
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc override dynamic public func layoutSubviews()
+  @objc public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @objc public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
+  @objc public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  public func setTokens(tokens: Swift.Array<Loooot.TokenTypeList>!)
+  public func getTokens() -> Swift.Array<Loooot.TokenTypeList>
+  public func initTokenList(campaignId: Foundation.UUID, campaignName: Swift.String)
+  public func setRewardsTableBackgroundColor(color: Swift.Int)
+  public func setEmptyRewardListTextColor(color: Swift.Int)
+  public func setEmptyRewardListSuggestionTextColor(color: Swift.Int)
+  public func setLoadingViewColor(color: Swift.Int)
+  public func setCellBackgroundColor(color: Swift.Int)
+  public func setCellPictureBorderColor(color: Swift.Int)
+  public func setCellPictureBackgroundColor(color: Swift.Int)
+  public func setCellRewardTypeTextColor(color: Swift.Int)
+  public func setCellTitleTextColor(color: Swift.Int)
+  public func setCellSubtitleTextColor(color: Swift.Int)
+  public func setCellArrowTintColor(color: Swift.Int)
+  public func setEmptyListText(text: Swift.String)
+  public func setEmptyListSuggestionText(text: Swift.String)
+  @objc deinit
+}
+public class PermissionModel {
+  public init(image: UIKit.UIImage, deniedImage: UIKit.UIImage?, message: Swift.String, details: Swift.String, deniedMesage: Swift.String?, deniedDetails: Swift.String?, buttonText: Swift.String)
+  public func getImage() -> UIKit.UIImage
+  public func setImage(image: UIKit.UIImage)
+  public func getDeniedImage() -> UIKit.UIImage
+  public func setDeniedImage(deniedImage: UIKit.UIImage)
+  public func getMessage() -> Swift.String
+  public func setMessage(message: Swift.String)
+  public func getDetails() -> Swift.String
+  public func setDetails(details: Swift.String)
+  public func getDeniedMesage() -> Swift.String
+  public func setDeniedMesage(deniedMesage: Swift.String)
+  public func getDeniedDetails() -> Swift.String
+  public func setDeniedDetails(deniedDetails: Swift.String)
+  public func getButtonText() -> Swift.String
+  public func setButtonText(buttonText: Swift.String)
+  @objc deinit
+}
+@objc public class CustomBottomNavigation : UIKit.UITabBar {
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  public init(frame: CoreGraphics.CGRect, initialiseMannually: Swift.Bool)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc override dynamic public func layoutSubviews()
+  @objc deinit
+}
+extension NSNotification.Name {
+  public static let rewardCollectedAR: Foundation.Notification.Name
+  public static let rewardRedeemed: Foundation.Notification.Name
+  public static let didUpdateLocation: Foundation.Notification.Name
+  public static let showTurnOnLocationServiceAlert: Foundation.Notification.Name
+  public static let removeCampaign: Foundation.Notification.Name
+}
+extension Request {
+  public typealias ValidationResult = Swift.Result<Swift.Void, Swift.Error>
+}
+extension DataRequest {
+  public typealias Validation = (Foundation.URLRequest?, Foundation.HTTPURLResponse, Foundation.Data?) -> Loooot.DataRequest.ValidationResult
+  @discardableResult
+  public func validate<S>(statusCode acceptableStatusCodes: S) -> Self where S : Swift.Sequence, S.Element == Swift.Int
+  @discardableResult
+  public func validate<S>(contentType acceptableContentTypes: @autoclosure @escaping () -> S) -> Self where S : Swift.Sequence, S.Element == Swift.String
+  @discardableResult
+  public func validate() -> Self
+}
+extension DownloadRequest {
+  public typealias Validation = (Foundation.URLRequest?, Foundation.HTTPURLResponse, Foundation.URL?) -> Loooot.DownloadRequest.ValidationResult
+  @discardableResult
+  public func validate<S>(statusCode acceptableStatusCodes: S) -> Self where S : Swift.Sequence, S.Element == Swift.Int
+  @discardableResult
+  public func validate<S>(contentType acceptableContentTypes: @autoclosure @escaping () -> S) -> Self where S : Swift.Sequence, S.Element == Swift.String
+  @discardableResult
+  public func validate() -> Self
+}
+@objc @IBDesignable public class ErrorView : UIKit.UIView {
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  public func setImage(image: UIKit.UIImage)
+  public func setMessage(message: Swift.String)
+  public func setViewBackgroundColor(color: Swift.Int)
+  public func setMessageTextColor(color: Swift.Int)
+  @objc deinit
+}
+@objc @IBDesignable public class AdBannerView : UIKit.UIView {
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  public func setImageGestureRecognizer(gestureRecognizer: UIKit.UIGestureRecognizer)
+  public func setCloseGestureRecognizer(gestureRecognizer: UIKit.UIGestureRecognizer)
+  public func setAdImage(backgroundColor: Swift.String, imageUrl: Swift.String)
+  public func setAdHiding(isHidden: Swift.Bool)
+  public func setCloseButtonHiding(isHidden: Swift.Bool)
+  @objc deinit
+}
+@objc @IBDesignable public class DigiFidelCampaignTableViewCell : UIKit.UITableViewCell {
+  public static let Identifier: Swift.String
+  @objc override dynamic public func awakeFromNib()
+  public func setData(extendedItemModel: Loooot.ExtendedItemModel)
+  public func setViewBackgroundColor(color: Swift.Int)
+  public func setTitleTextColor(color: Swift.Int)
+  public func setSubtitleTextColor(color: Swift.Int)
+  public func setMessageTextColor(color: Swift.Int)
+  @available(iOS 3.0, *)
+  @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+extension SceneLocationEstimate {
+  public func locationTranslation(to position: SceneKit.SCNVector3) -> Loooot.LocationTranslation
+  public func translatedLocation(to position: SceneKit.SCNVector3) -> CoreLocation.CLLocation
+}
+public class GetAllTokensModel {
+  public func getPlayerId() -> Foundation.UUID
+  public func setPlayerId(playerId: Foundation.UUID)
+  public func getCampaignsIdList() -> Swift.Array<Foundation.UUID>
+  public func setCampaignsIdList(campaignsIdList: Swift.Array<Foundation.UUID>)
+  public func toJson() -> Swift.String
+  @objc deinit
+}
+public class LanguageSelected {
+  public static let englishDefault: Swift.Int
+  public static let french: Swift.Int
+  public static let creole: Swift.Int
+  @objc deinit
+}
+@objc @IBDesignable public class CampaignTableViewCell : UIKit.UITableViewCell {
+  public static let Identifier: Swift.String
+  @objc override dynamic public func awakeFromNib()
+  public func setData(extendedItemModel: Loooot.ExtendedItemModel)
+  public func setViewBackgroundColor(color: Swift.Int)
+  public func setTitleTextColor(color: Swift.Int)
+  public func setSubtitleTextColor(color: Swift.Int)
+  public func setMessageTextColor(color: Swift.Int)
+  public func setArrowTintColor(color: Swift.Int)
+  @available(iOS 3.0, *)
+  @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public protocol WalletViewDelegate {
+  func onWalletItemClicked(walletItem: Loooot.WalletList)
+}
+@objc @IBDesignable public class WalletView : UIKit.UIView, UIKit.UITableViewDataSource, UIKit.UITableViewDelegate, Loooot.RewardDetailsDelegate {
+  public var delegate: Loooot.WalletViewDelegate?
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc override dynamic public func layoutSubviews()
+  @objc public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @objc public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
+  @objc public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  public func removeRewardFromWallet(rewardIdToRemove: Foundation.UUID)
+  public func setWalletTokens(walletList: Swift.Array<Loooot.WalletList>!)
+  public func getWalletTokens() -> Swift.Array<Loooot.TokenTypeList>
+  public func setWalletBackgroundColor(color: Swift.Int)
+  public func setEmptyWalletTextColor(color: Swift.Int)
+  public func setEmptyWalletSuggestionTextColor(color: Swift.Int)
+  public func setLoadingViewColor(color: Swift.Int)
+  public func setCellBackgroundColor(color: Swift.Int)
+  public func setCellPictureBorderColor(color: Swift.Int)
+  public func setCellPictureBackgroundColor(color: Swift.Int)
+  public func setCellRewardTypeTextColor(color: Swift.Int)
+  public func setCellTitleTextColor(color: Swift.Int)
+  public func setCellSubtitleTextColor(color: Swift.Int)
+  public func setCellMessageTextColor(color: Swift.Int)
+  public func setCellArrowTintColor(color: Swift.Int)
+  public func setEmptyWalletText(text: Swift.String)
+  public func setEmptyWalletSuggestionText(text: Swift.String)
+  @objc deinit
+}
+public class ColorConstants {
+  public static let closeAdBackground: Swift.Int
+  public static let closeAdTint: Swift.Int
+  public static let closeARBackground: Swift.Int
+  public static let closeARTint: Swift.Int
+  @objc deinit
+}
+@objc open class AnnotationNode : SceneKit.SCNNode {
+  public var view: UIKit.UIView?
+  public var image: UIKit.UIImage?
+  public var id: Foundation.UUID?
+  public init(view: UIKit.UIView?, image: UIKit.UIImage?, id: Foundation.UUID?)
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc open class LocationNode : SceneKit.SCNNode {
+  public var location: CoreLocation.CLLocation!
+  public var tag: Swift.String?
+  public var locationConfirmed: Swift.Bool {
+    get
+  }
+  public var continuallyAdjustNodePositionWhenWithinRange: Swift.Bool
+  public var continuallyUpdatePositionAndScale: Swift.Bool
+  public var scaleRelativeToDistance: Swift.Bool
+  public var ignoreAltitude: Swift.Bool
+  public var scalingScheme: Loooot.ScalingScheme
+  public init(location: CoreLocation.CLLocation?)
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension UIView {
+  public func applyGradient(colors: [CoreGraphics.CGColor])
+}
+public class SceneLocationEstimate {
+  final public let location: CoreLocation.CLLocation
+  final public let position: SceneKit.SCNVector3
+  @objc deinit
+}
+@objc public class LocationManager : ObjectiveC.NSObject {
+  public var heading: CoreLocation.CLLocationDirection? {
+    get
+    }
+  public var headingAccuracy: CoreLocation.CLLocationDirection? {
+    get
+    }
+  @objc deinit
+}
+extension LocationManager : CoreLocation.CLLocationManagerDelegate {
+  @objc dynamic public func locationManager(_ manager: CoreLocation.CLLocationManager, didChangeAuthorization status: CoreLocation.CLAuthorizationStatus)
+  @objc dynamic public func locationManager(_ manager: CoreLocation.CLLocationManager, didUpdateLocations locations: [CoreLocation.CLLocation])
+  @objc dynamic public func locationManager(_ manager: CoreLocation.CLLocationManager, didUpdateHeading newHeading: CoreLocation.CLHeading)
+  @objc dynamic public func locationManagerShouldDisplayHeadingCalibration(_ manager: CoreLocation.CLLocationManager) -> Swift.Bool
+}
+public class Converter {
+  public static func radiansToDegrees(_ radians: Swift.Double) -> Swift.Double
+  public static func degreesToRadians(_ degrees: Swift.Double) -> Swift.Double
+  public static func convertTimeZoneToUrlString(currentTime: Swift.String) -> Swift.String
+  @objc deinit
+}
+open class ServerTrustManager {
+  final public let allHostsMustBeEvaluated: Swift.Bool
+  final public let evaluators: [Swift.String : Loooot.ServerTrustEvaluating]
+  public init(allHostsMustBeEvaluated: Swift.Bool = true, evaluators: [Swift.String : Loooot.ServerTrustEvaluating])
+  open func serverTrustEvaluator(forHost host: Swift.String) throws -> Loooot.ServerTrustEvaluating?
+  @objc deinit
+}
+public protocol ServerTrustEvaluating {
+  func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
+}
+final public class DefaultTrustEvaluator : Loooot.ServerTrustEvaluating {
+  public init(validateHost: Swift.Bool = true)
+  final public func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
+  @objc deinit
+}
+final public class RevocationTrustEvaluator : Loooot.ServerTrustEvaluating {
+  public struct Options : Swift.OptionSet {
+    public static let crl: Loooot.RevocationTrustEvaluator.Options
+    public static let networkAccessDisabled: Loooot.RevocationTrustEvaluator.Options
+    public static let ocsp: Loooot.RevocationTrustEvaluator.Options
+    public static let preferCRL: Loooot.RevocationTrustEvaluator.Options
+    public static let requirePositiveResponse: Loooot.RevocationTrustEvaluator.Options
+    public static let any: Loooot.RevocationTrustEvaluator.Options
+    public let rawValue: CoreFoundation.CFOptionFlags
+    public init(rawValue: CoreFoundation.CFOptionFlags)
+    public typealias Element = Loooot.RevocationTrustEvaluator.Options
+    public typealias ArrayLiteralElement = Loooot.RevocationTrustEvaluator.Options
+    public typealias RawValue = CoreFoundation.CFOptionFlags
+  }
+  public init(performDefaultValidation: Swift.Bool = true, validateHost: Swift.Bool = true, options: Loooot.RevocationTrustEvaluator.Options = .any)
+  final public func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
+  @objc deinit
+}
+final public class PinnedCertificatesTrustEvaluator : Loooot.ServerTrustEvaluating {
+  public init(certificates: [Security.SecCertificate] = Bundle.main.af.certificates, acceptSelfSignedCertificates: Swift.Bool = false, performDefaultValidation: Swift.Bool = true, validateHost: Swift.Bool = true)
+  final public func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
+  @objc deinit
+}
+final public class PublicKeysTrustEvaluator : Loooot.ServerTrustEvaluating {
+  public init(keys: [Security.SecKey] = Bundle.main.af.publicKeys, performDefaultValidation: Swift.Bool = true, validateHost: Swift.Bool = true)
+  final public func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
+  @objc deinit
+}
+final public class CompositeTrustEvaluator : Loooot.ServerTrustEvaluating {
+  public init(evaluators: [Loooot.ServerTrustEvaluating])
+  final public func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
+  @objc deinit
+}
+final public class DisabledEvaluator : Loooot.ServerTrustEvaluating {
+  public init()
+  final public func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
+  @objc deinit
+}
+extension Array where Element == Loooot.ServerTrustEvaluating {
+  public func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
+}
+extension Bundle : Loooot.AlamofireExtended {
+  public typealias ExtendedType = Foundation.Bundle
+}
+extension AlamofireExtension where ExtendedType : Foundation.Bundle {
+  public var certificates: [Security.SecCertificate] {
+    get
+  }
+  public var publicKeys: [Security.SecKey] {
+    get
+  }
+  public func paths(forResourcesOfTypes types: [Swift.String]) -> [Swift.String]
+}
+extension SecTrust : Loooot.AlamofireExtended {
+  public typealias ExtendedType = Security.SecTrust
+}
+extension AlamofireExtension where ExtendedType == Security.SecTrust {
+  public func validate(policy: Security.SecPolicy, errorProducer: (Darwin.OSStatus, Security.SecTrustResultType) -> Swift.Error) throws
+  public func apply(policy: Security.SecPolicy) throws -> Security.SecTrust
+  public func validate(errorProducer: (Darwin.OSStatus, Security.SecTrustResultType) -> Swift.Error) throws
+  public func setAnchorCertificates(_ certificates: [Security.SecCertificate]) throws
+  public var publicKeys: [Security.SecKey] {
+    get
+  }
+  public var certificates: [Security.SecCertificate] {
+    get
+  }
+  public var certificateData: [Foundation.Data] {
+    get
+  }
+  public func performDefaultValidation(forHost host: Swift.String) throws
+  public func performValidation(forHost host: Swift.String) throws
+}
+extension SecPolicy : Loooot.AlamofireExtended {
+  public typealias ExtendedType = Security.SecPolicy
+}
+extension AlamofireExtension where ExtendedType == Security.SecPolicy {
+  public static let `default`: Security.SecPolicy
+  public static func hostname(_ hostname: Swift.String) -> Security.SecPolicy
+  public static func revocation(options: Loooot.RevocationTrustEvaluator.Options) throws -> Security.SecPolicy
+}
+extension Array : Loooot.AlamofireExtended {
+  public typealias ExtendedType = Swift.Array<Element>
+}
+extension AlamofireExtension where ExtendedType == [Security.SecCertificate] {
+  public var data: [Foundation.Data] {
+    get
+  }
+  public var publicKeys: [Security.SecKey] {
+    get
+  }
+}
+extension SecCertificate : Loooot.AlamofireExtended {
+  public typealias ExtendedType = Security.SecCertificate
+}
+extension AlamofireExtension where ExtendedType == Security.SecCertificate {
+  public var publicKey: Security.SecKey? {
+    get
+  }
+}
+extension Int32 : Loooot.AlamofireExtended {
+  public typealias ExtendedType = Swift.Int32
+}
+extension AlamofireExtension where ExtendedType == Darwin.OSStatus {
+  public var isSuccess: Swift.Bool {
+    get
+  }
+}
+extension SecTrustResultType : Loooot.AlamofireExtended {
+  public typealias ExtendedType = Security.SecTrustResultType
+}
+extension AlamofireExtension where ExtendedType == Security.SecTrustResultType {
+  public var isSuccess: Swift.Bool {
+    get
+  }
+}
+extension Double {
+  public var metersToLatitude: Swift.Double {
+    get
+  }
+  public var metersToLongitude: Swift.Double {
+    get
+  }
+}
+extension Float {
+  public var short: Swift.String {
+    get
+  }
+}
+extension Int {
+  public var short: Swift.String {
+    get
+  }
+  public var short3: Swift.String {
+    get
+  }
+}
+public protocol EventMonitor {
+  var queue: Dispatch.DispatchQueue { get }
+  func urlSession(_ session: Foundation.URLSession, didBecomeInvalidWithError error: Swift.Error?)
+  func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didReceive challenge: Foundation.URLAuthenticationChallenge)
+  func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didSendBodyData bytesSent: Swift.Int64, totalBytesSent: Swift.Int64, totalBytesExpectedToSend: Swift.Int64)
+  func urlSession(_ session: Foundation.URLSession, taskNeedsNewBodyStream task: Foundation.URLSessionTask)
+  func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, willPerformHTTPRedirection response: Foundation.HTTPURLResponse, newRequest request: Foundation.URLRequest)
+  func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didFinishCollecting metrics: Foundation.URLSessionTaskMetrics)
+  func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didCompleteWithError error: Swift.Error?)
+  @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+  func urlSession(_ session: Foundation.URLSession, taskIsWaitingForConnectivity task: Foundation.URLSessionTask)
+  func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, didReceive data: Foundation.Data)
+  func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, willCacheResponse proposedResponse: Foundation.CachedURLResponse)
+  func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didResumeAtOffset fileOffset: Swift.Int64, expectedTotalBytes: Swift.Int64)
+  func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didWriteData bytesWritten: Swift.Int64, totalBytesWritten: Swift.Int64, totalBytesExpectedToWrite: Swift.Int64)
+  func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didFinishDownloadingTo location: Foundation.URL)
+  func request(_ request: Loooot.Request, didCreateInitialURLRequest urlRequest: Foundation.URLRequest)
+  func request(_ request: Loooot.Request, didFailToCreateURLRequestWithError error: Loooot.AFError)
+  func request(_ request: Loooot.Request, didAdaptInitialRequest initialRequest: Foundation.URLRequest, to adaptedRequest: Foundation.URLRequest)
+  func request(_ request: Loooot.Request, didFailToAdaptURLRequest initialRequest: Foundation.URLRequest, withError error: Loooot.AFError)
+  func request(_ request: Loooot.Request, didCreateURLRequest urlRequest: Foundation.URLRequest)
+  func request(_ request: Loooot.Request, didCreateTask task: Foundation.URLSessionTask)
+  func request(_ request: Loooot.Request, didGatherMetrics metrics: Foundation.URLSessionTaskMetrics)
+  func request(_ request: Loooot.Request, didFailTask task: Foundation.URLSessionTask, earlyWithError error: Loooot.AFError)
+  func request(_ request: Loooot.Request, didCompleteTask task: Foundation.URLSessionTask, with error: Loooot.AFError?)
+  func requestIsRetrying(_ request: Loooot.Request)
+  func requestDidFinish(_ request: Loooot.Request)
+  func requestDidResume(_ request: Loooot.Request)
+  func request(_ request: Loooot.Request, didResumeTask task: Foundation.URLSessionTask)
+  func requestDidSuspend(_ request: Loooot.Request)
+  func request(_ request: Loooot.Request, didSuspendTask task: Foundation.URLSessionTask)
+  func requestDidCancel(_ request: Loooot.Request)
+  func request(_ request: Loooot.Request, didCancelTask task: Foundation.URLSessionTask)
+  func request(_ request: Loooot.DataRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, data: Foundation.Data?, withResult result: Loooot.Request.ValidationResult)
+  func request(_ request: Loooot.DataRequest, didParseResponse response: Loooot.DataResponse<Foundation.Data?, Loooot.AFError>)
+  func request<Value>(_ request: Loooot.DataRequest, didParseResponse response: Loooot.DataResponse<Value, Loooot.AFError>)
+  func request(_ request: Loooot.UploadRequest, didCreateUploadable uploadable: Loooot.UploadRequest.Uploadable)
+  func request(_ request: Loooot.UploadRequest, didFailToCreateUploadableWithError error: Loooot.AFError)
+  func request(_ request: Loooot.UploadRequest, didProvideInputStream stream: Foundation.InputStream)
+  func request(_ request: Loooot.DownloadRequest, didFinishDownloadingUsing task: Foundation.URLSessionTask, with result: Swift.Result<Foundation.URL, Loooot.AFError>)
+  func request(_ request: Loooot.DownloadRequest, didCreateDestinationURL url: Foundation.URL)
+  func request(_ request: Loooot.DownloadRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, fileURL: Foundation.URL?, withResult result: Loooot.Request.ValidationResult)
+  func request(_ request: Loooot.DownloadRequest, didParseResponse response: Loooot.DownloadResponse<Foundation.URL?, Loooot.AFError>)
+  func request<Value>(_ request: Loooot.DownloadRequest, didParseResponse response: Loooot.DownloadResponse<Value, Loooot.AFError>)
+}
+extension EventMonitor {
+  public var queue: Dispatch.DispatchQueue {
+    get
+  }
+  public func urlSession(_ session: Foundation.URLSession, didBecomeInvalidWithError error: Swift.Error?)
+  public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didReceive challenge: Foundation.URLAuthenticationChallenge)
+  public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didSendBodyData bytesSent: Swift.Int64, totalBytesSent: Swift.Int64, totalBytesExpectedToSend: Swift.Int64)
+  public func urlSession(_ session: Foundation.URLSession, taskNeedsNewBodyStream task: Foundation.URLSessionTask)
+  public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, willPerformHTTPRedirection response: Foundation.HTTPURLResponse, newRequest request: Foundation.URLRequest)
+  public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didFinishCollecting metrics: Foundation.URLSessionTaskMetrics)
+  public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didCompleteWithError error: Swift.Error?)
+  public func urlSession(_ session: Foundation.URLSession, taskIsWaitingForConnectivity task: Foundation.URLSessionTask)
+  public func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, didReceive data: Foundation.Data)
+  public func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, willCacheResponse proposedResponse: Foundation.CachedURLResponse)
+  public func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didResumeAtOffset fileOffset: Swift.Int64, expectedTotalBytes: Swift.Int64)
+  public func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didWriteData bytesWritten: Swift.Int64, totalBytesWritten: Swift.Int64, totalBytesExpectedToWrite: Swift.Int64)
+  public func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didFinishDownloadingTo location: Foundation.URL)
+  public func request(_ request: Loooot.Request, didCreateInitialURLRequest urlRequest: Foundation.URLRequest)
+  public func request(_ request: Loooot.Request, didFailToCreateURLRequestWithError error: Loooot.AFError)
+  public func request(_ request: Loooot.Request, didAdaptInitialRequest initialRequest: Foundation.URLRequest, to adaptedRequest: Foundation.URLRequest)
+  public func request(_ request: Loooot.Request, didFailToAdaptURLRequest initialRequest: Foundation.URLRequest, withError error: Loooot.AFError)
+  public func request(_ request: Loooot.Request, didCreateURLRequest urlRequest: Foundation.URLRequest)
+  public func request(_ request: Loooot.Request, didCreateTask task: Foundation.URLSessionTask)
+  public func request(_ request: Loooot.Request, didGatherMetrics metrics: Foundation.URLSessionTaskMetrics)
+  public func request(_ request: Loooot.Request, didFailTask task: Foundation.URLSessionTask, earlyWithError error: Loooot.AFError)
+  public func request(_ request: Loooot.Request, didCompleteTask task: Foundation.URLSessionTask, with error: Loooot.AFError?)
+  public func requestIsRetrying(_ request: Loooot.Request)
+  public func requestDidFinish(_ request: Loooot.Request)
+  public func requestDidResume(_ request: Loooot.Request)
+  public func request(_ request: Loooot.Request, didResumeTask task: Foundation.URLSessionTask)
+  public func requestDidSuspend(_ request: Loooot.Request)
+  public func request(_ request: Loooot.Request, didSuspendTask task: Foundation.URLSessionTask)
+  public func requestDidCancel(_ request: Loooot.Request)
+  public func request(_ request: Loooot.Request, didCancelTask task: Foundation.URLSessionTask)
+  public func request(_ request: Loooot.DataRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, data: Foundation.Data?, withResult result: Loooot.Request.ValidationResult)
+  public func request(_ request: Loooot.DataRequest, didParseResponse response: Loooot.DataResponse<Foundation.Data?, Loooot.AFError>)
+  public func request<Value>(_ request: Loooot.DataRequest, didParseResponse response: Loooot.DataResponse<Value, Loooot.AFError>)
+  public func request(_ request: Loooot.UploadRequest, didCreateUploadable uploadable: Loooot.UploadRequest.Uploadable)
+  public func request(_ request: Loooot.UploadRequest, didFailToCreateUploadableWithError error: Loooot.AFError)
+  public func request(_ request: Loooot.UploadRequest, didProvideInputStream stream: Foundation.InputStream)
+  public func request(_ request: Loooot.DownloadRequest, didFinishDownloadingUsing task: Foundation.URLSessionTask, with result: Swift.Result<Foundation.URL, Loooot.AFError>)
+  public func request(_ request: Loooot.DownloadRequest, didCreateDestinationURL url: Foundation.URL)
+  public func request(_ request: Loooot.DownloadRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, fileURL: Foundation.URL?, withResult result: Loooot.Request.ValidationResult)
+  public func request(_ request: Loooot.DownloadRequest, didParseResponse response: Loooot.DownloadResponse<Foundation.URL?, Loooot.AFError>)
+  public func request<Value>(_ request: Loooot.DownloadRequest, didParseResponse response: Loooot.DownloadResponse<Value, Loooot.AFError>)
+}
+final public class CompositeEventMonitor : Loooot.EventMonitor {
+  final public let queue: Dispatch.DispatchQueue
+  final public func urlSession(_ session: Foundation.URLSession, didBecomeInvalidWithError error: Swift.Error?)
+  final public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didReceive challenge: Foundation.URLAuthenticationChallenge)
+  final public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didSendBodyData bytesSent: Swift.Int64, totalBytesSent: Swift.Int64, totalBytesExpectedToSend: Swift.Int64)
+  final public func urlSession(_ session: Foundation.URLSession, taskNeedsNewBodyStream task: Foundation.URLSessionTask)
+  final public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, willPerformHTTPRedirection response: Foundation.HTTPURLResponse, newRequest request: Foundation.URLRequest)
+  final public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didFinishCollecting metrics: Foundation.URLSessionTaskMetrics)
+  final public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didCompleteWithError error: Swift.Error?)
+  @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+  final public func urlSession(_ session: Foundation.URLSession, taskIsWaitingForConnectivity task: Foundation.URLSessionTask)
+  final public func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, didReceive data: Foundation.Data)
+  final public func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, willCacheResponse proposedResponse: Foundation.CachedURLResponse)
+  final public func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didResumeAtOffset fileOffset: Swift.Int64, expectedTotalBytes: Swift.Int64)
+  final public func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didWriteData bytesWritten: Swift.Int64, totalBytesWritten: Swift.Int64, totalBytesExpectedToWrite: Swift.Int64)
+  final public func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didFinishDownloadingTo location: Foundation.URL)
+  final public func request(_ request: Loooot.Request, didCreateInitialURLRequest urlRequest: Foundation.URLRequest)
+  final public func request(_ request: Loooot.Request, didFailToCreateURLRequestWithError error: Loooot.AFError)
+  final public func request(_ request: Loooot.Request, didAdaptInitialRequest initialRequest: Foundation.URLRequest, to adaptedRequest: Foundation.URLRequest)
+  final public func request(_ request: Loooot.Request, didFailToAdaptURLRequest initialRequest: Foundation.URLRequest, withError error: Loooot.AFError)
+  final public func request(_ request: Loooot.Request, didCreateURLRequest urlRequest: Foundation.URLRequest)
+  final public func request(_ request: Loooot.Request, didCreateTask task: Foundation.URLSessionTask)
+  final public func request(_ request: Loooot.Request, didGatherMetrics metrics: Foundation.URLSessionTaskMetrics)
+  final public func request(_ request: Loooot.Request, didFailTask task: Foundation.URLSessionTask, earlyWithError error: Loooot.AFError)
+  final public func request(_ request: Loooot.Request, didCompleteTask task: Foundation.URLSessionTask, with error: Loooot.AFError?)
+  final public func requestIsRetrying(_ request: Loooot.Request)
+  final public func requestDidFinish(_ request: Loooot.Request)
+  final public func requestDidResume(_ request: Loooot.Request)
+  final public func request(_ request: Loooot.Request, didResumeTask task: Foundation.URLSessionTask)
+  final public func requestDidSuspend(_ request: Loooot.Request)
+  final public func request(_ request: Loooot.Request, didSuspendTask task: Foundation.URLSessionTask)
+  final public func requestDidCancel(_ request: Loooot.Request)
+  final public func request(_ request: Loooot.Request, didCancelTask task: Foundation.URLSessionTask)
+  final public func request(_ request: Loooot.DataRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, data: Foundation.Data?, withResult result: Loooot.Request.ValidationResult)
+  final public func request(_ request: Loooot.DataRequest, didParseResponse response: Loooot.DataResponse<Foundation.Data?, Loooot.AFError>)
+  final public func request<Value>(_ request: Loooot.DataRequest, didParseResponse response: Loooot.DataResponse<Value, Loooot.AFError>)
+  final public func request(_ request: Loooot.UploadRequest, didCreateUploadable uploadable: Loooot.UploadRequest.Uploadable)
+  final public func request(_ request: Loooot.UploadRequest, didFailToCreateUploadableWithError error: Loooot.AFError)
+  final public func request(_ request: Loooot.UploadRequest, didProvideInputStream stream: Foundation.InputStream)
+  final public func request(_ request: Loooot.DownloadRequest, didFinishDownloadingUsing task: Foundation.URLSessionTask, with result: Swift.Result<Foundation.URL, Loooot.AFError>)
+  final public func request(_ request: Loooot.DownloadRequest, didCreateDestinationURL url: Foundation.URL)
+  final public func request(_ request: Loooot.DownloadRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, fileURL: Foundation.URL?, withResult result: Loooot.Request.ValidationResult)
+  final public func request(_ request: Loooot.DownloadRequest, didParseResponse response: Loooot.DownloadResponse<Foundation.URL?, Loooot.AFError>)
+  final public func request<Value>(_ request: Loooot.DownloadRequest, didParseResponse response: Loooot.DownloadResponse<Value, Loooot.AFError>)
+  @objc deinit
+}
+open class ClosureEventMonitor : Loooot.EventMonitor {
+  open var sessionDidBecomeInvalidWithError: ((Foundation.URLSession, Swift.Error?) -> Swift.Void)?
+  open var taskDidReceiveChallenge: ((Foundation.URLSession, Foundation.URLSessionTask, Foundation.URLAuthenticationChallenge) -> Swift.Void)?
+  open var taskDidSendBodyData: ((Foundation.URLSession, Foundation.URLSessionTask, Swift.Int64, Swift.Int64, Swift.Int64) -> Swift.Void)?
+  open var taskNeedNewBodyStream: ((Foundation.URLSession, Foundation.URLSessionTask) -> Swift.Void)?
+  open var taskWillPerformHTTPRedirection: ((Foundation.URLSession, Foundation.URLSessionTask, Foundation.HTTPURLResponse, Foundation.URLRequest) -> Swift.Void)?
+  open var taskDidFinishCollectingMetrics: ((Foundation.URLSession, Foundation.URLSessionTask, Foundation.URLSessionTaskMetrics) -> Swift.Void)?
+  open var taskDidComplete: ((Foundation.URLSession, Foundation.URLSessionTask, Swift.Error?) -> Swift.Void)?
+  open var taskIsWaitingForConnectivity: ((Foundation.URLSession, Foundation.URLSessionTask) -> Swift.Void)?
+  open var dataTaskDidReceiveData: ((Foundation.URLSession, Foundation.URLSessionDataTask, Foundation.Data) -> Swift.Void)?
+  open var dataTaskWillCacheResponse: ((Foundation.URLSession, Foundation.URLSessionDataTask, Foundation.CachedURLResponse) -> Swift.Void)?
+  open var downloadTaskDidFinishDownloadingToURL: ((Foundation.URLSession, Foundation.URLSessionDownloadTask, Foundation.URL) -> Swift.Void)?
+  open var downloadTaskDidWriteData: ((Foundation.URLSession, Foundation.URLSessionDownloadTask, Swift.Int64, Swift.Int64, Swift.Int64) -> Swift.Void)?
+  open var downloadTaskDidResumeAtOffset: ((Foundation.URLSession, Foundation.URLSessionDownloadTask, Swift.Int64, Swift.Int64) -> Swift.Void)?
+  open var requestDidCreateInitialURLRequest: ((Loooot.Request, Foundation.URLRequest) -> Swift.Void)?
+  open var requestDidFailToCreateURLRequestWithError: ((Loooot.Request, Loooot.AFError) -> Swift.Void)?
+  open var requestDidAdaptInitialRequestToAdaptedRequest: ((Loooot.Request, Foundation.URLRequest, Foundation.URLRequest) -> Swift.Void)?
+  open var requestDidFailToAdaptURLRequestWithError: ((Loooot.Request, Foundation.URLRequest, Loooot.AFError) -> Swift.Void)?
+  open var requestDidCreateURLRequest: ((Loooot.Request, Foundation.URLRequest) -> Swift.Void)?
+  open var requestDidCreateTask: ((Loooot.Request, Foundation.URLSessionTask) -> Swift.Void)?
+  open var requestDidGatherMetrics: ((Loooot.Request, Foundation.URLSessionTaskMetrics) -> Swift.Void)?
+  open var requestDidFailTaskEarlyWithError: ((Loooot.Request, Foundation.URLSessionTask, Loooot.AFError) -> Swift.Void)?
+  open var requestDidCompleteTaskWithError: ((Loooot.Request, Foundation.URLSessionTask, Loooot.AFError?) -> Swift.Void)?
+  open var requestIsRetrying: ((Loooot.Request) -> Swift.Void)?
+  open var requestDidFinish: ((Loooot.Request) -> Swift.Void)?
+  open var requestDidResume: ((Loooot.Request) -> Swift.Void)?
+  open var requestDidResumeTask: ((Loooot.Request, Foundation.URLSessionTask) -> Swift.Void)?
+  open var requestDidSuspend: ((Loooot.Request) -> Swift.Void)?
+  open var requestDidSuspendTask: ((Loooot.Request, Foundation.URLSessionTask) -> Swift.Void)?
+  open var requestDidCancel: ((Loooot.Request) -> Swift.Void)?
+  open var requestDidCancelTask: ((Loooot.Request, Foundation.URLSessionTask) -> Swift.Void)?
+  open var requestDidValidateRequestResponseDataWithResult: ((Loooot.DataRequest, Foundation.URLRequest?, Foundation.HTTPURLResponse, Foundation.Data?, Loooot.Request.ValidationResult) -> Swift.Void)?
+  open var requestDidParseResponse: ((Loooot.DataRequest, Loooot.DataResponse<Foundation.Data?, Loooot.AFError>) -> Swift.Void)?
+  open var requestDidCreateUploadable: ((Loooot.UploadRequest, Loooot.UploadRequest.Uploadable) -> Swift.Void)?
+  open var requestDidFailToCreateUploadableWithError: ((Loooot.UploadRequest, Loooot.AFError) -> Swift.Void)?
+  open var requestDidProvideInputStream: ((Loooot.UploadRequest, Foundation.InputStream) -> Swift.Void)?
+  open var requestDidFinishDownloadingUsingTaskWithResult: ((Loooot.DownloadRequest, Foundation.URLSessionTask, Swift.Result<Foundation.URL, Loooot.AFError>) -> Swift.Void)?
+  open var requestDidCreateDestinationURL: ((Loooot.DownloadRequest, Foundation.URL) -> Swift.Void)?
+  open var requestDidValidateRequestResponseFileURLWithResult: ((Loooot.DownloadRequest, Foundation.URLRequest?, Foundation.HTTPURLResponse, Foundation.URL?, Loooot.Request.ValidationResult) -> Swift.Void)?
+  open var requestDidParseDownloadResponse: ((Loooot.DownloadRequest, Loooot.DownloadResponse<Foundation.URL?, Loooot.AFError>) -> Swift.Void)?
+  final public let queue: Dispatch.DispatchQueue
+  public init(queue: Dispatch.DispatchQueue = .main)
+  open func urlSession(_ session: Foundation.URLSession, didBecomeInvalidWithError error: Swift.Error?)
+  open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didReceive challenge: Foundation.URLAuthenticationChallenge)
+  open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didSendBodyData bytesSent: Swift.Int64, totalBytesSent: Swift.Int64, totalBytesExpectedToSend: Swift.Int64)
+  open func urlSession(_ session: Foundation.URLSession, taskNeedsNewBodyStream task: Foundation.URLSessionTask)
+  open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, willPerformHTTPRedirection response: Foundation.HTTPURLResponse, newRequest request: Foundation.URLRequest)
+  open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didFinishCollecting metrics: Foundation.URLSessionTaskMetrics)
+  open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didCompleteWithError error: Swift.Error?)
+  open func urlSession(_ session: Foundation.URLSession, taskIsWaitingForConnectivity task: Foundation.URLSessionTask)
+  open func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, didReceive data: Foundation.Data)
+  open func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, willCacheResponse proposedResponse: Foundation.CachedURLResponse)
+  open func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didResumeAtOffset fileOffset: Swift.Int64, expectedTotalBytes: Swift.Int64)
+  open func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didWriteData bytesWritten: Swift.Int64, totalBytesWritten: Swift.Int64, totalBytesExpectedToWrite: Swift.Int64)
+  open func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didFinishDownloadingTo location: Foundation.URL)
+  open func request(_ request: Loooot.Request, didCreateInitialURLRequest urlRequest: Foundation.URLRequest)
+  open func request(_ request: Loooot.Request, didFailToCreateURLRequestWithError error: Loooot.AFError)
+  open func request(_ request: Loooot.Request, didAdaptInitialRequest initialRequest: Foundation.URLRequest, to adaptedRequest: Foundation.URLRequest)
+  open func request(_ request: Loooot.Request, didFailToAdaptURLRequest initialRequest: Foundation.URLRequest, withError error: Loooot.AFError)
+  open func request(_ request: Loooot.Request, didCreateURLRequest urlRequest: Foundation.URLRequest)
+  open func request(_ request: Loooot.Request, didCreateTask task: Foundation.URLSessionTask)
+  open func request(_ request: Loooot.Request, didGatherMetrics metrics: Foundation.URLSessionTaskMetrics)
+  open func request(_ request: Loooot.Request, didFailTask task: Foundation.URLSessionTask, earlyWithError error: Loooot.AFError)
+  open func request(_ request: Loooot.Request, didCompleteTask task: Foundation.URLSessionTask, with error: Loooot.AFError?)
+  open func requestIsRetrying(_ request: Loooot.Request)
+  open func requestDidFinish(_ request: Loooot.Request)
+  open func requestDidResume(_ request: Loooot.Request)
+  public func request(_ request: Loooot.Request, didResumeTask task: Foundation.URLSessionTask)
+  open func requestDidSuspend(_ request: Loooot.Request)
+  public func request(_ request: Loooot.Request, didSuspendTask task: Foundation.URLSessionTask)
+  open func requestDidCancel(_ request: Loooot.Request)
+  public func request(_ request: Loooot.Request, didCancelTask task: Foundation.URLSessionTask)
+  open func request(_ request: Loooot.DataRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, data: Foundation.Data?, withResult result: Loooot.Request.ValidationResult)
+  open func request(_ request: Loooot.DataRequest, didParseResponse response: Loooot.DataResponse<Foundation.Data?, Loooot.AFError>)
+  open func request(_ request: Loooot.UploadRequest, didCreateUploadable uploadable: Loooot.UploadRequest.Uploadable)
+  open func request(_ request: Loooot.UploadRequest, didFailToCreateUploadableWithError error: Loooot.AFError)
+  open func request(_ request: Loooot.UploadRequest, didProvideInputStream stream: Foundation.InputStream)
+  open func request(_ request: Loooot.DownloadRequest, didFinishDownloadingUsing task: Foundation.URLSessionTask, with result: Swift.Result<Foundation.URL, Loooot.AFError>)
+  open func request(_ request: Loooot.DownloadRequest, didCreateDestinationURL url: Foundation.URL)
+  open func request(_ request: Loooot.DownloadRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, fileURL: Foundation.URL?, withResult result: Loooot.Request.ValidationResult)
+  open func request(_ request: Loooot.DownloadRequest, didParseResponse response: Loooot.DownloadResponse<Foundation.URL?, Loooot.AFError>)
+  @objc deinit
+}
+@objc public class WelcomeViewController : UIKit.UIViewController {
+  public static let StoryboardName: Swift.String
+  @objc override dynamic public func viewDidLoad()
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+final public class URLEncodedFormEncoder {
+  public enum ArrayEncoding {
+    case brackets
+    case noBrackets
+    public static func == (a: Loooot.URLEncodedFormEncoder.ArrayEncoding, b: Loooot.URLEncodedFormEncoder.ArrayEncoding) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public enum BoolEncoding {
+    case numeric
+    case literal
+    public static func == (a: Loooot.URLEncodedFormEncoder.BoolEncoding, b: Loooot.URLEncodedFormEncoder.BoolEncoding) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public enum DataEncoding {
+    case deferredToData
+    case base64
+    case custom((Foundation.Data) throws -> Swift.String)
+  }
+  public enum DateEncoding {
+    case deferredToDate
+    case secondsSince1970
+    case millisecondsSince1970
+    case iso8601
+    case formatted(Foundation.DateFormatter)
+    case custom((Foundation.Date) throws -> Swift.String)
+  }
+  public enum KeyEncoding {
+    case useDefaultKeys
+    case convertToSnakeCase
+    case convertToKebabCase
+    case capitalized
+    case uppercased
+    case lowercased
+    case custom((Swift.String) -> Swift.String)
+  }
+  public enum SpaceEncoding {
+    case percentEscaped
+    case plusReplaced
+    public static func == (a: Loooot.URLEncodedFormEncoder.SpaceEncoding, b: Loooot.URLEncodedFormEncoder.SpaceEncoding) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public enum Error : Swift.Error {
+    case invalidRootObject(Swift.String)
+  }
+  final public let arrayEncoding: Loooot.URLEncodedFormEncoder.ArrayEncoding
+  final public let boolEncoding: Loooot.URLEncodedFormEncoder.BoolEncoding
+  final public let dataEncoding: Loooot.URLEncodedFormEncoder.DataEncoding
+  final public let dateEncoding: Loooot.URLEncodedFormEncoder.DateEncoding
+  final public let keyEncoding: Loooot.URLEncodedFormEncoder.KeyEncoding
+  final public let spaceEncoding: Loooot.URLEncodedFormEncoder.SpaceEncoding
+  final public var allowedCharacters: Foundation.CharacterSet
+  public init(arrayEncoding: Loooot.URLEncodedFormEncoder.ArrayEncoding = .brackets, boolEncoding: Loooot.URLEncodedFormEncoder.BoolEncoding = .numeric, dataEncoding: Loooot.URLEncodedFormEncoder.DataEncoding = .base64, dateEncoding: Loooot.URLEncodedFormEncoder.DateEncoding = .deferredToDate, keyEncoding: Loooot.URLEncodedFormEncoder.KeyEncoding = .useDefaultKeys, spaceEncoding: Loooot.URLEncodedFormEncoder.SpaceEncoding = .percentEscaped, allowedCharacters: Foundation.CharacterSet = .afURLQueryAllowed)
+  final public func encode(_ value: Swift.Encodable) throws -> Swift.String
+  final public func encode(_ value: Swift.Encodable) throws -> Foundation.Data
+  @objc deinit
+}
+extension CharacterSet {
+  public static let afURLQueryAllowed: Foundation.CharacterSet
+}
+@objc public class RewardListViewController : UIKit.UIViewController, Loooot.RewardsTableViewDelegate {
+  public static let StoryboardName: Swift.String
+  @objc override dynamic public func viewDidLoad()
+  @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  @objc override dynamic public func viewDidLayoutSubviews()
+  public func onRewardClicked(rewardTypeId: Foundation.UUID)
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+extension DispatchQueue {
+  public static func background(delay: Swift.Double = 0.0, background: (() -> Swift.Void)? = nil, completion: (() -> Swift.Void)? = nil)
+}
+public enum LocationEstimateMethod {
+  case coreLocationDataOnly
+  case mostRelevantEstimate
+  public static func == (a: Loooot.LocationEstimateMethod, b: Loooot.LocationEstimateMethod) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+final public class SceneLocationManager {
+  final public var locationEstimateMethod: Loooot.LocationEstimateMethod
+  final public let locationManager: Loooot.LocationManager
+  final public var bestLocationEstimate: Loooot.SceneLocationEstimate? {
+    get
+  }
+  final public var currentLocation: CoreLocation.CLLocation? {
+    get
+  }
+  @objc deinit
+}
+extension SceneLocationManager {
+  final public func run()
+  final public func pause()
+}
+public typealias BoxBuilder = (CoreGraphics.CGFloat) -> SceneKit.SCNBox
+@objc public class PolylineNode : Loooot.LocationNode {
+  public var locationNodes: [Loooot.LocationNode] {
+    get
+    }
+  final public let polyline: MapKit.MKPolyline
+  final public let altitude: CoreLocation.CLLocationDistance
+  final public let boxBuilder: Loooot.BoxBuilder
+  public init(polyline: MapKit.MKPolyline, altitude: CoreLocation.CLLocationDistance, boxBuilder: Loooot.BoxBuilder? = nil)
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  override public init(location: CoreLocation.CLLocation?)
+  @objc deinit
+}
+@objc @IBDesignable public class LoadingView : UIKit.UIView {
+  @objc override dynamic public var layer: QuartzCore.CAShapeLayer {
+    @objc get
+  }
+  @objc override dynamic public class var layerClass: Swift.AnyClass {
+    @objc get
+  }
+  @objc override dynamic public func layoutSubviews()
+  @objc override dynamic public func didMoveToWindow()
+  public var isScreenReady: Swift.Bool {
+    get
+    set
+  }
+  public func setStrokeColor(color: Swift.Int)
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public class Campaign {
+  public init()
+  public init(id: Foundation.UUID, name: Swift.String, description: Swift.String, startDate: Foundation.Date, endDate: Foundation.Date, totalTokenAmount: Swift.Int, claimedTokens: Swift.Int, remainingTokens: Swift.Int, companyLogoUrl: Swift.String?)
+  public init(json: [Swift.String : Any])
+  public func getId() -> Foundation.UUID
+  public func setId(id: Foundation.UUID)
+  public func getName() -> Swift.String
+  public func setName(name: Swift.String)
+  public func getDescription() -> Swift.String
+  public func setDescription(description: Swift.String)
+  public func getStartDate() -> Foundation.Date
+  public func setStartDate(startDate: Foundation.Date)
+  public func getEndDate() -> Foundation.Date
+  public func setEndDate(endDate: Foundation.Date)
+  public func getTotalTokenAmount() -> Swift.Int
+  public func setTotalTokenAmount(totalTokenAmount: Swift.Int)
+  public func getClaimedTokens() -> Swift.Int
+  public func setClaimedTokens(claimedTokens: Swift.Int)
+  public func getRemainingTokens() -> Swift.Int
+  public func setRemainingTokens(remainingTokens: Swift.Int)
+  public func getCompanyLogoUrl() -> Swift.String?
+  public func setCompanyLogoUrl(companyLogoUrl: Swift.String?)
+  public func toExtendedItemModel() -> Loooot.ExtendedItemModel
+  @objc deinit
+}
+@objc open class SessionDelegate : ObjectiveC.NSObject {
+  public init(fileManager: Foundation.FileManager = .default)
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension SessionDelegate : Foundation.URLSessionDelegate {
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, didBecomeInvalidWithError error: Swift.Error?)
+}
+extension SessionDelegate : Foundation.URLSessionTaskDelegate {
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didReceive challenge: Foundation.URLAuthenticationChallenge, completionHandler: @escaping (Foundation.URLSession.AuthChallengeDisposition, Foundation.URLCredential?) -> Swift.Void)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didSendBodyData bytesSent: Swift.Int64, totalBytesSent: Swift.Int64, totalBytesExpectedToSend: Swift.Int64)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, needNewBodyStream completionHandler: @escaping (Foundation.InputStream?) -> Swift.Void)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, willPerformHTTPRedirection response: Foundation.HTTPURLResponse, newRequest request: Foundation.URLRequest, completionHandler: @escaping (Foundation.URLRequest?) -> Swift.Void)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didFinishCollecting metrics: Foundation.URLSessionTaskMetrics)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didCompleteWithError error: Swift.Error?)
+  @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, taskIsWaitingForConnectivity task: Foundation.URLSessionTask)
+}
+extension SessionDelegate : Foundation.URLSessionDataDelegate {
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, didReceive data: Foundation.Data)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, willCacheResponse proposedResponse: Foundation.CachedURLResponse, completionHandler: @escaping (Foundation.CachedURLResponse?) -> Swift.Void)
+}
+extension SessionDelegate : Foundation.URLSessionDownloadDelegate {
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didResumeAtOffset fileOffset: Swift.Int64, expectedTotalBytes: Swift.Int64)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didWriteData bytesWritten: Swift.Int64, totalBytesWritten: Swift.Int64, totalBytesExpectedToWrite: Swift.Int64)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didFinishDownloadingTo location: Foundation.URL)
+}
+public protocol CampaignListViewDelegate {
+  func onCampaignClicked(campaign: Loooot.Campaign)
+}
+@objc @IBDesignable public class CampaignListView : UIKit.UIView, UIKit.UITableViewDataSource, UIKit.UITableViewDelegate {
+  public var delegate: Loooot.CampaignListViewDelegate?
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc override dynamic public func layoutSubviews()
+  @objc public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @objc public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
+  @objc public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  public func setCampaigns(campaings: Swift.Array<Loooot.Campaign>!)
+  public func getCampaigns() -> Swift.Array<Loooot.Campaign>
+  public func setCampaignsTableBackgroundColor(color: Swift.Int)
+  public func setEmptyCampaignListTextColor(color: Swift.Int)
+  public func setEmptyCampaignListSuggestionTextColor(color: Swift.Int)
+  public func setLoadingViewColor(color: Swift.Int)
+  public func setCellBackgroundColor(color: Swift.Int)
+  public func setCellTitleTextColor(color: Swift.Int)
+  public func setCellSubtitleTextColor(color: Swift.Int)
+  public func setCellMessageTextColor(color: Swift.Int)
+  public func setCellArrowTintColor(color: Swift.Int)
+  public func setEmptyListText(text: Swift.String)
+  public func setEmptyListSuggestionText(text: Swift.String)
+  @objc deinit
+}
+@objc public class LooootViewController : UIKit.UITabBarController {
+  public static let StoryboardName: Swift.String
+  @objc override dynamic public func viewDidLoad()
+  @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  @objc override dynamic public func tabBar(_ tabBar: UIKit.UITabBar, didSelect item: UIKit.UITabBarItem)
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public class GetTokensModel {
+  public func getPlayerId() -> Foundation.UUID
+  public func setPlayerId(playerId: Foundation.UUID)
+  public func getLatitude() -> Swift.Double
+  public func setLatitude(latitude: Swift.Double)
+  public func getLongitude() -> Swift.Double
+  public func setLongitude(longitude: Swift.Double)
+  public func getCampaignsIdList() -> Swift.Array<Foundation.UUID>
+  public func setCampaignsIdList(campaignsIdList: Swift.Array<Foundation.UUID>)
+  public func getLatestUpdate() -> Swift.String
+  public func setLatestUpdate(latestUpdate: Swift.String)
+  public func getSessionId() -> Foundation.UUID
+  public func setSessionId(sessionId: Foundation.UUID)
+  public func toJson() -> Swift.String
+  @objc deinit
+}
+open class RetryPolicy : Loooot.RequestInterceptor {
+  public static let defaultRetryLimit: Swift.UInt
+  public static let defaultExponentialBackoffBase: Swift.UInt
+  public static let defaultExponentialBackoffScale: Swift.Double
+  public static let defaultRetryableHTTPMethods: Swift.Set<Loooot.HTTPMethod>
+  public static let defaultRetryableHTTPStatusCodes: Swift.Set<Swift.Int>
+  public static let defaultRetryableURLErrorCodes: Swift.Set<Foundation.URLError.Code>
+  final public let retryLimit: Swift.UInt
+  final public let exponentialBackoffBase: Swift.UInt
+  final public let exponentialBackoffScale: Swift.Double
+  final public let retryableHTTPMethods: Swift.Set<Loooot.HTTPMethod>
+  final public let retryableHTTPStatusCodes: Swift.Set<Swift.Int>
+  final public let retryableURLErrorCodes: Swift.Set<Foundation.URLError.Code>
+  public init(retryLimit: Swift.UInt = RetryPolicy.defaultRetryLimit, exponentialBackoffBase: Swift.UInt = RetryPolicy.defaultExponentialBackoffBase, exponentialBackoffScale: Swift.Double = RetryPolicy.defaultExponentialBackoffScale, retryableHTTPMethods: Swift.Set<Loooot.HTTPMethod> = RetryPolicy.defaultRetryableHTTPMethods, retryableHTTPStatusCodes: Swift.Set<Swift.Int> = RetryPolicy.defaultRetryableHTTPStatusCodes, retryableURLErrorCodes: Swift.Set<Foundation.URLError.Code> = RetryPolicy.defaultRetryableURLErrorCodes)
+  open func retry(_ request: Loooot.Request, for session: Loooot.Session, dueTo error: Swift.Error, completion: @escaping (Loooot.RetryResult) -> Swift.Void)
+  @objc deinit
+}
+open class ConnectionLostRetryPolicy : Loooot.RetryPolicy {
+  public init(retryLimit: Swift.UInt = RetryPolicy.defaultRetryLimit, exponentialBackoffBase: Swift.UInt = RetryPolicy.defaultExponentialBackoffBase, exponentialBackoffScale: Swift.Double = RetryPolicy.defaultExponentialBackoffScale, retryableHTTPMethods: Swift.Set<Loooot.HTTPMethod> = RetryPolicy.defaultRetryableHTTPMethods)
+  override public init(retryLimit: Swift.UInt = super, exponentialBackoffBase: Swift.UInt = super, exponentialBackoffScale: Swift.Double = super, retryableHTTPMethods: Swift.Set<Loooot.HTTPMethod> = super, retryableHTTPStatusCodes: Swift.Set<Swift.Int> = super, retryableURLErrorCodes: Swift.Set<Foundation.URLError.Code> = super)
+  @objc deinit
+}
+extension Request {
+  public static let didResumeNotification: Foundation.Notification.Name
+  public static let didSuspendNotification: Foundation.Notification.Name
+  public static let didCancelNotification: Foundation.Notification.Name
+  public static let didFinishNotification: Foundation.Notification.Name
+  public static let didResumeTaskNotification: Foundation.Notification.Name
+  public static let didSuspendTaskNotification: Foundation.Notification.Name
+  public static let didCancelTaskNotification: Foundation.Notification.Name
+  public static let didCompleteTaskNotification: Foundation.Notification.Name
+}
+extension Notification {
+  public var request: Loooot.Request? {
+    get
+  }
+}
+final public class AlamofireNotifications : Loooot.EventMonitor {
+  final public func requestDidResume(_ request: Loooot.Request)
+  final public func requestDidSuspend(_ request: Loooot.Request)
+  final public func requestDidCancel(_ request: Loooot.Request)
+  final public func requestDidFinish(_ request: Loooot.Request)
+  final public func request(_ request: Loooot.Request, didResumeTask task: Foundation.URLSessionTask)
+  final public func request(_ request: Loooot.Request, didSuspendTask task: Foundation.URLSessionTask)
+  final public func request(_ request: Loooot.Request, didCancelTask task: Foundation.URLSessionTask)
+  final public func request(_ request: Loooot.Request, didCompleteTask task: Foundation.URLSessionTask, with error: Loooot.AFError?)
+  @objc deinit
+}
+public struct HTTPHeaders {
+  public init()
+  public init(_ headers: [Loooot.HTTPHeader])
+  public init(_ dictionary: [Swift.String : Swift.String])
+  mutating public func add(name: Swift.String, value: Swift.String)
+  mutating public func add(_ header: Loooot.HTTPHeader)
+  mutating public func update(name: Swift.String, value: Swift.String)
+  mutating public func update(_ header: Loooot.HTTPHeader)
+  mutating public func remove(name: Swift.String)
+  mutating public func sort()
+  public func sorted() -> Loooot.HTTPHeaders
+  public func value(for name: Swift.String) -> Swift.String?
+  public subscript(name: Swift.String) -> Swift.String? {
+    get
+    set
+  }
+  public var dictionary: [Swift.String : Swift.String] {
+    get
+  }
+}
+extension HTTPHeaders : Swift.ExpressibleByDictionaryLiteral {
+  public init(dictionaryLiteral elements: (Swift.String, Swift.String)...)
+  public typealias Key = Swift.String
+  public typealias Value = Swift.String
+}
+extension HTTPHeaders : Swift.ExpressibleByArrayLiteral {
+  public init(arrayLiteral elements: Loooot.HTTPHeader...)
+  public typealias ArrayLiteralElement = Loooot.HTTPHeader
+}
+extension HTTPHeaders : Swift.Sequence {
+  public func makeIterator() -> Swift.IndexingIterator<[Loooot.HTTPHeader]>
+}
+extension HTTPHeaders : Swift.Collection {
+  public var startIndex: Swift.Int {
+    get
+  }
+  public var endIndex: Swift.Int {
+    get
+  }
+  public subscript(position: Swift.Int) -> Loooot.HTTPHeader {
+    get
+  }
+  public func index(after i: Swift.Int) -> Swift.Int
+  public typealias Element = Loooot.HTTPHeader
+  public typealias Index = Swift.Int
+  public typealias Iterator = Swift.IndexingIterator<[Loooot.HTTPHeader]>
+  public typealias SubSequence = Swift.Slice<Loooot.HTTPHeaders>
+  public typealias Indices = Swift.DefaultIndices<Loooot.HTTPHeaders>
+}
+extension HTTPHeaders : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+public struct HTTPHeader : Swift.Hashable {
+  public let name: Swift.String
+  public let value: Swift.String
+  public init(name: Swift.String, value: Swift.String)
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: Loooot.HTTPHeader, b: Loooot.HTTPHeader) -> Swift.Bool
+}
+extension HTTPHeader : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension HTTPHeader {
+  public static func accept(_ value: Swift.String) -> Loooot.HTTPHeader
+  public static func acceptCharset(_ value: Swift.String) -> Loooot.HTTPHeader
+  public static func acceptLanguage(_ value: Swift.String) -> Loooot.HTTPHeader
+  public static func acceptEncoding(_ value: Swift.String) -> Loooot.HTTPHeader
+  public static func authorization(username: Swift.String, password: Swift.String) -> Loooot.HTTPHeader
+  public static func authorization(bearerToken: Swift.String) -> Loooot.HTTPHeader
+  public static func authorization(_ value: Swift.String) -> Loooot.HTTPHeader
+  public static func contentDisposition(_ value: Swift.String) -> Loooot.HTTPHeader
+  public static func contentType(_ value: Swift.String) -> Loooot.HTTPHeader
+  public static func userAgent(_ value: Swift.String) -> Loooot.HTTPHeader
+}
+extension HTTPHeaders {
+  public static let `default`: Loooot.HTTPHeaders
+}
+extension HTTPHeader {
+  public static let defaultAcceptEncoding: Loooot.HTTPHeader
+  public static let defaultAcceptLanguage: Loooot.HTTPHeader
+  public static let defaultUserAgent: Loooot.HTTPHeader
+}
+extension URLRequest {
+  public var headers: Loooot.HTTPHeaders {
+    get
+    set
+  }
+}
+extension HTTPURLResponse {
+  public var headers: Loooot.HTTPHeaders {
+    get
+  }
+}
+extension URLSessionConfiguration {
+  public var headers: Loooot.HTTPHeaders {
+    get
+    set
+  }
+}
+public class RewardClaimResponse {
+  public func getCollectionMessage() -> Swift.String?
+  public func getCollectionRules() -> Swift.String?
+  public func getMessage() -> Swift.String?
+  public func setMessage(message: Swift.String)
+  public func getRedeemType() -> Swift.Int?
+  public func setRedeemType(redeemType: Swift.Int)
+  public func getPromotionDescription() -> Swift.String?
+  public func setPromotionDescription(promotionDescription: Swift.String)
+  public func getRedemptionRules() -> Swift.String?
+  public func setRedemptionRules(redemptionRules: Swift.String)
+  public func getExpirationDate() -> Foundation.Date?
+  public func setExpirationDate(expirationDate: Foundation.Date)
+  public func getCampaignName() -> Swift.String?
+  public func setCampaignName(campaignName: Swift.String)
+  @objc deinit
+}
+public class ExtendedItemModel {
+  public init(title: Swift.String!, subtitle: Swift.String!, description: Swift.String!, pictureUrl: Swift.String!)
+  public init(title: Swift.String!, subtitle: Swift.String!, description: Swift.String!, pictureUrl: Swift.String!, rewardType: Swift.Int)
+  public func getTitle() -> Swift.String!
+  public func setTitle(title: Swift.String)
+  public func getSubtitle() -> Swift.String!
+  public func setSubtitle(subtitle: Swift.String)
+  public func getMessage() -> Swift.String!
+  public func setMessage(message: Swift.String)
+  public func getPictureUrl() -> Swift.String!
+  public func setPictureUrl(pictureUrl: Swift.String)
+  public func getRewardType() -> Swift.Int?
+  public func setRewardType(rewardType: Swift.Int)
+  @objc deinit
+}
+@objc @IBDesignable public class PrimaryButton : UIKit.UIButton {
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc override dynamic public func layoutSubviews()
+  @objc deinit
+}
+extension URLSessionConfiguration : Loooot.AlamofireExtended {
+  public typealias ExtendedType = Foundation.URLSessionConfiguration
+}
+extension AlamofireExtension where ExtendedType : Foundation.URLSessionConfiguration {
+  public static var `default`: Foundation.URLSessionConfiguration {
+    get
+  }
+}
+public class GeofenceHelper {
+  public static func getDistanceInMeters(lat1: Swift.Double, lon1: Swift.Double, lat2: Swift.Double, lon2: Swift.Double) -> Swift.Double
+  public static func isInRange(lat1: Swift.Double, lon1: Swift.Double, lat2: Swift.Double, lon2: Swift.Double, radiusInMeters: Swift.Double) -> Swift.Bool
+  @objc deinit
+}
+@objc @IBDesignable public class SecondaryButton : UIKit.UIButton {
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc override dynamic public func layoutSubviews()
+  @objc deinit
+}
+public class RedeemType {
+  public static let instant: Swift.Int
+  public static let wallet: Swift.Int
+  @objc deinit
+}
+public struct LocationTranslation {
+  public var latitudeTranslation: Swift.Double
+  public var longitudeTranslation: Swift.Double
+  public var altitudeTranslation: Swift.Double
+}
+extension CLLocation {
+  convenience public init(coordinate: CoreLocation.CLLocationCoordinate2D, altitude: CoreLocation.CLLocationDistance)
+  public func translation(toLocation location: CoreLocation.CLLocation) -> Loooot.LocationTranslation
+  public func translatedLocation(with translation: Loooot.LocationTranslation) -> CoreLocation.CLLocation
+  public func bearing(between point: CoreLocation.CLLocation) -> Swift.Double
+}
+extension CLLocation {
+  public var debugLog: Swift.String {
+    get
+  }
+}
+extension CLLocationCoordinate2D {
+  public func coordinateWithBearing(bearing: Swift.Double, distanceMeters: Swift.Double) -> CoreLocation.CLLocationCoordinate2D
+}
+@objc @IBDesignable public class MapView : UIKit.UIView, GoogleMaps.GMSMapViewDelegate, Loooot.GMUClusterManagerDelegate, Loooot.GMUClusterRendererDelegate {
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc public func mapView(_ mapView: GoogleMaps.GMSMapView, didChange position: GoogleMaps.GMSCameraPosition)
+  @objc public func mapView(_ mapView: GoogleMaps.GMSMapView, didTap marker: GoogleMaps.GMSMarker) -> Swift.Bool
+  @objc public func renderer(_ renderer: Loooot.GMUClusterRenderer, willRenderMarker marker: GoogleMaps.GMSMarker)
+  public func getMarkerSize() -> CoreGraphics.CGSize
+  public func setMarkerSize(size: CoreGraphics.CGSize)
+  public func setShouldSaveZoomLevel(shouldSaveZoomLevel: Swift.Bool)
+  public func setCollectedViewBackgroundColor(color: Swift.Int)
+  public func setMapOverlayColor(color: Swift.Int)
+  public func setTokenCloseColor(color: Swift.Int)
+  public func setTokenClaimTextColor(color: Swift.Int)
+  public func setAddToWalletButtonTextColor(color: Swift.Int)
+  public func setAddToWalletButtonColor(color: Swift.Int)
+  public func setLoadingViewColor(color: Swift.Int)
+  @objc deinit
+}
+@objc public class PermissionViewController : UIKit.UIViewController, CoreLocation.CLLocationManagerDelegate {
+  public static let StoryboardName: Swift.String
+  @objc override dynamic public func viewDidLoad()
+  @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
+  @objc public func locationManager(_ manager: CoreLocation.CLLocationManager, didChangeAuthorization status: CoreLocation.CLAuthorizationStatus)
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public class StartSessionResponse {
+  public init(sessionId: Foundation.UUID!)
+  public init(json: [Swift.String : Any])
+  public func getSessionId() -> Foundation.UUID
+  public func setSessionId(sessionId: Foundation.UUID)
+  @objc deinit
+}
+open class Session {
+  public static let `default`: Loooot.Session
+  final public let session: Foundation.URLSession
+  final public let delegate: Loooot.SessionDelegate
+  final public let rootQueue: Dispatch.DispatchQueue
+  final public let startRequestsImmediately: Swift.Bool
+  final public let requestQueue: Dispatch.DispatchQueue
+  final public let serializationQueue: Dispatch.DispatchQueue
+  final public let interceptor: Loooot.RequestInterceptor?
+  final public let serverTrustManager: Loooot.ServerTrustManager?
+  final public let redirectHandler: Loooot.RedirectHandler?
+  final public let cachedResponseHandler: Loooot.CachedResponseHandler?
+  final public let eventMonitor: Loooot.CompositeEventMonitor
+  final public let defaultEventMonitors: [Loooot.EventMonitor]
+  public init(session: Foundation.URLSession, delegate: Loooot.SessionDelegate, rootQueue: Dispatch.DispatchQueue, startRequestsImmediately: Swift.Bool = true, requestQueue: Dispatch.DispatchQueue? = nil, serializationQueue: Dispatch.DispatchQueue? = nil, interceptor: Loooot.RequestInterceptor? = nil, serverTrustManager: Loooot.ServerTrustManager? = nil, redirectHandler: Loooot.RedirectHandler? = nil, cachedResponseHandler: Loooot.CachedResponseHandler? = nil, eventMonitors: [Loooot.EventMonitor] = [])
+  convenience public init(configuration: Foundation.URLSessionConfiguration = URLSessionConfiguration.af.default, delegate: Loooot.SessionDelegate = SessionDelegate(), rootQueue: Dispatch.DispatchQueue = DispatchQueue(label: "org.alamofire.session.rootQueue"), startRequestsImmediately: Swift.Bool = true, requestQueue: Dispatch.DispatchQueue? = nil, serializationQueue: Dispatch.DispatchQueue? = nil, interceptor: Loooot.RequestInterceptor? = nil, serverTrustManager: Loooot.ServerTrustManager? = nil, redirectHandler: Loooot.RedirectHandler? = nil, cachedResponseHandler: Loooot.CachedResponseHandler? = nil, eventMonitors: [Loooot.EventMonitor] = [])
+  @objc deinit
+  public func cancelAllRequests(completingOnQueue queue: Dispatch.DispatchQueue = .main, completion: (() -> Swift.Void)? = nil)
+  open func request(_ convertible: Loooot.URLConvertible, method: Loooot.HTTPMethod = .get, parameters: Loooot.Parameters? = nil, encoding: Loooot.ParameterEncoding = URLEncoding.default, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil) -> Loooot.DataRequest
+  open func request<Parameters>(_ convertible: Loooot.URLConvertible, method: Loooot.HTTPMethod = .get, parameters: Parameters? = nil, encoder: Loooot.ParameterEncoder = URLEncodedFormParameterEncoder.default, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil) -> Loooot.DataRequest where Parameters : Swift.Encodable
+  open func request(_ convertible: Loooot.URLRequestConvertible, interceptor: Loooot.RequestInterceptor? = nil) -> Loooot.DataRequest
+  open func download(_ convertible: Loooot.URLConvertible, method: Loooot.HTTPMethod = .get, parameters: Loooot.Parameters? = nil, encoding: Loooot.ParameterEncoding = URLEncoding.default, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil, to destination: Loooot.DownloadRequest.Destination? = nil) -> Loooot.DownloadRequest
+  open func download<Parameters>(_ convertible: Loooot.URLConvertible, method: Loooot.HTTPMethod = .get, parameters: Parameters? = nil, encoder: Loooot.ParameterEncoder = URLEncodedFormParameterEncoder.default, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil, to destination: Loooot.DownloadRequest.Destination? = nil) -> Loooot.DownloadRequest where Parameters : Swift.Encodable
+  open func download(_ convertible: Loooot.URLRequestConvertible, interceptor: Loooot.RequestInterceptor? = nil, to destination: Loooot.DownloadRequest.Destination? = nil) -> Loooot.DownloadRequest
+  open func download(resumingWith data: Foundation.Data, interceptor: Loooot.RequestInterceptor? = nil, to destination: Loooot.DownloadRequest.Destination? = nil) -> Loooot.DownloadRequest
+  open func upload(_ data: Foundation.Data, to convertible: Loooot.URLConvertible, method: Loooot.HTTPMethod = .post, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  open func upload(_ data: Foundation.Data, with convertible: Loooot.URLRequestConvertible, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  open func upload(_ fileURL: Foundation.URL, to convertible: Loooot.URLConvertible, method: Loooot.HTTPMethod = .post, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  open func upload(_ fileURL: Foundation.URL, with convertible: Loooot.URLRequestConvertible, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  open func upload(_ stream: Foundation.InputStream, to convertible: Loooot.URLConvertible, method: Loooot.HTTPMethod = .post, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  open func upload(_ stream: Foundation.InputStream, with convertible: Loooot.URLRequestConvertible, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  open func upload(multipartFormData: @escaping (Loooot.MultipartFormData) -> Swift.Void, to url: Loooot.URLConvertible, usingThreshold encodingMemoryThreshold: Swift.UInt64 = MultipartFormData.encodingMemoryThreshold, method: Loooot.HTTPMethod = .post, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  open func upload(multipartFormData: @escaping (Loooot.MultipartFormData) -> Swift.Void, with request: Loooot.URLRequestConvertible, usingThreshold encodingMemoryThreshold: Swift.UInt64 = MultipartFormData.encodingMemoryThreshold, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  open func upload(multipartFormData: Loooot.MultipartFormData, to url: Loooot.URLConvertible, usingThreshold encodingMemoryThreshold: Swift.UInt64 = MultipartFormData.encodingMemoryThreshold, method: Loooot.HTTPMethod = .post, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  open func upload(multipartFormData: Loooot.MultipartFormData, with request: Loooot.URLRequestConvertible, usingThreshold encodingMemoryThreshold: Swift.UInt64 = MultipartFormData.encodingMemoryThreshold, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+}
+extension Session : Loooot.RequestDelegate {
+  public var sessionConfiguration: Foundation.URLSessionConfiguration {
+    get
+  }
+  public func cleanup(after request: Loooot.Request)
+  public func retryResult(for request: Loooot.Request, dueTo error: Loooot.AFError, completion: @escaping (Loooot.RetryResult) -> Swift.Void)
+  public func retryRequest(_ request: Loooot.Request, withDelay timeDelay: Foundation.TimeInterval?)
+}
+public enum AF {
+  public static func request(_ url: Loooot.URLConvertible, method: Loooot.HTTPMethod = .get, parameters: Loooot.Parameters? = nil, encoding: Loooot.ParameterEncoding = URLEncoding.default, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil) -> Loooot.DataRequest
+  public static func request<Parameters>(_ url: Loooot.URLConvertible, method: Loooot.HTTPMethod = .get, parameters: Parameters? = nil, encoder: Loooot.ParameterEncoder = URLEncodedFormParameterEncoder.default, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil) -> Loooot.DataRequest where Parameters : Swift.Encodable
+  public static func request(_ urlRequest: Loooot.URLRequestConvertible, interceptor: Loooot.RequestInterceptor? = nil) -> Loooot.DataRequest
+  public static func download(_ url: Loooot.URLConvertible, method: Loooot.HTTPMethod = .get, parameters: Loooot.Parameters? = nil, encoding: Loooot.ParameterEncoding = URLEncoding.default, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil, to destination: Loooot.DownloadRequest.Destination? = nil) -> Loooot.DownloadRequest
+  public static func download<Parameters>(_ url: Loooot.URLConvertible, method: Loooot.HTTPMethod = .get, parameters: Parameters? = nil, encoder: Loooot.ParameterEncoder = URLEncodedFormParameterEncoder.default, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil, to destination: Loooot.DownloadRequest.Destination? = nil) -> Loooot.DownloadRequest where Parameters : Swift.Encodable
+  public static func download(_ urlRequest: Loooot.URLRequestConvertible, interceptor: Loooot.RequestInterceptor? = nil, to destination: Loooot.DownloadRequest.Destination? = nil) -> Loooot.DownloadRequest
+  public static func download(resumingWith resumeData: Foundation.Data, interceptor: Loooot.RequestInterceptor? = nil, to destination: Loooot.DownloadRequest.Destination? = nil) -> Loooot.DownloadRequest
+  public static func upload(_ data: Foundation.Data, to convertible: Loooot.URLConvertible, method: Loooot.HTTPMethod = .post, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  public static func upload(_ data: Foundation.Data, with convertible: Loooot.URLRequestConvertible, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  public static func upload(_ fileURL: Foundation.URL, to convertible: Loooot.URLConvertible, method: Loooot.HTTPMethod = .post, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  public static func upload(_ fileURL: Foundation.URL, with convertible: Loooot.URLRequestConvertible, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  public static func upload(_ stream: Foundation.InputStream, to convertible: Loooot.URLConvertible, method: Loooot.HTTPMethod = .post, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  public static func upload(_ stream: Foundation.InputStream, with convertible: Loooot.URLRequestConvertible, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  public static func upload(multipartFormData: @escaping (Loooot.MultipartFormData) -> Swift.Void, to url: Loooot.URLConvertible, usingThreshold encodingMemoryThreshold: Swift.UInt64 = MultipartFormData.encodingMemoryThreshold, method: Loooot.HTTPMethod = .post, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  public static func upload(multipartFormData: @escaping (Loooot.MultipartFormData) -> Swift.Void, with request: Loooot.URLRequestConvertible, usingThreshold encodingMemoryThreshold: Swift.UInt64 = MultipartFormData.encodingMemoryThreshold, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  public static func upload(multipartFormData: Loooot.MultipartFormData, to url: Loooot.URLConvertible, usingThreshold encodingMemoryThreshold: Swift.UInt64 = MultipartFormData.encodingMemoryThreshold, method: Loooot.HTTPMethod = .post, headers: Loooot.HTTPHeaders? = nil, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+  public static func upload(multipartFormData: Loooot.MultipartFormData, with request: Loooot.URLRequestConvertible, usingThreshold encodingMemoryThreshold: Swift.UInt64 = MultipartFormData.encodingMemoryThreshold, interceptor: Loooot.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> Loooot.UploadRequest
+}
+public class ThemeManager {
+  public static let shared: Loooot.ThemeManager
+  public func setThemeColor(theme: Loooot.ThemeColor)
+  public func setThemeImages(theme: Loooot.ThemeImages)
+  public func getThemeImages() -> Loooot.ThemeImages
+  public func getPrimaryColor() -> Swift.Int
+  public func getSecondaryColor() -> Swift.Int
+  public func getAccentColor() -> Swift.Int
+  public func getTextColor() -> Swift.Int
+  public func getPrimaryBackgroundColor() -> Swift.Int
+  public func getCellBackgroundColor() -> Swift.Int
+  public func getPrimaryButtonBackgroundColor() -> Swift.Int
+  public func getPrimaryButtonTextColor() -> Swift.Int
+  public func getSecondaryButtonBackgroundColor() -> Swift.Int
+  public func getSecondaryButtonTextColor() -> Swift.Int
+  public func getDisabledColor() -> Swift.Int
+  public func getErrorColor() -> Swift.Int
+  public func getClusterColor() -> Swift.Int
+  public func getToolbarTextColor() -> Swift.Int
+  public func getToolbarBackColor() -> Swift.Int
+  public func getCameraPermissionImage() -> UIKit.UIImage
+  public func getCameraDeniedImage() -> UIKit.UIImage
+  public func getLocationPermissionImage() -> UIKit.UIImage
+  public func getLocationDeniedImage() -> UIKit.UIImage
+  public func getNoInternetImage() -> UIKit.UIImage
+  public func getImagePlaceholder() -> UIKit.UIImage
+  public func getPinTabImage() -> UIKit.UIImage
+  public func getFAQTabImage() -> UIKit.UIImage
+  public func getCampaignTabImage() -> UIKit.UIImage
+  public func getHomeTabImage() -> UIKit.UIImage
+  public func getWalletTabImage() -> UIKit.UIImage
+  public func getStartExperienceImage() -> UIKit.UIImage
+  public func getEmptyCampaignImage() -> UIKit.UIImage
+  public func getEmptyTokenListImage() -> UIKit.UIImage
+  public func getEmptyWalletImage() -> UIKit.UIImage
+  public func getNotificationsImage() -> UIKit.UIImage
+  public func getBackIcon() -> UIKit.UIImage
+  public func getMenuIcon() -> UIKit.UIImage
+  public func getLogo() -> UIKit.UIImage
+  @objc deinit
+}
+public protocol RequestAdapter {
+  func adapt(_ urlRequest: Foundation.URLRequest, for session: Loooot.Session, completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void)
+}
+public enum RetryResult {
+  case retry
+  case retryWithDelay(Foundation.TimeInterval)
+  case doNotRetry
+  case doNotRetryWithError(Swift.Error)
+}
+public protocol RequestRetrier {
+  func retry(_ request: Loooot.Request, for session: Loooot.Session, dueTo error: Swift.Error, completion: @escaping (Loooot.RetryResult) -> Swift.Void)
+}
+public protocol RequestInterceptor : Loooot.RequestAdapter, Loooot.RequestRetrier {
+}
+extension RequestInterceptor {
+  public func adapt(_ urlRequest: Foundation.URLRequest, for session: Loooot.Session, completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void)
+  public func retry(_ request: Loooot.Request, for session: Loooot.Session, dueTo error: Swift.Error, completion: @escaping (Loooot.RetryResult) -> Swift.Void)
+}
+public typealias AdaptHandler = (Foundation.URLRequest, Loooot.Session, @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void) -> Swift.Void
+public typealias RetryHandler = (Loooot.Request, Loooot.Session, Swift.Error, @escaping (Loooot.RetryResult) -> Swift.Void) -> Swift.Void
+open class Adapter : Loooot.RequestInterceptor {
+  public init(_ adaptHandler: @escaping Loooot.AdaptHandler)
+  open func adapt(_ urlRequest: Foundation.URLRequest, for session: Loooot.Session, completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void)
+  @objc deinit
+}
+open class Retrier : Loooot.RequestInterceptor {
+  public init(_ retryHandler: @escaping Loooot.RetryHandler)
+  open func retry(_ request: Loooot.Request, for session: Loooot.Session, dueTo error: Swift.Error, completion: @escaping (Loooot.RetryResult) -> Swift.Void)
+  @objc deinit
+}
+open class Interceptor : Loooot.RequestInterceptor {
+  final public let adapters: [Loooot.RequestAdapter]
+  final public let retriers: [Loooot.RequestRetrier]
+  public init(adaptHandler: @escaping Loooot.AdaptHandler, retryHandler: @escaping Loooot.RetryHandler)
+  public init(adapter: Loooot.RequestAdapter, retrier: Loooot.RequestRetrier)
+  public init(adapters: [Loooot.RequestAdapter] = [], retriers: [Loooot.RequestRetrier] = [])
+  open func adapt(_ urlRequest: Foundation.URLRequest, for session: Loooot.Session, completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void)
+  open func retry(_ request: Loooot.Request, for session: Loooot.Session, dueTo error: Swift.Error, completion: @escaping (Loooot.RetryResult) -> Swift.Void)
+  @objc deinit
+}
+public class HttpClientManager {
+  public static let shared: Loooot.HttpClientManager
+  public func getTermsAndConditionsUrl() -> Swift.String
+  public func setTermsAndConditionsUrl(url: Swift.String)
+  public func initializeLooootManager(playerIdentifier: Swift.String, clientId: Foundation.UUID, completion: @escaping (Loooot.InitResponse?, Swift.Bool) -> Swift.Void)
+  public func startSession(currentTime: Swift.String, completion: @escaping (Loooot.StartSessionResponse?, Swift.Bool) -> Swift.Void)
+  public func getCampaigns(completion: @escaping (Swift.Array<Loooot.Campaign>?, Swift.Bool) -> Swift.Void)
+  public func getTokensMinifiedList(campaignId: Foundation.UUID, completion: @escaping (Swift.Array<Loooot.TokenTypeList>?, Swift.Bool) -> Swift.Void)
+  public func getTokensByLocation(latitude: Swift.Double, longitude: Swift.Double, completion: @escaping (Swift.Array<Loooot.MapToken>?, Swift.Bool) -> Swift.Void)
+  public func getAllTokens(completion: @escaping (Swift.Array<Loooot.TokenTypeList>?, Swift.Bool) -> Swift.Void)
+  public func getTokenTypeById(tokenTypeId: Foundation.UUID, completion: @escaping (Loooot.TokenTypeDetails?, Swift.Bool) -> Swift.Void)
+  public func claimToken(tokenId: Foundation.UUID, latitude: Swift.Double, longitude: Swift.Double, claimedAt: Swift.String, completion: @escaping (Loooot.WebResponse<Loooot.RewardClaimResponse>?, Swift.Bool) -> Swift.Void)
+  public func redeemToken(tokenId: Foundation.UUID, redeemedAt: Swift.String, completion: @escaping (Loooot.TokenTypeDetails?, Swift.Bool) -> Swift.Void)
+  public func getWallet(completion: @escaping (Swift.Array<Loooot.WalletList>?, Swift.Bool) -> Swift.Void)
+  public func getNextAd(adImageId: Foundation.UUID, completion: @escaping (Loooot.Ad?, Swift.Bool) -> Swift.Void)
+  public func adShown(adDisplayedModel: Loooot.AdDisplayedModel)
+  public func adTapped(adDisplayedModel: Loooot.AdDisplayedModel)
+  @objc deinit
+}
+public enum AFError : Swift.Error {
+  public enum MultipartEncodingFailureReason {
+    case bodyPartURLInvalid(url: Foundation.URL)
+    case bodyPartFilenameInvalid(in: Foundation.URL)
+    case bodyPartFileNotReachable(at: Foundation.URL)
+    case bodyPartFileNotReachableWithError(atURL: Foundation.URL, error: Swift.Error)
+    case bodyPartFileIsDirectory(at: Foundation.URL)
+    case bodyPartFileSizeNotAvailable(at: Foundation.URL)
+    case bodyPartFileSizeQueryFailedWithError(forURL: Foundation.URL, error: Swift.Error)
+    case bodyPartInputStreamCreationFailed(for: Foundation.URL)
+    case outputStreamCreationFailed(for: Foundation.URL)
+    case outputStreamFileAlreadyExists(at: Foundation.URL)
+    case outputStreamURLInvalid(url: Foundation.URL)
+    case outputStreamWriteFailed(error: Swift.Error)
+    case inputStreamReadFailed(error: Swift.Error)
+  }
+  public enum ParameterEncodingFailureReason {
+    case missingURL
+    case jsonEncodingFailed(error: Swift.Error)
+    case customEncodingFailed(error: Swift.Error)
+  }
+  public enum ParameterEncoderFailureReason {
+    public enum RequiredComponent {
+      case url
+      case httpMethod(rawValue: Swift.String)
+    }
+    case missingRequiredComponent(Loooot.AFError.ParameterEncoderFailureReason.RequiredComponent)
+    case encoderFailed(error: Swift.Error)
+  }
+  public enum ResponseValidationFailureReason {
+    case dataFileNil
+    case dataFileReadFailed(at: Foundation.URL)
+    case missingContentType(acceptableContentTypes: [Swift.String])
+    case unacceptableContentType(acceptableContentTypes: [Swift.String], responseContentType: Swift.String)
+    case unacceptableStatusCode(code: Swift.Int)
+    case customValidationFailed(error: Swift.Error)
+  }
+  public enum ResponseSerializationFailureReason {
+    case inputDataNilOrZeroLength
+    case inputFileNil
+    case inputFileReadFailed(at: Foundation.URL)
+    case stringSerializationFailed(encoding: Swift.String.Encoding)
+    case jsonSerializationFailed(error: Swift.Error)
+    case decodingFailed(error: Swift.Error)
+    case customSerializationFailed(error: Swift.Error)
+    case invalidEmptyResponse(type: Swift.String)
+  }
+  public enum ServerTrustFailureReason {
+    public struct Output {
+      public let host: Swift.String
+      public let trust: Security.SecTrust
+      public let status: Darwin.OSStatus
+      public let result: Security.SecTrustResultType
+    }
+    case noRequiredEvaluator(host: Swift.String)
+    case noCertificatesFound
+    case noPublicKeysFound
+    case policyApplicationFailed(trust: Security.SecTrust, policy: Security.SecPolicy, status: Darwin.OSStatus)
+    case settingAnchorCertificatesFailed(status: Darwin.OSStatus, certificates: [Security.SecCertificate])
+    case revocationPolicyCreationFailed
+    case defaultEvaluationFailed(output: Loooot.AFError.ServerTrustFailureReason.Output)
+    case hostValidationFailed(output: Loooot.AFError.ServerTrustFailureReason.Output)
+    case revocationCheckFailed(output: Loooot.AFError.ServerTrustFailureReason.Output, options: Loooot.RevocationTrustEvaluator.Options)
+    case certificatePinningFailed(host: Swift.String, trust: Security.SecTrust, pinnedCertificates: [Security.SecCertificate], serverCertificates: [Security.SecCertificate])
+    case publicKeyPinningFailed(host: Swift.String, trust: Security.SecTrust, pinnedKeys: [Security.SecKey], serverKeys: [Security.SecKey])
+    case customEvaluationFailed(error: Swift.Error)
+  }
+  public enum URLRequestValidationFailureReason {
+    case bodyDataInGETRequest(Foundation.Data)
+  }
+  case createUploadableFailed(error: Swift.Error)
+  case createURLRequestFailed(error: Swift.Error)
+  case downloadedFileMoveFailed(error: Swift.Error, source: Foundation.URL, destination: Foundation.URL)
+  case explicitlyCancelled
+  case invalidURL(url: Loooot.URLConvertible)
+  case multipartEncodingFailed(reason: Loooot.AFError.MultipartEncodingFailureReason)
+  case parameterEncodingFailed(reason: Loooot.AFError.ParameterEncodingFailureReason)
+  case parameterEncoderFailed(reason: Loooot.AFError.ParameterEncoderFailureReason)
+  case requestAdaptationFailed(error: Swift.Error)
+  case requestRetryFailed(retryError: Swift.Error, originalError: Swift.Error)
+  case responseValidationFailed(reason: Loooot.AFError.ResponseValidationFailureReason)
+  case responseSerializationFailed(reason: Loooot.AFError.ResponseSerializationFailureReason)
+  case serverTrustEvaluationFailed(reason: Loooot.AFError.ServerTrustFailureReason)
+  case sessionDeinitialized
+  case sessionInvalidated(error: Swift.Error?)
+  case sessionTaskFailed(error: Swift.Error)
+  case urlRequestValidationFailed(reason: Loooot.AFError.URLRequestValidationFailureReason)
+}
+extension Error {
+  public var asAFError: Loooot.AFError? {
+    get
+  }
+  public func asAFError(orFailWith message: @autoclosure () -> Swift.String, file: Swift.StaticString = #file, line: Swift.UInt = #line) -> Loooot.AFError
+}
+extension AFError {
+  public var isSessionDeinitializedError: Swift.Bool {
+    get
+  }
+  public var isSessionInvalidatedError: Swift.Bool {
+    get
+  }
+  public var isExplicitlyCancelledError: Swift.Bool {
+    get
+  }
+  public var isInvalidURLError: Swift.Bool {
+    get
+  }
+  public var isParameterEncodingError: Swift.Bool {
+    get
+  }
+  public var isParameterEncoderError: Swift.Bool {
+    get
+  }
+  public var isMultipartEncodingError: Swift.Bool {
+    get
+  }
+  public var isRequestAdaptationError: Swift.Bool {
+    get
+  }
+  public var isResponseValidationError: Swift.Bool {
+    get
+  }
+  public var isResponseSerializationError: Swift.Bool {
+    get
+  }
+  public var isServerTrustEvaluationError: Swift.Bool {
+    get
+  }
+  public var isRequestRetryError: Swift.Bool {
+    get
+  }
+  public var isCreateUploadableError: Swift.Bool {
+    get
+  }
+  public var isCreateURLRequestError: Swift.Bool {
+    get
+  }
+  public var isDownloadedFileMoveError: Swift.Bool {
+    get
+  }
+  public var isSessionTaskError: Swift.Bool {
+    get
+  }
+}
+extension AFError {
+  public var urlConvertible: Loooot.URLConvertible? {
+    get
+  }
+  public var url: Foundation.URL? {
+    get
+  }
+  public var underlyingError: Swift.Error? {
+    get
+  }
+  public var acceptableContentTypes: [Swift.String]? {
+    get
+  }
+  public var responseContentType: Swift.String? {
+    get
+  }
+  public var responseCode: Swift.Int? {
+    get
+  }
+  public var failedStringEncoding: Swift.String.Encoding? {
+    get
+  }
+  public var sourceURL: Foundation.URL? {
+    get
+  }
+  public var destinationURL: Foundation.URL? {
+    get
+  }
+}
+extension AFError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public class ThemeColor {
+  public init()
+  public init(primaryColor: Swift.Int, secondaryColor: Swift.Int, accentColor: Swift.Int, textColor: Swift.Int, primaryBackgroundColor: Swift.Int, cellBackgroundColor: Swift.Int, primaryButtonBackgroundColor: Swift.Int, primaryButtonTextColor: Swift.Int, secondaryButtonBackgroundColor: Swift.Int, secondaryButtonTextColor: Swift.Int, disabledColor: Swift.Int, errorColor: Swift.Int, clusterColor: Swift.Int, toolbarTextColor: Swift.Int, toolbarBackColor: Swift.Int)
+  public func getPrimaryColor() -> Swift.Int
+  public func setPrimaryColor(color: Swift.Int)
+  public func getSecondaryColor() -> Swift.Int
+  public func setSecondaryColor(color: Swift.Int)
+  public func getAccentColor() -> Swift.Int
+  public func setAccentColor(color: Swift.Int)
+  public func getTextColor() -> Swift.Int
+  public func setTextColor(color: Swift.Int)
+  public func getPrimaryBackgroundColor() -> Swift.Int
+  public func setPrimaryBackgroundColor(color: Swift.Int)
+  public func getCellBackgroundColor() -> Swift.Int
+  public func setCellBackgroundColor(color: Swift.Int)
+  public func getPrimaryButtonBackgroundColor() -> Swift.Int
+  public func setPrimaryButtonBackgroundColor(color: Swift.Int)
+  public func getPrimaryButtonTextColor() -> Swift.Int
+  public func setPrimaryButtonTextColor(color: Swift.Int)
+  public func getSecondaryButtonBackgroundColor() -> Swift.Int
+  public func setSecondaryButtonBackgroundColor(color: Swift.Int)
+  public func getSecondaryButtonTextColor() -> Swift.Int
+  public func setSecondaryButtonTextColor(color: Swift.Int)
+  public func getDisabledColor() -> Swift.Int
+  public func setDisabledColor(color: Swift.Int)
+  public func getErrorColor() -> Swift.Int
+  public func setErrorColor(color: Swift.Int)
+  public func getClusterColor() -> Swift.Int
+  public func setClusterColor(color: Swift.Int)
+  public func getToolbarTextColor() -> Swift.Int
+  public func setToolbarTextColor(color: Swift.Int)
+  public func getToolbarBackColor() -> Swift.Int
+  public func setToolbarBackColor(color: Swift.Int)
+  @objc deinit
+}
+@objc public class TermsAndConditionsViewController : UIKit.UIViewController, UIKit.UIWebViewDelegate {
+  public static let StoryboardName: Swift.String
+  @objc override dynamic public func viewDidLoad()
+  @objc public func webViewDidFinishLoad(_ webView: UIKit.UIWebView)
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public protocol MenuDelegate {
+  func getMenuViewController() -> UIKit.UIViewController?
+  func onMenuOpened()
+  func onMenuClosed()
+}
+public protocol HomeDelegate {
+  func onHomePressed()
+}
+public class LooootManager {
+  public static let shared: Loooot.LooootManager
+  public var menuDelegate: Loooot.MenuDelegate?
+  public var homeDelegate: Loooot.HomeDelegate?
+  public static func initialize(playerIdentifier: Swift.String, clientId: Foundation.UUID, completion: @escaping (Swift.Bool) -> Swift.Void)
+  public func getBundle() -> Foundation.Bundle
+  public func getHttpClient() -> Loooot.HttpClientManager
+  public func getTranslationManager() -> Loooot.TranslationManager
+  public func startLoooot(viewController: UIKit.UIViewController, playerIdentifier: Swift.String)
+  public func getPlayerIdentifier() -> Swift.String
+  public func setPlayerIdentifier(playerIdentifier: Swift.String)
+  public func getPlayerId() -> Foundation.UUID
+  public func setPlayerId(playerId: Foundation.UUID)
+  public func getClienId() -> Foundation.UUID
+  public func setClienId(clientId: Foundation.UUID)
+  public func getSessionId() -> Foundation.UUID?
+  public func setSessionId(sessionId: Foundation.UUID)
+  public func getCampaignIdList() -> Swift.Array<Foundation.UUID>
+  public func setCampaignIdList(campaignIdList: Swift.Array<Foundation.UUID>)
+  public func getCurrentLatitude() -> Swift.Double?
+  public func setCurrentLatitude(currentLatitude: Swift.Double)
+  public func getCurrentLongitude() -> Swift.Double?
+  public func setCurrentLongitude(currentLongitude: Swift.Double)
+  public func setTermsAndConditionsUrl(url: Swift.String)
+  public func shouldShowDebugLayout() -> Swift.Bool
+  public func getTermsAndConditionsUrl() -> Swift.String
+  @objc deinit
+}
+public class TokenTypeDetails {
+  public init()
+  public init(id: Foundation.UUID?, whitelabelId: Foundation.UUID?, name: Swift.String?, message: Swift.String?, imageUrl: Swift.String?, redeemType: Swift.Int?, promotionDescription: Swift.String?, redemptionRules: Swift.String?, companyLogoUrl: Swift.String?, promotionImageUrl: Swift.String?, qrUrl: Swift.String?, status: Swift.Int?)
+  public init(json: [Swift.String : Any])
+  public func getId() -> Foundation.UUID?
+  public func setId(id: Foundation.UUID?)
+  public func getWhitelabelId() -> Foundation.UUID?
+  public func setWhitelabelId(whitelabelId: Foundation.UUID?)
+  public func getName() -> Swift.String?
+  public func setName(name: Swift.String?)
+  public func getMessage() -> Swift.String?
+  public func setMessage(message: Swift.String?)
+  public func getImageUrl() -> Swift.String?
+  public func setImageUrl(imageUrl: Swift.String?)
+  public func getRedeemType() -> Swift.Int?
+  public func setRedeemType(redeemType: Swift.Int?)
+  public func getPromotionDescription() -> Swift.String?
+  public func setPromotionDescription(promotionDescription: Swift.String?)
+  public func getRedemptionRules() -> Swift.String?
+  public func setRedemptionRules(redemptionRules: Swift.String?)
+  public func getCompanyLogoUrl() -> Swift.String?
+  public func setCompanyLogoUrl(companyLogoUrl: Swift.String!)
+  public func getPromotionImageUrl() -> Swift.String?
+  public func setPromotionImageUrl(promotionImageUrl: Swift.String?)
+  public func getQrUrl() -> Swift.String?
+  public func setQrUrl(qrUrl: Swift.String?)
+  public func getStatus() -> Swift.Int?
+  public func setStatus(status: Swift.Int?)
+  @objc deinit
+}
+public struct HTTPMethod : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
+  public static let connect: Loooot.HTTPMethod
+  public static let delete: Loooot.HTTPMethod
+  public static let get: Loooot.HTTPMethod
+  public static let head: Loooot.HTTPMethod
+  public static let options: Loooot.HTTPMethod
+  public static let patch: Loooot.HTTPMethod
+  public static let post: Loooot.HTTPMethod
+  public static let put: Loooot.HTTPMethod
+  public static let trace: Loooot.HTTPMethod
+  public let rawValue: Swift.String
+  public init(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+}
+public class NotificationCenterDataConstants {
+  public static let newLocationKey: Swift.String
+  public static let newHeadingKey: Swift.String
+  public static let arItemKey: Swift.String
+  public static let rewardRedeemKey: Swift.String
+  public static let removeCampaign: Swift.String
+  @objc deinit
+}
+public class TokenTypeList {
+  public init()
+  public init(id: Foundation.UUID, name: Swift.String, campaignNames: Swift.Array<Swift.String>?, tokenImageUrl: Swift.String, rewardType: Swift.Int)
+  public init(json: [Swift.String : Any])
+  public func getId() -> Foundation.UUID
+  public func setId(id: Foundation.UUID)
+  public func getCampaignNames() -> Swift.Array<Swift.String>?
+  public func setCampaignNames(campaignNames: Swift.Array<Swift.String>?)
+  public func getName() -> Swift.String
+  public func setName(name: Swift.String)
+  public func getTokenImageUrl() -> Swift.String
+  public func setTokenImageUrl(tokenImageUrl: Swift.String)
+  public func getRewardType() -> Swift.Int
+  public func setRewardType(rewardType: Swift.Int)
+  public func toSimpleItemModel() -> Swift.Array<Loooot.SimpleItemModel>
+  public func toSimpleItemModelWithRewardType() -> Swift.Array<Loooot.SimpleItemModel>
+  public func toSimpleItemModel(campaignName: Swift.String) -> Loooot.SimpleItemModel
+  public func toSimpleItemModelWithRewardType(campaignName: Swift.String) -> Loooot.SimpleItemModel
+  @objc deinit
+}
+@objc open class LocationAnnotationNode : Loooot.LocationNode {
+  final public let annotationNode: Loooot.AnnotationNode
+  public init(location: CoreLocation.CLLocation?, image: UIKit.UIImage, id: Foundation.UUID?)
+  @available(iOS 10.0, *)
+  convenience public init(location: CoreLocation.CLLocation?, view: UIKit.UIView, id: Foundation.UUID?)
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  override public init(location: CoreLocation.CLLocation?)
+  @objc deinit
+}
+extension UIView {
+  @available(iOS 10.0, *)
+  public var image: UIKit.UIImage {
+    get
+  }
+}
+public protocol DataResponseSerializerProtocol {
+  associatedtype SerializedObject
+  func serialize(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, data: Foundation.Data?, error: Swift.Error?) throws -> Self.SerializedObject
+}
+public protocol DownloadResponseSerializerProtocol {
+  associatedtype SerializedObject
+  func serializeDownload(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, fileURL: Foundation.URL?, error: Swift.Error?) throws -> Self.SerializedObject
+}
+public protocol ResponseSerializer : Loooot.DataResponseSerializerProtocol, Loooot.DownloadResponseSerializerProtocol {
+  var dataPreprocessor: Loooot.DataPreprocessor { get }
+  var emptyRequestMethods: Swift.Set<Loooot.HTTPMethod> { get }
+  var emptyResponseCodes: Swift.Set<Swift.Int> { get }
+}
+public protocol DataPreprocessor {
+  func preprocess(_ data: Foundation.Data) throws -> Foundation.Data
+}
+public struct PassthroughPreprocessor : Loooot.DataPreprocessor {
+  public init()
+  public func preprocess(_ data: Foundation.Data) throws -> Foundation.Data
+}
+public struct GoogleXSSIPreprocessor : Loooot.DataPreprocessor {
+  public init()
+  public func preprocess(_ data: Foundation.Data) throws -> Foundation.Data
+}
+extension ResponseSerializer {
+  public static var defaultDataPreprocessor: Loooot.DataPreprocessor {
+    get
+  }
+  public static var defaultEmptyRequestMethods: Swift.Set<Loooot.HTTPMethod> {
+    get
+  }
+  public static var defaultEmptyResponseCodes: Swift.Set<Swift.Int> {
+    get
+  }
+  public var dataPreprocessor: Loooot.DataPreprocessor {
+    get
+  }
+  public var emptyRequestMethods: Swift.Set<Loooot.HTTPMethod> {
+    get
+  }
+  public var emptyResponseCodes: Swift.Set<Swift.Int> {
+    get
+  }
+  public func requestAllowsEmptyResponseData(_ request: Foundation.URLRequest?) -> Swift.Bool?
+  public func responseAllowsEmptyResponseData(_ response: Foundation.HTTPURLResponse?) -> Swift.Bool?
+  public func emptyResponseAllowed(forRequest request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?) -> Swift.Bool
+}
+extension DownloadResponseSerializerProtocol where Self : Loooot.DataResponseSerializerProtocol {
+  public func serializeDownload(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, fileURL: Foundation.URL?, error: Swift.Error?) throws -> Self.SerializedObject
+}
+extension DataRequest {
+  @discardableResult
+  public func response(queue: Dispatch.DispatchQueue = .main, completionHandler: @escaping (Loooot.AFDataResponse<Foundation.Data?>) -> Swift.Void) -> Self
+  @discardableResult
+  public func response<Serializer>(queue: Dispatch.DispatchQueue = .main, responseSerializer: Serializer, completionHandler: @escaping (Loooot.AFDataResponse<Serializer.SerializedObject>) -> Swift.Void) -> Self where Serializer : Loooot.DataResponseSerializerProtocol
+}
+extension DownloadRequest {
+  @discardableResult
+  public func response(queue: Dispatch.DispatchQueue = .main, completionHandler: @escaping (Loooot.AFDownloadResponse<Foundation.URL?>) -> Swift.Void) -> Self
+  @discardableResult
+  public func response<T>(queue: Dispatch.DispatchQueue = .main, responseSerializer: T, completionHandler: @escaping (Loooot.AFDownloadResponse<T.SerializedObject>) -> Swift.Void) -> Self where T : Loooot.DownloadResponseSerializerProtocol
+}
+extension DataRequest {
+  @discardableResult
+  public func responseData(queue: Dispatch.DispatchQueue = .main, completionHandler: @escaping (Loooot.AFDataResponse<Foundation.Data>) -> Swift.Void) -> Self
+}
+final public class DataResponseSerializer : Loooot.ResponseSerializer {
+  final public let dataPreprocessor: Loooot.DataPreprocessor
+  final public let emptyResponseCodes: Swift.Set<Swift.Int>
+  final public let emptyRequestMethods: Swift.Set<Loooot.HTTPMethod>
+  public init(dataPreprocessor: Loooot.DataPreprocessor = DataResponseSerializer.defaultDataPreprocessor, emptyResponseCodes: Swift.Set<Swift.Int> = DataResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<Loooot.HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods)
+  final public func serialize(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, data: Foundation.Data?, error: Swift.Error?) throws -> Foundation.Data
+  @objc deinit
+  public typealias SerializedObject = Foundation.Data
+}
+extension DownloadRequest {
+  @discardableResult
+  public func responseData(queue: Dispatch.DispatchQueue = .main, completionHandler: @escaping (Loooot.AFDownloadResponse<Foundation.Data>) -> Swift.Void) -> Self
+}
+final public class StringResponseSerializer : Loooot.ResponseSerializer {
+  final public let dataPreprocessor: Loooot.DataPreprocessor
+  final public let encoding: Swift.String.Encoding?
+  final public let emptyResponseCodes: Swift.Set<Swift.Int>
+  final public let emptyRequestMethods: Swift.Set<Loooot.HTTPMethod>
+  public init(dataPreprocessor: Loooot.DataPreprocessor = StringResponseSerializer.defaultDataPreprocessor, encoding: Swift.String.Encoding? = nil, emptyResponseCodes: Swift.Set<Swift.Int> = StringResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<Loooot.HTTPMethod> = StringResponseSerializer.defaultEmptyRequestMethods)
+  final public func serialize(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, data: Foundation.Data?, error: Swift.Error?) throws -> Swift.String
+  @objc deinit
+  public typealias SerializedObject = Swift.String
+}
+extension DataRequest {
+  @discardableResult
+  public func responseString(queue: Dispatch.DispatchQueue = .main, encoding: Swift.String.Encoding? = nil, completionHandler: @escaping (Loooot.AFDataResponse<Swift.String>) -> Swift.Void) -> Self
+}
+extension DownloadRequest {
+  @discardableResult
+  public func responseString(queue: Dispatch.DispatchQueue = .main, encoding: Swift.String.Encoding? = nil, completionHandler: @escaping (Loooot.AFDownloadResponse<Swift.String>) -> Swift.Void) -> Self
+}
+final public class JSONResponseSerializer : Loooot.ResponseSerializer {
+  final public let dataPreprocessor: Loooot.DataPreprocessor
+  final public let emptyResponseCodes: Swift.Set<Swift.Int>
+  final public let emptyRequestMethods: Swift.Set<Loooot.HTTPMethod>
+  final public let options: Foundation.JSONSerialization.ReadingOptions
+  public init(dataPreprocessor: Loooot.DataPreprocessor = JSONResponseSerializer.defaultDataPreprocessor, emptyResponseCodes: Swift.Set<Swift.Int> = JSONResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<Loooot.HTTPMethod> = JSONResponseSerializer.defaultEmptyRequestMethods, options: Foundation.JSONSerialization.ReadingOptions = .allowFragments)
+  final public func serialize(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, data: Foundation.Data?, error: Swift.Error?) throws -> Any
+  @objc deinit
+  public typealias SerializedObject = Any
+}
+extension DataRequest {
+  @discardableResult
+  public func responseJSON(queue: Dispatch.DispatchQueue = .main, options: Foundation.JSONSerialization.ReadingOptions = .allowFragments, completionHandler: @escaping (Loooot.AFDataResponse<Any>) -> Swift.Void) -> Self
+}
+extension DownloadRequest {
+  @discardableResult
+  public func responseJSON(queue: Dispatch.DispatchQueue = .main, options: Foundation.JSONSerialization.ReadingOptions = .allowFragments, completionHandler: @escaping (Loooot.AFDownloadResponse<Any>) -> Swift.Void) -> Self
+}
+public protocol EmptyResponse {
+  static func emptyValue() -> Self
+}
+public struct Empty : Swift.Decodable {
+  public static let value: Loooot.Empty
+  public init(from decoder: Swift.Decoder) throws
+}
+extension Empty : Loooot.EmptyResponse {
+  public static func emptyValue() -> Loooot.Empty
+}
+public protocol DataDecoder {
+  func decode<D>(_ type: D.Type, from data: Foundation.Data) throws -> D where D : Swift.Decodable
+}
+extension JSONDecoder : Loooot.DataDecoder {
+}
+final public class DecodableResponseSerializer<T> : Loooot.ResponseSerializer where T : Swift.Decodable {
+  final public let dataPreprocessor: Loooot.DataPreprocessor
+  final public let decoder: Loooot.DataDecoder
+  final public let emptyResponseCodes: Swift.Set<Swift.Int>
+  final public let emptyRequestMethods: Swift.Set<Loooot.HTTPMethod>
+  public init(dataPreprocessor: Loooot.DataPreprocessor = DecodableResponseSerializer.defaultDataPreprocessor, decoder: Loooot.DataDecoder = JSONDecoder(), emptyResponseCodes: Swift.Set<Swift.Int> = DecodableResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<Loooot.HTTPMethod> = DecodableResponseSerializer.defaultEmptyRequestMethods)
+  final public func serialize(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, data: Foundation.Data?, error: Swift.Error?) throws -> T
+  @objc deinit
+  public typealias SerializedObject = T
+}
+extension DataRequest {
+  @discardableResult
+  public func responseDecodable<T>(of type: T.Type = T.self, queue: Dispatch.DispatchQueue = .main, decoder: Loooot.DataDecoder = JSONDecoder(), completionHandler: @escaping (Loooot.AFDataResponse<T>) -> Swift.Void) -> Self where T : Swift.Decodable
+}
+public class Ad {
+  public init()
+  public init(adId: Foundation.UUID, imageId: Foundation.UUID, imageUrl: Swift.String, type: Swift.Int, redirectLink: Swift.String?, displayTime: Swift.Int, showTime: Swift.Int, backgroundColor: Swift.String!)
+  public init(json: [Swift.String : Any])
+  public func getAdId() -> Foundation.UUID
+  public func setAdId(adId: Foundation.UUID)
+  public func getImageId() -> Foundation.UUID
+  public func setImageId(imageId: Foundation.UUID)
+  public func getImageUrl() -> Swift.String
+  public func setImageUrl(imageUrl: Swift.String)
+  public func getType() -> Swift.Int
+  public func setType(type: Swift.Int)
+  public func getRedirectLink() -> Swift.String?
+  public func setRedirectLink(redirectLink: Swift.String)
+  public func getDisplayTime() -> Swift.Int
+  public func setDisplayTime(displayTime: Swift.Int)
+  public func getShowTime() -> Swift.Int
+  public func setShowTime(showTime: Swift.Int)
+  public func getBackgroundColor() -> Swift.String
+  public func setBackgroundColor(backgroundColor: Swift.String)
+  @objc deinit
+}
+open class NetworkReachabilityManager {
+  public enum NetworkReachabilityStatus {
+    case unknown
+    case notReachable
+    case reachable(Loooot.NetworkReachabilityManager.NetworkReachabilityStatus.ConnectionType)
+    public enum ConnectionType {
+      case ethernetOrWiFi
+      case cellular
+      public static func == (a: Loooot.NetworkReachabilityManager.NetworkReachabilityStatus.ConnectionType, b: Loooot.NetworkReachabilityManager.NetworkReachabilityStatus.ConnectionType) -> Swift.Bool
+      public var hashValue: Swift.Int {
+        get
+      }
+      public func hash(into hasher: inout Swift.Hasher)
+    }
+  }
+  public typealias Listener = (Loooot.NetworkReachabilityManager.NetworkReachabilityStatus) -> Swift.Void
+  public static let `default`: Loooot.NetworkReachabilityManager?
+  open var isReachable: Swift.Bool {
+    get
+  }
+  open var isReachableOnCellular: Swift.Bool {
+    get
+  }
+  open var isReachableOnEthernetOrWiFi: Swift.Bool {
+    get
+  }
+  final public let reachabilityQueue: Dispatch.DispatchQueue
+  open var flags: SystemConfiguration.SCNetworkReachabilityFlags? {
+    get
+  }
+  open var status: Loooot.NetworkReachabilityManager.NetworkReachabilityStatus {
+    get
+  }
+  convenience public init?(host: Swift.String)
+  convenience public init?()
+  @objc deinit
+  @discardableResult
+  open func startListening(onQueue queue: Dispatch.DispatchQueue = .main, onUpdatePerforming listener: @escaping Loooot.NetworkReachabilityManager.Listener) -> Swift.Bool
+  open func stopListening()
+}
+extension NetworkReachabilityManager.NetworkReachabilityStatus : Swift.Equatable {
+  public static func == (a: Loooot.NetworkReachabilityManager.NetworkReachabilityStatus, b: Loooot.NetworkReachabilityManager.NetworkReachabilityStatus) -> Swift.Bool
+}
+extension UINavigationBar {
+  public func setUpNavigationBarWithMenuButton()
+  public func setUpNavigationBarWithBackButton()
+}
+@objc public class MapToken : ObjectiveC.NSObject, Loooot.GMUClusterItem {
+  @objc public var position: CoreLocation.CLLocationCoordinate2D
+  public init(id: Foundation.UUID, groupId: Foundation.UUID, campaignId: Foundation.UUID, tokenTypeId: Foundation.UUID, latitude: Swift.Double, longitude: Swift.Double, name: Swift.String, imageUrl: Swift.String, collectionDistance: Swift.Double)
+  public init(json: [Swift.String : Any])
+  public func getId() -> Foundation.UUID
+  public func setId(id: Foundation.UUID)
+  public func getGroupId() -> Foundation.UUID
+  public func setGroupId(groupId: Foundation.UUID)
+  public func getCampaignId() -> Foundation.UUID
+  public func setCampaignId(campaignId: Foundation.UUID)
+  public func getTokenTypeId() -> Foundation.UUID
+  public func setTokenTypeId(tokenTypeId: Foundation.UUID)
+  public func getLatitude() -> Swift.Double
+  public func setLatitude(latitude: Swift.Double)
+  public func getLongitude() -> Swift.Double
+  public func setLongitude(longitude: Swift.Double)
+  public func getName() -> Swift.String
+  public func setName(name: Swift.String)
+  public func getImageUrl() -> Swift.String
+  public func setImageUrl(imageUrl: Swift.String)
+  public func getCollectionDistance() -> Swift.Double
+  public func setCollectionDistance(collectionDistance: Swift.Double)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public class ResponseHelper {
+  public static let responseCodeDictionary: Swift.Dictionary<Swift.Int, Swift.String>
+  public static func getMessage(responseCode: Swift.Int) -> Swift.String
+  @objc deinit
+}
+public typealias AFResult<Success> = Swift.Result<Success, Loooot.AFError>
+open class MultipartFormData {
+  public static let encodingMemoryThreshold: Swift.UInt64
+  open var contentType: Swift.String {
+    get
+    set
+  }
+  public var contentLength: Swift.UInt64 {
+    get
+  }
+  final public let boundary: Swift.String
+  public init(fileManager: Foundation.FileManager = .default, boundary: Swift.String? = nil)
+  public func append(_ data: Foundation.Data, withName name: Swift.String, fileName: Swift.String? = nil, mimeType: Swift.String? = nil)
+  public func append(_ fileURL: Foundation.URL, withName name: Swift.String)
+  public func append(_ fileURL: Foundation.URL, withName name: Swift.String, fileName: Swift.String, mimeType: Swift.String)
+  public func append(_ stream: Foundation.InputStream, withLength length: Swift.UInt64, name: Swift.String, fileName: Swift.String, mimeType: Swift.String)
+  public func append(_ stream: Foundation.InputStream, withLength length: Swift.UInt64, headers: Loooot.HTTPHeaders)
+  public func encode() throws -> Foundation.Data
+  public func writeEncodedData(to fileURL: Foundation.URL) throws
+  @objc deinit
+}
+public class WebResponse<T> {
+  public init()
+  public init(data: T, success: Swift.Bool, statusCode: Swift.Int)
+  public func getData() -> T
+  public func setData(data: T)
+  public func getSuccess() -> Swift.Bool
+  public func setSuccess(success: Swift.Bool)
+  public func getStatusCode() -> Swift.Int
+  public func setStatusCode(statusCode: Swift.Int)
+  public func isSuccessful() -> Swift.Bool
+  @objc deinit
+}
+public protocol AdManagerDelegate {
+  func onAdShown(ad: Loooot.Ad)
+  func onAdClicked(ad: Loooot.Ad)
+  func onAdClosed(ad: Loooot.Ad)
+}
+public class AdManager {
+  public static let shared: Loooot.AdManager
+  public func addDelegate(delegate: Loooot.AdManagerDelegate)
+  public func shouldShowInterstitial(shouldShowInterstitial: Swift.Bool)
+  public func onInterstitialClicked()
+  public func onInterstitialClosed()
+  public func setViewForBanner(bannerView: Loooot.AdBannerView, viewHeightConstraint: UIKit.NSLayoutConstraint)
+  public func startTimer()
+  public func stopTimer()
+  @objc deinit
+}
+public class AdDisplayedModel {
+  public func getPlayerId() -> Foundation.UUID
+  public func setPlayerId(playerId: Foundation.UUID)
+  public func getAdId() -> Foundation.UUID
+  public func setAdId(adId: Foundation.UUID)
+  public func getCurrentISOTime() -> Swift.String
+  public func setCurrentISOTime(currentISOTime: Swift.String)
+  public func toJson() -> Swift.String
+  @objc deinit
+}
+extension UIViewController {
+  public func presentFromBundle<T>(viewControllerType: T.Type, storyboardName: Swift.String, bundle: Foundation.Bundle) where T : UIKit.UIViewController
+}
+public class SimpleItemModel {
+  public init(title: Swift.String, subtitle: Swift.String, pictureUrl: Swift.String)
+  public init(title: Swift.String, subtitle: Swift.String, pictureUrl: Swift.String, rewardType: Swift.Int)
+  public func getTitle() -> Swift.String!
+  public func setTitle(title: Swift.String)
+  public func getSubtitle() -> Swift.String!
+  public func setSubtitle(subtitle: Swift.String)
+  public func getPictureUrl() -> Swift.String!
+  public func setPictureUrl(pictureUrl: Swift.String)
+  public func getRewardType() -> Swift.Int?
+  public func setRewardType(rewardType: Swift.Int)
+  @objc deinit
+}
+public class TranslationConstants {
+  public static let login: Swift.String
+  public static let appName: Swift.String
+  public static let campaignListViewNoItems: Swift.String
+  public static let campaignListViewYourCampaigns: Swift.String
+  public static let campaignListViewNoItemsSuggestion: Swift.String
+  public static let redeemTokenDialogTitle: Swift.String
+  public static let redeemTokenDialogAlert: Swift.String
+  public static let redeemTOkenDialogMessage: Swift.String
+  public static let redeemTokenDialogDecline: Swift.String
+  public static let redeemTokenDialogConfirm: Swift.String
+  public static let couponDetailsViewRedemptionRules: Swift.String
+  public static let mapViewTooFarToCollectTokenTitle: Swift.String
+  public static let mapViewTooFarToCollectTokenMessage: Swift.String
+  public static let mapViewConfirm: Swift.String
+  public static let mapViewFailedToCollectToken: Swift.String
+  public static let rewardListViewNoRewardsText: Swift.String
+  public static let rewardListViewNoRewardsSuggestionText: Swift.String
+  public static let rewardListViewYourPrizes: Swift.String
+  public static let walletViewEmptyText: Swift.String
+  public static let walletViewExpiresText: Swift.String
+  public static let walletViewEmptySuggestionText: Swift.String
+  public static let walletViewYourAvailableCoupons: Swift.String
+  public static let looootViewControllerHome: Swift.String
+  public static let looootViewControllerWallet: Swift.String
+  public static let looootViewControllerCampaigns: Swift.String
+  public static let looootViewControllerFAQ: Swift.String
+  public static let couponDetailsViewRedeemButton: Swift.String
+  public static let couponDetailsViewTokenTitle: Swift.String
+  public static let couponDetailsViewCouponTitle: Swift.String
+  public static let noInternetWarning: Swift.String
+  public static let cameraPermissionDenied: Swift.String
+  public static let accessLocationPermissionDenied: Swift.String
+  public static let locationServiceDisabled: Swift.String
+  public static let tokensLeftToCollectSingle: Swift.String
+  public static let tokensLeftToCollectPlural: Swift.String
+  public static let error: Swift.String
+  public static let errorFailedToInitializeLoooot: Swift.String
+  public static let errorTokenAlreadyClaimed: Swift.String
+  public static let welcomeButton: Swift.String
+  public static let returnToDigicel: Swift.String
+  public static let welcomeMessage: Swift.String
+  public static let termsAndConditionsTitle: Swift.String
+  public static let termsAndConditionsDenyButton: Swift.String
+  public static let termsAndConditionsAcceptButton: Swift.String
+  public static let permissionWelcomeMessage: Swift.String
+  public static let permissionWelcomeDetails: Swift.String
+  public static let permissionWelcomeButton: Swift.String
+  public static let permissionCameraMessage: Swift.String
+  public static let permissionCameraDetails: Swift.String
+  public static let permissionCameraDeniedMessage: Swift.String
+  public static let permissionCameraDeniedDetails: Swift.String
+  public static let permissionCameraButton: Swift.String
+  public static let permissionLocationMessage: Swift.String
+  public static let permissionLocationDetails: Swift.String
+  public static let permissionLocationDeniedMessage: Swift.String
+  public static let permissionLocationDeniedDetails: Swift.String
+  public static let permissionLocationButton: Swift.String
+  public static let permissionNotificationMessage: Swift.String
+  public static let permissionNotificationDetails: Swift.String
+  public static let permissionNotificationButton: Swift.String
+  public static let permissionDeniedButton: Swift.String
+  @objc deinit
+}
+public class ImageCacher {
+  public static let shared: Loooot.ImageCacher
+  public func addToDictionary(imageUrl: Swift.String, image: UIKit.UIImage)
+  public func addToMapDictionary(imageUrl: Swift.String, image: UIKit.UIImage)
+  public func removeFromDictionary(imageUrl: Swift.String)
+  public func removeFromMapDictionary(imageUrl: Swift.String)
+  public func getFromDictionary(imageUrl: Swift.String) -> UIKit.UIImage?
+  public func getFromMapDictionary(imageUrl: Swift.String) -> UIKit.UIImage?
+  public func containsUrl(imageUrl: Swift.String) -> Swift.Bool
+  @objc deinit
+}
+public class StringConstants {
+  public static let ISODateFormat: Swift.String
+  public static let jsonDateFormat: Swift.String
+  public static let dateFormat: Swift.String
+  public static let campaignDatePeriod: Swift.String
+  public static func getTokensLeft(number: Swift.Int) -> Swift.String
+  public static let userId: Swift.String
+  public static let playerId: Swift.String
+  public static let clientId: Swift.String
+  public static let playerIdentifier: Swift.String
+  public static let latitude: Swift.String
+  public static let longitude: Swift.String
+  public static let campaignId: Swift.String
+  public static let tokenTypeId: Swift.String
+  public static let tokenId: Swift.String
+  public static let lastAdImageId: Swift.String
+  public static let claimedAt: Swift.String
+  public static let currentTime: Swift.String
+  public static let redeemedAt: Swift.String
+  @objc deinit
+}
+public class PermissionModelHelper {
+  public static func getWelcome() -> Loooot.PermissionModel
+  public static func getCameraPermission() -> Loooot.PermissionModel
+  public static func getLocationPermission() -> Loooot.PermissionModel
+  public static func getNotificationPermission() -> Loooot.PermissionModel
+  @objc deinit
+}
+public class WalletList : Loooot.TokenTypeList {
+  public init(id: Foundation.UUID, name: Swift.String, tokenImageUrl: Swift.String, mapTokenId: Foundation.UUID, expirationDate: Foundation.Date, campaignName: Swift.String)
+  override public init(json: [Swift.String : Any])
+  public func getMapTokenId() -> Foundation.UUID?
+  public func setMapTokenId(mapTokenId: Foundation.UUID)
+  public func getExpirationDate() -> Foundation.Date?
+  public func setExpirationDate(expirationDate: Foundation.Date)
+  public func getCampaignName() -> Swift.String
+  public func setCampaignName(campaignName: Swift.String)
+  public func toExtendedItemModel() -> Loooot.ExtendedItemModel
+  public func toExtendedItemModelWithRewardType() -> Loooot.ExtendedItemModel
+  override public init()
+  override public init(id: Foundation.UUID, name: Swift.String, campaignNames: Swift.Array<Swift.String>?, tokenImageUrl: Swift.String, rewardType: Swift.Int)
+  @objc deinit
+}
+@objc public class CustomClusterRenderer : Loooot.GMUDefaultClusterRenderer {
+  @objc override dynamic public func shouldRender(as cluster: Loooot.GMUCluster, atZoom zoom: Swift.Float) -> Swift.Bool
+  @objc override dynamic public init(mapView: GoogleMaps.GMSMapView, clusterIconGenerator iconGenerator: Loooot.GMUClusterIconGenerator)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public class TranslationManager {
+  public static let shared: Loooot.TranslationManager
+  public func setTranslationDictionary(translationDictionary: [Swift.String : Swift.String])
+  public func getTranslation(key: Swift.String) -> Swift.String
+  public func setTranslationLanguage(selectedLanguage: Swift.Int)
+  public func setAppNameText(text: Swift.String)
+  public func setCampaignListViewNoItemsText(text: Swift.String)
+  public func setCampaignListViewNoItemsSuggestionText(text: Swift.String)
+  public func setCouponDetailsViewRedemptionRulesText(text: Swift.String)
+  public func setCouponDetailsViewRedeemButtonText(text: Swift.String)
+  public func setCouponDetailsTokensLeftSingle(text: Swift.String)
+  public func setCouponDetailsTokensLeftPlural(text: Swift.String)
+  public func setCouponDetailsViewTokenTitle(text: Swift.String)
+  public func setCouponDetailsViewCouponTitle(text: Swift.String)
+  public func setNoInternetWarningText(text: Swift.String)
+  public func setCameraPermissionDeniedText(text: Swift.String)
+  public func setAccessLocationPermissionDeniedText(text: Swift.String)
+  public func setLocationServiceDisabledText(text: Swift.String)
+  public func setMapViewTooFarToCollectTokenTitleText(text: Swift.String)
+  public func setMapViewTooFarToCollectTokenMessageText(text: Swift.String)
+  public func setMapViewConfirmText(text: Swift.String)
+  public func setMapViewFailedToCollectTokenText(text: Swift.String)
+  public func setRewardListViewNoRewardText(text: Swift.String)
+  public func setRewardListViewNoRewardSuggestionText(text: Swift.String)
+  public func setWalletViewEmptyText(text: Swift.String)
+  public func setWalletViewEmptySuggestionText(text: Swift.String)
+  public func setWalletViewExpiresText(text: Swift.String)
+  public func setRedeemTokenDialogTitle(text: Swift.String)
+  public func setRedeemtokenDialogAlert(text: Swift.String)
+  public func setRedeemtokenDialogMessage(text: Swift.String)
+  public func setRedeemtokenDialogDecline(text: Swift.String)
+  public func setRedeemTokenDialogConfirm(text: Swift.String)
+  public func setLooootViewControllerHomeText(text: Swift.String)
+  public func setLooootViewControllerWalletText(text: Swift.String)
+  public func setLooootViewControllerCampaignsText(text: Swift.String)
+  public func setLooootViewControllerFAQText(text: Swift.String)
+  public func setErrorText(text: Swift.String)
+  public func setErrorFailedToInitializeLooootText(text: Swift.String)
+  public func setErrorTokenAlreadyClaimedText(text: Swift.String)
+  public func setWelcomeMessageText(text: Swift.String)
+  public func setWelcomeButtonText(text: Swift.String)
+  public func setReturnToDigicelButtonText(text: Swift.String)
+  public func setTermsAndConditionsTitleText(text: Swift.String)
+  public func setTermsAndConditionsDenyButtonText(text: Swift.String)
+  public func setTermsAndConditionsAcceptButtonText(text: Swift.String)
+  public func setWelcomePermissionMessageText(text: Swift.String)
+  public func setWelcomePermissionDetailsText(text: Swift.String)
+  public func setWelcomePermissionButtonText(text: Swift.String)
+  public func setCameraPermissionMessageText(text: Swift.String)
+  public func setCameraPermissionDetailsText(text: Swift.String)
+  public func setCameraPermissionDeniedMessageText(text: Swift.String)
+  public func setCameraPermissionDeniedDetailsText(text: Swift.String)
+  public func setCameraPermissionButtonText(text: Swift.String)
+  public func setLocationPermissionMessageText(text: Swift.String)
+  public func setLocationPermissionDetailsText(text: Swift.String)
+  public func setLocationPermissionDeniedMessageText(text: Swift.String)
+  public func setLocationPermissionDeniedDetailsText(text: Swift.String)
+  public func setLocationPermissionButtonText(text: Swift.String)
+  public func setNotificationPermissionMessageText(text: Swift.String)
+  public func setNotificationPermissionDetailsText(text: Swift.String)
+  public func setNotificationPermissionButtonText(text: Swift.String)
+  public func setPermissionDeniedButtonText(text: Swift.String)
+  @objc deinit
+}
+public class AppConstants {
+  public static let deviceId: Swift.String?
+  public static let deviceType: Swift.Int
+  public static let emptyUUID: Swift.String
+  public static let minDistanceForUpdateMapTokens: Swift.Double
+  @objc deinit
+}
+extension URLRequest {
+  public var method: Loooot.HTTPMethod? {
+    get
+    set
+  }
+  public func validate() throws
+}
+extension UIColor {
+  convenience public init(hex: Swift.Int, alpha: Swift.Float = 1.0)
+  convenience public init(hex: Swift.String, alpha: Swift.Float = 1.0)
+}
+public class StringWrapper {
+  public init()
+  public init(value: Swift.String)
+  public init(json: [Swift.String : Any])
+  public func getValue() -> Swift.String
+  public func setValue(value: Swift.String)
+  @objc deinit
+}
+public class StartSessionModel {
+  public init(clientId: Foundation.UUID!, playerId: Foundation.UUID, campaignIdListView: Swift.Array<Foundation.UUID>, latitude: Swift.Double, longitude: Swift.Double, currentTime: Swift.String)
+  public func getClientId() -> Foundation.UUID
+  public func setCampaignIdListView(campaignIdListView: Swift.Array<Foundation.UUID>)
+  public func getCampaignIdListView() -> Swift.Array<Foundation.UUID>
+  public func setLongitude(longitude: Swift.Double)
+  public func getLongitude() -> Swift.Double
+  public func setCurrentTime(currentTime: Swift.String)
+  public func getCurrentTime() -> Swift.String
+  public func setClientId(clientId: Foundation.UUID)
+  public func getPlayerId() -> Foundation.UUID
+  public func setPlayerId(playerId: Foundation.UUID)
+  public func toJson() -> Swift.String
+  @objc deinit
+}
+@objc @available(iOS 11.0, *)
+open class SceneLocationView : ARKit.ARSCNView {
+  public enum ARTrackingType {
+    case orientationTracking
+    case worldTracking
+    public static func == (a: Loooot.SceneLocationView.ARTrackingType, b: Loooot.SceneLocationView.ARTrackingType) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  weak public var locationViewDelegate: Loooot.SceneLocationViewDelegate?
+  weak public var locationEstimateDelegate: Loooot.SceneLocationViewEstimateDelegate?
+  weak public var locationNodeTouchDelegate: Loooot.LNTouchDelegate?
+  weak public var sceneTrackingDelegate: Loooot.SceneTrackingDelegate?
+  final public let sceneLocationManager: Loooot.SceneLocationManager
+  @objc override dynamic open var delegate: ARKit.ARSCNViewDelegate? {
+    @objc get
+    @objc set
+  }
+  weak public var arViewDelegate: ARKit.ARSCNViewDelegate?
+  public var locationEstimateMethod: Loooot.LocationEstimateMethod {
+    get
+    set
+  }
+  public var showAxesNode: Swift.Bool
+  public var sceneNode: SceneKit.SCNNode? {
+    get
+  }
+  public var orientToTrueNorth: Swift.Bool
+  public var showFeaturePoints: Swift.Bool
+  public var currentScenePosition: SceneKit.SCNVector3? {
+    get
+  }
+  public var currentEulerAngles: SceneKit.SCNVector3? {
+    get
+  }
+  public var locationNodes: [Loooot.LocationNode] {
+    get
+    }
+  public var polylineNodes: [Loooot.PolylineNode] {
+    get
+    }
+  public var arTrackingType: Loooot.SceneLocationView.ARTrackingType {
+    get
+    }
+  convenience public init(trackingType: Loooot.SceneLocationView.ARTrackingType = .worldTracking, frame: CoreGraphics.CGRect = .zero, options: [Swift.String : Any]? = nil)
+  @objc override dynamic public init(frame: CoreGraphics.CGRect, options: [Swift.String : Any]? = nil)
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc deinit
+}
+@available(iOS 11.0, *)
+extension SceneLocationView {
+  public func run()
+  public func pause()
+  public func moveSceneHeadingClockwise()
+  public func moveSceneHeadingAntiClockwise()
+  public func addLocationNodeForCurrentPosition(locationNode: Loooot.LocationNode)
+  public func addLocationNodesForCurrentPosition(locationNodes: [Loooot.LocationNode])
+  public func addLocationNodeWithConfirmedLocation(locationNode: Loooot.LocationNode)
+  @objc dynamic public func sceneLocationViewTouched(sender: UIKit.UITapGestureRecognizer)
+  public func addLocationNodesWithConfirmedLocation(locationNodes: [Loooot.LocationNode])
+  public func removeAllNodes()
+  public func sceneContainsNodeWithTag(_ tag: Swift.String) -> Swift.Bool
+  public func findNodes(tagged tag: Swift.String) -> [Loooot.LocationNode]
+  public func removeLocationNode(locationNode: Loooot.LocationNode)
+  public func removeLocationNodes(locationNodes: [Loooot.LocationNode])
+}
+@available(iOS 11.0, *)
+extension SceneLocationView {
+  public func addRoutes(routes: [MapKit.MKRoute], boxBuilder: Loooot.BoxBuilder? = nil)
+  public func removeRoutes(routes: [MapKit.MKRoute])
+}
+public class AdType {
+  public static let banner: Swift.Int
+  public static let interstitial: Swift.Int
+  @objc deinit
+}
+@objc public class LocationService : ObjectiveC.NSObject, CoreLocation.CLLocationManagerDelegate {
+  public static var shared: Loooot.LocationService
+  public func start()
+  @objc public func locationManager(_ manager: CoreLocation.CLLocationManager, didUpdateLocations locations: [CoreLocation.CLLocation])
+  @objc public func locationManager(_ manager: CoreLocation.CLLocationManager, didFailWithError error: Swift.Error)
+  @objc public func locationManager(_ manager: CoreLocation.CLLocationManager, didChangeAuthorization status: CoreLocation.CLAuthorizationStatus)
+  @objc deinit
+}
+@objc @IBDesignable public class DigiFidelExtendedItemTableViewCell : UIKit.UITableViewCell {
+  public static let Identifier: Swift.String
+  @objc override dynamic public func awakeFromNib()
+  public func setData(extendedItemModel: Loooot.ExtendedItemModel)
+  public func setViewBackgroundColor(color: Swift.Int)
+  public func setRewardTypeTextColor(color: Swift.Int)
+  public func setTitleTextColor(color: Swift.Int)
+  public func setSubtitleTextColor(color: Swift.Int)
+  public func setMessageTextColor(color: Swift.Int)
+  @available(iOS 3.0, *)
+  @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public typealias AFDataResponse<Success> = Loooot.DataResponse<Success, Loooot.AFError>
+public typealias AFDownloadResponse<Success> = Loooot.DownloadResponse<Success, Loooot.AFError>
+public struct DataResponse<Success, Failure> where Failure : Swift.Error {
+  public let request: Foundation.URLRequest?
+  public let response: Foundation.HTTPURLResponse?
+  public let data: Foundation.Data?
+  public let metrics: Foundation.URLSessionTaskMetrics?
+  public let serializationDuration: Foundation.TimeInterval
+  public let result: Swift.Result<Success, Failure>
+  public var value: Success? {
+    get
+  }
+  public var error: Failure? {
+    get
+  }
+  public init(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, data: Foundation.Data?, metrics: Foundation.URLSessionTaskMetrics?, serializationDuration: Foundation.TimeInterval, result: Swift.Result<Success, Failure>)
+}
+extension DataResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+extension DataResponse {
+  public func map<NewSuccess>(_ transform: (Success) -> NewSuccess) -> Loooot.DataResponse<NewSuccess, Failure>
+  public func tryMap<NewSuccess>(_ transform: (Success) throws -> NewSuccess) -> Loooot.DataResponse<NewSuccess, Swift.Error>
+  public func mapError<NewFailure>(_ transform: (Failure) -> NewFailure) -> Loooot.DataResponse<Success, NewFailure> where NewFailure : Swift.Error
+  public func tryMapError<NewFailure>(_ transform: (Failure) throws -> NewFailure) -> Loooot.DataResponse<Success, Swift.Error> where NewFailure : Swift.Error
+}
+public struct DownloadResponse<Success, Failure> where Failure : Swift.Error {
+  public let request: Foundation.URLRequest?
+  public let response: Foundation.HTTPURLResponse?
+  public let fileURL: Foundation.URL?
+  public let resumeData: Foundation.Data?
+  public let metrics: Foundation.URLSessionTaskMetrics?
+  public let serializationDuration: Foundation.TimeInterval
+  public let result: Swift.Result<Success, Failure>
+  public var value: Success? {
+    get
+  }
+  public var error: Failure? {
+    get
+  }
+  public init(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, fileURL: Foundation.URL?, resumeData: Foundation.Data?, metrics: Foundation.URLSessionTaskMetrics?, serializationDuration: Foundation.TimeInterval, result: Swift.Result<Success, Failure>)
+}
+extension DownloadResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+extension DownloadResponse {
+  public func map<NewSuccess>(_ transform: (Success) -> NewSuccess) -> Loooot.DownloadResponse<NewSuccess, Failure>
+  public func tryMap<NewSuccess>(_ transform: (Success) throws -> NewSuccess) -> Loooot.DownloadResponse<NewSuccess, Swift.Error>
+  public func mapError<NewFailure>(_ transform: (Failure) -> NewFailure) -> Loooot.DownloadResponse<Success, NewFailure> where NewFailure : Swift.Error
+  public func tryMapError<NewFailure>(_ transform: (Failure) throws -> NewFailure) -> Loooot.DownloadResponse<Success, Swift.Error> where NewFailure : Swift.Error
+}
+public class MapTokenType {
+  public func setTokenTypeId(tokenTypeId: Foundation.UUID)
+  public func getTokenTypeId() -> Foundation.UUID
+  public func setCampaignId(campaignId: Foundation.UUID)
+  public func getCampaignId() -> Foundation.UUID
+  public func setName(name: Swift.String)
+  public func getName() -> Swift.String
+  public func setImageUrl(imageUrl: Swift.String)
+  public func getImageUrl() -> Swift.String
+  public func setCollectionDistance(collectionDistance: Swift.Double)
+  public func getCollectionDistance() -> Swift.Double
+  public func setMinifiedTokens(minifiedMapTokenList: Swift.Array<Loooot.MinifiedMapToken>)
+  public func getMinifiedMapTokensList() -> Swift.Array<Loooot.MinifiedMapToken>
+  public init(json: [Swift.String : Any])
+  @objc deinit
+}
+@objc @IBDesignable public class RewardViewController : UIKit.UIViewController, UIKit.UINavigationBarDelegate {
+  public static let StoryboardName: Swift.String
+  public var campaignId: Foundation.UUID!
+  public var campaignName: Swift.String!
+  @objc override dynamic public func viewDidLoad()
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public protocol URLConvertible {
+  func asURL() throws -> Foundation.URL
+}
+extension String : Loooot.URLConvertible {
+  public func asURL() throws -> Foundation.URL
+}
+extension URL : Loooot.URLConvertible {
+  public func asURL() throws -> Foundation.URL
+}
+extension URLComponents : Loooot.URLConvertible {
+  public func asURL() throws -> Foundation.URL
+}
+public protocol URLRequestConvertible {
+  func asURLRequest() throws -> Foundation.URLRequest
+}
+extension URLRequestConvertible {
+  public var urlRequest: Foundation.URLRequest? {
+    get
+  }
+}
+extension URLRequest : Loooot.URLRequestConvertible {
+  public func asURLRequest() throws -> Foundation.URLRequest
+}
+extension URLRequest {
+  public init(url: Loooot.URLConvertible, method: Loooot.HTTPMethod, headers: Loooot.HTTPHeaders? = nil) throws
+}
+extension GMSMarker {
+  public func setIconSize(newSize: CoreGraphics.CGSize)
+}
+@objc @IBDesignable public class AdInterstitialViewController : UIKit.UIViewController {
+  public static let StoryboardName: Swift.String
+  public var ad: Loooot.Ad!
+  @objc override dynamic public func viewDidLoad()
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public enum ScalingScheme {
+  case normal
+  case tiered(threshold: Swift.Double, scale: Swift.Float)
+  case doubleTiered(firstThreshold: Swift.Double, firstScale: Swift.Float, secondThreshold: Swift.Double, secondScale: Swift.Float)
+  case linear(threshold: Swift.Double)
+  case linearBuffer(threshold: Swift.Double, buffer: Swift.Double)
+  public func getScheme() -> ((Swift.Double, Swift.Double) -> Swift.Float)
+}
+public protocol RedirectHandler {
+  func task(_ task: Foundation.URLSessionTask, willBeRedirectedTo request: Foundation.URLRequest, for response: Foundation.HTTPURLResponse, completion: @escaping (Foundation.URLRequest?) -> Swift.Void)
+}
+public struct Redirector {
+  public enum Behavior {
+    case follow
+    case doNotFollow
+    case modify((Foundation.URLSessionTask, Foundation.URLRequest, Foundation.HTTPURLResponse) -> Foundation.URLRequest?)
+  }
+  public static let follow: Loooot.Redirector
+  public static let doNotFollow: Loooot.Redirector
+  public let behavior: Loooot.Redirector.Behavior
+  public init(behavior: Loooot.Redirector.Behavior)
+}
+extension Redirector : Loooot.RedirectHandler {
+  public func task(_ task: Foundation.URLSessionTask, willBeRedirectedTo request: Foundation.URLRequest, for response: Foundation.HTTPURLResponse, completion: @escaping (Foundation.URLRequest?) -> Swift.Void)
+}
+public typealias Parameters = [Swift.String : Any]
+public protocol ParameterEncoding {
+  func encode(_ urlRequest: Loooot.URLRequestConvertible, with parameters: Loooot.Parameters?) throws -> Foundation.URLRequest
+}
+public struct URLEncoding : Loooot.ParameterEncoding {
+  public enum Destination {
+    case methodDependent
+    case queryString
+    case httpBody
+    public static func == (a: Loooot.URLEncoding.Destination, b: Loooot.URLEncoding.Destination) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public enum ArrayEncoding {
+    case brackets
+    case noBrackets
+    public static func == (a: Loooot.URLEncoding.ArrayEncoding, b: Loooot.URLEncoding.ArrayEncoding) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public enum BoolEncoding {
+    case numeric
+    case literal
+    public static func == (a: Loooot.URLEncoding.BoolEncoding, b: Loooot.URLEncoding.BoolEncoding) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public static var `default`: Loooot.URLEncoding {
+    get
+  }
+  public static var queryString: Loooot.URLEncoding {
+    get
+  }
+  public static var httpBody: Loooot.URLEncoding {
+    get
+  }
+  public let destination: Loooot.URLEncoding.Destination
+  public let arrayEncoding: Loooot.URLEncoding.ArrayEncoding
+  public let boolEncoding: Loooot.URLEncoding.BoolEncoding
+  public init(destination: Loooot.URLEncoding.Destination = .methodDependent, arrayEncoding: Loooot.URLEncoding.ArrayEncoding = .brackets, boolEncoding: Loooot.URLEncoding.BoolEncoding = .numeric)
+  public func encode(_ urlRequest: Loooot.URLRequestConvertible, with parameters: Loooot.Parameters?) throws -> Foundation.URLRequest
+  public func queryComponents(fromKey key: Swift.String, value: Any) -> [(Swift.String, Swift.String)]
+  public func escape(_ string: Swift.String) -> Swift.String
+}
+public struct JSONEncoding : Loooot.ParameterEncoding {
+  public static var `default`: Loooot.JSONEncoding {
+    get
+  }
+  public static var prettyPrinted: Loooot.JSONEncoding {
+    get
+  }
+  public let options: Foundation.JSONSerialization.WritingOptions
+  public init(options: Foundation.JSONSerialization.WritingOptions = [])
+  public func encode(_ urlRequest: Loooot.URLRequestConvertible, with parameters: Loooot.Parameters?) throws -> Foundation.URLRequest
+  public func encode(_ urlRequest: Loooot.URLRequestConvertible, withJSONObject jsonObject: Any? = nil) throws -> Foundation.URLRequest
+}
+public class InitResponse {
+  public init()
+  public init(playerId: Foundation.UUID, campaignsIdList: Swift.Array<Foundation.UUID>)
+  public init(playerId: Foundation.UUID, campaignsIdList: Swift.Array<Foundation.UUID>, isDebug: Swift.Bool)
+  public init(json: [Swift.String : Any])
+  public func getPlayerId() -> Foundation.UUID
+  public func setPlayerId(playerId: Foundation.UUID)
+  public func getCampaignsIdList() -> Swift.Array<Foundation.UUID>
+  public func setCampaignsIdList(campaignsIdList: Swift.Array<Foundation.UUID>)
+  public func isDebugMode() -> Swift.Bool
+  public func setDebug(debug: Swift.Bool)
+  @objc deinit
+}
+public protocol CachedResponseHandler {
+  func dataTask(_ task: Foundation.URLSessionDataTask, willCacheResponse response: Foundation.CachedURLResponse, completion: @escaping (Foundation.CachedURLResponse?) -> Swift.Void)
+}
+public struct ResponseCacher {
+  public enum Behavior {
+    case cache
+    case doNotCache
+    case modify((Foundation.URLSessionDataTask, Foundation.CachedURLResponse) -> Foundation.CachedURLResponse?)
+  }
+  public static let cache: Loooot.ResponseCacher
+  public static let doNotCache: Loooot.ResponseCacher
+  public let behavior: Loooot.ResponseCacher.Behavior
+  public init(behavior: Loooot.ResponseCacher.Behavior)
+}
+extension ResponseCacher : Loooot.CachedResponseHandler {
+  public func dataTask(_ task: Foundation.URLSessionDataTask, willCacheResponse response: Foundation.CachedURLResponse, completion: @escaping (Foundation.CachedURLResponse?) -> Swift.Void)
+}
+public struct AlamofireExtension<ExtendedType> {
+}
+public protocol AlamofireExtended {
+  associatedtype ExtendedType
+  static var af: Loooot.AlamofireExtension<Self.ExtendedType>.Type { get set }
+  var af: Loooot.AlamofireExtension<Self.ExtendedType> { get set }
+}
+extension AlamofireExtended {
+  public static var af: Loooot.AlamofireExtension<Self>.Type {
+    get
+    set
+  }
+  public var af: Loooot.AlamofireExtension<Self> {
+    get
+    set
+  }
+}
+extension SCNVector3 {
+  public func distance(to anotherVector: SceneKit.SCNVector3) -> Swift.Float
+}
+extension Loooot.Request.State : Swift.Equatable {}
+extension Loooot.Request.State : Swift.Hashable {}
+extension Loooot.URLEncodedFormParameterEncoder.Destination : Swift.Equatable {}
+extension Loooot.URLEncodedFormParameterEncoder.Destination : Swift.Hashable {}
+extension Loooot.URLEncodedFormEncoder.ArrayEncoding : Swift.Equatable {}
+extension Loooot.URLEncodedFormEncoder.ArrayEncoding : Swift.Hashable {}
+extension Loooot.URLEncodedFormEncoder.BoolEncoding : Swift.Equatable {}
+extension Loooot.URLEncodedFormEncoder.BoolEncoding : Swift.Hashable {}
+extension Loooot.URLEncodedFormEncoder.SpaceEncoding : Swift.Equatable {}
+extension Loooot.URLEncodedFormEncoder.SpaceEncoding : Swift.Hashable {}
+extension Loooot.LocationEstimateMethod : Swift.Hashable {}
+extension Loooot.NetworkReachabilityManager.NetworkReachabilityStatus.ConnectionType : Swift.Hashable {}
+@available(iOS 11.0, *)
+extension Loooot.SceneLocationView.ARTrackingType : Swift.Equatable {}
+@available(iOS 11.0, *)
+extension Loooot.SceneLocationView.ARTrackingType : Swift.Hashable {}
+extension Loooot.URLEncoding.Destination : Swift.Equatable {}
+extension Loooot.URLEncoding.Destination : Swift.Hashable {}
+extension Loooot.URLEncoding.ArrayEncoding : Swift.Equatable {}
+extension Loooot.URLEncoding.ArrayEncoding : Swift.Hashable {}
+extension Loooot.URLEncoding.BoolEncoding : Swift.Equatable {}
+extension Loooot.URLEncoding.BoolEncoding : Swift.Hashable {}

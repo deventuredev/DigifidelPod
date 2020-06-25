@@ -1,0 +1,6 @@
+framework module DigifidelPod {
+  umbrella header "DigifidelPod-umbrella.h"
+
+  export *
+  module * { export * }
+}
