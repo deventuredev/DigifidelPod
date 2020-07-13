@@ -198,14 +198,7 @@ public class EndPoint {
   public static let initializeLooootManager: Swift.String
   public static let startSession: Swift.String
   public static let downloadTerms: Swift.String
-<<<<<<< HEAD
   public static let faq: Swift.String
-=======
-<<<<<<< HEAD
-  public static let faq: Swift.String
-=======
->>>>>>> 491ada1a7519e3de5b35bc37c21501a5ece40292
->>>>>>> c22f358fff2fa6ec6bd037d90ec00bb9705f64ea
   public static let getCampaigns: Swift.String
   public static let redeemToken: Swift.String
   public static let getTokenTypeById: Swift.String
@@ -960,14 +953,7 @@ public class ClaimRewardModel {
 public class HttpClientManager {
   public static let shared: Loooot.HttpClientManager
   public func getTermsAndConditionsUrl() -> Swift.String
-<<<<<<< HEAD
   public func getFAQUrl() -> Swift.String
-=======
-<<<<<<< HEAD
-  public func getFAQUrl() -> Swift.String
-=======
->>>>>>> 491ada1a7519e3de5b35bc37c21501a5ece40292
->>>>>>> c22f358fff2fa6ec6bd037d90ec00bb9705f64ea
   public func setTermsAndConditionsUrl(url: Swift.String)
   public func initializeLooootManager(playerIdentifier: Swift.String, clientId: Swift.Int64, completion: @escaping (Loooot.InitResponse?, Swift.Bool) -> Swift.Void)
   public func startSession(currentTime: Swift.String, completion: @escaping (Loooot.StartSessionResponse?, Swift.Bool) -> Swift.Void)
@@ -1063,14 +1049,7 @@ public class LooootManager {
   public func setTermsAndConditionsUrl(url: Swift.String)
   public func shouldShowDebugLayout() -> Swift.Bool
   public func getTermsAndConditionsUrl() -> Swift.String
-<<<<<<< HEAD
   public func getFAQUrl() -> Swift.String
-=======
-<<<<<<< HEAD
-  public func getFAQUrl() -> Swift.String
-=======
->>>>>>> 491ada1a7519e3de5b35bc37c21501a5ece40292
->>>>>>> c22f358fff2fa6ec6bd037d90ec00bb9705f64ea
   public func getCampaignIdList() -> Swift.Array<Swift.Int64>
   @objc deinit
 }
