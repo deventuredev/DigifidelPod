@@ -3,9 +3,6 @@
 // swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Loooot
 import ARKit
 import AVFoundation
-import AppCenter
-import AppCenterAnalytics
-import AppCenterCrashes
 import CoreLocation
 import Foundation
 import GoogleMaps
