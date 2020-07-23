@@ -312,7 +312,7 @@ public class MinifiedMapReward {
   @objc deinit
 }
 public protocol RewardsTableViewDelegate {
-  func onRewardClicked(rewardTypeId: Swift.Int64)
+  func onRewardClicked(rewardTypeId: Swift.Int64, rewardName: Swift.String)
 }
 @objc @IBDesignable public class RewardListView : UIKit.UIView, UIKit.UITableViewDataSource, UIKit.UITableViewDelegate {
   public var delegate: Loooot.RewardsTableViewDelegate?
@@ -502,6 +502,7 @@ public class LanguageSelected {
   public static let englishDefault: Swift.Int
   public static let french: Swift.Int
   public static let creole: Swift.Int
+  public static let verve: Swift.Int
   @objc deinit
 }
 @objc @IBDesignable public class CampaignTableViewCell : UIKit.UITableViewCell {
@@ -642,7 +643,7 @@ extension Int {
   @objc override dynamic public func viewDidLoad()
   @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
   @objc override dynamic public func viewDidLayoutSubviews()
-  public func onRewardClicked(rewardTypeId: Swift.Int64)
+  public func onRewardClicked(rewardTypeId: Swift.Int64, rewardName: Swift.String)
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
@@ -959,7 +960,7 @@ public class HttpClientManager {
   public func getTokensByLocation(completion: @escaping (Swift.Array<Loooot.MapReward>?, Swift.Bool) -> Swift.Void)
   public func getAllTokens(completion: @escaping (Swift.Array<Loooot.RewardTypeList>?, Swift.Bool) -> Swift.Void)
   public func getTokenTypeById(tokenTypeId: Swift.Int64, completion: @escaping (Loooot.RewardTypeDetails?, Swift.Bool) -> Swift.Void)
-  public func claimToken(reward: Loooot.MapReward, proximity: Swift.Int, claimedAt: Swift.String, completion: @escaping (Loooot.WebResponse<Loooot.RewardClaimResponse>?, Swift.Bool) -> Swift.Void)
+  public func claimToken(reward: Loooot.MapReward, proximity: Swift.Int, claimedAt: Swift.String, lat: Swift.Double, lng: Swift.Double, completion: @escaping (Loooot.WebResponse<Loooot.RewardClaimResponse>?, Swift.Bool) -> Swift.Void)
   public func redeemToken(tokenId: Swift.Int64, redeemedAt: Swift.String, completion: @escaping (Loooot.RewardTypeDetails?, Swift.Bool) -> Swift.Void)
   public func getWallet(completion: @escaping (Swift.Array<Loooot.WalletList>?, Swift.Bool) -> Swift.Void)
   public func getNextAd(adImageId: Swift.Int64, completion: @escaping (Loooot.Ad?, Swift.Bool) -> Swift.Void)
