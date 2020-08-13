@@ -638,11 +638,13 @@ extension Int {
   @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
-@objc public class RewardListViewController : UIKit.UIViewController, Loooot.RewardsTableViewDelegate {
+@objc public class RewardListViewController : UIKit.UIViewController, Loooot.RewardsTableViewDelegate, Loooot.MenuActionDelegate {
   public static let StoryboardName: Swift.String
   @objc override dynamic public func viewDidLoad()
   @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
   @objc override dynamic public func viewDidLayoutSubviews()
+  public func dismissMenu()
   public func onRewardClicked(rewardTypeId: Swift.Int64, rewardName: Swift.String)
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
@@ -1017,12 +1019,16 @@ public protocol MenuDelegate {
   func onMenuOpened()
   func onMenuClosed()
 }
+public protocol MenuActionDelegate {
+  func dismissMenu()
+}
 public protocol HomeDelegate {
   func onHomePressed()
 }
 public class LooootManager {
   public static let shared: Loooot.LooootManager
   public var menuDelegate: Loooot.MenuDelegate?
+  public var menuActionDelegate: Loooot.MenuActionDelegate?
   public var homeDelegate: Loooot.HomeDelegate?
   public static func initialize(playerIdentifier: Swift.String, clientId: Swift.Int64, completion: @escaping (Swift.Bool) -> Swift.Void)
   public func getBundle() -> Foundation.Bundle
@@ -1049,6 +1055,7 @@ public class LooootManager {
   public func getTermsAndConditionsUrl() -> Swift.String
   public func getFAQUrl() -> Swift.String
   public func getCampaignIdList() -> Swift.Array<Swift.Int64>
+  public func dismissMenu()
   @objc deinit
 }
 public class RewardTypeDetails {
