@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)
+// swift-compiler-version: Apple Swift version 5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)
 // swift-module-flags: -target i386-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Loooot
 import ARKit
 import AVFoundation
@@ -13,7 +13,7 @@ import Swift
 import SystemConfiguration
 import UIKit
 import UserNotifications
-public class PreferencesConstants {
+@_hasMissingDesignatedInitializers public class PreferencesConstants {
   public static let firstUse: Swift.String
   public static let termsAndConditions: Swift.String
   @objc deinit
@@ -88,7 +88,7 @@ public class ThemeImages {
 extension UIImageView {
   public func setImage(imageUrl: Swift.String?, placeholder: UIKit.UIImage)
 }
-@objc public class NetworkManager : ObjectiveC.NSObject {
+@objc @_inheritsConvenienceInitializers public class NetworkManager : ObjectiveC.NSObject {
   public static let shared: Loooot.NetworkManager
   public var reachability: Loooot.Reachability!
   @objc override dynamic public init()
@@ -105,16 +105,16 @@ extension UIWindow {
   }
   public static func getVisibleViewControllerFrom(_ vc: UIKit.UIViewController?) -> UIKit.UIViewController?
 }
-@objc @IBDesignable public class RewardDetailsViewController : UIKit.UIViewController, UIKit.UINavigationBarDelegate, Loooot.RewardDetailsViewInitializeDelegate {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class RewardDetailsViewController : UIKit.UIViewController, UIKit.UINavigationBarDelegate, Loooot.RewardDetailsViewInitializeDelegate {
   public static let StoryboardName: Swift.String
   public var delegateView: Loooot.RewardDetailsDelegate!
   @objc override dynamic public func viewDidLoad()
   public func setNavigationBarTitle(title: Swift.String)
   public func setDelegateView(view: Loooot.RewardDetailsDelegate)
   public func setRewardIds(rewardId: Swift.Int64?, rewardTypeId: Swift.Int64)
+  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
 }
 public protocol RewardDetailsViewInitializeDelegate {
   func setNavigationBarTitle(title: Swift.String)
@@ -122,7 +122,7 @@ public protocol RewardDetailsViewInitializeDelegate {
 public protocol RewardDetailsDelegate {
   func removeRewardFromWallet(rewardIdToRemove: Swift.Int64)
 }
-@objc @IBDesignable public class RewardDetailsView : UIKit.UIView {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class RewardDetailsView : UIKit.UIView {
   public var viewInitializeDelegate: Loooot.RewardDetailsViewInitializeDelegate?
   public var delegate: Loooot.RewardDetailsDelegate?
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
@@ -139,7 +139,7 @@ public protocol RewardDetailsDelegate {
   public func setRedemptionRulesText(text: Swift.String)
   @objc deinit
 }
-public class ResponseCode {
+@_hasMissingDesignatedInitializers public class ResponseCode {
   public static let notSet: Swift.Int
   public static let success: Swift.Int
   public static let error: Swift.Int
@@ -191,7 +191,7 @@ extension FloatingPoint {
     get
   }
 }
-public class EndPoint {
+@_hasMissingDesignatedInitializers public class EndPoint {
   public static let initializeLooootManager: Swift.String
   public static let startSession: Swift.String
   public static let downloadTerms: Swift.String
@@ -209,7 +209,7 @@ public class EndPoint {
   public static let adTapped: Swift.String
   @objc deinit
 }
-@objc @IBDesignable public class ExtendedItemTableViewCell : UIKit.UITableViewCell {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class ExtendedItemTableViewCell : UIKit.UITableViewCell {
   public static let Identifier: Swift.String
   @objc override dynamic public func awakeFromNib()
   public func setData(extendedItemModel: Loooot.ExtendedItemModel)
@@ -220,10 +220,10 @@ public class EndPoint {
   public func setSubtitleTextColor(color: Swift.Int)
   public func setMessageTextColor(color: Swift.Int)
   public func setArrowTintColor(color: Swift.Int)
+  @objc deinit
   @available(iOS 3.0, *)
   @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
 }
 public class ARItem {
   public init(id: Swift.Int64, name: Swift.String, location: CoreLocation.CLLocationCoordinate2D, image: UIKit.UIImage?)
@@ -237,7 +237,7 @@ public class ARItem {
   public func setImage(image: UIKit.UIImage)
   @objc deinit
 }
-@objc @IBDesignable public class DigiFidelSimpleItemTableViewCell : UIKit.UITableViewCell {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class DigiFidelSimpleItemTableViewCell : UIKit.UITableViewCell {
   public static let Identifier: Swift.String
   @objc override dynamic public func awakeFromNib()
   public func setData(simpleItemModel: Loooot.SimpleItemModel)
@@ -245,12 +245,12 @@ public class ARItem {
   public func setRewardTypeTextColor(color: Swift.Int)
   public func setTitleTextColor(color: Swift.Int)
   public func setSubtitleTextColor(color: Swift.Int)
+  @objc deinit
   @available(iOS 3.0, *)
   @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
 }
-@objc @IBDesignable public class SimpleItemTableViewCell : UIKit.UITableViewCell {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class SimpleItemTableViewCell : UIKit.UITableViewCell {
   public static let Identifier: Swift.String
   @objc override dynamic public func awakeFromNib()
   public func setData(simpleItemModel: Loooot.SimpleItemModel)
@@ -260,10 +260,10 @@ public class ARItem {
   public func setTitleTextColor(color: Swift.Int)
   public func setSubtitleTextColor(color: Swift.Int)
   public func setArrowTintColor(color: Swift.Int)
+  @objc deinit
   @available(iOS 3.0, *)
   @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
 }
 public protocol LNTouchDelegate : AnyObject {
   func locationNodeTouched(node: Loooot.AnnotationNode)
@@ -314,7 +314,7 @@ public class MinifiedMapReward {
 public protocol RewardsTableViewDelegate {
   func onRewardClicked(rewardTypeId: Swift.Int64, rewardName: Swift.String)
 }
-@objc @IBDesignable public class RewardListView : UIKit.UIView, UIKit.UITableViewDataSource, UIKit.UITableViewDelegate {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class RewardListView : UIKit.UIView, UIKit.UITableViewDataSource, UIKit.UITableViewDelegate {
   public var delegate: Loooot.RewardsTableViewDelegate?
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
@@ -358,7 +358,7 @@ public class PermissionModel {
   public func setButtonText(buttonText: Swift.String)
   @objc deinit
 }
-@objc public class CustomBottomNavigation : UIKit.UITabBar {
+@objc @_inheritsConvenienceInitializers public class CustomBottomNavigation : UIKit.UITabBar {
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   public init(frame: CoreGraphics.CGRect, initialiseMannually: Swift.Bool)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
@@ -373,7 +373,7 @@ extension NSNotification.Name {
   public static let removeCampaign: Foundation.Notification.Name
   public static let networkReachabilityChanged: Foundation.Notification.Name
 }
-@objc @IBDesignable public class ErrorView : UIKit.UIView {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class ErrorView : UIKit.UIView {
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   public func setImage(image: UIKit.UIImage)
@@ -382,7 +382,7 @@ extension NSNotification.Name {
   public func setMessageTextColor(color: Swift.Int)
   @objc deinit
 }
-@objc @IBDesignable public class AdBannerView : UIKit.UIView {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class AdBannerView : UIKit.UIView {
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   public func setImageGestureRecognizer(gestureRecognizer: UIKit.UIGestureRecognizer)
@@ -392,7 +392,7 @@ extension NSNotification.Name {
   public func setCloseButtonHiding(isHidden: Swift.Bool)
   @objc deinit
 }
-@objc @IBDesignable public class DigiFidelCampaignTableViewCell : UIKit.UITableViewCell {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class DigiFidelCampaignTableViewCell : UIKit.UITableViewCell {
   public static let Identifier: Swift.String
   @objc override dynamic public func awakeFromNib()
   public func setData(extendedItemModel: Loooot.ExtendedItemModel)
@@ -400,10 +400,10 @@ extension NSNotification.Name {
   public func setTitleTextColor(color: Swift.Int)
   public func setSubtitleTextColor(color: Swift.Int)
   public func setMessageTextColor(color: Swift.Int)
+  @objc deinit
   @available(iOS 3.0, *)
   @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
 }
 public enum ReachabilityError : Swift.Error {
   case failedToCreateWithAddress(Darwin.sockaddr, Swift.Int32)
@@ -490,7 +490,7 @@ extension SceneLocationEstimate {
   public func locationTranslation(to position: SceneKit.SCNVector3) -> Loooot.LocationTranslation
   public func translatedLocation(to position: SceneKit.SCNVector3) -> CoreLocation.CLLocation
 }
-public class GetAllRewardsModel {
+@_hasMissingDesignatedInitializers public class GetAllRewardsModel {
   public func getPlayerId() -> Swift.Int64
   public func setPlayerId(playerId: Swift.Int64)
   public func getCampaignsIdList() -> Swift.Array<Swift.Int64>
@@ -498,14 +498,14 @@ public class GetAllRewardsModel {
   public func toJson() -> Swift.String
   @objc deinit
 }
-public class LanguageSelected {
+@_hasMissingDesignatedInitializers public class LanguageSelected {
   public static let englishDefault: Swift.Int
   public static let french: Swift.Int
   public static let creole: Swift.Int
   public static let verve: Swift.Int
   @objc deinit
 }
-@objc @IBDesignable public class CampaignTableViewCell : UIKit.UITableViewCell {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class CampaignTableViewCell : UIKit.UITableViewCell {
   public static let Identifier: Swift.String
   @objc override dynamic public func awakeFromNib()
   public func setData(extendedItemModel: Loooot.ExtendedItemModel)
@@ -514,15 +514,15 @@ public class LanguageSelected {
   public func setSubtitleTextColor(color: Swift.Int)
   public func setMessageTextColor(color: Swift.Int)
   public func setArrowTintColor(color: Swift.Int)
+  @objc deinit
   @available(iOS 3.0, *)
   @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
 }
 public protocol WalletViewDelegate {
   func onWalletItemClicked(walletItem: Loooot.WalletList)
 }
-@objc @IBDesignable public class WalletView : UIKit.UIView, UIKit.UITableViewDataSource, UIKit.UITableViewDelegate, Loooot.RewardDetailsDelegate {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class WalletView : UIKit.UIView, UIKit.UITableViewDataSource, UIKit.UITableViewDelegate, Loooot.RewardDetailsDelegate {
   public var delegate: Loooot.WalletViewDelegate?
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
@@ -549,7 +549,7 @@ public protocol WalletViewDelegate {
   public func setEmptyWalletSuggestionText(text: Swift.String)
   @objc deinit
 }
-public class ColorConstants {
+@_hasMissingDesignatedInitializers public class ColorConstants {
   public static let closeAdBackground: Swift.Int
   public static let closeAdTint: Swift.Int
   public static let closeARBackground: Swift.Int
@@ -562,8 +562,8 @@ public class ColorConstants {
   public var id: Swift.Int64?
   public init(view: UIKit.UIView?, image: UIKit.UIImage?, id: Swift.Int64?)
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 @objc open class LocationNode : SceneKit.SCNNode {
   public var location: CoreLocation.CLLocation!
@@ -584,18 +584,18 @@ public class ColorConstants {
 extension UIView {
   public func applyGradient(colors: [CoreGraphics.CGColor])
 }
-public class SceneLocationEstimate {
+@_hasMissingDesignatedInitializers public class SceneLocationEstimate {
   final public let location: CoreLocation.CLLocation
   final public let position: SceneKit.SCNVector3
   @objc deinit
 }
-@objc public class LocationManager : ObjectiveC.NSObject {
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class LocationManager : ObjectiveC.NSObject {
   public var heading: CoreLocation.CLLocationDirection? {
     get
-    }
+  }
   public var headingAccuracy: CoreLocation.CLLocationDirection? {
     get
-    }
+  }
   @objc deinit
 }
 extension LocationManager : CoreLocation.CLLocationManagerDelegate {
@@ -604,7 +604,7 @@ extension LocationManager : CoreLocation.CLLocationManagerDelegate {
   @objc dynamic public func locationManager(_ manager: CoreLocation.CLLocationManager, didUpdateHeading newHeading: CoreLocation.CLHeading)
   @objc dynamic public func locationManagerShouldDisplayHeadingCalibration(_ manager: CoreLocation.CLLocationManager) -> Swift.Bool
 }
-public class Converter {
+@_hasMissingDesignatedInitializers public class Converter {
   public static func radiansToDegrees(_ radians: Swift.Double) -> Swift.Double
   public static func degreesToRadians(_ degrees: Swift.Double) -> Swift.Double
   public static func convertTimeZoneToUrlString(currentTime: Swift.String) -> Swift.String
@@ -631,14 +631,14 @@ extension Int {
     get
   }
 }
-@objc public class WelcomeViewController : UIKit.UIViewController {
+@objc @_inheritsConvenienceInitializers public class WelcomeViewController : UIKit.UIViewController {
   public static let StoryboardName: Swift.String
   @objc override dynamic public func viewDidLoad()
+  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
 }
-@objc public class RewardListViewController : UIKit.UIViewController, Loooot.RewardsTableViewDelegate, Loooot.MenuActionDelegate {
+@objc @_inheritsConvenienceInitializers public class RewardListViewController : UIKit.UIViewController, Loooot.RewardsTableViewDelegate, Loooot.MenuActionDelegate {
   public static let StoryboardName: Swift.String
   @objc override dynamic public func viewDidLoad()
   @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
@@ -646,9 +646,9 @@ extension Int {
   @objc override dynamic public func viewDidLayoutSubviews()
   public func dismissMenu()
   public func onRewardClicked(rewardTypeId: Swift.Int64, rewardName: Swift.String)
+  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
 }
 extension DispatchQueue {
   public static func background(delay: Swift.Double = 0.0, background: (() -> Swift.Void)? = nil, completion: (() -> Swift.Void)? = nil)
@@ -662,7 +662,7 @@ public enum LocationEstimateMethod {
   }
   public func hash(into hasher: inout Swift.Hasher)
 }
-final public class SceneLocationManager {
+@_hasMissingDesignatedInitializers final public class SceneLocationManager {
   final public var locationEstimateMethod: Loooot.LocationEstimateMethod
   final public let locationManager: Loooot.LocationManager
   final public var bestLocationEstimate: Loooot.SceneLocationEstimate? {
@@ -681,16 +681,16 @@ public typealias BoxBuilder = (CoreGraphics.CGFloat) -> SceneKit.SCNBox
 @objc public class PolylineNode : Loooot.LocationNode {
   public var locationNodes: [Loooot.LocationNode] {
     get
-    }
+  }
   final public let polyline: MapKit.MKPolyline
   final public let altitude: CoreLocation.CLLocationDistance
   final public let boxBuilder: Loooot.BoxBuilder
   public init(polyline: MapKit.MKPolyline, altitude: CoreLocation.CLLocationDistance, boxBuilder: Loooot.BoxBuilder? = nil)
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  override public init(location: CoreLocation.CLLocation?)
   @objc deinit
+  override public init(location: CoreLocation.CLLocation?)
 }
-@objc @IBDesignable public class LoadingView : UIKit.UIView {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class LoadingView : UIKit.UIView {
   @objc override dynamic public var layer: QuartzCore.CAShapeLayer {
     @objc get
   }
@@ -704,9 +704,9 @@ public typealias BoxBuilder = (CoreGraphics.CGFloat) -> SceneKit.SCNBox
     set
   }
   public func setStrokeColor(color: Swift.Int)
+  @objc deinit
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
 }
 public class Campaign {
   public init()
@@ -732,7 +732,7 @@ public class Campaign {
 public protocol CampaignListViewDelegate {
   func onCampaignClicked(campaign: Loooot.Campaign)
 }
-@objc @IBDesignable public class CampaignListView : UIKit.UIView, UIKit.UITableViewDataSource, UIKit.UITableViewDelegate {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class CampaignListView : UIKit.UIView, UIKit.UITableViewDataSource, UIKit.UITableViewDelegate {
   public var delegate: Loooot.CampaignListViewDelegate?
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
@@ -755,16 +755,16 @@ public protocol CampaignListViewDelegate {
   public func setEmptyListSuggestionText(text: Swift.String)
   @objc deinit
 }
-@objc public class LooootViewController : UIKit.UITabBarController {
+@objc @_inheritsConvenienceInitializers public class LooootViewController : UIKit.UITabBarController {
   public static let StoryboardName: Swift.String
   @objc override dynamic public func viewDidLoad()
   @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
   @objc override dynamic public func tabBar(_ tabBar: UIKit.UITabBar, didSelect item: UIKit.UITabBarItem)
+  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
 }
-public class GetRewardsModel {
+@_hasMissingDesignatedInitializers public class GetRewardsModel {
   public func getPlayerId() -> Swift.Int64
   public func setPlayerId(playerId: Swift.Int64)
   public func getLatitude() -> Swift.Double
@@ -780,7 +780,7 @@ public class GetRewardsModel {
   public func toJson() -> Swift.String
   @objc deinit
 }
-public class RewardClaimResponse {
+@_hasMissingDesignatedInitializers public class RewardClaimResponse {
   public func getMessage() -> Swift.String?
   public func setMessage(message: Swift.String)
   public func getRuleLimitMessage() -> Swift.String?
@@ -806,27 +806,27 @@ public class ExtendedItemModel {
   public func setRewardType(rewardType: Swift.Int)
   @objc deinit
 }
-@objc @IBDesignable public class PrimaryButton : UIKit.UIButton {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class PrimaryButton : UIKit.UIButton {
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @objc override dynamic public func layoutSubviews()
   public func setButtonBackgroundColor(color: Swift.Int)
   @objc deinit
 }
-public class GeofenceHelper {
+@_hasMissingDesignatedInitializers public class GeofenceHelper {
   public static func getDistanceInMeters(lat1: Swift.Double, lon1: Swift.Double, lat2: Swift.Double, lon2: Swift.Double) -> Swift.Double
   public static func isInRange(lat1: Swift.Double, lon1: Swift.Double, lat2: Swift.Double, lon2: Swift.Double, radiusInMeters: Swift.Double) -> Swift.Bool
   public static func isInRange(lat1: Swift.Double, lon1: Swift.Double, lat2: Swift.Double, lon2: Swift.Double, radiusInMeters: Swift.Int) -> Swift.Bool
   @objc deinit
 }
-@objc @IBDesignable public class SecondaryButton : UIKit.UIButton {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class SecondaryButton : UIKit.UIButton {
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @objc override dynamic public func layoutSubviews()
   public func setButtonBackgroundColor(color: Swift.Int)
   @objc deinit
 }
-public class RedeemType {
+@_hasMissingDesignatedInitializers public class RedeemType {
   public static let instant: Swift.Int
   public static let wallet: Swift.Int
   @objc deinit
@@ -850,7 +850,7 @@ extension CLLocation {
 extension CLLocationCoordinate2D {
   public func coordinateWithBearing(bearing: Swift.Double, distanceMeters: Swift.Double) -> CoreLocation.CLLocationCoordinate2D
 }
-@objc @IBDesignable public class MapView : UIKit.UIView, GoogleMaps.GMSMapViewDelegate, Loooot.GMUClusterManagerDelegate, Loooot.GMUClusterRendererDelegate {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class MapView : UIKit.UIView, GoogleMaps.GMSMapViewDelegate, Loooot.GMUClusterManagerDelegate, Loooot.GMUClusterRendererDelegate {
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @objc public func mapView(_ mapView: GoogleMaps.GMSMapView, didChange position: GoogleMaps.GMSCameraPosition)
@@ -868,15 +868,15 @@ extension CLLocationCoordinate2D {
   public func setLoadingViewColor(color: Swift.Int)
   @objc deinit
 }
-@objc public class PermissionViewController : UIKit.UIViewController, CoreLocation.CLLocationManagerDelegate {
+@objc @_inheritsConvenienceInitializers public class PermissionViewController : UIKit.UIViewController, CoreLocation.CLLocationManagerDelegate {
   public static let StoryboardName: Swift.String
   @objc override dynamic public func viewDidLoad()
   @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
   @objc override dynamic public func viewDidLayoutSubviews()
   @objc public func locationManager(_ manager: CoreLocation.CLLocationManager, didChangeAuthorization status: CoreLocation.CLAuthorizationStatus)
+  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
 }
 public class StartSessionResponse {
   public init(sessionId: Swift.Int64!)
@@ -885,7 +885,7 @@ public class StartSessionResponse {
   public func setSessionId(sessionId: Swift.Int64)
   @objc deinit
 }
-public class ThemeManager {
+@_hasMissingDesignatedInitializers public class ThemeManager {
   public static let shared: Loooot.ThemeManager
   public func setThemeColor(theme: Loooot.ThemeColor)
   public func setThemeImages(theme: Loooot.ThemeImages)
@@ -950,7 +950,7 @@ public class ClaimRewardModel {
   public func toJson() -> Swift.String
   @objc deinit
 }
-public class HttpClientManager {
+@_hasMissingDesignatedInitializers public class HttpClientManager {
   public static let shared: Loooot.HttpClientManager
   public func getTermsAndConditionsUrl() -> Swift.String
   public func getFAQUrl() -> Swift.String
@@ -1005,14 +1005,14 @@ public class ThemeColor {
   public func setToolbarBackColor(color: Swift.Int)
   @objc deinit
 }
-@objc public class TermsAndConditionsViewController : UIKit.UIViewController, UIKit.UIWebViewDelegate {
+@objc @_inheritsConvenienceInitializers public class TermsAndConditionsViewController : UIKit.UIViewController, UIKit.UIWebViewDelegate {
   public static let StoryboardName: Swift.String
   @objc override dynamic public func viewDidLoad()
   @objc override dynamic public func viewDidLayoutSubviews()
   @objc public func webViewDidFinishLoad(_ webView: UIKit.UIWebView)
+  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
 }
 public protocol MenuDelegate {
   func getMenuViewController() -> UIKit.UIViewController?
@@ -1025,7 +1025,7 @@ public protocol MenuActionDelegate {
 public protocol HomeDelegate {
   func onHomePressed()
 }
-public class LooootManager {
+@_hasMissingDesignatedInitializers public class LooootManager {
   public static let shared: Loooot.LooootManager
   public var menuDelegate: Loooot.MenuDelegate?
   public var menuActionDelegate: Loooot.MenuActionDelegate?
@@ -1088,7 +1088,7 @@ public class RewardTypeDetails {
   public func setStatus(status: Swift.Int?)
   @objc deinit
 }
-public class NotificationCenterDataConstants {
+@_hasMissingDesignatedInitializers public class NotificationCenterDataConstants {
   public static let newLocationKey: Swift.String
   public static let newHeadingKey: Swift.String
   public static let arItemKey: Swift.String
@@ -1181,7 +1181,7 @@ extension UINavigationBar {
   @objc override dynamic public init()
   @objc deinit
 }
-public class ResponseHelper {
+@_hasMissingDesignatedInitializers public class ResponseHelper {
   public static let responseCodeDictionary: Swift.Dictionary<Swift.Int, Swift.String>
   public static func getMessage(responseCode: Swift.Int) -> Swift.String
   @objc deinit
@@ -1203,7 +1203,7 @@ public protocol AdManagerDelegate {
   func onAdClicked(ad: Loooot.Ad)
   func onAdClosed(ad: Loooot.Ad)
 }
-public class AdManager {
+@_hasMissingDesignatedInitializers public class AdManager {
   public static let shared: Loooot.AdManager
   public func addDelegate(delegate: Loooot.AdManagerDelegate)
   public func shouldShowInterstitial(shouldShowInterstitial: Swift.Bool)
@@ -1214,7 +1214,7 @@ public class AdManager {
   public func stopTimer()
   @objc deinit
 }
-public class AdDisplayedModel {
+@_hasMissingDesignatedInitializers public class AdDisplayedModel {
   public func getPlayerId() -> Swift.Int64
   public func setPlayerId(playerId: Swift.Int64)
   public func getAdId() -> Swift.Int64
@@ -1240,7 +1240,7 @@ public class SimpleItemModel {
   public func setRewardType(rewardType: Swift.Int)
   @objc deinit
 }
-public class TranslationConstants {
+@_hasMissingDesignatedInitializers public class TranslationConstants {
   public static let login: Swift.String
   public static let appName: Swift.String
   public static let campaignListViewNoItems: Swift.String
@@ -1304,7 +1304,7 @@ public class TranslationConstants {
   public static let permissionDeniedButton: Swift.String
   @objc deinit
 }
-public class ImageCacher {
+@_hasMissingDesignatedInitializers public class ImageCacher {
   public static let shared: Loooot.ImageCacher
   public func addToDictionary(imageUrl: Swift.String, image: UIKit.UIImage)
   public func addToMapDictionary(imageUrl: Swift.String, image: UIKit.UIImage)
@@ -1315,7 +1315,7 @@ public class ImageCacher {
   public func containsUrl(imageUrl: Swift.String) -> Swift.Bool
   @objc deinit
 }
-public class StringConstants {
+@_hasMissingDesignatedInitializers public class StringConstants {
   public static let ISODateFormat: Swift.String
   public static let jsonDateFormat: Swift.String
   public static let dateFormat: Swift.String
@@ -1336,7 +1336,7 @@ public class StringConstants {
   public static let redeemedAt: Swift.String
   @objc deinit
 }
-public class PermissionModelHelper {
+@_hasMissingDesignatedInitializers public class PermissionModelHelper {
   public static func getWelcome() -> Loooot.PermissionModel
   public static func getCameraPermission() -> Loooot.PermissionModel
   public static func getLocationPermission() -> Loooot.PermissionModel
@@ -1358,13 +1358,13 @@ public class WalletList : Loooot.RewardTypeList {
   override public init(id: Swift.Int64, name: Swift.String, campaignNames: Swift.Array<Swift.String>?, rewardImageUrl: Swift.String, rewardType: Swift.Int)
   @objc deinit
 }
-@objc public class CustomClusterRenderer : Loooot.GMUDefaultClusterRenderer {
+@objc @_inheritsConvenienceInitializers public class CustomClusterRenderer : Loooot.GMUDefaultClusterRenderer {
   @objc override dynamic public func shouldRender(as cluster: Loooot.GMUCluster, atZoom zoom: Swift.Float) -> Swift.Bool
   @objc override dynamic public init(mapView: GoogleMaps.GMSMapView, clusterIconGenerator iconGenerator: Loooot.GMUClusterIconGenerator)
   @objc override dynamic public init()
   @objc deinit
 }
-public class TranslationManager {
+@_hasMissingDesignatedInitializers public class TranslationManager {
   public static let shared: Loooot.TranslationManager
   public func setTranslationDictionary(translationDictionary: [Swift.String : Swift.String])
   public func getTranslation(key: Swift.String) -> Swift.String
@@ -1428,7 +1428,7 @@ public class TranslationManager {
   public func setPermissionDeniedButtonText(text: Swift.String)
   @objc deinit
 }
-public class AppConstants {
+@_hasMissingDesignatedInitializers public class AppConstants {
   public static let deviceId: Swift.String
   public static let deviceType: Swift.Int
   public static let emptyUUID: Swift.Int
@@ -1504,13 +1504,13 @@ open class SceneLocationView : ARKit.ARSCNView {
   }
   public var locationNodes: [Loooot.LocationNode] {
     get
-    }
+  }
   public var polylineNodes: [Loooot.PolylineNode] {
     get
-    }
+  }
   public var arTrackingType: Loooot.SceneLocationView.ARTrackingType {
     get
-    }
+  }
   convenience public init(trackingType: Loooot.SceneLocationView.ARTrackingType = .worldTracking, frame: CoreGraphics.CGRect = .zero, options: [Swift.String : Any]? = nil)
   @objc override dynamic public init(frame: CoreGraphics.CGRect, options: [Swift.String : Any]? = nil)
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
@@ -1539,12 +1539,12 @@ extension SceneLocationView {
   public func addRoutes(routes: [MapKit.MKRoute], boxBuilder: Loooot.BoxBuilder? = nil)
   public func removeRoutes(routes: [MapKit.MKRoute])
 }
-public class AdType {
+@_hasMissingDesignatedInitializers public class AdType {
   public static let banner: Swift.Int
   public static let interstitial: Swift.Int
   @objc deinit
 }
-@objc public class LocationService : ObjectiveC.NSObject, CoreLocation.CLLocationManagerDelegate {
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class LocationService : ObjectiveC.NSObject, CoreLocation.CLLocationManagerDelegate {
   public static var shared: Loooot.LocationService
   public func start()
   @objc public func locationManager(_ manager: CoreLocation.CLLocationManager, didUpdateLocations locations: [CoreLocation.CLLocation])
@@ -1552,7 +1552,7 @@ public class AdType {
   @objc public func locationManager(_ manager: CoreLocation.CLLocationManager, didChangeAuthorization status: CoreLocation.CLAuthorizationStatus)
   @objc deinit
 }
-@objc @IBDesignable public class DigiFidelExtendedItemTableViewCell : UIKit.UITableViewCell {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class DigiFidelExtendedItemTableViewCell : UIKit.UITableViewCell {
   public static let Identifier: Swift.String
   @objc override dynamic public func awakeFromNib()
   public func setData(extendedItemModel: Loooot.ExtendedItemModel)
@@ -1561,10 +1561,10 @@ public class AdType {
   public func setTitleTextColor(color: Swift.Int)
   public func setSubtitleTextColor(color: Swift.Int)
   public func setMessageTextColor(color: Swift.Int)
+  @objc deinit
   @available(iOS 3.0, *)
   @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
 }
 public class MapRewardType {
   public init(json: [Swift.String : Any])
@@ -1580,25 +1580,25 @@ public class MapRewardType {
   public func setMinifiedRewards(minifiedMapRewardList: Swift.Array<Loooot.MinifiedMapReward>)
   @objc deinit
 }
-@objc @IBDesignable public class RewardViewController : UIKit.UIViewController, UIKit.UINavigationBarDelegate {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class RewardViewController : UIKit.UIViewController, UIKit.UINavigationBarDelegate {
   public static let StoryboardName: Swift.String
   public var campaignId: Swift.Int64!
   public var campaignName: Swift.String!
   @objc override dynamic public func viewDidLoad()
+  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
 }
 extension GMSMarker {
   public func setIconSize(newSize: CoreGraphics.CGSize)
 }
-@objc @IBDesignable public class AdInterstitialViewController : UIKit.UIViewController {
+@objc @_inheritsConvenienceInitializers @IBDesignable public class AdInterstitialViewController : UIKit.UIViewController {
   public static let StoryboardName: Swift.String
   public var ad: Loooot.Ad!
   @objc override dynamic public func viewDidLoad()
+  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
 }
 public enum ScalingScheme {
   case normal
@@ -1628,7 +1628,9 @@ extension SCNVector3 {
 extension Loooot.Reachability.NetworkStatus : Swift.Equatable {}
 @available(*, unavailable, renamed: "Connection")
 extension Loooot.Reachability.NetworkStatus : Swift.Hashable {}
+extension Loooot.Reachability.Connection : Swift.Equatable {}
 extension Loooot.Reachability.Connection : Swift.Hashable {}
+extension Loooot.LocationEstimateMethod : Swift.Equatable {}
 extension Loooot.LocationEstimateMethod : Swift.Hashable {}
 @available(iOS 11.0, *)
 extension Loooot.SceneLocationView.ARTrackingType : Swift.Equatable {}
