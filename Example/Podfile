@@ -1,6 +1,6 @@
 use_frameworks!
 target 'DigifidelPod_Tests' do
   pod 'DigifidelPod', :path => '../'
-  
+  pod 'GoogleMaps', '~> 3.9.0'
   
 end

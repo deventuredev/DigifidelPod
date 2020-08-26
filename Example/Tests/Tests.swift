@@ -1,5 +1,5 @@
 import XCTest
-import DigifidelPod
+//import DigifidelPod
 
 class Tests: XCTestCase {
     

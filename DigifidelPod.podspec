@@ -31,14 +31,14 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '11.0'
   s.swift_version = '5.0'
 
-  #s.source_files = 'DigifidelPod/Classes/**/*'
+  s.source_files = 'DigifidelPod/Classes/**'
   
   # s.resource_bundles = {
   #   'LooootPod' => ['DigifidelPod/Assets/*.png']
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit', 'Loooot'
-  # s.dependency 'AFNetworking', '~> 2.3'
-  s.vendored_frameworks = 'Loooot.framework'
+   s.frameworks = 'GoogleMaps'
+#   s.dependency 'GoogleMaps', '~> 3.9.0'
+  # s.vendored_frameworks = 'Loooot.framework'
 end

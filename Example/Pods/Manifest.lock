@@ -1,16 +1,27 @@
 PODS:
-  - DigifidelPod (0.1.0)
+  - DigifidelPod (2.3.0)
+  - GoogleMaps (3.9.0):
+    - GoogleMaps/Maps (= 3.9.0)
+  - GoogleMaps/Base (3.9.0)
+  - GoogleMaps/Maps (3.9.0):
+    - GoogleMaps/Base
 
 DEPENDENCIES:
   - DigifidelPod (from `../`)
+  - GoogleMaps (~> 3.9.0)
+
+SPEC REPOS:
+  trunk:
+    - GoogleMaps
 
 EXTERNAL SOURCES:
   DigifidelPod:
     :path: "../"
 
 SPEC CHECKSUMS:
-  DigifidelPod: 712f5b50b7fe12f0d8e71512f1aa7891edcf4812
+  DigifidelPod: 55801ebc809b808dac73fd8c32c8247569ea7a06
+  GoogleMaps: 4b5346bddfe6911bb89155d43c903020170523ac
 
-PODFILE CHECKSUM: 2fe1aa07be9b95380be506028829290859eed9fe
+PODFILE CHECKSUM: af9b943b9c48f1cfa0dc6a7ffd889a65294c96e3
 
 COCOAPODS: 1.9.3
