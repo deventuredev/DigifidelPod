@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DigifidelPod'
-  s.version          = '2.3.0'
+  s.version          = '2.3.0.1'
   s.summary          = 'The pod of Digifidel version 2.3.0'
 
 # This description is used to generate tags and improve search results.
@@ -38,7 +38,8 @@ Pod::Spec.new do |s|
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-   s.frameworks = 'GoogleMaps'
-#   s.dependency 'GoogleMaps', '~> 3.9.0'
+  s.static_framework = true
+#   s.frameworks = 'GoogleMaps'
+   s.dependency 'GoogleMaps'
   # s.vendored_frameworks = 'Loooot.framework'
 end
