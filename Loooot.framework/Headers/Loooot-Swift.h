@@ -193,13 +193,10 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import CoreLocation;
 @import CoreMedia;
 @import Foundation;
-@import GoogleMaps;
 @import ObjectiveC;
 @import SceneKit;
 @import UIKit;
 #endif
-
-#import <Loooot/Loooot.h>
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
@@ -250,6 +247,18 @@ SWIFT_CLASS("_TtC6Loooot14AnnotationNode")
 @end
 
 
+/// This UIView is used to display a map with tokens to collect on it.
+/// It displays tokens based on current location. Tokens are clustered on map.
+/// When a token is clicked, if the phone supports AR, it will open camera and will add the token in camera view. If the phone doesn’t support AR it will just collect the token.
+/// After the token was collected, it will disappear from map and it will be added to wallet.
+/// If there is no internet connection or if location or camera permissions are disabled or if location service is disabled it will display an ErrorView screen.
+SWIFT_CLASS("_TtC6Loooot11BaseMapView")
+@interface BaseMapView : UIView
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 
 
 
@@ -288,27 +297,6 @@ SWIFT_CLASS("_TtC6Loooot22CustomBottomNavigation")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)layoutSubviews;
-@end
-
-@protocol GMUCluster;
-@class GMSMapView;
-@protocol GMUClusterIconGenerator;
-
-/// This class is used to render clusters on map.
-SWIFT_CLASS("_TtC6Loooot21CustomClusterRenderer")
-@interface CustomClusterRenderer : GMUDefaultClusterRenderer
-/// This function returns if the markers should be clustered.
-/// \param cluster The marker cluster.
-///
-/// \param zoom Zoom level.
-///
-///
-/// returns:
-///
-/// True if the markers should be clustered, false otherwise.
-- (BOOL)shouldRenderAsCluster:(id <GMUCluster> _Nonnull)cluster atZoom:(float)zoom SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)initWithMapView:(GMSMapView * _Nonnull)mapView clusterIconGenerator:(id <GMUClusterIconGenerator> _Nonnull)iconGenerator OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -358,8 +346,6 @@ SWIFT_CLASS("_TtC6Loooot25ExtendedItemTableViewCell")
 - (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=3.0);
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
-
-
 
 @class CAShapeLayer;
 
@@ -442,31 +428,9 @@ SWIFT_CLASS("_TtC6Loooot20LooootViewController")
 
 /// This class is the model for the reward that is displayed on map.
 SWIFT_CLASS("_TtC6Loooot9MapReward")
-@interface MapReward : NSObject <GMUClusterItem>
-@property (nonatomic) CLLocationCoordinate2D position;
+@interface MapReward : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-@class GMSCameraPosition;
-@protocol GMUClusterRenderer;
-
-/// This UIView is used to display a map with tokens to collect on it.
-/// It displays tokens based on current location. Tokens are clustered on map.
-/// When a token is clicked, if the phone supports AR, it will open camera and will add the token in camera view. If the phone doesn’t support AR it will just collect the token.
-/// After the token was collected, it will disappear from map and it will be added to wallet.
-/// If there is no internet connection or if location or camera permissions are disabled or if location service is disabled it will display an ErrorView screen.
-IB_DESIGNABLE
-SWIFT_CLASS("_TtC6Loooot7MapView")
-@interface MapView : UIView <GMSMapViewDelegate, GMUClusterManagerDelegate, GMUClusterRendererDelegate>
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-/// This function is called whenever the map camera is moved and saves camera zoom level.
-- (void)mapView:(GMSMapView * _Nonnull)mapView didChangeCameraPosition:(GMSCameraPosition * _Nonnull)position;
-/// This function is called when a marker or a cluster is tapped.
-- (BOOL)mapView:(GMSMapView * _Nonnull)mapView didTapMarker:(GMSMarker * _Nonnull)marker SWIFT_WARN_UNUSED_RESULT;
-/// This function is called when a marker or a cluster is about to be added to the map.
-- (void)renderer:(id <GMUClusterRenderer> _Nonnull)renderer willRenderMarker:(GMSMarker * _Nonnull)marker;
 @end
 
 
@@ -597,6 +561,18 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didRemoveNode:(SCNNode * _Nonnull)node forAnchor:(ARAnchor * _Nonnull)anchor;
 @end
 
+@class SCNScene;
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface SceneLocationView (SWIFT_EXTENSION(Loooot))
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didRenderScene:(SCNScene * _Nonnull)scene atTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer updateAtTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didApplyAnimationsAtTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didSimulatePhysicsAtTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didApplyConstraintsAtTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer willRenderScene:(SCNScene * _Nonnull)scene atTime:(NSTimeInterval)time;
+@end
+
 @class ARSession;
 @class ARCamera;
 
@@ -608,18 +584,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)sessionInterruptionEnded:(ARSession * _Nonnull)session;
 - (BOOL)sessionShouldAttemptRelocalization:(ARSession * _Nonnull)session SWIFT_WARN_UNUSED_RESULT SWIFT_AVAILABILITY(ios,introduced=11.3);
 - (void)session:(ARSession * _Nonnull)session didOutputAudioSampleBuffer:(CMSampleBufferRef _Nonnull)audioSampleBuffer;
-@end
-
-@class SCNScene;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface SceneLocationView (SWIFT_EXTENSION(Loooot))
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didRenderScene:(SCNScene * _Nonnull)scene atTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer updateAtTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didApplyAnimationsAtTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didSimulatePhysicsAtTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didApplyConstraintsAtTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer willRenderScene:(SCNScene * _Nonnull)scene atTime:(NSTimeInterval)time;
 @end
 
 
@@ -901,13 +865,10 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import CoreLocation;
 @import CoreMedia;
 @import Foundation;
-@import GoogleMaps;
 @import ObjectiveC;
 @import SceneKit;
 @import UIKit;
 #endif
-
-#import <Loooot/Loooot.h>
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
@@ -958,6 +919,18 @@ SWIFT_CLASS("_TtC6Loooot14AnnotationNode")
 @end
 
 
+/// This UIView is used to display a map with tokens to collect on it.
+/// It displays tokens based on current location. Tokens are clustered on map.
+/// When a token is clicked, if the phone supports AR, it will open camera and will add the token in camera view. If the phone doesn’t support AR it will just collect the token.
+/// After the token was collected, it will disappear from map and it will be added to wallet.
+/// If there is no internet connection or if location or camera permissions are disabled or if location service is disabled it will display an ErrorView screen.
+SWIFT_CLASS("_TtC6Loooot11BaseMapView")
+@interface BaseMapView : UIView
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 
 
 
@@ -996,27 +969,6 @@ SWIFT_CLASS("_TtC6Loooot22CustomBottomNavigation")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)layoutSubviews;
-@end
-
-@protocol GMUCluster;
-@class GMSMapView;
-@protocol GMUClusterIconGenerator;
-
-/// This class is used to render clusters on map.
-SWIFT_CLASS("_TtC6Loooot21CustomClusterRenderer")
-@interface CustomClusterRenderer : GMUDefaultClusterRenderer
-/// This function returns if the markers should be clustered.
-/// \param cluster The marker cluster.
-///
-/// \param zoom Zoom level.
-///
-///
-/// returns:
-///
-/// True if the markers should be clustered, false otherwise.
-- (BOOL)shouldRenderAsCluster:(id <GMUCluster> _Nonnull)cluster atZoom:(float)zoom SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)initWithMapView:(GMSMapView * _Nonnull)mapView clusterIconGenerator:(id <GMUClusterIconGenerator> _Nonnull)iconGenerator OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1066,8 +1018,6 @@ SWIFT_CLASS("_TtC6Loooot25ExtendedItemTableViewCell")
 - (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=3.0);
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
-
-
 
 @class CAShapeLayer;
 
@@ -1150,31 +1100,9 @@ SWIFT_CLASS("_TtC6Loooot20LooootViewController")
 
 /// This class is the model for the reward that is displayed on map.
 SWIFT_CLASS("_TtC6Loooot9MapReward")
-@interface MapReward : NSObject <GMUClusterItem>
-@property (nonatomic) CLLocationCoordinate2D position;
+@interface MapReward : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-@class GMSCameraPosition;
-@protocol GMUClusterRenderer;
-
-/// This UIView is used to display a map with tokens to collect on it.
-/// It displays tokens based on current location. Tokens are clustered on map.
-/// When a token is clicked, if the phone supports AR, it will open camera and will add the token in camera view. If the phone doesn’t support AR it will just collect the token.
-/// After the token was collected, it will disappear from map and it will be added to wallet.
-/// If there is no internet connection or if location or camera permissions are disabled or if location service is disabled it will display an ErrorView screen.
-IB_DESIGNABLE
-SWIFT_CLASS("_TtC6Loooot7MapView")
-@interface MapView : UIView <GMSMapViewDelegate, GMUClusterManagerDelegate, GMUClusterRendererDelegate>
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-/// This function is called whenever the map camera is moved and saves camera zoom level.
-- (void)mapView:(GMSMapView * _Nonnull)mapView didChangeCameraPosition:(GMSCameraPosition * _Nonnull)position;
-/// This function is called when a marker or a cluster is tapped.
-- (BOOL)mapView:(GMSMapView * _Nonnull)mapView didTapMarker:(GMSMarker * _Nonnull)marker SWIFT_WARN_UNUSED_RESULT;
-/// This function is called when a marker or a cluster is about to be added to the map.
-- (void)renderer:(id <GMUClusterRenderer> _Nonnull)renderer willRenderMarker:(GMSMarker * _Nonnull)marker;
 @end
 
 
@@ -1305,6 +1233,18 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didRemoveNode:(SCNNode * _Nonnull)node forAnchor:(ARAnchor * _Nonnull)anchor;
 @end
 
+@class SCNScene;
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface SceneLocationView (SWIFT_EXTENSION(Loooot))
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didRenderScene:(SCNScene * _Nonnull)scene atTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer updateAtTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didApplyAnimationsAtTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didSimulatePhysicsAtTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didApplyConstraintsAtTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer willRenderScene:(SCNScene * _Nonnull)scene atTime:(NSTimeInterval)time;
+@end
+
 @class ARSession;
 @class ARCamera;
 
@@ -1316,18 +1256,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)sessionInterruptionEnded:(ARSession * _Nonnull)session;
 - (BOOL)sessionShouldAttemptRelocalization:(ARSession * _Nonnull)session SWIFT_WARN_UNUSED_RESULT SWIFT_AVAILABILITY(ios,introduced=11.3);
 - (void)session:(ARSession * _Nonnull)session didOutputAudioSampleBuffer:(CMSampleBufferRef _Nonnull)audioSampleBuffer;
-@end
-
-@class SCNScene;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface SceneLocationView (SWIFT_EXTENSION(Loooot))
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didRenderScene:(SCNScene * _Nonnull)scene atTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer updateAtTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didApplyAnimationsAtTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didSimulatePhysicsAtTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didApplyConstraintsAtTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer willRenderScene:(SCNScene * _Nonnull)scene atTime:(NSTimeInterval)time;
 @end
 
 

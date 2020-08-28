@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DigifidelPod'
-  s.version          = '2.3.0'
-  s.summary          = 'The pod of Digifidel version 2.3.0'
+  s.version          = '2.3.0.3'
+  s.summary          = 'The pod of Digifidel version 2.3.0.3'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -31,14 +31,17 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '11.0'
   s.swift_version = '5.0'
 
-  #s.source_files = 'DigifidelPod/Classes/**/*'
+  s.source_files = 'DigifidelPod/Classes/**'
   
   # s.resource_bundles = {
   #   'LooootPod' => ['DigifidelPod/Assets/*.png']
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit', 'Loooot'
+  s.static_framework = true
+#  s.frameworks = 'GoogleMaps'
+  s.dependency 'GoogleMaps', 'GoogleMapsUtils'
+
   # s.dependency 'AFNetworking', '~> 2.3'
   s.vendored_frameworks = 'Loooot.framework'
 end

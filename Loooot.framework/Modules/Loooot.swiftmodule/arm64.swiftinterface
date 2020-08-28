@@ -5,7 +5,6 @@ import ARKit
 import AVFoundation
 import CoreLocation
 import Foundation
-import GoogleMaps
 @_exported import Loooot
 import MapKit
 import SceneKit
@@ -850,22 +849,43 @@ extension CLLocation {
 extension CLLocationCoordinate2D {
   public func coordinateWithBearing(bearing: Swift.Double, distanceMeters: Swift.Double) -> CoreLocation.CLLocationCoordinate2D
 }
-@objc @_inheritsConvenienceInitializers @IBDesignable public class MapView : UIKit.UIView, GoogleMaps.GMSMapViewDelegate, Loooot.GMUClusterManagerDelegate, Loooot.GMUClusterRendererDelegate {
+@objc @_inheritsConvenienceInitializers open class BaseMapView : UIKit.UIView {
+  public static let defaultZoom: Swift.Float
+  public static let maximumZoom: Swift.Float
+  public static let minimumZoom: Swift.Float
+  public static let defaultZoomIdiomPad: Swift.Float
+  public static let minimumZoomIdiomPad: Swift.Float
+  public static let defaultLocation: CoreLocation.CLLocation
+  public static let autoUpdateMapTime: Swift.Double
+  public var tokenSelected: Loooot.MapReward!
+  public var currentZoomLevel: Swift.Float!
+  public var mapTokensList: Swift.Array<Loooot.MapReward>!
+  public var markerIconSize: CoreGraphics.CGSize
+  public var debugString: [Swift.String?]
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc public func mapView(_ mapView: GoogleMaps.GMSMapView, didChange position: GoogleMaps.GMSCameraPosition)
-  @objc public func mapView(_ mapView: GoogleMaps.GMSMapView, didTap marker: GoogleMaps.GMSMarker) -> Swift.Bool
-  @objc public func renderer(_ renderer: Loooot.GMUClusterRenderer, willRenderMarker marker: GoogleMaps.GMSMarker)
+  public func getView() -> UIKit.UIView
+  public func setView(newView: UIKit.UIView)
+  public func baseInit()
+  public func onMapTokenTapped(tokenSelected: Loooot.MapReward, markerIcon: UIKit.UIImage, markerPosition: CoreLocation.CLLocationCoordinate2D) -> Swift.Bool
+  open func setTokenCollectedImage(image: UIKit.UIImage)
+  open func animateMapView(zoomLevel: Swift.Float)
+  open func getErrorView() -> Loooot.ErrorView
+  open func getLoadingView() -> Loooot.LoadingView
+  open func getTokenCollectedView() -> UIKit.UIView
+  open func getTokenCollectedDetailsLabel() -> UIKit.UILabel
+  open func getTokenCollectedImage() -> UIKit.UIImageView
+  open func animateMapView(latitude: Swift.Double, longitude: Swift.Double, zoom: Swift.Float)
+  open func getDebugTextLabel() -> UIKit.UILabel
+  open func getMapOverlay() -> UIKit.UIView
   public func getMarkerSize() -> CoreGraphics.CGSize
-  public func setMarkerSize(size: CoreGraphics.CGSize)
+  open func setMarkerSize(size: CoreGraphics.CGSize)
   public func setShouldSaveZoomLevel(shouldSaveZoomLevel: Swift.Bool)
-  public func setCollectedViewBackgroundColor(color: Swift.Int)
-  public func setMapOverlayColor(color: Swift.Int)
-  public func setTokenCloseColor(color: Swift.Int)
-  public func setTokenClaimTextColor(color: Swift.Int)
-  public func setAddToWalletButtonTextColor(color: Swift.Int)
-  public func setAddToWalletButtonColor(color: Swift.Int)
-  public func setLoadingViewColor(color: Swift.Int)
+  public func claimToken()
+  open func addMarkersOnCluster(mapTokens: Swift.Array<Loooot.MapReward>)
+  open func onTokenClicked()
+  public func refreshDebugString()
+  public func onCloseTokenCollectedAction(tapGestureRecognizer: UIKit.UITapGestureRecognizer)
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers public class PermissionViewController : UIKit.UIViewController, CoreLocation.CLLocationManagerDelegate {
@@ -1027,9 +1047,11 @@ public protocol HomeDelegate {
 }
 @_hasMissingDesignatedInitializers public class LooootManager {
   public static let shared: Loooot.LooootManager
+  public static let googleMapsApiKey: Swift.String
   public var menuDelegate: Loooot.MenuDelegate?
   public var menuActionDelegate: Loooot.MenuActionDelegate?
   public var homeDelegate: Loooot.HomeDelegate?
+  public var mapViewDelegate: Loooot.MapViewDelegate?
   public static func initialize(playerIdentifier: Swift.String, clientId: Swift.Int64, completion: @escaping (Swift.Bool) -> Swift.Void)
   public func getBundle() -> Foundation.Bundle
   public func getHttpClient() -> Loooot.HttpClientManager
@@ -1158,8 +1180,8 @@ extension UINavigationBar {
   public func setUpNavigationBarWithMenuButton()
   public func setUpNavigationBarWithBackButton()
 }
-@objc public class MapReward : ObjectiveC.NSObject, Loooot.GMUClusterItem {
-  @objc public var position: CoreLocation.CLLocationCoordinate2D
+@objc public class MapReward : ObjectiveC.NSObject {
+  public var position: CoreLocation.CLLocationCoordinate2D
   public init(id: Swift.Int64, groupId: Swift.Int64, campaignId: Swift.Int64, rewardTypeId: Swift.Int64, latitude: Swift.Double, longitude: Swift.Double, name: Swift.String, imageUrl: Swift.String)
   public init(json: [Swift.String : Any])
   public func getId() -> Swift.Int64
@@ -1213,6 +1235,9 @@ public protocol AdManagerDelegate {
   public func startTimer()
   public func stopTimer()
   @objc deinit
+}
+public protocol MapViewDelegate {
+  func GetMapView() -> Loooot.BaseMapView
 }
 @_hasMissingDesignatedInitializers public class AdDisplayedModel {
   public func getPlayerId() -> Swift.Int64
@@ -1356,12 +1381,6 @@ public class WalletList : Loooot.RewardTypeList {
   public func toExtendedItemModelWithRewardType() -> Loooot.ExtendedItemModel
   override public init()
   override public init(id: Swift.Int64, name: Swift.String, campaignNames: Swift.Array<Swift.String>?, rewardImageUrl: Swift.String, rewardType: Swift.Int)
-  @objc deinit
-}
-@objc @_inheritsConvenienceInitializers public class CustomClusterRenderer : Loooot.GMUDefaultClusterRenderer {
-  @objc override dynamic public func shouldRender(as cluster: Loooot.GMUCluster, atZoom zoom: Swift.Float) -> Swift.Bool
-  @objc override dynamic public init(mapView: GoogleMaps.GMSMapView, clusterIconGenerator iconGenerator: Loooot.GMUClusterIconGenerator)
-  @objc override dynamic public init()
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class TranslationManager {
@@ -1588,9 +1607,6 @@ public class MapRewardType {
   @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-}
-extension GMSMarker {
-  public func setIconSize(newSize: CoreGraphics.CGSize)
 }
 @objc @_inheritsConvenienceInitializers @IBDesignable public class AdInterstitialViewController : UIKit.UIViewController {
   public static let StoryboardName: Swift.String
