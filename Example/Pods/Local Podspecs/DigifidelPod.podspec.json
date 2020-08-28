@@ -16,7 +16,7 @@
     "tag": "2.3.0.3"
   },
   "platforms": {
-    "ios": "11.0"
+    "ios": "9.3"
   },
   "swift_versions": "5.0",
   "source_files": "DigifidelPod/Classes/**",

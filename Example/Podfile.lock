@@ -1,16 +1,52 @@
 PODS:
-  - DigifidelPod (0.1.0)
+  - DigifidelPod (2.3.0.3):
+    - GoogleMaps
+  - Google-Maps-iOS-Utils (3.2.1):
+    - Google-Maps-iOS-Utils/Clustering (= 3.2.1)
+    - Google-Maps-iOS-Utils/Geometry (= 3.2.1)
+    - Google-Maps-iOS-Utils/Heatmap (= 3.2.1)
+    - Google-Maps-iOS-Utils/QuadTree (= 3.2.1)
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/Clustering (3.2.1):
+    - Google-Maps-iOS-Utils/QuadTree
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/Geometry (3.2.1):
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/Heatmap (3.2.1):
+    - Google-Maps-iOS-Utils/QuadTree
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/QuadTree (3.2.1):
+    - GoogleMaps
+  - GoogleMaps (3.9.0):
+    - GoogleMaps/Maps (= 3.9.0)
+  - GoogleMaps/Base (3.9.0)
+  - GoogleMaps/Maps (3.9.0):
+    - GoogleMaps/Base
+  - GooglePlaces (3.9.0):
+    - GoogleMaps/Base (= 3.9.0)
 
 DEPENDENCIES:
   - DigifidelPod (from `../`)
+  - Google-Maps-iOS-Utils (~> 3.2.1)
+  - GoogleMaps (~> 3.9.0)
+  - GooglePlaces
+
+SPEC REPOS:
+  trunk:
+    - Google-Maps-iOS-Utils
+    - GoogleMaps
+    - GooglePlaces
 
 EXTERNAL SOURCES:
   DigifidelPod:
     :path: "../"
 
 SPEC CHECKSUMS:
-  DigifidelPod: 712f5b50b7fe12f0d8e71512f1aa7891edcf4812
+  DigifidelPod: c611a24d4232a99672e1a3439253698fc8ebfef4
+  Google-Maps-iOS-Utils: 1f1d9acb04f2211bcfd65659902eef7c9ba26028
+  GoogleMaps: 4b5346bddfe6911bb89155d43c903020170523ac
+  GooglePlaces: 1634d019549b969d40fe0ccb0b9513055adebe01
 
-PODFILE CHECKSUM: 2fe1aa07be9b95380be506028829290859eed9fe
+PODFILE CHECKSUM: ded9b5d3fb976ea0097f799f39e01f2f8e7c7e42
 
 COCOAPODS: 1.9.3

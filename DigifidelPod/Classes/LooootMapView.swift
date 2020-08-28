@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AVFoundation
 import GoogleMaps
-import Loooot 
+import Loooot
 import GoogleMapsUtils
 
 @IBDesignable
