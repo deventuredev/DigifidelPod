@@ -31,13 +31,13 @@ public class LooootMapView: BaseMapView, GMSMapViewDelegate, GMUClusterManagerDe
    @IBOutlet weak var errorView: ErrorView!
 
     // For debugging
-      @IBOutlet weak var debugLayoutText: UILabel!
-      @IBOutlet weak var debugLayoutGetTokens: UIButton!
-      @IBOutlet weak var debugLayoutGetCampaigns: UIButton!
-      
-      //TODO: Until further changes this will remain
-      @IBOutlet weak var cTokenCollectedCloseViewHeight: NSLayoutConstraint!
-      @IBOutlet weak var cTokenCollectedCloseHeight: NSLayoutConstraint!
+   @IBOutlet weak var debugLayoutText: UILabel!
+   @IBOutlet weak var debugLayoutGetTokens: UIButton!
+   @IBOutlet weak var debugLayoutGetCampaigns: UIButton!
+  
+  //TODO: Until further changes this will remain
+   @IBOutlet weak var cTokenCollectedCloseViewHeight: NSLayoutConstraint!
+   @IBOutlet weak var cTokenCollectedCloseHeight: NSLayoutConstraint!
     
     private var clusterManager: GMUClusterManager!
     private var gmsMarkers: [GMSMarker] = []
@@ -271,8 +271,7 @@ public class LooootMapView: BaseMapView, GMSMapViewDelegate, GMUClusterManagerDe
 
     public override func getErrorView() -> ErrorView
     {
-        return ErrorView()
-//        return errorView
+        return errorView
     }
     
     public override func getLoadingView() -> LoadingView

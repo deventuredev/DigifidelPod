@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,7 +44,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="koN-KW-HaK" customClass="LoadingView" customModule="Loooot" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="koN-KW-HaK" customClass="LoadingView" customModule="DigifidelPod" customModuleProvider="target">
                     <rect key="frame" x="182" y="428" width="50" height="50"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -51,7 +52,7 @@
                         <constraint firstAttribute="height" constant="50" id="zf1-pM-f9y"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="otX-xA-gl3">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="otX-xA-gl3" userLabel="tokenCollectedView">
                     <rect key="frame" x="40" y="312" width="334" height="238"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rvN-Q8-N6b">
@@ -67,7 +68,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Tu-6E-kGV" customClass="PrimaryButton" customModule="Loooot" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Tu-6E-kGV" customClass="PrimaryButton" customModule="DigifidelPod" customModuleProvider="target">
                             <rect key="frame" x="32" y="178" width="270" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="5eX-2a-nDd"/>
@@ -114,14 +115,14 @@
                         <constraint firstItem="6Tu-6E-kGV" firstAttribute="leading" secondItem="otX-xA-gl3" secondAttribute="leading" constant="32" id="yO6-Vd-rBw"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0tA-VL-nsu" customClass="AdBannerView" customModule="Loooot" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0tA-VL-nsu" customClass="AdBannerView" customModule="DigifidelPod" customModuleProvider="target">
                     <rect key="frame" x="10" y="714" width="394" height="138"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="138" id="Mh3-g5-vbS"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VbY-ks-vrg" customClass="ErrorView" customModule="Loooot" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VbY-ks-vrg" customClass="ErrorView" customModule="DigifidelPod" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
