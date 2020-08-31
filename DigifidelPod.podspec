@@ -32,7 +32,9 @@ Pod::Spec.new do |s|
   s.swift_version = '5.0'
 
   s.source_files = 'DigifidelPod/Classes/**'
-  
+  s.resource_bundles = {
+      'DigifidelBundle' => ['DigifidelPod/Pod/Classes/.{png,storyboard, xib}']
+  }
   # s.resource_bundles = {
   #   'LooootPod' => ['DigifidelPod/Assets/*.png']
   # }
