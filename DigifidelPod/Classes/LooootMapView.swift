@@ -41,11 +41,12 @@ public class LooootMapView: BaseMapView, GMSMapViewDelegate, GMUClusterManagerDe
     
     private var clusterManager: GMUClusterManager!
     private var gmsMarkers: [GMSMarker] = []
+    public var gmsMarkerSelected: GMSMarker!
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        let bundle = Bundle(for: type(of: self))
+//        let bundle = Bundle(for: type(of: self))
 //        loadViewFromNib(bundle: bundle)
         initViews()
         initMaps()
@@ -228,12 +229,19 @@ public class LooootMapView: BaseMapView, GMSMapViewDelegate, GMUClusterManagerDe
         mapTokensList = mapTokens
 
         clusterManager.clearItems()
-        clusterManager.add(self.mapTokensList)
+        
+        var clusterItemsList = Array<GMSMarker>()
+        for token in mapTokens {
+            let clusterItem = GMSMarker(position: token.position)
+            clusterItemsList.append(clusterItem)
+        }
+        clusterManager.add(clusterItemsList)
         clusterManager.cluster()
     }
     
     public override func onTokenClicked() {
-        clusterManager.remove(tokenSelected)
+        
+        clusterManager.remove(gmsMarkerSelected)
         clusterManager.cluster()
 
         debugString[3] = "Selected token id: \(tokenSelected.getId().description)"
@@ -313,6 +321,7 @@ public class LooootMapView: BaseMapView, GMSMapViewDelegate, GMUClusterManagerDe
     }
     
     public func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        gmsMarkerSelected = marker
         tokenSelected = marker.userData as? MapReward
         return onMapTokenTapped(tokenSelected: tokenSelected, markerIcon: marker.icon!, markerPosition: marker.position)
     }

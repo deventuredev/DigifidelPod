@@ -1,4 +1,4 @@
-module DigifidelPod {
+framework module DigifidelPod {
   umbrella header "DigifidelPod-umbrella.h"
 
   export *

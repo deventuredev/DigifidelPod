@@ -40,8 +40,9 @@ Pod::Spec.new do |s|
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.static_framework = true
 #  s.frameworks = 'GoogleMaps'
-  s.dependency 'GoogleMaps', 'GoogleMapsUtils'
-
+  s.dependency 'GoogleMaps'
+  s.dependency 'Google-Maps-iOS-Utils'
+  
   # s.dependency 'AFNetworking', '~> 2.3'
   s.vendored_frameworks = 'Loooot.framework'
 end

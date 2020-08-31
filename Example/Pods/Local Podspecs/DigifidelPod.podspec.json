@@ -24,6 +24,9 @@
   "dependencies": {
     "GoogleMaps": [
 
+    ],
+    "Google-Maps-iOS-Utils": [
+
     ]
   },
   "vendored_frameworks": "Loooot.framework",
