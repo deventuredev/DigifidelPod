@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DigifidelPod'
-  s.version          = '2.3.0.6'
-  s.summary          = 'The pod of Digifidel version 2.3.0.6'
+  s.version          = '2.3.0.7'
+  s.summary          = 'The pod of Digifidel version 2.3.0.7'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
 
   s.source_files = 'DigifidelPod/Classes/**'
   s.resource_bundles = {
-      'DigifidelBundle' => ['DigifidelPod/Pod/Classes/*.{png,storyboard, xib}']
+      'DigifidelBundle' => ['DigifidelPod/Classes/*.{png,storyboard,xib}']
   }
   # s.resource_bundles = {
   #   'LooootPod' => ['DigifidelPod/Assets/*.png']
