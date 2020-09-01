@@ -49,7 +49,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     }
     
     private var clusterManager: GMUClusterManager!
-    private var gmsMarkers: [GMSMarker] = []
+    private var gmsMarkers: [LooootMarker] = []
     public var gmsMarkerSelected: GMSMarker!
 
     private var adBannerViewLocal: AdBannerView?
@@ -104,8 +104,10 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                 adBannerViewLocal?.backgroundColor = UIColor.red
                 adBannerViewLocal?.translatesAutoresizingMaskIntoConstraints = false
                 cHeightAdBannerViewLocal = NSLayoutConstraint(item: adBannerViewLocal!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 130)
+                let bottomContraint =  NSLayoutConstraint(item: adBannerViewLocal!, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: getView(), attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 10)
                 adBannerViewLocal?.addConstraint(cHeightAdBannerViewLocal!)
-              
+                adBannerViewLocal?.bottomAnchor.constraint(equalTo: getView().bottomAnchor, constant: 10).isActive = true
+                
                 getView().addSubview(adBannerViewLocal!)
                 adBannerView.isHidden = true
                 
@@ -270,13 +272,14 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             mapTokensList = mapTokens
 
             clusterManager.clearItems()
-            
-            var clusterItemsList = Array<GMSMarker>()
+            gmsMarkers = []
+//            var clusterItemsList = Array<GMSMarker>()
             for token in mapTokens {
-                let clusterItem = GMSMarker(position: token.position)
-                clusterItemsList.append(clusterItem)
+                let clusterItem = LooootMarker(reward: token)
+                gmsMarkers.append(clusterItem)
             }
-            clusterManager.add(clusterItemsList)
+//            setMarkerSize(size: markerIconSize)
+            clusterManager.add(gmsMarkers)
             clusterManager.cluster()
         }
         
@@ -296,7 +299,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
          public override func setMarkerSize(size: CGSize) {
             markerIconSize = size
             for marker in gmsMarkers {
-                marker.setIconSize(newSize: size)
+//                marker.setIconSize(newSize: size)
             }
         }
         
@@ -361,7 +364,8 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         
         public func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
             gmsMarkerSelected = marker
-            tokenSelected = marker.userData as? MapReward
+            let loootMarker = marker.userData as? LooootMarker
+            tokenSelected =  loootMarker?.mapReward
             return onMapTokenTapped(tokenSelected: tokenSelected, markerIcon: marker.icon!, markerPosition: marker.position)
         }
         
@@ -369,9 +373,10 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         This function is called when a marker or a cluster is about to be added to the map.
         */
         public func renderer(_ renderer: GMUClusterRenderer, willRenderMarker marker: GMSMarker) {
-               if marker.userData is MapReward {
+               if marker.userData is LooootMarker {
                    // Marker is MapToken type
-                   let mapToken = marker.userData as! MapReward
+                   let loootToken = marker.userData as! LooootMarker
+                let mapToken = loootToken.mapReward
                    marker.title = mapToken.getName()
                    
                    if !ImageCacher.shared.containsUrl(imageUrl: mapToken.getImageUrl()) {
@@ -391,4 +396,20 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                    marker.setIconSize(newSize: CGSize(width: 40, height: 40))
                }
            }
+}
+
+public class LooootMarker: NSObject, GMUClusterItem
+{
+   
+       // Need to be public for GMUClusterItem.
+       public var position: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+       
+        public var mapReward: MapReward
+    public init(reward: MapReward) {
+        mapReward = reward
+        self.position = reward.position
+        super.init()
+      }
+       
+     
 }
