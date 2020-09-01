@@ -103,7 +103,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                 adBannerViewLocal = AdBannerView(frame: CGRect(x: 10, y:screenBounds.height - 190, width:screenBounds.width - 20, height:130))
                 adBannerViewLocal?.backgroundColor = UIColor.red
                 adBannerViewLocal?.translatesAutoresizingMaskIntoConstraints = false
-                cHeightAdBannerViewLocal = NSLayoutConstraint(item: adBannerViewLocal, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 130)
+                cHeightAdBannerViewLocal = NSLayoutConstraint(item: adBannerViewLocal!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 130)
                 adBannerViewLocal?.addConstraint(cHeightAdBannerViewLocal!)
               
                 getView().addSubview(adBannerViewLocal!)
