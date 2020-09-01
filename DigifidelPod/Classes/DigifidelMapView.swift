@@ -73,6 +73,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("DigifidelBundle.bundle")
             let bundle = Bundle(url: bundleURL!)
             loadViewFromNib(bundle: bundle!)
+            initLocalViews()
             baseInit()
             initViews()
             initMaps()
