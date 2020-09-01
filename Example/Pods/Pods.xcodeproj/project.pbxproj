@@ -57,14 +57,12 @@
 		7142D30882967D7696E91D31ED836949 /* GMUDefaultClusterIconGenerator+Testing.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E9BE4F5887D2E0A5BCC1057762D7CD6 /* GMUDefaultClusterIconGenerator+Testing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408376C40AD5B8064472187132EA1AB /* GMUCluster.h in Headers */ = {isa = PBXBuildFile; fileRef = F5D381CDBC15E1CEC4AA9A7143632A95 /* GMUCluster.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8483681C057FB757CC09F49937EC855A /* GMUClusterIconGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FCA212D3F86CE8C1EEB4F06D66DB9EF /* GMUClusterIconGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8604C989A8DC5C31BCA3BFC7A3658F16 /* LooootMapView.xib in Sources */ = {isa = PBXBuildFile; fileRef = 1AC45C43755F8713C55C3EE136D89733 /* LooootMapView.xib */; };
 		8AB8A5118FBD9C170F8457490DF0F31E /* GMUStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = F724A0BB7EB425DA920975E38B600B0C /* GMUStyle.m */; };
 		8E825639B3F2095E9883D28FEFA64A3D /* GQTPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = CFAC399D05526B3241E5F1EE1FDAC70D /* GQTPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		97E85B0A1626359B0C88031D20803D6D /* GMUPair.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCCA89638A81D76B6C7040EE5AE0D98 /* GMUPair.m */; };
 		9883770D4386664C4A9F9543A1DEDBDE /* GMUPair.h in Headers */ = {isa = PBXBuildFile; fileRef = 841C89BDDD43E6F54DCD6C87B737D654 /* GMUPair.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9886BEDCDF38EEB34F2D39837FBA9592 /* GMUGeoJSONParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC7E53A0D25DBE02B380524FC5B89DF /* GMUGeoJSONParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		98C1DE4105140DBE3B81E2AA4DA6C2A1 /* GMUWeightedLatLng.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B916CD5B81CE7B8C49C87B257615F81 /* GMUWeightedLatLng.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9BA58744DE40D9B83A7F4B2FA482C4AC /* LooootMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86CD7BAEDD84FBB0B335403F5F48A75 /* LooootMapView.swift */; };
 		9BC072E0B5C879E7A8D753A491893FD8 /* GMUHeatmapTileLayer+Testing.h in Headers */ = {isa = PBXBuildFile; fileRef = B858AF3334A4ADD4F35C951653EC0072 /* GMUHeatmapTileLayer+Testing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9F2828EB66EFEA0407C9C1FA34040714 /* CustomClusterRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45E7422DAA611FD48F144F55156EC89 /* CustomClusterRenderer.swift */; };
 		AB8896DC7EBC25D3BD2A4E00AE984690 /* GMUGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = CE387DDC2ADDFB85ADFE48EE0E02BCF6 /* GMUGradient.m */; };
@@ -157,7 +155,6 @@
 		087CB10B7A0A61354DF02E3E36B18916 /* Google-Maps-iOS-Utils.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Google-Maps-iOS-Utils.modulemap"; sourceTree = "<group>"; };
 		0ED06502D06168416EF14EE91776DCD0 /* Pods-DigifidelPod_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DigifidelPod_Tests-umbrella.h"; sourceTree = "<group>"; };
 		151FD2C3D6C8694F3ED2AB314BD21F9E /* Pods-DigifidelPod_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DigifidelPod_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		1AC45C43755F8713C55C3EE136D89733 /* LooootMapView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = LooootMapView.xib; path = DigifidelPod/Classes/LooootMapView.xib; sourceTree = "<group>"; };
 		1D4E77569642041BEF8A7BCEA648DCE4 /* DigifidelPod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DigifidelPod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EE56B1EE7BC180E78F02B8E6DCDD802 /* GMUStyleMap.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMUStyleMap.m; path = src/Geometry/Model/GMUStyleMap.m; sourceTree = "<group>"; };
 		2202E85AE13B9BF1E5DAD9C1AC5D744D /* DigifidelPod-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DigifidelPod-dummy.m"; sourceTree = "<group>"; };
@@ -222,7 +219,6 @@
 		9BC7E53A0D25DBE02B380524FC5B89DF /* GMUGeoJSONParser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUGeoJSONParser.h; path = src/Geometry/GMUGeoJSONParser.h; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A667FB5091425CF1CD32633653C55504 /* Loooot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Loooot.framework; sourceTree = "<group>"; };
-		A86CD7BAEDD84FBB0B335403F5F48A75 /* LooootMapView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LooootMapView.swift; path = DigifidelPod/Classes/LooootMapView.swift; sourceTree = "<group>"; };
 		A9BDDE46A6DD19F7C55740CE872B99FD /* GMUGeometry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUGeometry.h; path = src/Geometry/Model/GMUGeometry.h; sourceTree = "<group>"; };
 		AA31C67B2B7D71DE522E1303A0854136 /* Pods-DigifidelPod_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DigifidelPod_Tests-dummy.m"; sourceTree = "<group>"; };
 		AA4C079469B8EE0241BC67799B50D1D6 /* Google-Maps-iOS-Utils-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Google-Maps-iOS-Utils-Info.plist"; sourceTree = "<group>"; };
@@ -603,8 +599,6 @@
 				502C149324FD4A2F004A3FCE /* DigifidelMapView.xib */,
 				C45E7422DAA611FD48F144F55156EC89 /* CustomClusterRenderer.swift */,
 				AB1478AFB934F32CF9E116ED044AE23A /* GMSMarkerExtension.swift */,
-				A86CD7BAEDD84FBB0B335403F5F48A75 /* LooootMapView.swift */,
-				1AC45C43755F8713C55C3EE136D89733 /* LooootMapView.xib */,
 				60ED49CC61CF82D85888127B754CD03F /* Frameworks */,
 				5A2144DF01F937DD85C57916F6C3EFFC /* Pod */,
 				0A25A0F2FB4266CF6336861AF3838438 /* Support Files */,
@@ -809,8 +803,6 @@
 				E793E433C977A2414B0CEAFEC4887FEF /* DigifidelPod-dummy.m in Sources */,
 				C8DB49F9A08FD0FEA6C910FCC7A6E717 /* GMSMarkerExtension.swift in Sources */,
 				502C149624FD4A30004A3FCE /* DigifidelMapView.swift in Sources */,
-				9BA58744DE40D9B83A7F4B2FA482C4AC /* LooootMapView.swift in Sources */,
-				8604C989A8DC5C31BCA3BFC7A3658F16 /* LooootMapView.xib in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
