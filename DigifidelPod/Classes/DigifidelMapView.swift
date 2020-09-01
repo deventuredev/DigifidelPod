@@ -55,6 +55,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     private var adBannerViewLocal: AdBannerView?
     private var errorViewLocal: ErrorView?
     private var loadingViewLocal: LoadingView?
+    private var cHeightAdBannerViewLocal: NSLayoutConstraint?
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -99,14 +100,23 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         
             public override func initLocalViews() {
                 let screenBounds = UIScreen.main.bounds
-                adBannerViewLocal = AdBannerView(frame: CGRect(x:0, y:0, width:screenBounds.width - 20, height:50))
-                adBannerView.addSubview(adBannerViewLocal!)
+                adBannerViewLocal = AdBannerView(frame: CGRect(x: 10, y:screenBounds.height - 190, width:screenBounds.width - 20, height:130))
+                adBannerViewLocal?.backgroundColor = UIColor.red
+                adBannerViewLocal?.translatesAutoresizingMaskIntoConstraints = false
+                cHeightAdBannerViewLocal = NSLayoutConstraint(item: adBannerViewLocal, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 130)
+                adBannerViewLocal?.addConstraint(cHeightAdBannerViewLocal!)
+              
+                getView().addSubview(adBannerViewLocal!)
+                adBannerView.isHidden = true
                 
                 errorViewLocal = ErrorView(frame: CGRect(x:0, y: 0, width: screenBounds.width, height: screenBounds.height))
-                errorView.addSubview(errorViewLocal!)
-                
-                loadingViewLocal = LoadingView(frame: CGRect(x: 0, y:0, width: 50, height: 50))
-                loadingView.addSubview(loadingViewLocal!)
+                getView().addSubview(errorViewLocal!)
+                errorView.isHidden = true
+
+                loadingViewLocal = LoadingView(frame: CGRect(x: screenBounds.width/2 - 25, y:screenBounds.height/2 - 25, width: 50, height: 50))
+                getView().addSubview(loadingViewLocal!)
+                loadingView.isHidden = true
+//                loadingView.addSubview(loadingViewLocal!)
             }
     
         /**
@@ -143,7 +153,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                let singleTap = UITapGestureRecognizer(target: self, action: #selector(onCloseTokenCollected(tapGestureRecognizer:)))
                tokenCloseView.addGestureRecognizer(singleTap)
                tokenCollectedClose.addGestureRecognizer(singleTap)
-               AdManager.shared.setViewForBanner(bannerView: adBannerViewLocal!, viewHeightConstraint: cHeightAdBannerView)
+               AdManager.shared.setViewForBanner(bannerView: adBannerViewLocal!, viewHeightConstraint: cHeightAdBannerViewLocal!)
                
                //TODO: Until further changes this will remain
                cTokenCollectedCloseViewHeight.constant = 0
@@ -297,7 +307,6 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         
         public override func animateMapView(zoomLevel: Float){
             mapView.animate(toZoom: zoomLevel)
-
         }
 
         public override func getErrorView() -> ErrorView
@@ -313,7 +322,6 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         public override func getTokenCollectedView() -> UIView
         {
             return tokenCollectedView
-            
         }
         
         public override func getTokenCollectedDetailsLabel() -> UILabel
