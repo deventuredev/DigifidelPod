@@ -19,15 +19,15 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
 {
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var mapOverlay: UIView!
-    @IBOutlet weak var loadingView: LoadingView!
+    @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var tokenCollectedView: UIView!
     @IBOutlet weak var tokenCollectedImage: UIImageView!
     @IBOutlet weak var tokenCollectedDetails: UILabel!
     @IBOutlet weak var tokenCollectedButton: PrimaryButton!
     @IBOutlet weak var tokenCloseView: UIView!
     @IBOutlet weak var tokenCollectedClose: UIImageView!
-    @IBOutlet weak var adBannerView: AdBannerView!
-    @IBOutlet weak var errorView: ErrorView!
+    @IBOutlet weak var adBannerView: UIView!
+    @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var debugLayoutText: UILabel!
     
     @IBOutlet weak var debugLayoutGetCampaigns: UIButton!
@@ -48,10 +48,14 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     @IBAction func OnDebugLayoutGetTokensPressed(_ sender: Any) {
     }
     
-     private var clusterManager: GMUClusterManager!
-        private var gmsMarkers: [GMSMarker] = []
-        public var gmsMarkerSelected: GMSMarker!
+    private var clusterManager: GMUClusterManager!
+    private var gmsMarkers: [GMSMarker] = []
+    public var gmsMarkerSelected: GMSMarker!
 
+    private var adBannerViewLocal: AdBannerView?
+    private var errorViewLocal: ErrorView?
+    private var loadingViewLocal: LoadingView?
+    
         required public init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)
             
@@ -65,7 +69,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         public override init(frame: CGRect) {
             super.init(frame: frame)
             
-            let frameworkBundle = Bundle(for: LooootMapView.self)
+            let frameworkBundle = Bundle(for: DigifidelMapView.self)
             let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("DigifidelBundle.bundle")
             let bundle = Bundle(url: bundleURL!)
             loadViewFromNib(bundle: bundle!)
@@ -90,6 +94,19 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                 self.setView(newView: view)
            }
         
+            private func initLocalViews()
+            {
+                let screenBounds = UIScreen.main.bounds
+                adBannerViewLocal = AdBannerView(frame: CGRect(x:0, y:0, width:screenBounds.width - 20, height:50))
+                adBannerView.addSubview(adBannerViewLocal!)
+                
+                errorViewLocal = ErrorView(frame: CGRect(x:0, y: 0, width: screenBounds.width, height: screenBounds.height))
+                errorView.addSubview(errorView)
+                
+                loadingViewLocal = LoadingView(frame: CGRect(x: 0, y:0, width: 50, height: 50))
+                loadingView.addSubview(loadingViewLocal!)
+            }
+    
         /**
             Initialize views.
             */
@@ -124,7 +141,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                let singleTap = UITapGestureRecognizer(target: self, action: #selector(onCloseTokenCollected(tapGestureRecognizer:)))
                tokenCloseView.addGestureRecognizer(singleTap)
                tokenCollectedClose.addGestureRecognizer(singleTap)
-               AdManager.shared.setViewForBanner(bannerView: adBannerView, viewHeightConstraint: cHeightAdBannerView)
+               AdManager.shared.setViewForBanner(bannerView: adBannerViewLocal!, viewHeightConstraint: cHeightAdBannerView)
                
                //TODO: Until further changes this will remain
                cTokenCollectedCloseViewHeight.constant = 0
@@ -221,7 +238,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             - color: The new color.
             */
            public func setLoadingViewColor(color: Int) {
-               loadingView.setStrokeColor(color: color)
+               getLoadingView().setStrokeColor(color: color)
            }
            
         
@@ -282,17 +299,18 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
 
         public override func getErrorView() -> ErrorView
         {
-            return errorView
+            return errorViewLocal!
         }
         
         public override func getLoadingView() -> LoadingView
-           {
-               return loadingView
-           }
+       {
+           return loadingViewLocal!
+       }
 
         public override func getTokenCollectedView() -> UIView
         {
-            return LoadingView()
+            return tokenCollectedView
+            
         }
         
         public override func getTokenCollectedDetailsLabel() -> UILabel
