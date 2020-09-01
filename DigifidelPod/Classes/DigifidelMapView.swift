@@ -56,30 +56,30 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     private var errorViewLocal: ErrorView?
     private var loadingViewLocal: LoadingView?
     
-        required public init?(coder aDecoder: NSCoder) {
-            super.init(coder: aDecoder)
-            
-    //        let bundle = Bundle(for: type(of: self))
-    //        loadViewFromNib(bundle: bundle)
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    
+//        let bundle = Bundle(for: type(of: self))
+//        loadViewFromNib(bundle: bundle)
 //            initLocalViews()
-            initViews()
-            initMaps()
-            baseInit()
-        }
-        
-        public override init(frame: CGRect) {
-            super.init(frame: frame)
-            
-            let frameworkBundle = Bundle(for: DigifidelMapView.self)
-            let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("DigifidelBundle.bundle")
-            let bundle = Bundle(url: bundleURL!)
-//            initLocalViews()
+        baseInit()
+        initViews()
+        initMaps()
+    }
 
-            loadViewFromNib(bundle: bundle!)
-            baseInit()
-            initViews()
-            initMaps()
-        }
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        let frameworkBundle = Bundle(for: DigifidelMapView.self)
+        let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("DigifidelBundle.bundle")
+        let bundle = Bundle(url: bundleURL!)
+        loadViewFromNib(bundle: bundle!)
+
+        initLocalViews()
+        baseInit()
+        initViews()
+        initMaps()
+    }
         
         /**
             Load view from bundle.
@@ -103,7 +103,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                 adBannerView.addSubview(adBannerViewLocal!)
                 
                 errorViewLocal = ErrorView(frame: CGRect(x:0, y: 0, width: screenBounds.width, height: screenBounds.height))
-                errorView.addSubview(errorView)
+                errorView.addSubview(errorViewLocal!)
                 
                 loadingViewLocal = LoadingView(frame: CGRect(x: 0, y:0, width: 50, height: 50))
                 loadingView.addSubview(loadingViewLocal!)
