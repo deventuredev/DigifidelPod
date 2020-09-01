@@ -868,6 +868,7 @@ extension CLLocationCoordinate2D {
   public func setView(newView: UIKit.UIView)
   public func baseInit()
   public func onMapTokenTapped(tokenSelected: Loooot.MapReward, markerIcon: UIKit.UIImage, markerPosition: CoreLocation.CLLocationCoordinate2D) -> Swift.Bool
+  open func initLocalViews()
   open func setTokenCollectedImage(image: UIKit.UIImage)
   open func animateMapView(zoomLevel: Swift.Float)
   open func getErrorView() -> Loooot.ErrorView

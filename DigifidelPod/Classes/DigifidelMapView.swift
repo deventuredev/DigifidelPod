@@ -61,6 +61,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             
     //        let bundle = Bundle(for: type(of: self))
     //        loadViewFromNib(bundle: bundle)
+//            initLocalViews()
             initViews()
             initMaps()
             baseInit()
@@ -72,8 +73,9 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             let frameworkBundle = Bundle(for: DigifidelMapView.self)
             let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("DigifidelBundle.bundle")
             let bundle = Bundle(url: bundleURL!)
+//            initLocalViews()
+
             loadViewFromNib(bundle: bundle!)
-            initLocalViews()
             baseInit()
             initViews()
             initMaps()
@@ -95,8 +97,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                 self.setView(newView: view)
            }
         
-            private func initLocalViews()
-            {
+            public override func initLocalViews() {
                 let screenBounds = UIScreen.main.bounds
                 adBannerViewLocal = AdBannerView(frame: CGRect(x:0, y:0, width:screenBounds.width - 20, height:50))
                 adBannerView.addSubview(adBannerViewLocal!)
@@ -253,7 +254,8 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
            clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
         }
         
-        
+       
+    
         public override func addMarkersOnCluster(mapTokens: Array<MapReward>) {
             mapTokensList = mapTokens
 
