@@ -22,7 +22,6 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     @IBOutlet weak var tokenCollectedView: UIView!
     @IBOutlet weak var tokenCollectedImage: UIImageView!
     @IBOutlet weak var tokenCollectedDetails: UILabel!
-//    @IBOutlet weak var tokenCollectedButton: PrimaryButton!
     @IBOutlet weak var tokenCloseView: UIView!
     @IBOutlet weak var tokenCollectedClose: UIImageView!
     @IBOutlet weak var adBannerView: UIView!
@@ -64,9 +63,9 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
 //        let bundle = Bundle(for: type(of: self))
 //        loadViewFromNib(bundle: bundle)
 //            initLocalViews()
-        baseInit()
-        initViews()
-        initMaps()
+//        baseInit()
+//        initViews()
+//        initMaps()
     }
 
     public override init(frame: CGRect) {
@@ -128,7 +127,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                 getView().addSubview(loadingViewLocal!)
                 loadingView.isHidden = true
                 
-                tokenCollectedButton = PrimaryButton(frame: tokenCollectedButtonContainer.bounds)
+                tokenCollectedButton = PrimaryButton(frame: CGRect(x: 0, y:0, width: screenBounds.width - 144, height:40))
                 tokenCollectedButtonContainer.addSubview(tokenCollectedButton!)
                 tokenCollectedButton?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onCloseTokenCollected(tapGestureRecognizer:))))
             }
@@ -141,13 +140,13 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                mapView.settings.compassButton = true
                mapView.settings.myLocationButton = true
                mapView.isMyLocationEnabled = true
-//               if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
-//                   mapView.setMinZoom(BaseMapView.minimumZoomIdiomPad, maxZoom: BaseMapView.maximumZoom)
-//               }
-//               else {
-//                   mapView.setMinZoom(BaseMapView.minimumZoom, maxZoom: BaseMapView.maximumZoom)
-//               }
-               mapOverlay.backgroundColor = UIColor(hex: ThemeManager.shared.getSecondaryColor(), alpha: 0.6)
+               if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+                   mapView.setMinZoom(BaseMapView.minimumZoomIdiomPad, maxZoom: BaseMapView.maximumZoom)
+               }
+               else {
+                   mapView.setMinZoom(BaseMapView.minimumZoom, maxZoom: BaseMapView.maximumZoom)
+               }
+               mapOverlay.backgroundColor = UIColor(hex: ThemeManager.shared.getCellBackgroundColor(), alpha: 0.6)
                tokenCollectedView.layer.cornerRadius = 4
                tokenCollectedView.backgroundColor = UIColor(hex: ThemeManager.shared.getPrimaryBackgroundColor())
                tokenCollectedClose.tintColor = UIColor(hex: ThemeManager.shared.getPrimaryColor())
