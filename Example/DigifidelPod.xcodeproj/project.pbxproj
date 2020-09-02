@@ -343,6 +343,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FC72A654A391C8FDBCC78155 /* Pods-DigifidelPod_Tests.debug.xcconfig */;
 			buildSettings = {
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -365,6 +366,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BDE0BF4FA36903651F4BB168 /* Pods-DigifidelPod_Tests.release.xcconfig */;
 			buildSettings = {
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
