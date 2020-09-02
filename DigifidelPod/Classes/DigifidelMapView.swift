@@ -22,7 +22,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     @IBOutlet weak var tokenCollectedView: UIView!
     @IBOutlet weak var tokenCollectedImage: UIImageView!
     @IBOutlet weak var tokenCollectedDetails: UILabel!
-    @IBOutlet weak var tokenCollectedButton: PrimaryButton!
+//    @IBOutlet weak var tokenCollectedButton: PrimaryButton!
     @IBOutlet weak var tokenCloseView: UIView!
     @IBOutlet weak var tokenCollectedClose: UIImageView!
     @IBOutlet weak var adBannerView: UIView!
@@ -32,6 +32,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     @IBOutlet weak var debugLayoutGetCampaigns: UIButton!
     @IBOutlet weak var debugLayoutGetTokens: UIButton!
     
+    @IBOutlet weak var tokenCollectedButtonContainer: UIView!
     
     @IBOutlet weak var cHeightAdBannerView: NSLayoutConstraint!
     
@@ -55,6 +56,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     private var errorViewLocal: ErrorView?
     private var loadingViewLocal: LoadingView?
     private var cHeightAdBannerViewLocal: NSLayoutConstraint?
+    private var tokenCollectedButton: UIButton?
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -108,22 +110,14 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                 getView().addSubview(adBannerViewLocal!)
                 adBannerViewLocal!.leadingAnchor.constraint(equalTo: getView().leadingAnchor, constant: 10).isActive = true
                 adBannerViewLocal!.trailingAnchor.constraint(equalTo: getView().trailingAnchor, constant: -10).isActive = true
-                var topPadding = CGFloat(0)
+                var bottomPadding = CGFloat(80)
                 if #available(iOS 11.0, *) {
-                    if UIApplication.shared.keyWindow == nil
-                   {
-                       topPadding = 80
-                   }
-                    else
-                    {
-                         topPadding = UIApplication.shared.keyWindow!.safeAreaInsets.top
+                    if UIApplication.shared.keyWindow != nil {
+                        bottomPadding += UIApplication.shared.keyWindow!.safeAreaInsets.bottom
                     }
-                } else {
-                    topPadding = 80
-                };
-               
+                }
                 
-                adBannerViewLocal!.bottomAnchor.constraint(equalTo: getView().bottomAnchor, constant: -topPadding).isActive = true
+                adBannerViewLocal!.bottomAnchor.constraint(equalTo: getView().bottomAnchor, constant: -bottomPadding).isActive = true
                 adBannerView.isHidden = true
                 
                 errorViewLocal = ErrorView(frame: CGRect(x:0, y: 0, width: screenBounds.width, height: screenBounds.height))
@@ -133,7 +127,10 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                 loadingViewLocal = LoadingView(frame: CGRect(x: screenBounds.width/2 - 25, y:screenBounds.height/2 - 25, width: 50, height: 50))
                 getView().addSubview(loadingViewLocal!)
                 loadingView.isHidden = true
-//                loadingView.addSubview(loadingViewLocal!)
+                
+                tokenCollectedButton = PrimaryButton(frame: tokenCollectedButtonContainer.bounds)
+                tokenCollectedButtonContainer.addSubview(tokenCollectedButton!)
+                tokenCollectedButton?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onCloseTokenCollected(tapGestureRecognizer:))))
             }
     
         /**
@@ -155,7 +152,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                tokenCollectedView.backgroundColor = UIColor(hex: ThemeManager.shared.getPrimaryBackgroundColor())
                tokenCollectedClose.tintColor = UIColor(hex: ThemeManager.shared.getPrimaryColor())
                tokenCollectedDetails.textColor = UIColor(hex: ThemeManager.shared.getTextColor())
-               tokenCollectedButton.setTitle(LooootManager.shared.getTranslationManager().getTranslation(key: TranslationConstants.mapViewConfirm), for: UIButton.State.normal)
+               tokenCollectedButton!.setTitle(LooootManager.shared.getTranslationManager().getTranslation(key: TranslationConstants.mapViewConfirm), for: UIButton.State.normal)
                
                #if DIGIFIDEL
                
@@ -247,7 +244,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             - color: The new color.
             */
            public func setAddToWalletButtonTextColor(color: Int) {
-               tokenCollectedButton.setTitleColor(UIColor(hex: color), for: UIButton.State.normal)
+               tokenCollectedButton!.setTitleColor(UIColor(hex: color), for: UIButton.State.normal)
            }
            
            /**
@@ -257,7 +254,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             - color: The new color.
             */
            public func setAddToWalletButtonColor(color: Int) {
-               tokenCollectedButton.backgroundColor = UIColor(hex: color)
+               tokenCollectedButton!.backgroundColor = UIColor(hex: color)
            }
            
            /**

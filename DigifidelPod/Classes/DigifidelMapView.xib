@@ -22,7 +22,7 @@
                 <outlet property="mapOverlay" destination="DgP-vM-Xx0" id="LlQ-KK-MhS"/>
                 <outlet property="mapView" destination="Q0u-r7-MtL" id="Kau-EJ-XqM"/>
                 <outlet property="tokenCloseView" destination="YRU-Dz-4f8" id="q9H-p7-QbX"/>
-                <outlet property="tokenCollectedButton" destination="fGE-7a-I66" id="tHf-Cz-nHt"/>
+                <outlet property="tokenCollectedButtonContainer" destination="7MA-fq-77I" id="0GQ-Un-oRG"/>
                 <outlet property="tokenCollectedClose" destination="F8c-I3-NQR" id="4hk-ao-D3g"/>
                 <outlet property="tokenCollectedDetails" destination="o3l-yv-zz8" id="L8F-Y4-FIm"/>
                 <outlet property="tokenCollectedImage" destination="Xiz-Lz-Vlm" id="xqZ-Kv-B1D"/>
@@ -52,7 +52,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAf-mY-isk" userLabel="tokenCollectedView">
-                    <rect key="frame" x="40" y="334" width="334" height="238"/>
+                    <rect key="frame" x="40" y="342" width="334" height="222"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xiz-Lz-Vlm">
                             <rect key="frame" x="127" y="40" width="80" height="80"/>
@@ -67,17 +67,13 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fGE-7a-I66" customClass="PrimaryButton">
-                            <rect key="frame" x="32" y="178" width="270" height="40"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7MA-fq-77I" userLabel="buttonContaienr">
+                            <rect key="frame" x="32" y="170" width="270" height="40"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="OZ0-xO-Fpc"/>
+                                <constraint firstAttribute="height" constant="40" id="x2j-ro-Keg"/>
                             </constraints>
-                            <inset key="contentEdgeInsets" minX="25" minY="0.0" maxX="25" maxY="0.0"/>
-                            <state key="normal" title="Button"/>
-                            <connections>
-                                <action selector="onClaimPressed:" destination="-1" eventType="touchUpInside" id="dpF-pp-eEd"/>
-                            </connections>
-                        </button>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRU-Dz-4f8">
                             <rect key="frame" x="289" y="15" width="30" height="30"/>
                             <subviews>
@@ -100,18 +96,17 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="fGE-7a-I66" firstAttribute="leading" secondItem="NAf-mY-isk" secondAttribute="leading" constant="32" id="2aN-x0-DMA"/>
                         <constraint firstItem="YRU-Dz-4f8" firstAttribute="top" secondItem="NAf-mY-isk" secondAttribute="top" constant="15" id="39B-y1-l3N"/>
                         <constraint firstItem="o3l-yv-zz8" firstAttribute="top" secondItem="Xiz-Lz-Vlm" secondAttribute="bottom" constant="20" id="4R6-ce-CUW"/>
                         <constraint firstItem="Xiz-Lz-Vlm" firstAttribute="top" secondItem="NAf-mY-isk" secondAttribute="top" constant="40" id="EFN-KK-GEQ"/>
-                        <constraint firstAttribute="bottom" secondItem="fGE-7a-I66" secondAttribute="bottom" constant="20" id="I24-WB-Voh"/>
-                        <constraint firstAttribute="trailing" secondItem="fGE-7a-I66" secondAttribute="trailing" constant="32" id="ObV-g4-NfZ"/>
+                        <constraint firstAttribute="bottom" secondItem="7MA-fq-77I" secondAttribute="bottom" constant="12" id="EqV-aJ-sB3"/>
+                        <constraint firstItem="7MA-fq-77I" firstAttribute="top" secondItem="o3l-yv-zz8" secondAttribute="bottom" constant="12" id="Vy4-5U-UWM"/>
+                        <constraint firstAttribute="trailing" secondItem="7MA-fq-77I" secondAttribute="trailing" constant="32" id="XvH-ql-hum"/>
                         <constraint firstItem="Xiz-Lz-Vlm" firstAttribute="centerX" secondItem="NAf-mY-isk" secondAttribute="centerX" id="bSk-fi-ieC"/>
+                        <constraint firstItem="7MA-fq-77I" firstAttribute="leading" secondItem="NAf-mY-isk" secondAttribute="leading" constant="32" id="bye-dR-jBi"/>
                         <constraint firstAttribute="trailing" secondItem="YRU-Dz-4f8" secondAttribute="trailing" constant="15" id="gtC-n5-BLs"/>
                         <constraint firstAttribute="trailing" secondItem="o3l-yv-zz8" secondAttribute="trailing" constant="32" id="l0y-KZ-dHd"/>
-                        <constraint firstItem="fGE-7a-I66" firstAttribute="centerX" secondItem="NAf-mY-isk" secondAttribute="centerX" id="mV6-hf-hTX"/>
                         <constraint firstItem="o3l-yv-zz8" firstAttribute="leading" secondItem="NAf-mY-isk" secondAttribute="leading" constant="32" id="nFN-Pw-ilD"/>
-                        <constraint firstItem="fGE-7a-I66" firstAttribute="top" secondItem="o3l-yv-zz8" secondAttribute="bottom" constant="20" id="nUg-rI-0Ru"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hX5-In-fOj" userLabel="adBannerView">
@@ -183,7 +178,7 @@
                 <constraint firstAttribute="bottom" secondItem="dQw-Vr-pOm" secondAttribute="bottom" id="xWH-bj-GHt"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="141" y="154"/>
+            <point key="canvasLocation" x="140.57971014492756" y="153.34821428571428"/>
         </view>
     </objects>
     <resources>
