@@ -13,7 +13,6 @@ import GoogleMaps
 import Loooot
 import GoogleMapsUtils
 
-
 @IBDesignable
 public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManagerDelegate, GMUClusterRendererDelegate
 {
@@ -49,7 +48,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     }
     
     private var clusterManager: GMUClusterManager!
-    private var gmsMarkers: [LooootMarker] = []
+    private var gmsMarkers: [GMSMarker] = []
     public var gmsMarkerSelected: GMSMarker!
 
     private var adBannerViewLocal: AdBannerView?
@@ -100,15 +99,16 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         
             public override func initLocalViews() {
                 let screenBounds = UIScreen.main.bounds
-                adBannerViewLocal = AdBannerView(frame: CGRect(x: 10, y:screenBounds.height - 190, width:screenBounds.width - 20, height:130))
-                adBannerViewLocal?.backgroundColor = UIColor.red
+                adBannerViewLocal = AdBannerView(frame: CGRect(x: 0, y:0, width:screenBounds.width - 20, height:138))
+                adBannerViewLocal?.layer.cornerRadius = 4
                 adBannerViewLocal?.translatesAutoresizingMaskIntoConstraints = false
-                cHeightAdBannerViewLocal = NSLayoutConstraint(item: adBannerViewLocal!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 130)
-                let bottomContraint =  NSLayoutConstraint(item: adBannerViewLocal!, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: getView(), attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 10)
+                cHeightAdBannerViewLocal = NSLayoutConstraint(item: adBannerViewLocal!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 138)
                 adBannerViewLocal?.addConstraint(cHeightAdBannerViewLocal!)
-                adBannerViewLocal?.bottomAnchor.constraint(equalTo: getView().bottomAnchor, constant: 10).isActive = true
-                
+              
                 getView().addSubview(adBannerViewLocal!)
+                adBannerViewLocal!.leadingAnchor.constraint(equalTo: getView().leadingAnchor, constant: 10).isActive = true
+                adBannerViewLocal!.trailingAnchor.constraint(equalTo: getView().trailingAnchor, constant: -10).isActive = true
+                adBannerViewLocal!.bottomAnchor.constraint(equalTo: getView().bottomAnchor, constant: -80).isActive = true
                 adBannerView.isHidden = true
                 
                 errorViewLocal = ErrorView(frame: CGRect(x:0, y: 0, width: screenBounds.width, height: screenBounds.height))
@@ -129,12 +129,12 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                mapView.settings.compassButton = true
                mapView.settings.myLocationButton = true
                mapView.isMyLocationEnabled = true
-               if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
-                   mapView.setMinZoom(BaseMapView.minimumZoomIdiomPad, maxZoom: BaseMapView.maximumZoom)
-               }
-               else {
-                   mapView.setMinZoom(BaseMapView.minimumZoom, maxZoom: BaseMapView.maximumZoom)
-               }
+//               if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+//                   mapView.setMinZoom(BaseMapView.minimumZoomIdiomPad, maxZoom: BaseMapView.maximumZoom)
+//               }
+//               else {
+//                   mapView.setMinZoom(BaseMapView.minimumZoom, maxZoom: BaseMapView.maximumZoom)
+//               }
                mapOverlay.backgroundColor = UIColor(hex: ThemeManager.shared.getSecondaryColor(), alpha: 0.6)
                tokenCollectedView.layer.cornerRadius = 4
                tokenCollectedView.backgroundColor = UIColor(hex: ThemeManager.shared.getPrimaryBackgroundColor())
@@ -272,14 +272,14 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             mapTokensList = mapTokens
 
             clusterManager.clearItems()
-            gmsMarkers = []
-//            var clusterItemsList = Array<GMSMarker>()
+            
+            var clusterItemsList = Array<GMSMarker>()
             for token in mapTokens {
-                let clusterItem = LooootMarker(reward: token)
-                gmsMarkers.append(clusterItem)
+                let clusterItem = GMSMarker(position: token.position)
+                clusterItem.userData = token
+                clusterItemsList.append(clusterItem)
             }
-//            setMarkerSize(size: markerIconSize)
-            clusterManager.add(gmsMarkers)
+            clusterManager.add(clusterItemsList)
             clusterManager.cluster()
         }
         
@@ -299,7 +299,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
          public override func setMarkerSize(size: CGSize) {
             markerIconSize = size
             for marker in gmsMarkers {
-//                marker.setIconSize(newSize: size)
+                marker.setIconSize(newSize: size)
             }
         }
         
@@ -364,8 +364,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         
         public func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
             gmsMarkerSelected = marker
-            let loootMarker = marker.userData as? LooootMarker
-            tokenSelected =  loootMarker?.mapReward
+            tokenSelected = marker.userData as? MapReward
             return onMapTokenTapped(tokenSelected: tokenSelected, markerIcon: marker.icon!, markerPosition: marker.position)
         }
         
@@ -373,10 +372,9 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         This function is called when a marker or a cluster is about to be added to the map.
         */
         public func renderer(_ renderer: GMUClusterRenderer, willRenderMarker marker: GMSMarker) {
-               if marker.userData is LooootMarker {
+               if marker.userData is MapReward {
                    // Marker is MapToken type
-                   let loootToken = marker.userData as! LooootMarker
-                let mapToken = loootToken.mapReward
+                   let mapToken = marker.userData as! MapReward
                    marker.title = mapToken.getName()
                    
                    if !ImageCacher.shared.containsUrl(imageUrl: mapToken.getImageUrl()) {
@@ -396,20 +394,4 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                    marker.setIconSize(newSize: CGSize(width: 40, height: 40))
                }
            }
-}
-
-public class LooootMarker: NSObject, GMUClusterItem
-{
-   
-       // Need to be public for GMUClusterItem.
-       public var position: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-       
-        public var mapReward: MapReward
-    public init(reward: MapReward) {
-        mapReward = reward
-        self.position = reward.position
-        super.init()
-      }
-       
-     
 }
