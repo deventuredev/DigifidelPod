@@ -1,4 +1,6 @@
 use_frameworks!
+enable_bitcode_for_prebuilt_frameworks!
+
 target 'DigifidelPod_Tests' do
   pod 'DigifidelPod', :path => '../'
   pod 'GoogleMaps', '~> 3.9.0'
