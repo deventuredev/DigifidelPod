@@ -310,9 +310,9 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         
          public override func setMarkerSize(size: CGSize) {
             markerIconSize = size
-            for marker in gmsMarkers {
+//            for marker in gmsMarkers {
 //                marker.setIconSize(newSize: size)
-            }
+//            }
         }
         
         public override func setTokenCollectedImage(image: UIImage)
