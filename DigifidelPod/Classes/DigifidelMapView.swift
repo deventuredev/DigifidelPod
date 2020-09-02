@@ -280,9 +280,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
            renderer.animatesClusters = false
            clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
         }
-        
        
-    
         public override func addMarkersOnCluster(mapTokens: Array<MapReward>) {
             mapTokensList = mapTokens
 
@@ -380,7 +378,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             gmsMarkerSelected = marker
             let loootMarker = marker.userData as? LooootMarker
             tokenSelected =  loootMarker?.mapReward
-            return onMapTokenTapped(tokenSelected: tokenSelected, markerIcon: marker.icon!, markerPosition: marker.position)
+            return onMapTokenTapped(mapTokenSelected: loootMarker?.mapReward, markerIcon: marker.icon, markerPosition: marker.position)
         }
         
         /**
@@ -415,15 +413,15 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
 public class LooootMarker: NSObject, GMUClusterItem
 {
    
-       // Need to be public for GMUClusterItem.
-       public var position: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-       
-        public var mapReward: MapReward
+    // Need to be public for GMUClusterItem.
+    public var position: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    public var mapReward: MapReward
+    
     public init(reward: MapReward) {
         mapReward = reward
         self.position = reward.position
         super.init()
-      }
+    }
 }
        
      
