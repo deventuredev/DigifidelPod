@@ -186,6 +186,12 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
            }
         
            private func setUpDebugLayout() {
+            if(!LooootManager.shared.shouldShowDebugLayout())
+            {
+                debugLayoutText.isHidden = true
+                debugLayoutGetTokens.isHidden = true
+                debugLayoutGetCampaigns.isHidden = true
+            }
                debugLayoutText.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0.8)
                
                debugString[0] = "Current location: "
