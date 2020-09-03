@@ -174,7 +174,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                tokenCloseView.isHidden = true
                tokenCollectedClose.isHidden = true
                
-               if !_isDebugAssertConfiguration() && !LooootManager.shared.shouldShowDebugLayout() {
+               if !LooootManager.shared.shouldShowDebugLayout() {
                    debugLayoutText.isHidden = true
                    debugLayoutGetTokens.isHidden = true
                    debugLayoutGetCampaigns.isHidden = true
