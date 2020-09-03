@@ -813,6 +813,7 @@ public class ExtendedItemModel {
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class GeofenceHelper {
+  public static func isPointInPolygon(minX: Swift.Double, maxX: Swift.Double, minY: Swift.Double, maxY: Swift.Double, xValue: Swift.Double, yValue: Swift.Double) -> Swift.Bool
   public static func getDistanceInMeters(lat1: Swift.Double, lon1: Swift.Double, lat2: Swift.Double, lon2: Swift.Double) -> Swift.Double
   public static func isInRange(lat1: Swift.Double, lon1: Swift.Double, lat2: Swift.Double, lon2: Swift.Double, radiusInMeters: Swift.Double) -> Swift.Bool
   public static func isInRange(lat1: Swift.Double, lon1: Swift.Double, lat2: Swift.Double, lon2: Swift.Double, radiusInMeters: Swift.Int) -> Swift.Bool
@@ -857,11 +858,12 @@ extension CLLocationCoordinate2D {
   public static let minimumZoomIdiomPad: Swift.Float
   public static let defaultLocation: CoreLocation.CLLocation
   public static let autoUpdateMapTime: Swift.Double
+  public var debugString: [Swift.String?]
   public var tokenSelected: Loooot.MapReward!
   public var currentZoomLevel: Swift.Float!
+  public var allTokensList: Swift.Array<Loooot.MapReward>!
   public var mapTokensList: Swift.Array<Loooot.MapReward>!
   public var markerIconSize: CoreGraphics.CGSize
-  public var debugString: [Swift.String?]
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   public func getView() -> UIKit.UIView
@@ -1075,6 +1077,11 @@ public protocol HomeDelegate {
   public func setCurrentLongitude(currentLongitude: Swift.Double)
   public func setTermsAndConditionsUrl(url: Swift.String)
   public func shouldShowDebugLayout() -> Swift.Bool
+  public func getOffsetXGetMarkers() -> Swift.Int
+  public func getOffsetYGetMarkers() -> Swift.Int
+  public func getMaxTokensDisplayed() -> Swift.Int
+  public func getDefaultTimeUpdate() -> Swift.Int
+  public func getDefaultDistanceUpdate() -> Swift.Int
   public func getTermsAndConditionsUrl() -> Swift.String
   public func getFAQUrl() -> Swift.String
   public func getCampaignIdList() -> Swift.Array<Swift.Int64>
@@ -1453,7 +1460,7 @@ public class WalletList : Loooot.RewardTypeList {
   public static let deviceType: Swift.Int
   public static let emptyUUID: Swift.Int
   public static let emptyLongId: Swift.Int64
-  public static let minDistanceForUpdateMapTokens: Swift.Double
+  public static let poiBoundsDelta1M: Swift.Double
   @objc deinit
 }
 extension UIColor {
@@ -1627,8 +1634,8 @@ public enum ScalingScheme {
 }
 public class InitResponse {
   public init()
-  public init(playerId: Swift.Int64, campaignsIdList: Swift.Array<Loooot.CampaignMinified>)
-  public init(playerId: Swift.Int64, campaignsIdList: Swift.Array<Loooot.CampaignMinified>, isDebug: Swift.Bool)
+  public init(playerId: Swift.Int64, campaignsIdList: Swift.Array<Loooot.CampaignMinified>, offsetXGetMarkers: Swift.Int, offsetYGetMarkers: Swift.Int, maxTokensDisplayed: Swift.Int, defaultTimeUpdate: Swift.Int, defaultDistanceUpdate: Swift.Int)
+  public init(playerId: Swift.Int64, campaignsIdList: Swift.Array<Loooot.CampaignMinified>, isDebug: Swift.Bool, offsetXGetMarkers: Swift.Int, offsetYGetMarkers: Swift.Int, maxTokensDisplayed: Swift.Int, defaultTimeUpdate: Swift.Int, defaultDistanceUpdate: Swift.Int)
   public init(json: [Swift.String : Any])
   public func getPlayerId() -> Swift.Int64
   public func setPlayerId(playerId: Swift.Int64)
@@ -1636,6 +1643,11 @@ public class InitResponse {
   public func setCampaignMinifiedList(campaignMinifiedList: Swift.Array<Loooot.CampaignMinified>)
   public func isDebugMode() -> Swift.Bool
   public func setDebug(debug: Swift.Bool)
+  public func getOffsetXGetMarkers() -> Swift.Int
+  public func getOffsetYGetMarkers() -> Swift.Int
+  public func getMaxTokensDisplayed() -> Swift.Int
+  public func getDefaultTimeUpdate() -> Swift.Int
+  public func getDefaultDistanceUpdate() -> Swift.Int
   @objc deinit
 }
 extension SCNVector3 {
