@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DigifidelPod'
-  s.version          = '2.4.2'
-  s.summary          = 'The pod of Digifidel 2.4.2'
+  s.version          = '2.4.2.0'
+  s.summary          = 'The pod of Digifidel 2.4.2.0'
 
 #   This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -44,7 +44,8 @@ Pod::Spec.new do |s|
 #  s.frameworks = 'GoogleMaps'
   s.dependency 'GoogleMaps'
   s.dependency 'Google-Maps-iOS-Utils'
-  
+  s.dependency 'SwiftSignalRClient'
+
   # s.dependency 'AFNetworking', '~> 2.3'
   s.vendored_frameworks = 'Loooot.framework'
 end

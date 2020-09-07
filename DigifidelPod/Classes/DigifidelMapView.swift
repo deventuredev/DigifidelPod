@@ -56,6 +56,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     private var loadingViewLocal: LoadingView?
     private var cHeightAdBannerViewLocal: NSLayoutConstraint?
     private var tokenCollectedButton: UIButton?
+    private var signalService:SignalRService?
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -75,11 +76,12 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("DigifidelBundle.bundle")
         let bundle = Bundle(url: bundleURL!)
         loadViewFromNib(bundle: bundle!)
-
+        signalService = SignalRService()
         initLocalViews()
         baseInit()
         initViews()
         initMaps()
+        
     }
         
         /**
