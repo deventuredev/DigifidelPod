@@ -813,6 +813,7 @@ public class ExtendedItemModel {
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class GeofenceHelper {
+  public static func getLatLongIdetifier(latitude: Swift.Double, longitude: Swift.Double) -> Swift.Int64
   public static func isPointInPolygon(minX: Swift.Double, maxX: Swift.Double, minY: Swift.Double, maxY: Swift.Double, xValue: Swift.Double, yValue: Swift.Double) -> Swift.Bool
   public static func getDistanceInMeters(lat1: Swift.Double, lon1: Swift.Double, lat2: Swift.Double, lon2: Swift.Double) -> Swift.Double
   public static func isInRange(lat1: Swift.Double, lon1: Swift.Double, lat2: Swift.Double, lon2: Swift.Double, radiusInMeters: Swift.Double) -> Swift.Bool
@@ -857,19 +858,24 @@ extension CLLocationCoordinate2D {
   public static let defaultZoomIdiomPad: Swift.Float
   public static let minimumZoomIdiomPad: Swift.Float
   public static let defaultLocation: CoreLocation.CLLocation
-  public static let autoUpdateMapTime: Swift.Double
+  public static let defaultUserDistanceToMoveCamera: Swift.Int
   public var debugString: [Swift.String?]
   public var tokenSelected: Loooot.MapReward!
   public var currentZoomLevel: Swift.Float!
   public var allTokensList: Swift.Array<Loooot.MapReward>!
   public var mapTokensList: Swift.Array<Loooot.MapReward>!
   public var markerIconSize: CoreGraphics.CGSize
+  public var shouldMoveCameraToUserPosition: Swift.Bool
+  public var currentLatLongIdentifier: Swift.Int64!
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   public func getView() -> UIKit.UIView
   public func setView(newView: UIKit.UIView)
   public func baseInit()
   public func onMapTokenTapped(mapTokenSelected: Loooot.MapReward?, markerIcon: UIKit.UIImage?, markerPosition: CoreLocation.CLLocationCoordinate2D) -> Swift.Bool
+  public func onTokenCollected(tokenId: Swift.Int64, groupId: Swift.Int64, campaignId: Swift.Int64)
+  open func updateLatLongIdentifier(oldRoom: Swift.String, newRoom: Swift.String)
+  open func removeMarker(mapReward: Loooot.MapReward)
   open func initLocalViews()
   open func setTokenCollectedImage(image: UIKit.UIImage)
   open func animateMapView(zoomLevel: Swift.Float)
@@ -885,8 +891,10 @@ extension CLLocationCoordinate2D {
   open func setMarkerSize(size: CoreGraphics.CGSize)
   public func setShouldSaveZoomLevel(shouldSaveZoomLevel: Swift.Bool)
   public func claimToken()
+  open func drawPolygonOnMap(minX: Swift.Double, maxX: Swift.Double, minY: Swift.Double, maxY: Swift.Double)
   open func addMarkersOnCluster(mapTokens: Swift.Array<Loooot.MapReward>)
   open func onTokenClicked()
+  public func getClosestMarkers(tokens: inout Swift.Array<Loooot.MapReward>, lat: Swift.Double, lng: Swift.Double) -> Swift.Array<Loooot.MapReward>
   public func refreshDebugString()
   public func onCloseTokenCollectedAction(tapGestureRecognizer: UIKit.UITapGestureRecognizer)
   @objc deinit
@@ -951,7 +959,9 @@ public class StartSessionResponse {
 }
 public class ClaimRewardModel {
   public init()
-  public init(rewardId: Swift.Int64, userId: Swift.Int64, campaignId: Swift.Int64, playerLatitude: Swift.Double, playerLongitude: Swift.Double, rewardLatitude: Swift.Double, rewardLongitude: Swift.Double, claimedAt: Swift.String, campaignProximity: Swift.Int, tokenTypeId: Swift.Int64, sessionId: Swift.Int64, groupId: Swift.Int64)
+  public init(clientId: Swift.Int64, rewardId: Swift.Int64, userId: Swift.Int64, campaignId: Swift.Int64, playerLatitude: Swift.Double, playerLongitude: Swift.Double, rewardLatitude: Swift.Double, rewardLongitude: Swift.Double, claimedAt: Swift.String, campaignProximity: Swift.Int, tokenTypeId: Swift.Int64, sessionId: Swift.Int64, groupId: Swift.Int64)
+  public func getClientId() -> Swift.Int64
+  public func setClientId(clientId: Swift.Int64)
   public func getRewardId() -> Swift.Int64
   public func setRewardId(rewardId: Swift.Int64)
   public func getUserId() -> Swift.Int64
@@ -975,6 +985,7 @@ public class ClaimRewardModel {
 }
 @_hasMissingDesignatedInitializers public class HttpClientManager {
   public static let shared: Loooot.HttpClientManager
+  public static let SIGNALR_URL: Swift.String
   public func getTermsAndConditionsUrl() -> Swift.String
   public func getFAQUrl() -> Swift.String
   public func setTermsAndConditionsUrl(url: Swift.String)
@@ -1615,6 +1626,9 @@ public class MapRewardType {
   @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+}
+extension UIView {
+  public func showAutoDismissAlertWithOneButton(title: Swift.String, message: Swift.String, style: UIKit.UIAlertController.Style = .alert, buttonTitle: Swift.String, buttonStyle: UIKit.UIAlertAction.Style = .default, dismissAfterSeconds: Swift.Int = 10)
 }
 @objc @_inheritsConvenienceInitializers @IBDesignable public class AdInterstitialViewController : UIKit.UIViewController {
   public static let StoryboardName: Swift.String

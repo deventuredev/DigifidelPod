@@ -644,6 +644,8 @@ SWIFT_CLASS("_TtC6Loooot32TermsAndConditionsViewController")
 
 
 
+
+
 /// This view displays the list of tokens from the wallet.
 IB_DESIGNABLE
 SWIFT_CLASS("_TtC6Loooot10WalletView")
@@ -1298,6 +1300,8 @@ SWIFT_CLASS("_TtC6Loooot32TermsAndConditionsViewController")
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 
 
