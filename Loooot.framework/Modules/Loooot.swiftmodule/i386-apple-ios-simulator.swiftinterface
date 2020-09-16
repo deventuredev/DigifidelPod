@@ -193,6 +193,7 @@ extension FloatingPoint {
 @_hasMissingDesignatedInitializers public class EndPoint {
   public static let initializeLooootManager: Swift.String
   public static let startSession: Swift.String
+  public static let endSession: Swift.String
   public static let downloadTerms: Swift.String
   public static let faq: Swift.String
   public static let getCampaigns: Swift.String
@@ -580,6 +581,24 @@ public protocol WalletViewDelegate {
   @objc override dynamic public init()
   @objc deinit
 }
+public class ClaimTokenSignalRModel {
+  public init()
+  public init(companyId: Swift.Int64, latitude: Swift.Double, longitude: Swift.Double, tokenId: Swift.Int64, groupId: Swift.Int64, campaignId: Swift.Int64)
+  public func getCompanyId() -> Swift.Int64
+  public func setCompanyId(companyId: Swift.Int64)
+  public func getLatitude() -> Swift.Double
+  public func setLatitude(latitude: Swift.Double)
+  public func getLongitude() -> Swift.Double
+  public func setLongitude(longitude: Swift.Double)
+  public func getTokenId() -> Swift.Int64
+  public func setTokenId(tokenId: Swift.Int64)
+  public func getGroupId() -> Swift.Int64
+  public func setGroupId(groupId: Swift.Int64)
+  public func getCampaignId() -> Swift.Int64
+  public func setCampaignId(campaignId: Swift.Int64)
+  public func toJson() -> Swift.String
+  @objc deinit
+}
 extension UIView {
   public func applyGradient(colors: [CoreGraphics.CGColor])
 }
@@ -879,6 +898,10 @@ extension CLLocationCoordinate2D {
   open func initLocalViews()
   open func setTokenCollectedImage(image: UIKit.UIImage)
   open func animateMapView(zoomLevel: Swift.Float)
+  open func whenAutoUpdateMap()
+  open func claimTokenSignalR(claimTokenSignalRModel: Loooot.ClaimTokenSignalRModel)
+  open func startSignalRService()
+  open func stopSignalRService()
   open func getErrorView() -> Loooot.ErrorView
   open func getLoadingView() -> Loooot.LoadingView
   open func getTokenCollectedView() -> UIKit.UIView
@@ -890,11 +913,14 @@ extension CLLocationCoordinate2D {
   public func getMarkerSize() -> CoreGraphics.CGSize
   open func setMarkerSize(size: CoreGraphics.CGSize)
   public func setShouldSaveZoomLevel(shouldSaveZoomLevel: Swift.Bool)
+  public func getTokensByLocation()
   public func claimToken()
   open func drawPolygonOnMap(minX: Swift.Double, maxX: Swift.Double, minY: Swift.Double, maxY: Swift.Double)
+  open func drawRooms()
   open func addMarkersOnCluster(mapTokens: Swift.Array<Loooot.MapReward>)
   open func onTokenClicked()
   public func getClosestMarkers(tokens: inout Swift.Array<Loooot.MapReward>, lat: Swift.Double, lng: Swift.Double) -> Swift.Array<Loooot.MapReward>
+  public func refreshCampaigns()
   public func refreshDebugString()
   public func onCloseTokenCollectedAction(tapGestureRecognizer: UIKit.UITapGestureRecognizer)
   @objc deinit
@@ -991,6 +1017,7 @@ public class ClaimRewardModel {
   public func setTermsAndConditionsUrl(url: Swift.String)
   public func initializeLooootManager(playerIdentifier: Swift.String, clientId: Swift.Int64, completion: @escaping (Loooot.InitResponse?, Swift.Bool) -> Swift.Void)
   public func startSession(currentTime: Swift.String, completion: @escaping (Loooot.StartSessionResponse?, Swift.Bool) -> Swift.Void)
+  public func endSession(currentTime: Swift.String)
   public func getCampaigns(completion: @escaping (Swift.Array<Loooot.Campaign>?, Swift.Bool) -> Swift.Void)
   public func getTokensMinifiedList(campaignId: Swift.Int64, completion: @escaping (Swift.Array<Loooot.RewardTypeList>?, Swift.Bool) -> Swift.Void)
   public func getTokensByLocation(completion: @escaping (Swift.Array<Loooot.MapReward>?, Swift.Bool) -> Swift.Void)
@@ -1072,6 +1099,7 @@ public protocol HomeDelegate {
   public func getTranslationManager() -> Loooot.TranslationManager
   public func startLoooot(viewController: UIKit.UIViewController, playerIdentifier: Swift.String)
   public func startLoooot(viewController: UIKit.UIViewController, playerIdentifier: Swift.String, clientId: Swift.Int64)
+  public func endSession()
   public func getPlayerIdentifier() -> Swift.String
   public func setPlayerIdentifier(playerIdentifier: Swift.String)
   public func getPlayerId() -> Swift.Int64
@@ -1087,12 +1115,14 @@ public protocol HomeDelegate {
   public func getCurrentLongitude() -> Swift.Double?
   public func setCurrentLongitude(currentLongitude: Swift.Double)
   public func setTermsAndConditionsUrl(url: Swift.String)
-  public func shouldShowDebugLayout() -> Swift.Bool
+  public func isDebugMode() -> Swift.Bool
   public func getOffsetXGetMarkers() -> Swift.Int
   public func getOffsetYGetMarkers() -> Swift.Int
   public func getMaxTokensDisplayed() -> Swift.Int
   public func getDefaultTimeUpdate() -> Swift.Int
-  public func getDefaultDistanceUpdate() -> Swift.Int
+  public func getShouldGetTokensAfterClaim() -> Swift.Bool
+  public func isDisableAR() -> Swift.Bool
+  public func setDisableAR(disableAR: Swift.Bool)
   public func getTermsAndConditionsUrl() -> Swift.String
   public func getFAQUrl() -> Swift.String
   public func getCampaignIdList() -> Swift.Array<Swift.Int64>
@@ -1378,6 +1408,7 @@ public class SimpleItemModel {
   public static let claimedAt: Swift.String
   public static let currentTime: Swift.String
   public static let redeemedAt: Swift.String
+  public static let sessionId: Swift.String
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class PermissionModelHelper {
@@ -1648,8 +1679,8 @@ public enum ScalingScheme {
 }
 public class InitResponse {
   public init()
-  public init(playerId: Swift.Int64, campaignsIdList: Swift.Array<Loooot.CampaignMinified>, offsetXGetMarkers: Swift.Int, offsetYGetMarkers: Swift.Int, maxTokensDisplayed: Swift.Int, defaultTimeUpdate: Swift.Int, defaultDistanceUpdate: Swift.Int)
-  public init(playerId: Swift.Int64, campaignsIdList: Swift.Array<Loooot.CampaignMinified>, isDebug: Swift.Bool, offsetXGetMarkers: Swift.Int, offsetYGetMarkers: Swift.Int, maxTokensDisplayed: Swift.Int, defaultTimeUpdate: Swift.Int, defaultDistanceUpdate: Swift.Int)
+  public init(playerId: Swift.Int64, campaignsIdList: Swift.Array<Loooot.CampaignMinified>, offsetXGetMarkers: Swift.Int, offsetYGetMarkers: Swift.Int, maxTokensDisplayed: Swift.Int, defaultTimeUpdate: Swift.Int, shouldGetTokensAfterClaim: Swift.Bool, disableAR: Swift.Bool)
+  public init(playerId: Swift.Int64, campaignsIdList: Swift.Array<Loooot.CampaignMinified>, isDebug: Swift.Bool, offsetXGetMarkers: Swift.Int, offsetYGetMarkers: Swift.Int, maxTokensDisplayed: Swift.Int, defaultTimeUpdate: Swift.Int, shouldGetTokensAfterClaim: Swift.Bool, disableAR: Swift.Bool)
   public init(json: [Swift.String : Any])
   public func getPlayerId() -> Swift.Int64
   public func setPlayerId(playerId: Swift.Int64)
@@ -1661,7 +1692,19 @@ public class InitResponse {
   public func getOffsetYGetMarkers() -> Swift.Int
   public func getMaxTokensDisplayed() -> Swift.Int
   public func getDefaultTimeUpdate() -> Swift.Int
-  public func getDefaultDistanceUpdate() -> Swift.Int
+  public func getShouldGetTokensAfterClaim() -> Swift.Bool
+  public func IsDisableAR() -> Swift.Bool
+  @objc deinit
+}
+public class EndSessionModel {
+  public init(playerId: Swift.Int64, sessionId: Swift.Int64!, currentTime: Swift.String)
+  public func getPlayerId() -> Swift.Int64
+  public func setPlayerId(playerId: Swift.Int64)
+  public func getSessionId() -> Swift.Int64
+  public func setSessionId(sessionId: Swift.Int64)
+  public func getCurrentTime() -> Swift.String
+  public func setCurrentTime(currentTime: Swift.String)
+  public func toJson() -> Swift.String
   @objc deinit
 }
 extension SCNVector3 {

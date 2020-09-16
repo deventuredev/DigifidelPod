@@ -1,11 +1,3 @@
-//
-//  DigifidelMapView.swift
-//  DigifidelPod
-//
-//  Created by Deventure Dev on 31/08/2020.
-//
-
-
 import Foundation
 import UIKit
 import AVFoundation
@@ -15,8 +7,7 @@ import GoogleMapsUtils
 import SwiftSignalRClient
 
 @IBDesignable
-public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManagerDelegate, GMUClusterRendererDelegate, SignalRCallback
-{
+public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManagerDelegate, GMUClusterRendererDelegate, SignalRCallback {
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var mapOverlay: UIView!
     @IBOutlet weak var loadingView: UIView!
@@ -31,6 +22,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     
     @IBOutlet weak var debugLayoutGetCampaigns: UIButton!
     @IBOutlet weak var debugLayoutGetTokens: UIButton!
+    @IBOutlet weak var debugLayoutEndSession: UIButton!
     
     @IBOutlet weak var tokenCollectedButtonContainer: UIView!
     
@@ -39,11 +31,18 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     @IBOutlet weak var cTokenCollectedCloseHeight: NSLayoutConstraint!
     @IBOutlet weak var cTokenCollectedCloseViewHeight: NSLayoutConstraint!
     
-    @IBAction func onDebugLayoutGetCampaignsPressed(_ sender: Any) {
+    @IBAction func onDebugLayoutGetTokensPressed(_ sender: Any) {
+        getLoadingView().isScreenReady = false
+        getMapOverlay().isHidden = false
+        getTokensByLocation()
     }
     
+    @IBAction func onDebugLayoutGetCampaignsPressed(_ sender: Any) {
+        refreshCampaigns()
+    }
     
-    @IBAction func OnDebugLayoutGetTokensPressed(_ sender: Any) {
+    @IBAction func onDebugLayoutEndSessionPressed(_ sender: Any) {
+        LooootManager.shared.endSession()
     }
     
     private var clusterManager: GMUClusterManager!
@@ -55,8 +54,10 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     private var loadingViewLocal: LoadingView?
     private var cHeightAdBannerViewLocal: NSLayoutConstraint?
     private var tokenCollectedButton: UIButton?
+    private var signalRService: SignalRService?
+    
     private var currentPolygon: GMSPolygon!
-    private var signalService:SignalRService?
+    private var roomsPolygon: [GMSPolygon] = [ GMSPolygon(), GMSPolygon(), GMSPolygon(), GMSPolygon(), GMSPolygon(), GMSPolygon(), GMSPolygon(), GMSPolygon(), GMSPolygon() ]
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -70,8 +71,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         baseInit()
         initViews()
         initMaps()
-        signalService = SignalRService.shared(callback: self)
-        signalService?.start()
+        initializeSignalRService()
     }
     
     public func onTokenCollectedSignal(data: SignalRService.TokenNotifyPlayerModel) {
@@ -80,10 +80,18 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     
     public func connectionDidOpen(hubConnection: HubConnection) {
         if(currentLatLongIdentifier == nil || currentLatLongIdentifier == 0){
-          return
+            return
         }
         
-        signalService?.changeRoomByLatLongIdentifier(oldRoom: "", newRoom: "\(LooootManager.shared.getClienId())-\(currentLatLongIdentifier.description)")
+        let newRoom = "\(LooootManager.shared.getClienId())-\(currentLatLongIdentifier.description)"
+        signalRService?.changeRoomByLatLongIdentifier(oldRoom: "", newRoom: newRoom)
+
+        if LooootManager.shared.isDebugMode() {
+            debugString[4] = "oldRoom: \(LooootManager.shared.getClienId())-"
+            debugString[5] = "newRoom: \(newRoom)"
+            debugString[8] = "SignalR ConnectionId:" + (signalRService?.getConnectionId())!
+            refreshDebugString()
+        }
     }
     
     public func connectionDidFailToOpen(error: Error) {
@@ -150,7 +158,10 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         mapView.settings.compassButton = true
         mapView.settings.myLocationButton = true
         mapView.isMyLocationEnabled = true
-        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+        if LooootManager.shared.isDebugMode() {
+            // No minimum zoom
+        }
+        else if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
             mapView.setMinZoom(BaseMapView.minimumZoomIdiomPad, maxZoom: BaseMapView.maximumZoom)
         }
         else {
@@ -185,10 +196,11 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         tokenCloseView.isHidden = true
         tokenCollectedClose.isHidden = true
         
-        if !LooootManager.shared.shouldShowDebugLayout() {
+        if !LooootManager.shared.isDebugMode() {
             debugLayoutText.isHidden = true
             debugLayoutGetTokens.isHidden = true
             debugLayoutGetCampaigns.isHidden = true
+            debugLayoutEndSession.isHidden = true
         }
     }
     
@@ -203,8 +215,11 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         debugString[1] = "Prev position distance: "
         debugString[2] = "Distance to selected Token: "
         debugString[3] = "Selected token id: "
-        debugString[4] = "Selected token type: "
-        debugString[5] = "Selected token campaign: "
+        debugString[4] = "oldRoom:  "
+        debugString[5] = "newRoom: "
+        debugString[6] = "Session id: "
+        debugString[7] = "Player Identifier: "
+        debugString[8] = "SignalR connectionId: "
     }
     
     /**
@@ -277,7 +292,6 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         getLoadingView().setStrokeColor(color: color)
     }
     
-    
     public func initMaps() {
         let iconGenerator = GMUDefaultClusterIconGenerator(buckets: [999], backgroundColors: [UIColor(hex: ThemeManager.shared.getClusterColor())])
         let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
@@ -285,6 +299,11 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         renderer.delegate = self
         renderer.animatesClusters = false
         clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
+    }
+    
+    private func initializeSignalRService() {
+        signalRService = SignalRService.shared(callback: self)
+        signalRService?.start()
     }
     
     public override func removeMarker(mapReward: MapReward) {
@@ -297,23 +316,19 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         }
     }
     
-    public func updateMarkersOnCluster(newItems: Array<MapReward>, toBeRemoved:Array<MapReward>)
-    {
-        let toBeRemovedGmsMarkers = gmsMarkers.filter
-        {
+    public func updateMarkersOnCluster(newItems: Array<MapReward>, toBeRemoved:Array<MapReward>) {
+        let toBeRemovedGmsMarkers = gmsMarkers.filter {
             let mapRew = $0.mapReward
             return toBeRemoved.contains(where: { $0.getId() == mapRew.getId()})
         }
         
-        for clusterItem in toBeRemovedGmsMarkers
-        {
+        for clusterItem in toBeRemovedGmsMarkers {
             clusterManager.remove(clusterItem)
         }
         
-        gmsMarkers = gmsMarkers.filter
-            {
-                let mapRew = $0.mapReward
-                return !toBeRemoved.contains(where: { $0.getId() == mapRew.getId()})
+        gmsMarkers = gmsMarkers.filter {
+            let mapRew = $0.mapReward
+            return !toBeRemoved.contains(where: { $0.getId() == mapRew.getId()})
         }
         
         var toBeAddedGmsMarkers = Array<LooootMarker>()
@@ -329,12 +344,13 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         }
     }
     
-    public override func updateLatLongIdentifier(oldRoom: String, newRoom: String)
-    {
-        signalService?.changeRoomByLatLongIdentifier(oldRoom: oldRoom, newRoom: newRoom)
+    public override func updateLatLongIdentifier(oldRoom: String, newRoom: String) {
+        signalRService?.changeRoomByLatLongIdentifier(oldRoom: oldRoom, newRoom: newRoom)
     }
     
-    public override func drawPolygonOnMap(minX: Double,maxX: Double,minY: Double, maxY:Double) {
+    public override func drawPolygonOnMap(minX: Double, maxX: Double, minY: Double, maxY:Double) {
+        drawRooms()
+        
         if currentPolygon != nil {
             currentPolygon?.map = nil
         }
@@ -354,6 +370,116 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         currentPolygon.map = mapView
     }
     
+    public override func drawRooms() {
+        var currentUserLatitude = LooootManager.shared.getCurrentLatitude()! * 100
+        currentUserLatitude = Double(Int(currentUserLatitude))
+        currentUserLatitude = currentUserLatitude / 100
+        
+        var currentUserLongitutde = LooootManager.shared.getCurrentLongitude()! * 100
+        currentUserLongitutde = Double(Int(currentUserLongitutde))
+        currentUserLongitutde = currentUserLongitutde / 100
+        
+        let point1 = CLLocationCoordinate2DMake(currentUserLatitude + 0.02, currentUserLongitutde - 0.01)
+        let point2 = CLLocationCoordinate2DMake(currentUserLatitude + 0.02, currentUserLongitutde)
+        let point3 = CLLocationCoordinate2DMake(currentUserLatitude + 0.02, currentUserLongitutde + 0.01)
+        let point4 = CLLocationCoordinate2DMake(currentUserLatitude + 0.02, currentUserLongitutde + 0.02)
+
+        let point5 = CLLocationCoordinate2DMake(currentUserLatitude + 0.01, currentUserLongitutde - 0.01)
+        let point6 = CLLocationCoordinate2DMake(currentUserLatitude + 0.01, currentUserLongitutde)
+        let point7 = CLLocationCoordinate2DMake(currentUserLatitude + 0.01, currentUserLongitutde + 0.01)
+        let point8 = CLLocationCoordinate2DMake(currentUserLatitude + 0.01, currentUserLongitutde + 0.02)
+
+        let point9 = CLLocationCoordinate2DMake(currentUserLatitude, currentUserLongitutde - 0.01)
+        let point10 = CLLocationCoordinate2DMake(currentUserLatitude, currentUserLongitutde)
+        let point11 = CLLocationCoordinate2DMake(currentUserLatitude, currentUserLongitutde + 0.01)
+        let point12 = CLLocationCoordinate2DMake(currentUserLatitude, currentUserLongitutde + 0.02)
+
+        let point13 = CLLocationCoordinate2DMake(currentUserLatitude - 0.01, currentUserLongitutde - 0.01)
+        let point14 = CLLocationCoordinate2DMake(currentUserLatitude - 0.01, currentUserLongitutde)
+        let point15 = CLLocationCoordinate2DMake(currentUserLatitude - 0.01, currentUserLongitutde + 0.01)
+        let point16 = CLLocationCoordinate2DMake(currentUserLatitude - 0.01, currentUserLongitutde + 0.02)
+        
+        for i in 0 ..< roomsPolygon.count {
+            roomsPolygon[i].map = nil
+            roomsPolygon[i] = GMSPolygon()
+            roomsPolygon[i].strokeColor = UIColor.blue
+            roomsPolygon[i].strokeWidth = 4
+            roomsPolygon[i].fillColor = UIColor.clear
+        }
+        
+        var rect = GMSMutablePath()
+        rect.add(point1)
+        rect.add(point2)
+        rect.add(point6)
+        rect.add(point5)
+        roomsPolygon[0].path = rect
+        roomsPolygon[0].map = mapView
+        
+        rect = GMSMutablePath()
+        rect.add(point2)
+        rect.add(point3)
+        rect.add(point7)
+        rect.add(point6)
+        roomsPolygon[1].path = rect
+        roomsPolygon[1].map = mapView
+
+        rect = GMSMutablePath()
+        rect.add(point3)
+        rect.add(point4)
+        rect.add(point8)
+        rect.add(point7)
+        roomsPolygon[2].path = rect
+        roomsPolygon[2].map = mapView
+
+        rect = GMSMutablePath()
+        rect.add(point5)
+        rect.add(point6)
+        rect.add(point10)
+        rect.add(point9)
+        roomsPolygon[3].path = rect
+        roomsPolygon[3].map = mapView
+
+        rect = GMSMutablePath()
+        rect.add(point6)
+        rect.add(point7)
+        rect.add(point11)
+        rect.add(point10)
+        roomsPolygon[4].path = rect
+        roomsPolygon[4].map = mapView
+
+        rect = GMSMutablePath()
+        rect.add(point7)
+        rect.add(point8)
+        rect.add(point12)
+        rect.add(point11)
+        roomsPolygon[5].path = rect
+        roomsPolygon[5].map = mapView
+
+        rect = GMSMutablePath()
+        rect.add(point9)
+        rect.add(point10)
+        rect.add(point14)
+        rect.add(point13)
+        roomsPolygon[6].path = rect
+        roomsPolygon[6].map = mapView
+
+        rect = GMSMutablePath()
+        rect.add(point10)
+        rect.add(point11)
+        rect.add(point15)
+        rect.add(point14)
+        roomsPolygon[7].path = rect
+        roomsPolygon[7].map = mapView
+
+        rect = GMSMutablePath()
+        rect.add(point11)
+        rect.add(point12)
+        rect.add(point16)
+        rect.add(point15)
+        roomsPolygon[8].path = rect
+        roomsPolygon[8].map = mapView
+    }
+    
     public override func addMarkersOnCluster(mapTokens: Array<MapReward>) {
         mapTokensList = mapTokens
         
@@ -369,14 +495,13 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     }
     
     public override func onTokenClicked() {
-        
         clusterManager.remove(gmsMarkerSelected)
         clusterManager.cluster()
         
-        debugString[3] = "Selected token id: \(tokenSelected.getId().description)"
-        debugString[4] = "Selected token type: \(tokenSelected.getRewardTypeId().description)"
-        debugString[5] = "Selected token campaign: \(tokenSelected.getCampaignId().description)"
-        refreshDebugString()
+        if LooootManager.shared.isDebugMode() {
+            debugString[3] = "Selected token id: \(tokenSelected.getId().description)"
+            refreshDebugString()
+        }
         
         claimToken()
     }
@@ -388,8 +513,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         //            }
     }
     
-    public override func setTokenCollectedImage(image: UIImage)
-    {
+    public override func setTokenCollectedImage(image: UIImage) {
         tokenCollectedImage.image = image
     }
     
@@ -397,33 +521,48 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         mapView.animate(toZoom: zoomLevel)
     }
     
-    public override func getErrorView() -> ErrorView
-    {
+    public override func whenAutoUpdateMap() {
+        if !(signalRService?.isConnected ?? true) {
+            signalRService?.start()
+        }
+    }
+    
+    public override func claimTokenSignalR(claimTokenSignalRModel: ClaimTokenSignalRModel) {
+        signalRService?.onClaimToken(claimTokenModel: claimTokenSignalRModel)
+    }
+    
+    public override func startSignalRService() {
+        if !(signalRService?.isConnected ?? true) {
+            print("Start signalRService from DigiFidelMapView.startSignalRService()")
+            signalRService?.start()
+        }
+    }
+    
+    public override func stopSignalRService() {
+        signalRService?.stop()
+    }
+    
+    public override func getErrorView() -> ErrorView {
         return errorViewLocal!
     }
     
-    public override func getLoadingView() -> LoadingView
-    {
+    public override func getLoadingView() -> LoadingView {
         return loadingViewLocal!
     }
     
-    public override func getTokenCollectedView() -> UIView
-    {
+    public override func getTokenCollectedView() -> UIView {
         return tokenCollectedView
     }
     
-    public override func getTokenCollectedDetailsLabel() -> UILabel
-    {
+    public override func getTokenCollectedDetailsLabel() -> UILabel {
         return tokenCollectedDetails
     }
     
-    public override func getTokenCollectedImage() -> UIImageView
-    {
+    public override func getTokenCollectedImage() -> UIImageView {
         return tokenCollectedImage
     }
     
-    public override func animateMapView(latitude: Double, longitude: Double, zoom: Float)
-    {
+    public override func animateMapView(latitude: Double, longitude: Double, zoom: Float) {
         if latitude == -999999999 && longitude == -999999999 {
             mapView.animate(toZoom: zoom)
             return
@@ -432,13 +571,11 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         mapView.animate(to: camera)
     }
     
-    public override func getDebugTextLabel() -> UILabel
-    {
+    public override func getDebugTextLabel() -> UILabel {
         return debugLayoutText
     }
     
-    public override func getMapOverlay() -> UIView
-    {
+    public override func getMapOverlay() -> UIView {
         return mapOverlay
     }
     
@@ -482,7 +619,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     }
     
     public func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
-        if (gesture){
+        if gesture {
             shouldMoveCameraToUserPosition = false
         }
     }
@@ -512,7 +649,6 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
 
 public class LooootMarker: NSObject, GMUClusterItem
 {
-    
     // Need to be public for GMUClusterItem.
     public var position: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     public var mapReward: MapReward
