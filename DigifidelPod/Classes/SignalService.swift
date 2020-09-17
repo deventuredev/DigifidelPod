@@ -2,8 +2,7 @@ import Foundation
 import SwiftSignalRClient
 import Loooot
 
-public protocol SignalRCallback
-{
+public protocol SignalRCallback {
     func onTokenCollectedSignal(data: SignalRService.TokenNotifyPlayerModel)
     func connectionDidOpen(hubConnection: HubConnection)
     func connectionDidFailToOpen(error: Error)
@@ -11,7 +10,6 @@ public protocol SignalRCallback
 }
 
 public class SignalRService: HubConnectionDelegate {
-    
     public var isConnected: Bool = false
     
     public func connectionDidOpen(hubConnection: HubConnection) {
@@ -34,37 +32,37 @@ public class SignalRService: HubConnectionDelegate {
     private var connection: HubConnection?
     private var callback: SignalRCallback?
     
-    public static func shared(callback: SignalRCallback) -> SignalRService
-    {
-        if(instance == nil)
-        {
+    public static func shared(callback: SignalRCallback) -> SignalRService {
+        if(instance == nil) {
             instance = SignalRService(callback: callback)
         }
-        
-        return instance!;
+        return instance!
     }
     
-    
     private init(callback: SignalRCallback) {
-        
         self.callback = callback
     }
     
-    public func start()
-    {
-        let url = URL(string: HttpClientManager.SIGNALR_URL)
+    public func start() {
+        let url = URL(string: LooootManager.shared.getSignalRUrl())
         connection = HubConnectionBuilder(url: url!).withLogging(minLogLevel: .error).build()
         connection?.on(method: "onTokenCollected", callback: { (message:  String) in
-            do {
-                print("SignalR: onTokenCollected: \(message)")
-                let data = TokenNotifyPlayerModel(json: self.convertToDictionary(text:message)!)
-                self.callback?.onTokenCollectedSignal(data: data)
-            } catch {
-                print(error)
-            }
+            let data = TokenNotifyPlayerModel(json: self.convertToDictionary(text:message)!)
+            self.callback?.onTokenCollectedSignal(data: data)
         })
         connection?.delegate = self
         connection?.start()
+    }
+    
+    public func stop() {
+        connection?.stop()
+    }
+    
+    public func getConnectionId() -> String {
+        if(!isConnected) {
+            return "DISCONNECTED"
+        }
+        return (connection?.connectionId)!
     }
 
     func convertToDictionary(text: String) -> [String: Any]? {
@@ -78,17 +76,20 @@ public class SignalRService: HubConnectionDelegate {
         return nil
     }
     
-    public func changeRoomByLatLongIdentifier(oldRoom:String, newRoom:String)
-    {
-        if(!isConnected)
-        {
+    public func onClaimToken(claimTokenModel: ClaimTokenSignalRModel) {
+        if !isConnected {
+            return
+        }
+        connection?.send(method: "onClaimToken", claimTokenModel.toJson())
+    }
+    
+    public func changeRoomByLatLongIdentifier(oldRoom: String, newRoom: String) {
+        if !isConnected {
             return
         }
         let param = RoomsPlayerModel(oldRoom: oldRoom, newRoom: newRoom)
         connection?.send(method: "ChangeRoomByLatLongIdentifier", param.toJson())
     }
-    
-    
     
     public class RoomsPlayerModel
     {
