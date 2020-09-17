@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -8,12 +8,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DigifidelMapView" customModule="DigifidelPod" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DigifidelMapView" customModule="DigifidelBundle" customModuleProvider="target">
             <connections>
                 <outlet property="adBannerView" destination="hX5-In-fOj" id="INj-ut-6Bv"/>
                 <outlet property="cHeightAdBannerView" destination="6Mg-fe-Kkp" id="R0X-i3-Vot"/>
                 <outlet property="cTokenCollectedCloseHeight" destination="ddY-BH-cjl" id="iBz-Ni-trw"/>
                 <outlet property="cTokenCollectedCloseViewHeight" destination="pUR-JN-ebd" id="vB2-Ij-9aa"/>
+                <outlet property="debugLayoutEndSession" destination="sy6-xY-SPE" id="MCv-hR-TZo"/>
                 <outlet property="debugLayoutGetCampaigns" destination="deI-9H-Poa" id="Ue1-fg-tjW"/>
                 <outlet property="debugLayoutGetTokens" destination="j1f-GN-jUf" id="7Cz-eb-Cfe"/>
                 <outlet property="debugLayoutText" destination="0WN-NB-Waz" id="UeK-nz-wjm"/>
@@ -127,7 +128,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j1f-GN-jUf">
-                    <rect key="frame" x="20" y="742" width="149" height="40"/>
+                    <rect key="frame" x="20" y="682" width="149" height="40"/>
                     <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="p2S-vF-Mwj"/>
@@ -135,11 +136,11 @@
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="GetTokensByLocation"/>
                     <connections>
-                        <action selector="OnDebugLayoutGetTokensPressed:" destination="-1" eventType="touchUpInside" id="9bY-OL-NMz"/>
+                        <action selector="onDebugLayoutGetTokensPressed:" destination="-1" eventType="touchUpInside" id="i9Z-bQ-her"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="deI-9H-Poa">
-                    <rect key="frame" x="20" y="802" width="102" height="40"/>
+                    <rect key="frame" x="20" y="742" width="102" height="40"/>
                     <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="jHi-8f-fCV"/>
@@ -148,6 +149,18 @@
                     <state key="normal" title="GetCampaigns"/>
                     <connections>
                         <action selector="onDebugLayoutGetCampaignsPressed:" destination="-1" eventType="touchUpInside" id="dz5-QL-2p9"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sy6-xY-SPE">
+                    <rect key="frame" x="20" y="802" width="80" height="40"/>
+                    <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="hvb-HM-meE"/>
+                    </constraints>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="EndSession"/>
+                    <connections>
+                        <action selector="onDebugLayoutEndSessionPressed:" destination="-1" eventType="touchUpInside" id="pGs-t6-VAw"/>
                     </connections>
                 </button>
             </subviews>
@@ -169,12 +182,14 @@
                 <constraint firstItem="0WN-NB-Waz" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="SI4-Oi-m7V"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="NAf-mY-isk" secondAttribute="trailing" constant="40" id="c5H-OK-4Yg"/>
                 <constraint firstItem="0WN-NB-Waz" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="dhD-oQ-Fh4"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="deI-9H-Poa" secondAttribute="bottom" constant="20" id="dss-Fs-K7i"/>
+                <constraint firstItem="sy6-xY-SPE" firstAttribute="top" secondItem="deI-9H-Poa" secondAttribute="bottom" constant="20" id="dss-Fs-K7i"/>
                 <constraint firstItem="fK2-uh-YAo" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="hhq-Kx-ANZ"/>
+                <constraint firstItem="sy6-xY-SPE" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="kX2-Vr-ECB"/>
                 <constraint firstItem="dQw-Vr-pOm" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="qmY-8G-bdU"/>
                 <constraint firstItem="dQw-Vr-pOm" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="qta-bL-V4W"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hX5-In-fOj" secondAttribute="trailing" constant="10" id="raZ-dl-hCo"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="hX5-In-fOj" secondAttribute="bottom" constant="10" id="roh-nl-9p7"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="sy6-xY-SPE" secondAttribute="bottom" constant="20" id="vES-Es-LpZ"/>
                 <constraint firstAttribute="bottom" secondItem="dQw-Vr-pOm" secondAttribute="bottom" id="xWH-bj-GHt"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = GoogleMaps;
+			productName = GoogleMaps;
 		};
 /* End PBXAggregateTarget section */
 
@@ -36,7 +37,7 @@
 		297C1E0E3E51B8060CD5C5731FADA41C /* GMUSimpleClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48D2284D132DC70C6F5F4CF0358A9C /* GMUSimpleClusterAlgorithm.m */; };
 		30604E46D085EAA0E5DE412CBC3E8682 /* NegotiationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16361DA69BFF998E31F102719E99F718 /* NegotiationResponse.swift */; };
 		31103669469177D51D52ACFE1ED328AC /* GMUStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 64936218A547BC66DAA23B77435DB0E0 /* GMUStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		32F3BD09A0BFA89969B67299D6A369C5 /* SignalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C08B59CC4BD93A4474413BE155CFA0A /* SignalService.swift */; };
+		32F3BD09A0BFA89969B67299D6A369C5 /* SignalRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C08B59CC4BD93A4474413BE155CFA0A /* SignalRService.swift */; };
 		339FBA7FDAD53CC0BB1EF8DE59F55EAE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		342B775BB56D4F751DA6757D9DA22930 /* Google-Maps-iOS-Utils-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 66790454B75A6DA28590A701752D3A39 /* Google-Maps-iOS-Utils-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		36C84A8479ED61B17A219ABDE11447F7 /* DigifidelMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 331EDC114B41EEBC2E8C816B7DDCC195 /* DigifidelMapView.xib */; };
@@ -223,7 +224,7 @@
 		187420F2E7D275A1AD9992B759FF93C8 /* GQTPointQuadTreeItem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GQTPointQuadTreeItem.h; path = src/QuadTree/GQTPointQuadTreeItem.h; sourceTree = "<group>"; };
 		1A12ABC2AD173C2835289AF8AA99DAEF /* SwiftSignalRClient-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftSignalRClient-Info.plist"; sourceTree = "<group>"; };
 		1A30F344B7689CD299EDC2937857EDEC /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Maps/Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
-		1D4E77569642041BEF8A7BCEA648DCE4 /* DigifidelPod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DigifidelPod.framework; path = DigifidelPod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D4E77569642041BEF8A7BCEA648DCE4 /* DigifidelPod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DigifidelPod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E2288955358763C04AC4726F04EF494 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = Base/Frameworks/GoogleMapsBase.framework; sourceTree = "<group>"; };
 		1E231E4BE895340059E257A2DD75F371 /* GMUClusterRenderer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUClusterRenderer.h; path = src/Clustering/View/GMUClusterRenderer.h; sourceTree = "<group>"; };
 		1FC5AC213817F155AE39F902082EF02B /* DigifidelPod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DigifidelPod.release.xcconfig; sourceTree = "<group>"; };
@@ -266,11 +267,11 @@
 		5B8218AABC078BD685A649734CBB952D /* GMUGroundOverlay.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMUGroundOverlay.m; path = src/Geometry/Model/GMUGroundOverlay.m; sourceTree = "<group>"; };
 		5BA7CB20E193D13B329B341C127A9CEE /* LooootMapView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LooootMapView.swift; path = DigifidelPod/Classes/LooootMapView.swift; sourceTree = "<group>"; };
 		5C0345FAB1045DA1C44A862164F57E78 /* Pods-DigifidelPod_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DigifidelPod_Tests-Info.plist"; sourceTree = "<group>"; };
-		5CA9E6FE438CE79CD76FA3B34CC95836 /* GoogleMapsUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GoogleMapsUtils.framework; path = "Google-Maps-iOS-Utils.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CA9E6FE438CE79CD76FA3B34CC95836 /* GoogleMapsUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleMapsUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CAD6B50FB6643E48A3593C9A5201F6F /* Transport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Transport.swift; path = Sources/SignalRClient/Transport.swift; sourceTree = "<group>"; };
 		5DC72440D22656305AF522F444F65C2C /* GMUDefaultClusterRenderer+Testing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GMUDefaultClusterRenderer+Testing.h"; path = "src/Clustering/View/GMUDefaultClusterRenderer+Testing.h"; sourceTree = "<group>"; };
 		5E6981CDEBF40422DB4945C283151FA1 /* CodableHelpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CodableHelpers.swift; path = Sources/SignalRClient/CodableHelpers.swift; sourceTree = "<group>"; };
-		5FD21D8DB7796B79CDBD73C97BABB256 /* Pods_DigifidelPod_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_DigifidelPod_Tests.framework; path = "Pods-DigifidelPod_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5FD21D8DB7796B79CDBD73C97BABB256 /* Pods_DigifidelPod_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DigifidelPod_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6057262F509E9A8AC5DB2011C19AAC13 /* GMUPolygon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUPolygon.h; path = src/Geometry/Model/GMUPolygon.h; sourceTree = "<group>"; };
 		623D56F1523CB70DE943962E04A06E6B /* HubConnection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HubConnection.swift; path = Sources/SignalRClient/HubConnection.swift; sourceTree = "<group>"; };
 		632353AEF9862D2A7185104D223FC959 /* Pods-DigifidelPod_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DigifidelPod_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -286,7 +287,7 @@
 		797D410CC43EDBDB9CFBB1F197433400 /* DefaultTransportFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultTransportFactory.swift; path = Sources/SignalRClient/DefaultTransportFactory.swift; sourceTree = "<group>"; };
 		7C0C931D29CFAB536910C151E5DDF559 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMUNonHierarchicalDistanceBasedAlgorithm.m; path = src/Clustering/Algo/GMUNonHierarchicalDistanceBasedAlgorithm.m; sourceTree = "<group>"; };
 		83B23E466D8E7A3AB18F3CAD86706839 /* DigifidelMapView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DigifidelMapView.swift; path = DigifidelPod/Classes/DigifidelMapView.swift; sourceTree = "<group>"; };
-		846D1CD4952D917A3EE834BEC606E8EF /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		846D1CD4952D917A3EE834BEC606E8EF /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		85D93D5D15AE5B37C73269076B7EBE1B /* GoogleMaps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleMaps.release.xcconfig; sourceTree = "<group>"; };
 		883C194126DA589A0D8A71174E19A880 /* GMUGeometry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUGeometry.h; path = src/Geometry/Model/GMUGeometry.h; sourceTree = "<group>"; };
 		8847FF23D27339C53BB5675548F57A8B /* GMUGeoJSONParser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUGeoJSONParser.h; path = src/Geometry/GMUGeoJSONParser.h; sourceTree = "<group>"; };
@@ -300,9 +301,9 @@
 		989D67FE4AF0A7CD4FD40236939D5DF5 /* GMUClusterManager+Testing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GMUClusterManager+Testing.h"; path = "src/Clustering/GMUClusterManager+Testing.h"; sourceTree = "<group>"; };
 		9A73583B764D9C43EE8408F81B878B7D /* StreamHandle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StreamHandle.swift; path = Sources/SignalRClient/StreamHandle.swift; sourceTree = "<group>"; };
 		9BF83B9F068AC1A1346C1537C1CAD599 /* WebSocket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSocket.swift; path = Sources/SignalRClient/WebSocket.swift; sourceTree = "<group>"; };
-		9C08B59CC4BD93A4474413BE155CFA0A /* SignalService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SignalService.swift; path = DigifidelPod/Classes/SignalService.swift; sourceTree = "<group>"; };
+		9C08B59CC4BD93A4474413BE155CFA0A /* SignalRService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SignalRService.swift; path = DigifidelPod/Classes/SignalRService.swift; sourceTree = "<group>"; };
 		9D7FF80E1D4A6DD73F9EBE6B2A9B5C74 /* HandshakeProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HandshakeProtocol.swift; path = Sources/SignalRClient/HandshakeProtocol.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DC305CAAB14CC3045AA128140560EFF /* GMUSimpleClusterAlgorithm.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUSimpleClusterAlgorithm.h; path = src/Clustering/Algo/GMUSimpleClusterAlgorithm.h; sourceTree = "<group>"; };
 		9E9173385AE81F31722FA6B8DA246941 /* GMUGroundOverlay.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUGroundOverlay.h; path = src/Geometry/Model/GMUGroundOverlay.h; sourceTree = "<group>"; };
 		A14FE4B256565855BF3AB5E702CAF170 /* GMUDefaultClusterIconGenerator+Testing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GMUDefaultClusterIconGenerator+Testing.h"; path = "src/Clustering/View/GMUDefaultClusterIconGenerator+Testing.h"; sourceTree = "<group>"; };
@@ -310,7 +311,7 @@
 		A37877E374B5BEA68C5B17ECB4AC4E3E /* GoogleMaps.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		A7D7892D4CD47E363A13994BB5AD26C6 /* CustomClusterRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CustomClusterRenderer.swift; path = DigifidelPod/Classes/CustomClusterRenderer.swift; sourceTree = "<group>"; };
 		A8CC6EDEDD140C4E65322B61BE20BA35 /* GMUWrappingDictionaryKey.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUWrappingDictionaryKey.h; path = src/Clustering/Algo/GMUWrappingDictionaryKey.h; sourceTree = "<group>"; };
-		A90ECFE2ADC2C63A4F9785CE09338740 /* DigifidelBundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = DigifidelBundle.bundle; path = "DigifidelPod-DigifidelBundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A90ECFE2ADC2C63A4F9785CE09338740 /* DigifidelBundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DigifidelBundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA31C67B2B7D71DE522E1303A0854136 /* Pods-DigifidelPod_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DigifidelPod_Tests-dummy.m"; sourceTree = "<group>"; };
 		ABB2DD1DBB740991F9CA9B7207459222 /* SwiftSignalRClient-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftSignalRClient-dummy.m"; sourceTree = "<group>"; };
 		ABF58F80F9A4410414B9DE6135D7F9B6 /* HttpClientProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpClientProtocol.swift; path = Sources/SignalRClient/HttpClientProtocol.swift; sourceTree = "<group>"; };
@@ -329,7 +330,7 @@
 		CABF772230430ACD191EC5A63597D6D1 /* Google-Maps-iOS-Utils.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Google-Maps-iOS-Utils.release.xcconfig"; sourceTree = "<group>"; };
 		CD111C8D0F0E610D3BF048C38984BA88 /* GMUKMLParser.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMUKMLParser.m; path = src/Geometry/GMUKMLParser.m; sourceTree = "<group>"; };
 		CF48D2284D132DC70C6F5F4CF0358A9C /* GMUSimpleClusterAlgorithm.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMUSimpleClusterAlgorithm.m; path = src/Clustering/Algo/GMUSimpleClusterAlgorithm.m; sourceTree = "<group>"; };
-		D3C2F5AA0761F8BECB626488D03F9168 /* DigifidelPod.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = DigifidelPod.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		D3C2F5AA0761F8BECB626488D03F9168 /* DigifidelPod.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = DigifidelPod.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D41989458A6206D75C714134F0FE27F6 /* GMUCluster.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUCluster.h; path = src/Clustering/GMUCluster.h; sourceTree = "<group>"; };
 		D7477A7A773FD65AF808342EF1774461 /* GMULineString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMULineString.h; path = src/Geometry/Model/GMULineString.h; sourceTree = "<group>"; };
 		D8242498F739786B0C8B7C5D0E3DA021 /* GMUGeometryCollection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUGeometryCollection.h; path = src/Geometry/Model/GMUGeometryCollection.h; sourceTree = "<group>"; };
@@ -347,11 +348,11 @@
 		E4145029135D7ACF6E7EDAD1869F59FB /* Connection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Connection.swift; path = Sources/SignalRClient/Connection.swift; sourceTree = "<group>"; };
 		E4C609A4F1D6F61277C178D93F43BB0E /* GMUHeatmapTileLayer+Testing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GMUHeatmapTileLayer+Testing.h"; path = "src/Heatmap/GMUHeatmapTileLayer+Testing.h"; sourceTree = "<group>"; };
 		E72D69BF5CE4BD37E8FD963B3A2B509C /* GMUGeometryRenderer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMUGeometryRenderer.m; path = src/Geometry/GMUGeometryRenderer.m; sourceTree = "<group>"; };
-		E7AFB048F72A32D1AB967A9164E20741 /* SwiftSignalRClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftSignalRClient.framework; path = SwiftSignalRClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7AFB048F72A32D1AB967A9164E20741 /* SwiftSignalRClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftSignalRClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7D425FDFB5DBC1F3C4CA31BDABC5E7A /* DefaultHttpClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultHttpClient.swift; path = Sources/SignalRClient/DefaultHttpClient.swift; sourceTree = "<group>"; };
 		E8230E59DA681EB795C77F7B2155668B /* Pods-DigifidelPod_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DigifidelPod_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		EAAFC6A4215000819B6B3CA4F5C96585 /* DigifidelPod-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DigifidelPod-dummy.m"; sourceTree = "<group>"; };
-		EAC963A136F1A9CC49B67AC2971FB07B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		EAC963A136F1A9CC49B67AC2971FB07B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		EADEFDBB3E88686075346DFF34384F39 /* GMUClusterManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUClusterManager.h; path = src/Clustering/GMUClusterManager.h; sourceTree = "<group>"; };
 		EC21A7203D1C654A484E7EA17A13D7AF /* GMUClusterItem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUClusterItem.h; path = src/Clustering/GMUClusterItem.h; sourceTree = "<group>"; };
 		EC42EA710E683757E73059998054CBA3 /* Google-Maps-iOS-Utils-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Google-Maps-iOS-Utils-prefix.pch"; sourceTree = "<group>"; };
@@ -443,7 +444,6 @@
 				4CEB4374B94219356EAD8284F8F4AB75 /* WebsocketsTransport.swift */,
 				74E134DCA646469D7B0797AE1AE71E57 /* Support Files */,
 			);
-			name = SwiftSignalRClient;
 			path = SwiftSignalRClient;
 			sourceTree = "<group>";
 		};
@@ -488,7 +488,6 @@
 				0BE95EC7C101B5E38B853CB0875FE269 /* QuadTree */,
 				EACEA31D2A74EE9F49DDFE55BE34DDF6 /* Support Files */,
 			);
-			name = "Google-Maps-iOS-Utils";
 			path = "Google-Maps-iOS-Utils";
 			sourceTree = "<group>";
 		};
@@ -499,7 +498,6 @@
 				865B2327B8F021D88B9D663B90F5720B /* Maps */,
 				A42DB9A9475279F2F600F9ABD8E73302 /* Support Files */,
 			);
-			name = GoogleMaps;
 			path = GoogleMaps;
 			sourceTree = "<group>";
 		};
@@ -668,7 +666,7 @@
 				95EB4821647F575DB2E4836A65F9105D /* GMSMarkerExtension.swift */,
 				5BA7CB20E193D13B329B341C127A9CEE /* LooootMapView.swift */,
 				FC0D01AF240B519CD2D5313092B0B8C8 /* LooootMapView.xib */,
-				9C08B59CC4BD93A4474413BE155CFA0A /* SignalService.swift */,
+				9C08B59CC4BD93A4474413BE155CFA0A /* SignalRService.swift */,
 				D3DD7417AAD47305044D64045B0698D8 /* Frameworks */,
 				5B5841B5543E2985FD678713057FF3B0 /* Pod */,
 				E57B70F563C6C10D6533534CA3B37520 /* Resources */,
@@ -1109,7 +1107,7 @@
 				A164422677BA808284104F443E1FA81C /* GMSMarkerExtension.swift in Sources */,
 				140C68D367478A8C838916584BC67C0A /* LooootMapView.swift in Sources */,
 				B50E3A63C0833B2BD6D623AA49C5F465 /* LooootMapView.xib in Sources */,
-				32F3BD09A0BFA89969B67299D6A369C5 /* SignalService.swift in Sources */,
+				32F3BD09A0BFA89969B67299D6A369C5 /* SignalRService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1485,8 +1483,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
