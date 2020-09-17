@@ -4,6 +4,8 @@ import Loooot
 
 public protocol SignalRCallback {
     func onTokenCollectedSignal(data: SignalRService.TokenNotifyPlayerModel)
+    func onRefreshCampaigns()
+
     func connectionDidOpen(hubConnection: HubConnection)
     func connectionDidFailToOpen(error: Error)
     func connectionDidClose(error: Error?)
@@ -49,6 +51,9 @@ public class SignalRService: HubConnectionDelegate {
         connection?.on(method: "onTokenCollected", callback: { (message:  String) in
             let data = TokenNotifyPlayerModel(json: self.convertToDictionary(text:message)!)
             self.callback?.onTokenCollectedSignal(data: data)
+        })
+        connection?.on(method: "onRefreshCampaigns", callback: { (message:  String) in
+            self.callback?.onRefreshCampaigns()
         })
         connection?.delegate = self
         connection?.start()

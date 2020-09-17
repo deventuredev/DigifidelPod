@@ -2,9 +2,9 @@ import Foundation
 import UIKit
 import AVFoundation
 import GoogleMaps
+import Loooot
 import GoogleMapsUtils
 import SwiftSignalRClient
-import Loooot
 
 @IBDesignable
 public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManagerDelegate, GMUClusterRendererDelegate, SignalRCallback {
@@ -67,7 +67,10 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
-        loadViewFromNib(bundle: Bundle.main)
+        let frameworkBundle = Bundle(for: DigifidelMapView.self)
+        let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("DigifidelBundle.bundle")
+        let bundle = Bundle(url: bundleURL!)
+        loadViewFromNib(bundle: bundle!)
         initLocalViews()
         baseInit()
         initViews()
@@ -77,6 +80,10 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     
     public func onTokenCollectedSignal(data: SignalRService.TokenNotifyPlayerModel) {
         onTokenCollected(tokenId: data.getTokenId(), groupId: data.getGroupId(), campaignId: data.getCampaignId())
+    }
+    
+    public func onRefreshCampaigns() {
+        self.refreshCampaigns()
     }
     
     public func connectionDidOpen(hubConnection: HubConnection) {
@@ -492,7 +499,10 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             gmsMarkers.append(clusterItem)
         }
         clusterManager.add(gmsMarkers)
-        clusterManager.cluster()
+        
+        DispatchQueue.main.async {
+            self.clusterManager.cluster()
+        }
     }
     
     public override func onTokenClicked() {
