@@ -1,8 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)
+// swift-compiler-version: Apple Swift version 5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)
 // swift-module-flags: -target arm64-apple-ios10.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Loooot
 import ARKit
 import AVFoundation
+import CoreImage.CIFilterBuiltins
+import CoreImage
 import CoreLocation
 import Foundation
 @_exported import Loooot
@@ -163,6 +165,7 @@ public protocol RewardDetailsDelegate {
   public static let errorCannotCollectMoreTokensPerDay: Swift.Int
   public static let errorCannotCollectMoreTokensPerHour: Swift.Int
   public static let errorCannotClaimTokensBecauseOfProximity: Swift.Int
+  public static let errorCampaignNotAvailable: Swift.Int
   public static let successHourlyLimitReached: Swift.Int
   public static let successDailyLimitReached: Swift.Int
   public static let successCampaignLimitReached: Swift.Int
@@ -503,6 +506,8 @@ extension SceneLocationEstimate {
   public static let french: Swift.Int
   public static let creole: Swift.Int
   public static let verve: Swift.Int
+  public static let spar: Swift.Int
+  public static let heineken: Swift.Int
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @IBDesignable public class CampaignTableViewCell : UIKit.UITableViewCell {
@@ -662,6 +667,7 @@ extension Int {
   @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
   @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
   @objc override dynamic public func viewDidLayoutSubviews()
+  @objc override dynamic public func viewWillTransition(to size: CoreGraphics.CGSize, with coordinator: UIKit.UIViewControllerTransitionCoordinator)
   public func dismissMenu()
   public func onRewardClicked(rewardTypeId: Swift.Int64, rewardName: Swift.String)
   @objc deinit
@@ -799,6 +805,7 @@ public protocol CampaignListViewDelegate {
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class RewardClaimResponse {
+  public init()
   public func getMessage() -> Swift.String?
   public func setMessage(message: Swift.String)
   public func getRuleLimitMessage() -> Swift.String?
@@ -896,12 +903,14 @@ extension CLLocationCoordinate2D {
   open func updateLatLongIdentifier(oldRoom: Swift.String, newRoom: Swift.String)
   open func removeMarker(mapReward: Loooot.MapReward)
   open func initLocalViews()
+  open func changeMapFrame(size: CoreGraphics.CGSize)
   open func setTokenCollectedImage(image: UIKit.UIImage)
   open func animateMapView(zoomLevel: Swift.Float)
   open func whenAutoUpdateMap()
   open func claimTokenSignalR(claimTokenSignalRModel: Loooot.ClaimTokenSignalRModel)
   open func startSignalRService()
   open func stopSignalRService()
+  open func onNetworkStatusChanged(isConnected: Swift.Bool)
   open func getErrorView() -> Loooot.ErrorView
   open func getLoadingView() -> Loooot.LoadingView
   open func getTokenCollectedView() -> UIKit.UIView
@@ -1065,6 +1074,26 @@ public class ThemeColor {
   public func setToolbarBackColor(color: Swift.Int)
   @objc deinit
 }
+public protocol ProtoHttpManagerDelegate {
+  static var shared: Loooot.ProtoHttpManagerDelegate! { get }
+  func getTermsAndConditionsUrl() -> Swift.String
+  func getFAQUrl() -> Swift.String
+  func setTermsAndConditionsUrl(url: Swift.String)
+  func initializeLooootManager(playerIdentifier: Swift.String, clientId: Swift.Int64, completion: @escaping (Loooot.InitResponse?, Swift.Bool) -> Swift.Void)
+  func startSession(currentTime: Swift.String, completion: @escaping (Loooot.StartSessionResponse?, Swift.Bool) -> Swift.Void)
+  func endSession(currentTime: Swift.String)
+  func getCampaigns(completion: @escaping (Swift.Array<Loooot.Campaign>?, Swift.Bool) -> Swift.Void)
+  func getTokensMinifiedList(campaignId: Swift.Int64, completion: @escaping (Swift.Array<Loooot.RewardTypeList>?, Swift.Bool) -> Swift.Void)
+  func getTokensByLocation(completion: @escaping (Swift.Array<Loooot.MapReward>?, Swift.Bool) -> Swift.Void)
+  func getAllTokens(completion: @escaping (Swift.Array<Loooot.RewardTypeList>?, Swift.Bool) -> Swift.Void)
+  func getTokenTypeById(tokenTypeId: Swift.Int64, completion: @escaping (Loooot.RewardTypeDetails?, Swift.Bool) -> Swift.Void)
+  func claimToken(reward: Loooot.MapReward, proximity: Swift.Int, claimedAt: Swift.String, lat: Swift.Double, lng: Swift.Double, completion: @escaping (Loooot.WebResponse<Loooot.RewardClaimResponse>?, Swift.Bool) -> Swift.Void)
+  func redeemToken(tokenId: Swift.Int64, redeemedAt: Swift.String, completion: @escaping (Loooot.RewardTypeDetails?, Swift.Bool) -> Swift.Void)
+  func getWallet(completion: @escaping (Swift.Array<Loooot.WalletList>?, Swift.Bool) -> Swift.Void)
+  func getNextAd(adImageId: Swift.Int64, completion: @escaping (Loooot.Ad?, Swift.Bool) -> Swift.Void)
+  func adShown(adDisplayedModel: Loooot.AdDisplayedModel)
+  func adTapped(adDisplayedModel: Loooot.AdDisplayedModel)
+}
 @objc @_inheritsConvenienceInitializers public class TermsAndConditionsViewController : UIKit.UIViewController, UIKit.UIWebViewDelegate {
   public static let StoryboardName: Swift.String
   @objc override dynamic public func viewDidLoad()
@@ -1085,16 +1114,22 @@ public protocol MenuActionDelegate {
 public protocol HomeDelegate {
   func onHomePressed()
 }
-@_hasMissingDesignatedInitializers public class LooootManager {
-  public static let shared: Loooot.LooootManager
+public protocol LooootManagerDelegate {
+  static var shared: Loooot.LooootManagerDelegate! { get }
+}
+open class BaseLooootManager {
+  public static func sharedInstance2() -> Loooot.BaseLooootManager
+  public static let sharedInstance: Loooot.BaseLooootManager
   public static let googleMapsApiKey: Swift.String
   public var menuDelegate: Loooot.MenuDelegate?
   public var menuActionDelegate: Loooot.MenuActionDelegate?
   public var homeDelegate: Loooot.HomeDelegate?
   public var mapViewDelegate: Loooot.MapViewDelegate?
+  public var protoHttpManagerDelegate: Loooot.ProtoHttpManagerDelegate?
+  public init()
   public static func initialize(playerIdentifier: Swift.String, clientId: Swift.Int64, completion: @escaping (Swift.Bool) -> Swift.Void)
   public func getBundle() -> Foundation.Bundle
-  public func getHttpClient() -> Loooot.HttpClientManager
+  public func getHttpClient() -> Loooot.ProtoHttpManagerDelegate
   public func getTranslationManager() -> Loooot.TranslationManager
   public func startLoooot(viewController: UIKit.UIViewController, playerIdentifier: Swift.String)
   public func startLoooot(viewController: UIKit.UIViewController, playerIdentifier: Swift.String, clientId: Swift.Int64)
@@ -1132,7 +1167,7 @@ public protocol HomeDelegate {
 }
 public class RewardTypeDetails {
   public init()
-  public init(id: Swift.Int64?, whitelabelId: Swift.Int64?, name: Swift.String?, message: Swift.String?, imageUrl: Swift.String?, redeemType: Swift.Int?, promotionDescription: Swift.String?, redemptionRules: Swift.String?, companyLogoUrl: Swift.String?, promotionImageUrl: Swift.String?, qrUrl: Swift.String?, status: Swift.Int?)
+  public init(id: Swift.Int64?, whitelabelId: Swift.Int64?, name: Swift.String?, message: Swift.String?, imageUrl: Swift.String?, redeemType: Swift.Int?, promotionDescription: Swift.String?, redemptionRules: Swift.String?, companyLogoUrl: Swift.String?, promotionImageUrl: Swift.String?, qrContent: Swift.String?, status: Swift.Int?)
   public init(json: [Swift.String : Any])
   public func getId() -> Swift.Int64?
   public func setId(id: Swift.Int64?)
@@ -1154,8 +1189,8 @@ public class RewardTypeDetails {
   public func setCompanyLogoUrl(companyLogoUrl: Swift.String!)
   public func getPromotionImageUrl() -> Swift.String?
   public func setPromotionImageUrl(promotionImageUrl: Swift.String?)
-  public func getQrUrl() -> Swift.String?
-  public func setQrUrl(qrUrl: Swift.String?)
+  public func getQrContent() -> Swift.String?
+  public func setQrContent(qrContent: Swift.String?)
   public func getStatus() -> Swift.Int?
   public func setStatus(status: Swift.Int?)
   @objc deinit
@@ -1230,8 +1265,9 @@ extension UINavigationBar {
   public func setUpNavigationBarWithMenuButton()
   public func setUpNavigationBarWithBackButton()
 }
-@objc public class MapReward : ObjectiveC.NSObject {
+@objc @_inheritsConvenienceInitializers public class MapReward : ObjectiveC.NSObject {
   public var position: CoreLocation.CLLocationCoordinate2D
+  @objc override dynamic public init()
   public init(id: Swift.Int64, groupId: Swift.Int64, campaignId: Swift.Int64, rewardTypeId: Swift.Int64, latitude: Swift.Double, longitude: Swift.Double, name: Swift.String, imageUrl: Swift.String)
   public init(json: [Swift.String : Any])
   public func getId() -> Swift.Int64
@@ -1250,7 +1286,6 @@ extension UINavigationBar {
   public func setName(name: Swift.String)
   public func getImageUrl() -> Swift.String
   public func setImageUrl(imageUrl: Swift.String)
-  @objc override dynamic public init()
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class ResponseHelper {
@@ -1420,7 +1455,7 @@ public class SimpleItemModel {
   @objc deinit
 }
 public class WalletList : Loooot.RewardTypeList {
-  public init(id: Swift.Int64, name: Swift.String, rewardImageUrl: Swift.String, mapRewardId: Swift.Int64, expirationDate: Foundation.Date, campaignName: Swift.String)
+  public init(id: Swift.Int64, name: Swift.String, rewardImageUrl: Swift.String, mapRewardId: Swift.Int64, expirationDate: Foundation.Date?, campaignName: Swift.String)
   override public init(json: [Swift.String : Any])
   public func getMapRewardId() -> Swift.Int64?
   public func setMapRewardId(mapRewardId: Swift.Int64)
@@ -1638,6 +1673,7 @@ extension SceneLocationView {
 }
 public class MapRewardType {
   public init(json: [Swift.String : Any])
+  public init()
   public func getRewardTypeId() -> Swift.Int64
   public func setRewardTypeId(rewardTypeId: Swift.Int64)
   public func getCampaignId() -> Swift.Int64
@@ -1679,8 +1715,18 @@ public enum ScalingScheme {
   public func getScheme() -> ((Swift.Double, Swift.Double) -> Swift.Float)
 }
 public class InitResponse {
+  public var playerId: Swift.Int64!
+  public var campaignMinifiedList: Swift.Array<Loooot.CampaignMinified>!
+  public var isDebug: Swift.Bool!
+  public var offsetXGetMarkers: Swift.Int!
+  public var offsetYGetMarkers: Swift.Int!
+  public var maxTokensDisplayed: Swift.Int!
+  public var defaultTimeUpdate: Swift.Int!
+  public var shouldGetTokensAfterClaim: Swift.Bool!
+  public var disableAR: Swift.Bool!
+  public var allowMockLocation: Swift.Bool!
+  public var signalRUrl: Swift.String!
   public init()
-  public init(playerId: Swift.Int64, campaignsIdList: Swift.Array<Loooot.CampaignMinified>, offsetXGetMarkers: Swift.Int, offsetYGetMarkers: Swift.Int, maxTokensDisplayed: Swift.Int, defaultTimeUpdate: Swift.Int, shouldGetTokensAfterClaim: Swift.Bool, disableAR: Swift.Bool, allowMockLocation: Swift.Bool, signalRUrl: Swift.String)
   public init(playerId: Swift.Int64, campaignsIdList: Swift.Array<Loooot.CampaignMinified>, isDebug: Swift.Bool, offsetXGetMarkers: Swift.Int, offsetYGetMarkers: Swift.Int, maxTokensDisplayed: Swift.Int, defaultTimeUpdate: Swift.Int, shouldGetTokensAfterClaim: Swift.Bool, disableAR: Swift.Bool, allowMockLocation: Swift.Bool, signalRUrl: Swift.String)
   public init(json: [Swift.String : Any])
   public func getPlayerId() -> Swift.Int64
@@ -1699,6 +1745,7 @@ public class InitResponse {
   public func setAllowMockLocation(allowMockLocation: Swift.Bool)
   public func getSignalRUrl() -> Swift.String
   public func setSignalRUrl(signalRUrl: Swift.String)
+  public func initInitResponse(playerId: Swift.Int64, campaignMinifiedList: Swift.Array<Loooot.CampaignMinified>, isDebug: Swift.Bool, offsetXGetMarkers: Swift.Int, offsetYGetMarkers: Swift.Int, maxTokensDisplayed: Swift.Int, defaultTimeUpdate: Swift.Int, shouldGetTokensAfterClaim: Swift.Bool, disableAR: Swift.Bool, allowMockLocation: Swift.Bool, signalRUrl: Swift.String)
   @objc deinit
 }
 public class EndSessionModel {

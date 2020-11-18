@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+
+message WalletModelProto {
+    int64 id = 1;
+
+    int64 mapTokenId = 2;
+
+    string name = 3;
+
+    string imageUrl = 4;
+
+    string expirationDate = 5;
+
+    string campaignName = 6;
+
+    int32 rewardType = 7;
+}

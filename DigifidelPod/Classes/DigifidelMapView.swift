@@ -8,6 +8,8 @@ import SwiftSignalRClient
 
 @IBDesignable
 public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManagerDelegate, GMUClusterRendererDelegate, SignalRCallback {
+    
+    
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var mapOverlay: UIView!
     @IBOutlet weak var loadingView: UIView!
@@ -42,7 +44,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     }
     
     @IBAction func onDebugLayoutEndSessionPressed(_ sender: Any) {
-        LooootManager.shared.endSession()
+        BaseLooootManager.sharedInstance.endSession()
     }
     
     private var clusterManager: GMUClusterManager!
@@ -59,7 +61,8 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     private var currentPolygon: GMSPolygon!
     private var roomsPolygon: [GMSPolygon] = [ GMSPolygon(), GMSPolygon(), GMSPolygon(), GMSPolygon(), GMSPolygon(), GMSPolygon(), GMSPolygon(), GMSPolygon(), GMSPolygon() ]
     private var looootMarker :LooootMarker!
-    
+    private var signalRConnectRetryCount:Int = 0
+
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -67,10 +70,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let frameworkBundle = Bundle(for: DigifidelMapView.self)
-        let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("DigifidelBundle.bundle")
-        let bundle = Bundle(url: bundleURL!)
-        loadViewFromNib(bundle: bundle!)
+        loadViewFromNib(bundle: Bundle.main)
         initLocalViews()
         baseInit()
         initViews()
@@ -91,11 +91,11 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             return
         }
         
-        let newRoom = "\(LooootManager.shared.getClienId())-\(currentLatLongIdentifier.description)"
+        let newRoom = "\(BaseLooootManager.sharedInstance.getClienId())-\(currentLatLongIdentifier.description)"
         signalRService?.changeRoomByLatLongIdentifier(oldRoom: "", newRoom: newRoom)
 
-        if LooootManager.shared.isDebugMode() {
-            debugString[4] = "oldRoom: \(LooootManager.shared.getClienId())-"
+        if BaseLooootManager.sharedInstance.isDebugMode() {
+            debugString[4] = "oldRoom: \(BaseLooootManager.sharedInstance.getClienId())-"
             debugString[5] = "newRoom: \(newRoom)"
             debugString[8] = "SignalR ConnectionId:" + (signalRService?.getConnectionId())!
             refreshDebugString()
@@ -106,6 +106,14 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     }
     
     public func connectionDidClose(error: Error?) {
+    }
+    
+    public func connectionWillReconnect(error: Error?) {
+        
+    }
+    
+    public func connectionDidReconnect() {
+        
     }
     
     /**
@@ -122,6 +130,11 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         ]
         addSubview(view)
         self.setView(newView: view)
+    }
+        
+    public override func changeMapFrame(size: CGSize)
+    {
+        self.mapView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
     }
     
     public override func initLocalViews() {
@@ -166,7 +179,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         mapView.settings.compassButton = true
         mapView.settings.myLocationButton = true
         mapView.isMyLocationEnabled = true
-        if LooootManager.shared.isDebugMode() {
+        if BaseLooootManager.sharedInstance.isDebugMode() {
             // No minimum zoom
         }
         else if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
@@ -181,7 +194,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         tokenCollectedView.backgroundColor = UIColor(hex: ThemeManager.shared.getPrimaryBackgroundColor())
         tokenCollectedClose.tintColor = UIColor(hex: ThemeManager.shared.getPrimaryColor())
         tokenCollectedDetails.textColor = UIColor(hex: ThemeManager.shared.getTextColor())
-        tokenCollectedButton!.setTitle(LooootManager.shared.getTranslationManager().getTranslation(key: TranslationConstants.mapViewConfirm), for: UIButton.State.normal)
+        tokenCollectedButton!.setTitle(BaseLooootManager.sharedInstance.getTranslationManager().getTranslation(key: TranslationConstants.mapViewConfirm), for: UIButton.State.normal)
         
         //               #if DIGIFIDEL
         //
@@ -204,7 +217,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         tokenCloseView.isHidden = true
         tokenCollectedClose.isHidden = true
         
-        if !LooootManager.shared.isDebugMode() {
+        if !BaseLooootManager.sharedInstance.isDebugMode() {
             debugLayoutText.isHidden = true
             debugLayoutGetTokens.isHidden = true
             debugLayoutGetCampaigns.isHidden = true
@@ -309,9 +322,31 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
     }
     
+    public override func onNetworkStatusChanged(isConnected: Bool) {
+        let signalRConenction = (signalRService?.isConnected ?? false)
+        if(isConnected && !signalRConenction)
+        {
+            initializeSignalRService()
+        }
+    }
+    
     private func initializeSignalRService() {
-        signalRService = SignalRService.shared(callback: self)
-        signalRService?.start()
+        if signalRConnectRetryCount >= 5
+        {
+            return
+        }
+        if !(signalRService?.isConnected ?? false)
+        {
+            signalRConnectRetryCount += 1
+            signalRService = SignalRService.shared(callback: self)
+            signalRService?.start()
+        }
+        else
+        {
+            signalRConnectRetryCount = 0
+            
+        }
+      
     }
     
     public override func removeMarker(mapReward: MapReward) {
@@ -346,12 +381,13 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             toBeAddedGmsMarkers.append(clusterItem)
         }
         
-        clusterManager.add(toBeAddedGmsMarkers)
+    
         DispatchQueue.main.async {
+            self.clusterManager.add(toBeAddedGmsMarkers)
             self.clusterManager.cluster()
         }
     }
-    
+  
     public override func updateLatLongIdentifier(oldRoom: String, newRoom: String) {
         signalRService?.changeRoomByLatLongIdentifier(oldRoom: oldRoom, newRoom: newRoom)
     }
@@ -379,33 +415,51 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     }
     
     public override func drawRooms() {
-        var currentUserLatitude = LooootManager.shared.getCurrentLatitude()! * 100
+        var currentUserLatitude = BaseLooootManager.sharedInstance.getCurrentLatitude()! * 100
         currentUserLatitude = Double(Int(currentUserLatitude))
         currentUserLatitude = currentUserLatitude / 100
         
-        var currentUserLongitutde = LooootManager.shared.getCurrentLongitude()! * 100
+        var currentUserLongitutde = BaseLooootManager.sharedInstance.getCurrentLongitude()! * 100
         currentUserLongitutde = Double(Int(currentUserLongitutde))
         currentUserLongitutde = currentUserLongitutde / 100
         
-        let point1 = CLLocationCoordinate2DMake(currentUserLatitude + 0.02, currentUserLongitutde - 0.01)
-        let point2 = CLLocationCoordinate2DMake(currentUserLatitude + 0.02, currentUserLongitutde)
-        let point3 = CLLocationCoordinate2DMake(currentUserLatitude + 0.02, currentUserLongitutde + 0.01)
-        let point4 = CLLocationCoordinate2DMake(currentUserLatitude + 0.02, currentUserLongitutde + 0.02)
+        var offsetLatPlus2 = currentUserLatitude + 0.02
+        var offsetLatPlus1 = currentUserLatitude + 0.01
+        var ofssetLatMinus1 = currentUserLatitude - 0.01
+        if currentUserLatitude < 0  {
+            offsetLatPlus2 = currentUserLatitude - 0.02
+            offsetLatPlus1 = currentUserLatitude - 0.01
+            ofssetLatMinus1 = currentUserLatitude + 0.01
+        }
 
-        let point5 = CLLocationCoordinate2DMake(currentUserLatitude + 0.01, currentUserLongitutde - 0.01)
-        let point6 = CLLocationCoordinate2DMake(currentUserLatitude + 0.01, currentUserLongitutde)
-        let point7 = CLLocationCoordinate2DMake(currentUserLatitude + 0.01, currentUserLongitutde + 0.01)
-        let point8 = CLLocationCoordinate2DMake(currentUserLatitude + 0.01, currentUserLongitutde + 0.02)
+        var offsetLngPlus2 = currentUserLongitutde + 0.02
+        var offsetLngPlus1 = currentUserLongitutde + 0.01
+        var ofssetLngMinus1 = currentUserLongitutde - 0.01
+        if currentUserLongitutde < 0  {
+            offsetLngPlus2 = currentUserLongitutde - 0.02
+            offsetLngPlus1 = currentUserLongitutde - 0.01
+            ofssetLngMinus1 = currentUserLongitutde + 0.01
+        }
+        
+        let point1 = CLLocationCoordinate2DMake(offsetLatPlus2, ofssetLngMinus1)
+        let point2 = CLLocationCoordinate2DMake(offsetLatPlus2, currentUserLongitutde)
+        let point3 = CLLocationCoordinate2DMake(offsetLatPlus2, offsetLngPlus1)
+        let point4 = CLLocationCoordinate2DMake(offsetLatPlus2, offsetLngPlus2)
 
-        let point9 = CLLocationCoordinate2DMake(currentUserLatitude, currentUserLongitutde - 0.01)
+        let point5 = CLLocationCoordinate2DMake(offsetLatPlus1, ofssetLngMinus1)
+        let point6 = CLLocationCoordinate2DMake(offsetLatPlus1, currentUserLongitutde)
+        let point7 = CLLocationCoordinate2DMake(offsetLatPlus1, offsetLngPlus1)
+        let point8 = CLLocationCoordinate2DMake(offsetLatPlus1, offsetLngPlus2)
+
+        let point9 = CLLocationCoordinate2DMake(currentUserLatitude, ofssetLngMinus1)
         let point10 = CLLocationCoordinate2DMake(currentUserLatitude, currentUserLongitutde)
-        let point11 = CLLocationCoordinate2DMake(currentUserLatitude, currentUserLongitutde + 0.01)
-        let point12 = CLLocationCoordinate2DMake(currentUserLatitude, currentUserLongitutde + 0.02)
+        let point11 = CLLocationCoordinate2DMake(currentUserLatitude, offsetLngPlus1)
+        let point12 = CLLocationCoordinate2DMake(currentUserLatitude, offsetLngPlus2)
 
-        let point13 = CLLocationCoordinate2DMake(currentUserLatitude - 0.01, currentUserLongitutde - 0.01)
-        let point14 = CLLocationCoordinate2DMake(currentUserLatitude - 0.01, currentUserLongitutde)
-        let point15 = CLLocationCoordinate2DMake(currentUserLatitude - 0.01, currentUserLongitutde + 0.01)
-        let point16 = CLLocationCoordinate2DMake(currentUserLatitude - 0.01, currentUserLongitutde + 0.02)
+        let point13 = CLLocationCoordinate2DMake(ofssetLatMinus1, ofssetLngMinus1)
+        let point14 = CLLocationCoordinate2DMake(ofssetLatMinus1, currentUserLongitutde)
+        let point15 = CLLocationCoordinate2DMake(ofssetLatMinus1, offsetLngPlus1)
+        let point16 = CLLocationCoordinate2DMake(ofssetLatMinus1, offsetLngPlus2)
         
         for i in 0 ..< roomsPolygon.count {
             roomsPolygon[i].map = nil
@@ -514,7 +568,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         let reward = looootMarker
         removeMarker(mapReward: reward!.mapReward)
        
-        if LooootManager.shared.isDebugMode() {
+        if BaseLooootManager.sharedInstance.isDebugMode() {
             debugString[3] = "Selected token id: \(tokenSelected.getId().description)"
             refreshDebugString()
         }

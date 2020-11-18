@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+
+message RewardClaimProto{
+    string message = 1;
+    string rule_limit_message = 2;
+    string expirationDate = 3;
+    int32 redeem_type = 4;
+}

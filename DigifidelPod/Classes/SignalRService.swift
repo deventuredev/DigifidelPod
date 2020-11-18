@@ -9,6 +9,8 @@ public protocol SignalRCallback {
     func connectionDidOpen(hubConnection: HubConnection)
     func connectionDidFailToOpen(error: Error)
     func connectionDidClose(error: Error?)
+    func connectionWillReconnect(error: Error?)
+    func connectionDidReconnect()
 }
 
 public class SignalRService: HubConnectionDelegate {
@@ -29,6 +31,16 @@ public class SignalRService: HubConnectionDelegate {
         callback?.connectionDidClose(error: error)
     }
     
+    public func connectionWillReconnect(error: Error) {
+        isConnected = false
+        callback?.connectionWillReconnect(error: error)
+    }
+
+    public func connectionDidReconnect(){
+        isConnected = true
+        callback?.connectionDidReconnect()
+    }
+    
     private static var instance: SignalRService?
     
     private var connection: HubConnection?
@@ -46,8 +58,8 @@ public class SignalRService: HubConnectionDelegate {
     }
     
     public func start() {
-        let url = URL(string: LooootManager.shared.getSignalRUrl())
-        connection = HubConnectionBuilder(url: url!).withLogging(minLogLevel: .error).build()
+        let url = URL(string: BaseLooootManager.sharedInstance.getSignalRUrl())
+        connection = HubConnectionBuilder(url: url!).withLogging(minLogLevel: .error).withAutoReconnect().build()
         connection?.on(method: "onTokenCollected", callback: { (message:  String) in
             let data = TokenNotifyPlayerModel(json: self.convertToDictionary(text:message)!)
             self.callback?.onTokenCollectedSignal(data: data)

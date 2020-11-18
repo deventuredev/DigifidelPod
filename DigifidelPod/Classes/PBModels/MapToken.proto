@@ -1,0 +1,118 @@
+syntax = "proto3";
+
+
+
+message GetTokensModelProto{
+    int64 player_id = 1;
+    double latitude = 2;
+    double longitude = 3;
+    repeated int64 campaign_id_list = 4;
+    string latest_update = 5;
+    int64 session_id = 6;
+}
+
+message MapTokenTypeProtoList{
+    repeated MapTokenTypeProtoModel values = 1;
+}
+
+message MapTokenTypeProtoModel{
+    int64 id = 1;
+    int64 campaign_id = 2;
+    string name = 3;
+    string image_url = 4;
+    repeated MinifiedMapTokenProtoModel minifiedTokenList = 5;
+}
+
+message MinifiedMapTokenProtoModel
+{
+    int64 id = 1;
+
+    int64 group_id = 2;
+
+    double latitude = 3;
+
+    double longitude = 4;
+}
+
+message TokenTypeDetailsModelProto
+{
+    int64 id = 1;
+
+    string name = 2;
+
+    string message = 3;
+
+    string imageUrl = 4;
+
+    int32 redeemType = 5;
+
+    string promotionDescription = 6;
+
+    string redemtionRules = 7;
+
+    string companyLogoUrl = 8;
+
+    string promotionImageUrl = 9;
+
+    string qrContent = 10;
+
+    int32 status = 11;
+
+    int64 campaignId = 12;
+}
+
+message TokenTypeModelProto
+{
+    int64 id = 1;
+
+    string name = 2;
+
+    repeated string campaignNames = 3;
+
+    string tokenImageURL = 4;
+
+    int32 rewardType = 5;
+}
+
+message ClaimModelProto
+{
+    int64 tokenId = 1;
+
+    int64 userId = 2;
+
+    int64 campaignId = 3;
+
+    int64 tokenTypeId = 4;
+
+    int64 sessionId = 5;
+
+    int64 groupId = 6;
+
+    double playerLatitude = 7;
+
+    double playerLongitude = 8;
+
+    double tokenLatitude = 9;
+
+    double tokenLongitude = 10;
+
+    string claimedAt = 11;
+
+    int32 campaignProximity = 12;
+
+    int64 clientId = 13;
+}
+
+message GetAllTokensModelProto
+{
+    int64 userId = 1;
+
+    repeated int64 campaignIdList = 2;
+}
+
+message TokenTypeByIdModel
+{
+    int64 id = 1;
+
+
+}

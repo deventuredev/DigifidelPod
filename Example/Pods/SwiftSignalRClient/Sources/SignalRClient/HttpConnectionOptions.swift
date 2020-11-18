@@ -26,8 +26,6 @@ public class HttpConnectionOptions {
 
     /**
      A factory for creating an HTTP client.
-
-     - note: currently used only by tests
     */
     public var httpClientFactory: (_ options: HttpConnectionOptions) -> HttpClientProtocol = { DefaultHttpClient(options: $0) }
 
@@ -35,10 +33,14 @@ public class HttpConnectionOptions {
      Whether to skip the negotiation request when starting a connection.
 
      - note: the negotiation request can be skipped only when using the WebSockets transport and cannot be skipped when connecting to SignalR Azure Service
-
     */
     public var skipNegotiation: Bool = false
 
+    /**
+    The timeout value for individual requests, in seconds.
+     */
+    public var requestTimeout: TimeInterval = 120
+    
     /**
      Initializes an `HttpConnectionOptions`.
      */

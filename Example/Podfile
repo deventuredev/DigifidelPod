@@ -5,5 +5,6 @@ target 'DigifidelPod_Tests' do
   pod 'GoogleMaps', '~> 3.9.0'
   pod 'Google-Maps-iOS-Utils', '~> 3.2.1'
   pod 'SwiftSignalRClient'
+  pod 'SwiftProtobuf', '~> 1.0'
 
 end

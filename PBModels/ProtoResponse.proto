@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+import public "CampaignProto.proto";
+import public "InitCampaign.proto";
+import public "MapToken.proto";
+import public "RewardClaim.proto";
+import public "SessionProto.proto";
+import public "WalletProto.proto";
+
+
+
+message ProtoResponseModel
+{
+   bool success = 1;
+
+   int32 statusCode = 2;
+
+   string message = 3;
+}
+
+message AdShownProtoResponse
+{
+  ProtoResponseModel response = 1;
+}
+
+message AdTappedResponseProto
+{
+  ProtoResponseModel response = 1;
+}
+
+message ClaimResponse
+{
+  ProtoResponseModel response = 1;
+
+  RewardClaimProto data = 2;
+}
+
+message EndSessionResponseProto
+{
+  ProtoResponseModel response = 1;
+}
+
+message GetCampaignsResponse
+{
+  ProtoResponseModel response = 1;
+
+  repeated CampaignModelProto data = 2;
+}
+
+message GetNextAdImageResponseProto
+{
+  ProtoResponseModel response = 1;
+
+  CampaignAdModelProto data = 2;
+}
+
+message GetTkTyByCampaignResponseProto
+{
+  ProtoResponseModel response = 1;
+
+  repeated TokenTypeModelProto dataList = 2;
+}
+
+message GetTkTyByIdResponseProto
+{
+  ProtoResponseModel response = 1;
+
+  TokenTypeDetailsModelProto data = 2;
+}
+
+message GetTokensByLocationResponse
+{
+  ProtoResponseModel response = 1;
+
+  repeated MapTokenTypeProtoModel dataList = 2;
+}
+
+message GetTokensResponseProto
+{
+  ProtoResponseModel response = 1;
+
+  repeated TokenTypeModelProto dataList = 2;
+}
+
+message GetWalletResponseProto
+{
+  ProtoResponseModel response = 1;
+
+  repeated WalletModelProto dataList = 2;
+}
+
+message InitModelResponse
+{
+  ProtoResponseModel response = 1;
+
+  InitModelProto data = 2;
+}
+
+message RedeemResponseProto
+{
+  ProtoResponseModel response = 1;
+
+  TokenTypeDetailsModelProto data = 2;
+}
+
+message StartSessionResponseProto
+{
+  ProtoResponseModel response = 1;
+
+  StartSessionGetModelProto data = 2;
+}
+
+

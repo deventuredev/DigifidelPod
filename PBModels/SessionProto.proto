@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+
+
+message StartSessionGetModelProto{
+    int64 sessionId = 1;
+}
+
+message EndSessionModelProto
+{
+    int64 playerId = 1;
+
+    int64 sessionId = 2;
+
+    string currentTime = 3;
+}
+
+message StartSessionModelProto
+{
+    int64 clientId = 1;
+
+    int64 playerId = 2;
+
+    repeated int64 campaignIdList = 3;
+
+    double latitude = 4;
+
+    double longitude = 5;
+
+    string currentTime = 6;
+}
