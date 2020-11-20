@@ -1,7 +1,7 @@
 {
   "name": "DigifidelPod",
-  "version": "2.5.0",
-  "summary": "The pod of Digifidel 2.5.0",
+  "version": "2.5.1.1",
+  "summary": "The pod of Digifidel 2.5.1.1",
   "description": "This is the official Digifidel pod. This version is for testing.",
   "homepage": "https://github.com/deventuredev/DigifidelPod",
   "license": {
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/deventuredev/DigifidelPod.git",
-    "tag": "2.5.0"
+    "tag": "2.5.1.1"
   },
   "platforms": {
     "ios": "9.3"
@@ -34,6 +34,9 @@
 
     ],
     "SwiftSignalRClient": [
+
+    ],
+    "SwiftProtobuf": [
 
     ]
   },

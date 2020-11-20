@@ -47,10 +47,7 @@ public class SignalRService: HubConnectionDelegate {
     private var callback: SignalRCallback?
     
     public static func shared(callback: SignalRCallback) -> SignalRService {
-        if(instance == nil) {
-            instance = SignalRService(callback: callback)
-        }
-        return instance!
+        return SignalRService(callback: callback)
     }
     
     private init(callback: SignalRCallback) {

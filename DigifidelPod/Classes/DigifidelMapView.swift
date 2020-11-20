@@ -32,6 +32,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     
     @IBOutlet weak var cTokenCollectedCloseHeight: NSLayoutConstraint!
     @IBOutlet weak var cTokenCollectedCloseViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var cTokenCollectedCloseWidth: NSLayoutConstraint!
     
     @IBAction func onDebugLayoutGetTokensPressed(_ sender: Any) {
         getLoadingView().isScreenReady = false
@@ -55,7 +56,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     private var errorViewLocal: ErrorView?
     private var loadingViewLocal: LoadingView?
     private var cHeightAdBannerViewLocal: NSLayoutConstraint?
-    private var tokenCollectedButton: UIButton?
+    private var tokenCollectedButton: PrimaryButton?
     private var signalRService: SignalRService?
     
     private var currentPolygon: GMSPolygon!
@@ -122,7 +123,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     private func loadViewFromNib(bundle: Bundle) {
         let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
-        
+        view.translatesAutoresizingMaskIntoConstraints = true
         view.frame = bounds
         view.autoresizingMask = [
             UIView.AutoresizingMask.flexibleWidth,
@@ -134,7 +135,8 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         
     public override func changeMapFrame(size: CGSize)
     {
-        self.mapView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        frame = CGRect(x: 0, y: 0, width: size.width, height: size.height - 48)
+       
     }
     
     public override func initLocalViews() {
@@ -165,8 +167,13 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         loadingViewLocal = LoadingView(frame: CGRect(x: screenBounds.width/2 - 25, y:screenBounds.height/2 - 25, width: 50, height: 50))
         getView().addSubview(loadingViewLocal!)
         loadingView.isHidden = true
-        
-        tokenCollectedButton = PrimaryButton(frame: CGRect(x: 0, y:0, width: screenBounds.width - 144, height:40))
+        var buttonWidth = screenBounds.width
+        if screenBounds.height < screenBounds.width
+        {
+            buttonWidth = screenBounds.height
+        }
+        tokenCollectedButton = PrimaryButton(frame: CGRect(x: 0, y:0, width: buttonWidth - 144, height:40))
+        cTokenCollectedCloseWidth.constant = buttonWidth - 144
         tokenCollectedButtonContainer.addSubview(tokenCollectedButton!)
         tokenCollectedButton?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onCloseTokenCollected(tapGestureRecognizer:))))
     }
@@ -223,6 +230,11 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             debugLayoutGetCampaigns.isHidden = true
             debugLayoutEndSession.isHidden = true
         }
+    }
+    
+    override public func onHomePressed() {
+        signalRService?.stop()
+        signalRService = nil
     }
     
     @objc private func onCloseTokenCollected(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -314,6 +326,12 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     }
     
     public func initMaps() {
+        mapView.translatesAutoresizingMaskIntoConstraints = true
+        mapView.frame = bounds
+        mapView.autoresizingMask = [
+            UIView.AutoresizingMask.flexibleWidth,
+            UIView.AutoresizingMask.flexibleHeight
+        ]
         let iconGenerator = GMUDefaultClusterIconGenerator(buckets: [999], backgroundColors: [UIColor(hex: ThemeManager.shared.getClusterColor())])
         let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
         let renderer = CustomClusterRenderer(mapView: mapView, clusterIconGenerator: iconGenerator)
@@ -350,10 +368,24 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     }
     
     public override func removeMarker(mapReward: MapReward) {
-        guard let gmsMarkerIndex = gmsMarkers.firstIndex(where: {$0.mapReward.getId() == mapReward.getId()}) else { return}
+        if gmsMarkers == nil
+        {
+            return
+        }
+        guard let gmsMarkerIndex = gmsMarkers.firstIndex(where: {$0.mapReward.getId() == mapReward.getId()}) else {
+            print("no token found wirh id:\(mapReward.getId())")
+            return
+        }
         let gmsMarker = gmsMarkers[gmsMarkerIndex]
-        gmsMarkers.remove(at: gmsMarkerIndex)
-        clusterManager.remove(gmsMarker)
+        print("TokenId: \(mapReward.getId()), GroupId: \(mapReward.getGroupId())")
+        print("gmsMarkerIndex\(gmsMarkerIndex.description)")
+        print("gmsMarkers.count \(gmsMarkers.count.description)")
+        
+        self.clusterManager.remove(gmsMarker)
+        if gmsMarkerIndex < self.gmsMarkers.count
+        {
+            self.gmsMarkers.remove(at: gmsMarkerIndex)
+        }
         DispatchQueue.main.async {
             self.clusterManager.cluster()
         }
@@ -559,6 +591,21 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         }
     }
     
+    public override func onArItemCollected(reward: MapReward?, arItem: ARItem)
+    {
+       
+       if reward == nil{
+        let model = SignalRService.TokenNotifyPlayerModel(tokenId: arItem.getId(), groupId: arItem.getGroupId(), campaignId: arItem.getCampaignId())
+        onTokenCollectedSignal(data: model)
+        setTokenCollected(message: "", collectionRules: ResponseHelper.getMessage(responseCode: ResponseCode.errorTokenAlreadyClaimed), isError: true)
+        setOverlayHidden(isHidden: false)
+        claimTokenBusy = false
+        return
+       }
+       
+       onTokenClicked()
+    }
+    
     public override func onTokenClicked() {
         if (looootMarker == nil)
         {
@@ -574,6 +621,105 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         }
         
         claimToken()
+    }
+    
+    public override func claimToken() {
+        if claimTokenBusy  {
+            return
+        }
+        claimTokenBusy = true
+
+        let df = DateFormatter()
+        df.dateFormat = StringConstants.ISODateFormat
+        let currentTimeAsISO = df.string(from: Date())
+        let proximity = getProximity(getCampaignId: tokenSelected.getCampaignId())
+        
+        BaseLooootManager.sharedInstance.getHttpClient().claimToken(reward: tokenSelected, proximity: proximity, claimedAt: currentTimeAsISO,
+                                                        lat: latAtClaimedTime!, lng: lngAtClaimedTime!, completion: { (data, isSuccessful) -> () in
+            if data != nil {
+                if !isSuccessful || data!.getStatusCode() == ResponseCode.errorCannotClaimTokensBecauseOfProximity
+                        || data!.getStatusCode() == ResponseCode.errorTokenAlreadyClaimed {
+                    let model = SignalRService.TokenNotifyPlayerModel(tokenId: self.tokenSelected.getId(), groupId: self.tokenSelected.getGroupId(), campaignId: self.tokenSelected.getCampaignId())
+                    self.onTokenCollectedSignal(data: model)
+                    
+                    self.setTokenCollected(message: "", collectionRules: ResponseHelper.getMessage(responseCode: data!.getStatusCode()), isError: true)
+                    self.setOverlayHidden(isHidden: false)
+                    self.claimTokenBusy = false
+                    return
+                }
+                
+                let reward = data!.getData()
+                if data!.getStatusCode() == ResponseCode.errorCampaignNotAvailable
+                {
+                    self.setTokenCollected(message: "", collectionRules: ResponseHelper.getMessage(responseCode: data!.getStatusCode()), isError: true)
+                    
+                    var campaignMinifiedList = BaseLooootManager.sharedInstance.getCampaignMinifiedList()
+                    for position in 0...campaignMinifiedList.count - 1 {
+                        if campaignMinifiedList[position].getId() == self.tokenSelected.getCampaignId() {
+                            campaignMinifiedList.remove(at: position)
+                            break
+                        }
+                    }
+                    BaseLooootManager.sharedInstance.setCampaignMinifiedList(campaignMinifiedList: campaignMinifiedList)
+                    NotificationCenter.default.post(name: .removeCampaign, object: self, userInfo: [NotificationCenterDataConstants.removeCampaign: self.tokenSelected.getCampaignId()])
+                    self.removeMapTokens(campaignId: self.tokenSelected.getCampaignId())
+                    return;
+                    
+                }
+                if ResponseCode.cannotCollectMoreTokens(statusCode: data!.getStatusCode()) {
+                    let model = SignalRService.TokenNotifyPlayerModel(tokenId: self.tokenSelected.getId(), groupId: self.tokenSelected.getGroupId(), campaignId:
+                        self.tokenSelected.getCampaignId())
+                    self.onTokenCollectedSignal(data: model)
+                    
+                    self.setTokenCollected(message: (reward.getMessage()!), collectionRules: "", isError: true)
+                    self.setOverlayHidden(isHidden: false)
+                    self.claimTokenBusy = false
+                    return
+                }
+                
+                if ResponseCode.limitReached(statusCode: data!.getStatusCode()) {
+                    self.setTokenCollected(message: (reward.getMessage()!), collectionRules: (reward.getRuleLimitMessage()!), isError: true)
+                    
+                    var campaignMinifiedList = BaseLooootManager.sharedInstance.getCampaignMinifiedList()
+                    for position in 0...campaignMinifiedList.count - 1 {
+                        if campaignMinifiedList[position].getId() == self.tokenSelected.getCampaignId() {
+                            campaignMinifiedList.remove(at: position)
+                            break
+                        }
+                    }
+                    BaseLooootManager.sharedInstance.setCampaignMinifiedList(campaignMinifiedList: campaignMinifiedList)
+                    NotificationCenter.default.post(name: .removeCampaign, object: self, userInfo: [NotificationCenterDataConstants.removeCampaign: self.tokenSelected.getCampaignId()])
+                    self.removeMapTokens(campaignId: self.tokenSelected.getCampaignId())
+                }
+                else {
+                    self.setTokenCollected(message: reward.getMessage()!, collectionRules: "", isError: false)
+                }
+                
+                if reward.getRedeemType() == RedeemType.wallet {
+                    for campaignMinified in BaseLooootManager.sharedInstance.getCampaignMinifiedList() {
+                        if self.tokenSelected.getCampaignId() == campaignMinified.getId() {
+                            let claimedToken = WalletList(id: self.tokenSelected.getRewardTypeId(), name: self.tokenSelected.getName(), rewardImageUrl: self.tokenSelected.getImageUrl(), mapRewardId: self.tokenSelected.getId(), expirationDate: reward.getExpirationDate(), campaignName: campaignMinified.getName())
+                            NotificationCenter.default.post(name: .rewardRedeemed, object: self, userInfo: [NotificationCenterDataConstants.rewardRedeemKey: claimedToken])
+                            break
+                        }
+                    }
+                }
+                
+                let claimTokenSignalRModel = ClaimTokenSignalRModel(companyId: BaseLooootManager.sharedInstance.getClienId(), latitude: self.tokenSelected.getLatitude(), longitude: self.tokenSelected.getLongitude(), tokenId: self.tokenSelected.getId(), groupId: self.tokenSelected.getGroupId(), campaignId: self.tokenSelected.getCampaignId())
+                self.claimTokenSignalR(claimTokenSignalRModel: claimTokenSignalRModel)
+                
+                if BaseLooootManager.sharedInstance.getShouldGetTokensAfterClaim() {
+                    DispatchQueue.main.async {
+                        self.getTokensByLocation()
+                    }
+                }
+                self.setOverlayHidden(isHidden: false)
+                self.claimTokenBusy = false
+            }
+            else {
+                self.claimTokenBusy = false
+            }
+        })
     }
     
     public override func setMarkerSize(size: CGSize) {
@@ -599,6 +745,9 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     
     public override func claimTokenSignalR(claimTokenSignalRModel: ClaimTokenSignalRModel) {
         signalRService?.onClaimToken(claimTokenModel: claimTokenSignalRModel)
+        let model = SignalRService.TokenNotifyPlayerModel(tokenId: claimTokenSignalRModel.getTokenId(), groupId: claimTokenSignalRModel.getGroupId(), campaignId: claimTokenSignalRModel.getCampaignId())
+        onTokenCollectedSignal(data: model)
+        
     }
     
     public override func startSignalRService() {

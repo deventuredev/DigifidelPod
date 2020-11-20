@@ -6,12 +6,8 @@ import Loooot
 public class ProtoClientManager: ProtoHttpManagerDelegate {
     public static var shared: ProtoHttpManagerDelegate! { get { return ProtoClientManager() } }
     
-    private let webApiProductionUrl = "http://84.232.230.195:182/"
-    private let webProductionUrl = "http://84.232.230.195:182/"
-    
-    //private let webApiProductionUrl = "https://loooot.app/webapi3/"
-    //private let webProductionUrl = "https://loooot.app/api/"
-
+    private let webApiProductionUrl = "https://loooot.app/webapi3/"
+    private let webProductionUrl = "https://loooot.app/api/"
     
     private let httpMethodPost = "POST"
     private let httpMethodGet = "GET"
@@ -41,7 +37,9 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
         if !termsAndConditionsUrl.isEmpty {
             return termsAndConditionsUrl
         }
-        return "\(webProductionUrl)\(EndPoint.downloadTerms)?\(StringConstants.clientId)=\(BaseLooootManager.sharedInstance.getClienId())"
+        let url = "\(webProductionUrl)\(EndPoint.downloadTerms)?\(StringConstants.clientId)=\(BaseLooootManager.sharedInstance.getClienId())"
+        print(url)
+        return url
     }
     
     public func getFAQUrl() -> String {
@@ -77,7 +75,6 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
                     return
                 }
                 let protoModel = try InitModelResponse.init(serializedData: data!)
-//                self.getRequestTime(endpoint: EndPoint.initializeLooootManager, time: startRequest, success: protoModel.response.success)
                 if protoModel.response.success {
 
                     var minifiedTokenList = Array<CampaignMinified>()
@@ -110,7 +107,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
                     completion(nil, false)
                 }
                }
-            catch let _
+            catch _
             {
                 DispatchQueue.main.async {
                     completion(nil, false)
@@ -182,8 +179,8 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
     
     public func endSession(currentTime: String) {
         var endSessionModelProto = EndSessionModelProto()
-        endSessionModelProto.playerID = LooootManager.shared.getPlayerId()
-        endSessionModelProto.sessionID = Int64(LooootManager.shared.getSessionId()!)
+        endSessionModelProto.playerID = BaseLooootManager.sharedInstance.getPlayerId()
+        endSessionModelProto.sessionID = Int64(BaseLooootManager.sharedInstance.getSessionId()!)
         endSessionModelProto.currentTime = currentTime
         let data:Data = try! endSessionModelProto.serializedData()
 
@@ -781,7 +778,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
                 (data, response, error) in
                     self.getRequestTime(endpoint: EndPoint.adShown, time: startRequest, success: true)
                }
-        task.resume()        
+        task.resume()
     }
     
     public func adTapped(adDisplayedModel: AdDisplayedModel) {
@@ -794,7 +791,6 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
         let url = generateQueryUrl(apiEndpoint: EndPoint.adTapped, parameters: emptyParameters)
         
         let urlRequest = createURLRequest(url: url, method: httpMethodPost, body: data)
-        let startRequest = Date()
         let task = urlSession.dataTask(with: urlRequest) {
                 (data, response, error) in
 //            self.getRequestTime(endpoint: EndPoint.adTapped, time: startRequest)

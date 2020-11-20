@@ -229,9 +229,13 @@ extension FloatingPoint {
   @objc required dynamic public init?(coder: Foundation.NSCoder)
 }
 public class ARItem {
-  public init(id: Swift.Int64, name: Swift.String, location: CoreLocation.CLLocationCoordinate2D, image: UIKit.UIImage?)
+  public init(id: Swift.Int64, name: Swift.String, location: CoreLocation.CLLocationCoordinate2D, image: UIKit.UIImage?, groupId: Swift.Int64, campaignId: Swift.Int64)
   public func getId() -> Swift.Int64
   public func setId(id: Swift.Int64)
+  public func getCampaignId() -> Swift.Int64
+  public func setCampaignId(campaignId: Swift.Int64)
+  public func getGroupId() -> Swift.Int64
+  public func setGroupId(groupId: Swift.Int64)
   public func getName() -> Swift.String
   public func setName(name: Swift.String)
   public func getLocation() -> CoreLocation.CLLocationCoordinate2D
@@ -361,7 +365,11 @@ public class PermissionModel {
   public func setButtonText(buttonText: Swift.String)
   @objc deinit
 }
+public protocol HomeBarButtonDelegate {
+  func onHomePressed()
+}
 @objc @_inheritsConvenienceInitializers public class CustomBottomNavigation : UIKit.UITabBar {
+  public var homeBarButtonDelegate: Loooot.HomeBarButtonDelegate?
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   public init(frame: CoreGraphics.CGRect, initialiseMannually: Swift.Bool)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
@@ -779,9 +787,10 @@ public protocol CampaignListViewDelegate {
   public func setEmptyListSuggestionText(text: Swift.String)
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers public class LooootViewController : UIKit.UITabBarController {
+@objc @_inheritsConvenienceInitializers public class LooootViewController : UIKit.UITabBarController, Loooot.HomeBarButtonDelegate {
   public static let StoryboardName: Swift.String
   @objc override dynamic public func viewDidLoad()
+  public func onHomePressed()
   @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
   @objc override dynamic public func tabBar(_ tabBar: UIKit.UITabBar, didSelect item: UIKit.UITabBarItem)
   @objc deinit
@@ -835,6 +844,7 @@ public class ExtendedItemModel {
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @objc override dynamic public func layoutSubviews()
+  public func setGradient()
   public func setButtonBackgroundColor(color: Swift.Int)
   @objc deinit
 }
@@ -891,6 +901,9 @@ extension CLLocationCoordinate2D {
   public var allTokensList: Swift.Array<Loooot.MapReward>!
   public var mapTokensList: Swift.Array<Loooot.MapReward>!
   public var markerIconSize: CoreGraphics.CGSize
+  public var claimTokenBusy: Swift.Bool
+  public var latAtClaimedTime: Swift.Double?
+  public var lngAtClaimedTime: Swift.Double?
   public var shouldMoveCameraToUserPosition: Swift.Bool
   public var currentLatLongIdentifier: Swift.Int64!
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
@@ -900,6 +913,7 @@ extension CLLocationCoordinate2D {
   public func baseInit()
   public func onMapTokenTapped(mapTokenSelected: Loooot.MapReward?, markerIcon: UIKit.UIImage?, markerPosition: CoreLocation.CLLocationCoordinate2D) -> Swift.Bool
   public func onTokenCollected(tokenId: Swift.Int64, groupId: Swift.Int64, campaignId: Swift.Int64)
+  open func onHomePressed()
   open func updateLatLongIdentifier(oldRoom: Swift.String, newRoom: Swift.String)
   open func removeMarker(mapReward: Loooot.MapReward)
   open func initLocalViews()
@@ -923,14 +937,19 @@ extension CLLocationCoordinate2D {
   open func setMarkerSize(size: CoreGraphics.CGSize)
   public func setShouldSaveZoomLevel(shouldSaveZoomLevel: Swift.Bool)
   public func getTokensByLocation()
-  public func claimToken()
+  open func claimToken()
+  open func removeMapTokens(campaignId: Swift.Int64)
   open func drawPolygonOnMap(minX: Swift.Double, maxX: Swift.Double, minY: Swift.Double, maxY: Swift.Double)
   open func drawRooms()
   open func addMarkersOnCluster(mapTokens: Swift.Array<Loooot.MapReward>)
   open func onTokenClicked()
   public func getClosestMarkers(tokens: inout Swift.Array<Loooot.MapReward>, lat: Swift.Double, lng: Swift.Double) -> Swift.Array<Loooot.MapReward>
+  public func setOverlayHidden(isHidden: Swift.Bool)
+  public func setTokenCollected(message: Swift.String, collectionRules: Swift.String, isError: Swift.Bool)
   public func refreshCampaigns()
+  public func getProximity(getCampaignId: Swift.Int64) -> Swift.Int
   public func refreshDebugString()
+  open func onArItemCollected(reward: Loooot.MapReward?, arItem: Loooot.ARItem)
   public func onCloseTokenCollectedAction(tapGestureRecognizer: UIKit.UITapGestureRecognizer)
   @objc deinit
 }
