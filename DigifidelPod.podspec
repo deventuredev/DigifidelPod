@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DigifidelPod'
-  s.version          = '2.5.1.2'
+  s.version          = '2.5.1.3'
   s.summary          = 'The pod of Digifidel 2.5.1.3'
 
 #   This description is used to generate tags and improve search results.
