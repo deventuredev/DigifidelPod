@@ -71,10 +71,8 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let frameworkBundle = Bundle(for: DigifidelMapView.self)
-        let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("DigifidelBundle.bundle")
-        let bundle = Bundle(url: bundleURL!)
-        loadViewFromNib(bundle: bundle!)
+        
+        loadViewFromNib(bundle: Bundle.main)
         initLocalViews()
         baseInit()
         initViews()
@@ -164,6 +162,12 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         adBannerView.isHidden = true
         
         errorViewLocal = ErrorView(frame: CGRect(x:0, y: 0, width: screenBounds.width, height: screenBounds.height))
+        errorViewLocal?.translatesAutoresizingMaskIntoConstraints = true
+        errorViewLocal?.frame = bounds
+        errorViewLocal?.autoresizingMask = [
+            UIView.AutoresizingMask.flexibleWidth,
+            UIView.AutoresizingMask.flexibleHeight
+        ]
         getView().addSubview(errorViewLocal!)
         errorView.isHidden = true
         
