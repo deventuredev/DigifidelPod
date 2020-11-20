@@ -96,7 +96,7 @@
 		4E5F2678E820A85512CA083F4006F332 /* JSONEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28587A776B2FEECC453C88C5243C64D /* JSONEncoder.swift */; };
 		4E81E94621015D1854F5326E3A5A4A2E /* field_mask.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C60715193F10FBC84739E597E1929FE /* field_mask.pb.swift */; };
 		4EA27AE06F5A756F56E44C7DEDE659C7 /* GMUGeometryRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C5A1936A3F8D16177AB8423D2A015B /* GMUGeometryRenderer.m */; };
-		50695DBC25657F440037D84E /* LooootManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50695DBB25657F440037D84E /* LooootManager.swift */; };
+		5066A9F4256801EC00AD83AB /* LooootManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5066A9F3256801EC00AD83AB /* LooootManager.swift */; };
 		513292E73C39CFBA220B9A49133C4AFA /* GMUDefaultClusterIconGenerator+Testing.h in Headers */ = {isa = PBXBuildFile; fileRef = C086075BED372605C7A6B550C556E1AC /* GMUDefaultClusterIconGenerator+Testing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5133809B41C7BD3ECB9513E8610B200E /* GMUGeoJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1B30489597814AED35331B9CDACBD3 /* GMUGeoJSONParser.m */; };
 		5198CD6BD4F0FC7BBCE2168D3A959D27 /* timestamp.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8B18B3DB44FE428EA3830FDE51937 /* timestamp.pb.swift */; };
@@ -398,7 +398,7 @@
 		4BF7A773DDE504CBFE9032D0CE48AB10 /* NameMap.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NameMap.swift; path = Sources/SwiftProtobuf/NameMap.swift; sourceTree = "<group>"; };
 		4CBAC9271C801D7CAC2D9F00EBBCE9A6 /* GMUFeature.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMUFeature.m; path = src/Geometry/Model/GMUFeature.m; sourceTree = "<group>"; };
 		4DBF2279A2056A2B8F8385B4019CF0EE /* LooootMapView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LooootMapView.swift; path = DigifidelPod/Classes/LooootMapView.swift; sourceTree = "<group>"; };
-		50695DBB25657F440037D84E /* LooootManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LooootManager.swift; path = ../../Loooot/Loooot.Mobile/iOS/LooootSample/LooootSample/PBModels/Managers/LooootManager.swift; sourceTree = "<group>"; };
+		5066A9F3256801EC00AD83AB /* LooootManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LooootManager.swift; path = DigifidelPod/Classes/LooootManager.swift; sourceTree = "<group>"; };
 		5173709A8D26932E5B41FD890B1C58C9 /* TransportDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransportDelegate.swift; path = Sources/SignalRClient/TransportDelegate.swift; sourceTree = "<group>"; };
 		54A0C5254D2B67F0E678FF00F9B4202D /* SwiftSignalRClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftSignalRClient.debug.xcconfig; sourceTree = "<group>"; };
 		588A3B4B9777C0886ABCA498BD04B243 /* GMUWeightedLatLng.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMUWeightedLatLng.m; path = src/Heatmap/GMUWeightedLatLng.m; sourceTree = "<group>"; };
@@ -1000,7 +1000,7 @@
 		83FF6A9581117F416B606460EDFFDB25 /* DigifidelPod */ = {
 			isa = PBXGroup;
 			children = (
-				50695DBB25657F440037D84E /* LooootManager.swift */,
+				5066A9F3256801EC00AD83AB /* LooootManager.swift */,
 				4BD74417F11A43CD29F2D3755AE129EA /* CampaignProto.pb.swift */,
 				5C18ED1A37482C9CCD3977445404BBC5 /* CustomClusterRenderer.swift */,
 				7F6717EF6CF4054B81B75F9578948C3A /* DigifidelMapView.swift */,
@@ -1474,6 +1474,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5066A9F4256801EC00AD83AB /* LooootManager.swift in Sources */,
 				D198E71D80809F0B34BBACC5D1ED9CF5 /* CampaignProto.pb.swift in Sources */,
 				E2056052ECD79BE9B0BAFD11EE0A603A /* CustomClusterRenderer.swift in Sources */,
 				80C750123A9B6FF9F4264B7DA893EC68 /* DigifidelMapView.swift in Sources */,
@@ -1484,7 +1485,6 @@
 				1693481174D2B6A5676D4375921DA00E /* LooootMapView.swift in Sources */,
 				F9AB9026CC1099369167494694EFEF6A /* LooootMapView.xib in Sources */,
 				B68996C1AC72E9C05C14351AF14210A9 /* MapToken.pb.swift in Sources */,
-				50695DBC25657F440037D84E /* LooootManager.swift in Sources */,
 				2A6D863BA54C8E85F4E7DA5385EBECED /* ProtoClientManager.swift in Sources */,
 				70AA6FE878E4F4E7CEC93248CF9A6F62 /* ProtoResponse.pb.swift in Sources */,
 				434A523FB1C4BC8948CB01B5B820A3DD /* RewardClaim.pb.swift in Sources */,
