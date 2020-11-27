@@ -26,7 +26,9 @@ public class HubConnectionBuilder {
     private var delegate: HubConnectionDelegate?
     private var reconnectPolicy: ReconnectPolicy = NoReconnectPolicy()
     private var useLegacyHttpConnection = false
-
+    private var permittedTransportTypes: TransportType = .all
+    private var transportFactory: ((Logger, TransportType) -> TransportFactory) =
+        { logger, permittedTransportTypes in DefaultTransportFactory(logger: logger, permittedTransportTypes: permittedTransportTypes)}
     /**
      Initializes a `HubConnectionBuilder` with a URL.
 
@@ -61,7 +63,7 @@ public class HubConnectionBuilder {
      Allows configuring `PrintLogger` logging.
 
      - parameter minLogLevel: minimum log level
-     - note: By default logging is disabled. When using this overload all log entries whose level is greater or equal than `minLogLevel` will be written using the `print` function.
+     - note: By default logging is disabled. When using this overload all log entries whose level is greater or equal than `minLogLevel` (with `debug` being the lowest logging level) will be written using the `print` function.
      */
     public func withLogging(minLogLevel: LogLevel) -> HubConnectionBuilder {
         logger = FilteringLogger(minLogLevel: minLogLevel, logger: PrintLogger())
@@ -113,6 +115,14 @@ public class HubConnectionBuilder {
         self.reconnectPolicy = reconnectPolicy
         return self
     }
+    
+    /**
+     Sets which transport types are turned on. Defaults to all types availble. Currently, only websockets and long polling are implemented.
+     */
+    public func withPermittedTransportTypes(_ permittedTransportTypes: TransportType) -> HubConnectionBuilder {
+        self.permittedTransportTypes = permittedTransportTypes
+        return self
+    }
 
     /**
     In case support for automatic reconnects  introduces issues this method allows to get to the previous behavior. It should be treated as an emergency measure only and will be removed in future versions.
@@ -122,27 +132,57 @@ public class HubConnectionBuilder {
         return self
     }
 
+    internal func withCustomTransportFactory(transportFactory: @escaping (Logger, TransportType) -> TransportFactory) -> HubConnectionBuilder {
+        self.transportFactory = transportFactory
+        return self
+    }
+
     /**
      Creates a new `HubConnection` using requested configuration.
 
      - returns: a new `HubConnection` configured as requested
      */
     public func build() -> HubConnection {
-        let hubConnection = HubConnection(connection: createHttpConnection(), hubProtocol: hubProtocolFactory(logger), logger: logger)
+        let httpConnection = createHttpConnection(transportFactory: transportFactory(logger, permittedTransportTypes))
+        let hubConnection = HubConnection(connection: httpConnection, hubProtocol: hubProtocolFactory(logger), logger: logger)
         hubConnection.delegate = delegate
         return hubConnection
     }
 
-    private func createHttpConnection() -> Connection {
+    private func createHttpConnection(transportFactory: TransportFactory) -> Connection {
         if useLegacyHttpConnection {
-            if !(reconnectPolicy is NoReconnectPolicy) {
-                logger.log(logLevel: .error, message: "Using reconnect with legacy HttpConnection is not supported. Ignoring reconnect settings.")
-            }
-            return HttpConnection(url: url, options: httpConnectionOptions, logger: logger)
+            return createLegacyHttpConnection(transportFactory: transportFactory)
+        } else {
+            return createReconnectableHttpConnection(transportFactory: transportFactory)
         }
-
-        let connectionFactory = {return HttpConnection(url: self.url, options: self.httpConnectionOptions, logger: self.logger)}
-        return ReconnectableConnection(connectionFactory: connectionFactory, reconnectPolicy: reconnectPolicy, logger: self.logger)
+    }
+    
+    private func createReconnectableHttpConnection(transportFactory: TransportFactory) -> ReconnectableConnection {
+        // Avoid capturing reference to this builder instance in the factory closure.
+        let url = self.url
+        let httpConnectionOptions = self.httpConnectionOptions
+        let logger = self.logger
+        let connectionFactory: () -> HttpConnection = {
+            // HttpConnection may overwrite some properties (most notably accessTokenProvider
+            // when connecting to Azure SingalR Service) so needs its own copy to not corrupt
+            // the instance provided by the user
+            let httpConnectionOptionsCopy = HttpConnectionOptions()
+            httpConnectionOptionsCopy.headers = httpConnectionOptions.headers
+            httpConnectionOptionsCopy.accessTokenProvider = httpConnectionOptions.accessTokenProvider
+            httpConnectionOptionsCopy.httpClientFactory = httpConnectionOptions.httpClientFactory
+            httpConnectionOptionsCopy.skipNegotiation = httpConnectionOptions.skipNegotiation
+            httpConnectionOptionsCopy.requestTimeout = httpConnectionOptions.requestTimeout
+            return HttpConnection(url: url, options: httpConnectionOptionsCopy, transportFactory: transportFactory, logger: logger)
+        }
+        
+        return ReconnectableConnection(connectionFactory: connectionFactory, reconnectPolicy: reconnectPolicy, logger: logger)
+    }
+    
+    private func createLegacyHttpConnection(transportFactory: TransportFactory) -> HttpConnection {
+        if !(reconnectPolicy is NoReconnectPolicy) {
+            logger.log(logLevel: .error, message: "Using reconnect with legacy HttpConnection is not supported. Ignoring reconnect settings.")
+        }
+        return HttpConnection(url: url, options: httpConnectionOptions, transportFactory: transportFactory, logger: logger)
     }
 }
 
