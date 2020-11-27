@@ -1,7 +1,7 @@
 {
   "name": "DigifidelPod",
-  "version": "2.5.9",
-  "summary": "The pod of Digifidel 2.5.9",
+  "version": "2.4.2",
+  "summary": "The pod of Digifidel 2.4.2",
   "description": "This is the official Digifidel pod. This version is for testing.",
   "homepage": "https://github.com/deventuredev/DigifidelPod",
   "license": {
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/deventuredev/DigifidelPod.git",
-    "tag": "2.5.9"
+    "tag": "2.4.2"
   },
   "platforms": {
     "ios": "9.3"
