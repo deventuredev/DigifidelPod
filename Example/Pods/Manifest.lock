@@ -1,5 +1,5 @@
 PODS:
-  - DigifidelPod (2.5.8):
+  - DigifidelPod (2.5.9):
     - Google-Maps-iOS-Utils
     - GoogleMaps
     - SwiftSignalRClient
@@ -43,11 +43,11 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  DigifidelPod: 9d6ceedf446d381d89ee692227bf1d22f2f65d87
+  DigifidelPod: 672673f7f1e97a71d55ab30e5cfedde16787d00e
   Google-Maps-iOS-Utils: 1f1d9acb04f2211bcfd65659902eef7c9ba26028
   GoogleMaps: 4b5346bddfe6911bb89155d43c903020170523ac
   SwiftSignalRClient: fcdfa9141dd191b5c219df87adbfc58f6f1f5554
 
 PODFILE CHECKSUM: 6838e7837868bb62112f1021f2c1afe443e0eaa6
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3
