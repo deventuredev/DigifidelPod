@@ -2,8 +2,6 @@
 
 A Swift SignalR Client for the Asp.Net Core version of SignalR
 
-**Before filing an issue please check [Frequently Asked Questions](https://github.com/moozzyk/SignalR-Client-Swift/wiki/Frequently-Asked-Questions)**
-
 ## Installation
 
 ### Cocoapods
@@ -34,6 +32,8 @@ Then include `"SignalRClient"` in your target dependencies. For example:
 .target(name: "MySwiftPackage", dependencies: ["SignalRClient"]),
 ```
 
+You may need to add libz.tbd to the libraries your project is linked with (under Build Phases, Linked Frameworks and Libraries) if you see undefined symbol errors similar to ones reported in https://github.com/moozzyk/SignalR-Client-Swift/issues/42.
+
 ### Carthage
 
 Add the following lines to your `Cartfile`:
@@ -49,7 +49,7 @@ carthage update
 
 ## Usage
 
-Add `import SwiftSignalRClient` (or `import SignalRClient` if you are using Swift Package Manager) to swift files you would like to use the client in.
+Add `import SwiftSignalRClient` to swift files you would like to use the client in.
 
 A typical implementation looks like the following:
 
@@ -79,11 +79,10 @@ public class SignalRService {
 }
 ```
 
-More detailed user's guide:
+More detailed user guide:
  - [Swift Client for the ASP.Net Core Version of SignalR – Part 1: Getting Started](https://blog.3d-logic.com/2019/07/28/swift-client-for-the-asp-net-core-version-of-signalr-part-1-getting-started/)
  - [Swift Client for the ASP.Net Core Version of SignalR – Part 1: Beyond the Basics](https://blog.3d-logic.com/2019/08/01/swift-client-for-the-asp-net-core-version-of-signalr-part-2-beyond-the-basics/)
- - [Automatic Reconnection in the Swift SignalR Client](https://blog.3d-logic.com/2020/06/28/automatic-reconnection-in-the-swift-signalr-client/)
- 
+
 ## Examples
 
 There are several sample projects in the `Examples` folder. They include:
@@ -163,6 +162,3 @@ The new APIs support up to 8 parameters. If you have a hub method taking more th
 ## Disclaimer
 
 I am providing code in the repository to you under an open source license. Because this is my personal repository, the license you receive to my code is from me and not my employer (Facebook)
-
-## Hits
-[![HitCount](http://hits.dwyl.com/moozzyk/Signalr-Client-Swift.svg)](http://hits.dwyl.com/moozzyk/Signalr-Client-Swift)

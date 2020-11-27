@@ -8,8 +8,6 @@ import SwiftSignalRClient
 
 @IBDesignable
 public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManagerDelegate, GMUClusterRendererDelegate, SignalRCallback {
-    
-    
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var mapOverlay: UIView!
     @IBOutlet weak var loadingView: UIView!
@@ -113,11 +111,9 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     }
     
     public func connectionWillReconnect(error: Error?) {
-        
     }
     
     public func connectionDidReconnect() {
-        
     }
     
     /**
@@ -139,7 +135,6 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     public override func changeMapFrame(size: CGSize)
     {
         frame = CGRect(x: 0, y: 0, width: size.width, height: size.height - 48)
-       
     }
     
     public override func initLocalViews() {

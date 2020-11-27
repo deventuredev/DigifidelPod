@@ -50,7 +50,7 @@ internal class ReconnectableConnection: Connection {
         }
     }
 
-    func send(data: Data, sendDidComplete: @escaping (Error?) -> Void) {
+    func send(data: Data, sendDidComplete: (Error?) -> Void) {
         logger.log(logLevel: .info, message: "Received send request")
         guard state != .reconnecting else {
             // TODO: consider buffering
