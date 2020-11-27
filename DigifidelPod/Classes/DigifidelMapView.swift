@@ -71,10 +71,8 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let frameworkBundle = Bundle(for: DigifidelMapView.self)
-        let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("DigifidelBundle.bundle")
-        let bundle = Bundle(url: bundleURL!)
-        loadViewFromNib(bundle: bundle!)
+        
+        loadViewFromNib(bundle: Bundle.main)
         initLocalViews()
         baseInit()
         initViews()
@@ -427,7 +425,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             self.clusterManager.add(toBeAddedGmsMarkers)
             self.clusterManager.cluster()
         }
-    }
+    }  
   
     public override func updateLatLongIdentifier(oldRoom: String, newRoom: String) {
         signalRService?.changeRoomByLatLongIdentifier(oldRoom: oldRoom, newRoom: newRoom)
@@ -661,6 +659,8 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                 if data!.getStatusCode() == ResponseCode.errorCampaignNotAvailable
                 {
                     self.setTokenCollected(message: "", collectionRules: ResponseHelper.getMessage(responseCode: data!.getStatusCode()), isError: true)
+                    self.setOverlayHidden(isHidden: false)
+                    self.claimTokenBusy = false
                     
                     var campaignMinifiedList = BaseLooootManager.sharedInstance.getCampaignMinifiedList()
                     for position in 0...campaignMinifiedList.count - 1 {

@@ -1,10 +1,3 @@
-//
-//  GMSMarkerExtension.swift
-//  Pods-DigifidelPod_Tests
-//
-//  Created by Deventure Dev on 28/08/2020.
-//
-
 import Foundation
 import GoogleMaps
 

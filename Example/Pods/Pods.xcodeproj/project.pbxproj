@@ -57,7 +57,6 @@
 		2914043840DDB2C4B64395BA3063D71C /* SelectiveVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CF43EDE85152D017AEA9FAB6542221 /* SelectiveVisitor.swift */; };
 		29B995C27CBAC9E0AA6AB379A5B0A832 /* any.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593F3B2CB5141723E27876FEBB6DFD8 /* any.pb.swift */; };
 		2A1FBA6D4235208906DC279090F2D362 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DC70108028B378DDA452468334FF7E /* Decoder.swift */; };
-		2A6D863BA54C8E85F4E7DA5385EBECED /* ProtoClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BE7F031A02157906A048E7B8E7A570 /* ProtoClientManager.swift */; };
 		2ABA7CC1B3F04B41D4CCCF635B15D351 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588AAAE0394E3128F4E73DC586A66209 /* TimeUtils.swift */; };
 		2B43AE042F0B8BE8CFBB64AC6A7E42C9 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF7FD696C76EDEA8242700EE37043C /* Enum.swift */; };
 		2D62F2259CB7FD3DDEB077AFF41AB7C4 /* Google_Protobuf_Wrappers+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1AC6330AD97494D3DD5A77C9F536 /* Google_Protobuf_Wrappers+Extensions.swift */; };
@@ -87,8 +86,6 @@
 		40C32AEEFBC932004C417311C0E6F2F2 /* TransportDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5173709A8D26932E5B41FD890B1C58C9 /* TransportDelegate.swift */; };
 		41676C26748C946113AE4091EEF1625C /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743A1585DFA748DDD964803332514A62 /* Data+Extensions.swift */; };
 		41A9E3E95FBC7C6ECB28D407477D4100 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		434A523FB1C4BC8948CB01B5B820A3DD /* RewardClaim.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = B884051B4076690C7139DA1F27A35750 /* RewardClaim.pb.swift */; };
-		453E915E73D212EE240436A930F32B8D /* DigifidelMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83035B2282F0B5AD5F139B22419FC2F9 /* DigifidelMapView.xib */; };
 		4756A7296CA02B53366BD7A8FAD3AF6D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		49B7B4BD48253687B9D34270EA002F2D /* ConnectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C69265C349FC961E24F69A723653E1 /* ConnectionDelegate.swift */; };
 		4BC94883659DE360F84B5DA492BC8B46 /* ReconnectPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AA83224FCA9387D848A48B293466E /* ReconnectPolicy.swift */; };
@@ -128,7 +125,6 @@
 		6EB2399C51904BC2587CC9DFC6CAAFFC /* Message+JSONAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B77AEF079F0C2A5AE100F472CC735A /* Message+JSONAdditions.swift */; };
 		6F01D98B20D92D90230E1628C49F215E /* Google_Protobuf_Value+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1420CFAE030F489214471A76B052F359 /* Google_Protobuf_Value+Extensions.swift */; };
 		6FC6200FB778B9B6567249CE9EC107F0 /* ZigZag.swift in Sources */ = {isa = PBXBuildFile; fileRef = C403F672533C0F0051B680044D24D776 /* ZigZag.swift */; };
-		70AA6FE878E4F4E7CEC93248CF9A6F62 /* ProtoResponse.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9F43BDB2F4993430185C38E20CF76B /* ProtoResponse.pb.swift */; };
 		724A3B423109022B5A132BFE4B89F4FD /* TransportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819A3D7221F0F63237226EF440944322 /* TransportType.swift */; };
 		72CA4965A28AE0AF7832F2088511AF3F /* Varint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852DF46D7EB7EFD07959F5B635928EE6 /* Varint.swift */; };
 		734E291DC6A465EEB2556AB714AB2602 /* GMUPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E9B68BCE51258C994B5BF541687082 /* GMUPolygon.m */; };
@@ -144,7 +140,6 @@
 		7F58FA7AEF0DB3718517B1017F9737B2 /* DefaultTransportFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745E2037745146D70B1774E8A1BBE92D /* DefaultTransportFactory.swift */; };
 		7FC715B152AB16DFDCD2D2FC151A063A /* WireFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914767B8B481B0E5ED942A0D3E837EF5 /* WireFormat.swift */; };
 		7FC8787CE50759A89C8EBB0B78E0C0A8 /* GMULineString.h in Headers */ = {isa = PBXBuildFile; fileRef = 8ECC911DCA0AD673DE7635CD6DE49A9B /* GMULineString.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		80C750123A9B6FF9F4264B7DA893EC68 /* DigifidelMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6717EF6CF4054B81B75F9578948C3A /* DigifidelMapView.swift */; };
 		884E02FD9404913D4593B5FE80245388 /* DigifidelPod-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4905E1201CE42D4994EAC8A4EBBE37EC /* DigifidelPod-dummy.m */; };
 		894527E89E3331145C622BDBA17D76B7 /* GMUFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = 43BE78DBD9CDF89C0A4C71847B0FF6DE /* GMUFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8A95BB54366D316E8390BB10261B38C6 /* HttpConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB669B8238C3F87FC358C9FB837A7847 /* HttpConnection.swift */; };
@@ -156,7 +151,6 @@
 		90CE15D8D8CB51479ADE51FA3DE65256 /* Google_Protobuf_NullValue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD82F83B513FDDBD308A912DF81EBA4 /* Google_Protobuf_NullValue+Extensions.swift */; };
 		91F4D09E15F9CD8DDF300FB1B09E2292 /* GMUSimpleClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DFE3388B4B6A955E53EAB7BBF44911 /* GMUSimpleClusterAlgorithm.m */; };
 		92568228026ED10BF258350D918A79DD /* BinaryEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18AF5407F613D152F854C24D32E270 /* BinaryEncoder.swift */; };
-		9408FBAE8ACE3E566DB017B3227B2DBC /* SessionProto.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DEF10015B1D964734998E9A64DA539 /* SessionProto.pb.swift */; };
 		95731547E39FB88BF189E09592B1A7FD /* GQTBounds.h in Headers */ = {isa = PBXBuildFile; fileRef = 45FD643E909B49658A22965C997CB4AD /* GQTBounds.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		964DEEE9F76EECEFB66710DD3B756548 /* GMUGridBasedClusterAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = 29B589EE4C76AF46AA39FD29C67EF481 /* GMUGridBasedClusterAlgorithm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		97FD015CC68D0BB2ACC22CAEF230E381 /* ProtoNameProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33E4EB153E4D8ED23636B9D8DEFFF80 /* ProtoNameProviding.swift */; };
@@ -177,6 +171,8 @@
 		A8FCA70A975D30CEF2E4E88ED45E2A5C /* GMUKMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = BBE10E316ED9D495C9D4C3DD01461AAB /* GMUKMLParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A98CC55326B051BB3D528359E4BE1419 /* GMUGeometryCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D3CB8079D447E416C13E39F76320F6 /* GMUGeometryCollection.m */; };
 		A9D72E7F6E0D3ED79DEA741382B32D08 /* LongPollingTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A1531CF8C6732C24C468BD8B87CCB3 /* LongPollingTransport.swift */; };
+		AACF083B257103FF0029BE73 /* DigifidelMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AACF0839257103FE0029BE73 /* DigifidelMapView.xib */; };
+		AACF083C257103FF0029BE73 /* DigifidelMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACF083A257103FE0029BE73 /* DigifidelMapView.swift */; };
 		ADD4AA909F3AF7FEE309A350FE817215 /* TextFormatScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D88E230C83A28D1181F25C27608D6F /* TextFormatScanner.swift */; };
 		AE46E39588149F4EC8424B68E3682D11 /* JSONDecodingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEB4FFDE5F8B7441BD0D4EBB09BF0CE /* JSONDecodingError.swift */; };
 		AFB7C633A28B2598578702720B1C5FE9 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A8E6EC4136F22A38C0657B5CA48EF /* Logger.swift */; };
@@ -185,7 +181,6 @@
 		B4AF8F60EC803DCA8304E75B5AB3B7E5 /* SwiftSignalRClient-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 74BB6690AB3514F8A71AC3CFF0DDE128 /* SwiftSignalRClient-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B4F882B61BA61E4F70736CAA46E05F5F /* SwiftSignalRClient-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EF258411FFFDF7F8167BD73EFE6821 /* SwiftSignalRClient-dummy.m */; };
 		B51FA12032B9F6E94932DFA6C7625F11 /* GMUDefaultClusterIconGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 25E48610E46788F3DDD1B65669CEEA5A /* GMUDefaultClusterIconGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B68996C1AC72E9C05C14351AF14210A9 /* MapToken.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D2323E51A3477440503C013470F6B4 /* MapToken.pb.swift */; };
 		B768E150C2C3A23597FE086BFABBB509 /* Google_Protobuf_Timestamp+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75066F3A18DDDDDBFDD554FF981D0196 /* Google_Protobuf_Timestamp+Extensions.swift */; };
 		B8812F38FF43842F4638C2E085BA9D5E /* GMUHeatmapTileLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F95DA4ABE7A2F9B1966A13A4181B52BD /* GMUHeatmapTileLayer.m */; };
 		B888BEE73C30E07A0646C8F25DEFCC63 /* Google-Maps-iOS-Utils-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F4563A2F0DC9D2D5912EF260C0E28F7 /* Google-Maps-iOS-Utils-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -202,7 +197,6 @@
 		C54F1130E6033D7EFD1CF7231027FEFA /* BinaryEncodingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CFDCD103272F9C51628DDA1FC8B71D /* BinaryEncodingError.swift */; };
 		C8082CDD3829EE60D58C04BBFB3C4FF4 /* GMUDefaultClusterRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = D65EF45C50A262F13D88EAA505B3ECF9 /* GMUDefaultClusterRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE11ED5F43568FA42CD475859CFBC7E5 /* Google_Protobuf_Any+Registry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2639D91FC433FD6627EF030795D565 /* Google_Protobuf_Any+Registry.swift */; };
-		D198E71D80809F0B34BBACC5D1ED9CF5 /* CampaignProto.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD74417F11A43CD29F2D3755AE129EA /* CampaignProto.pb.swift */; };
 		D2A0C72C7864C82208354178B1B6315F /* HubConnectionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1888610E8EF48A58066BDBA114929DA9 /* HubConnectionBuilder.swift */; };
 		D367B47C6BC86ACE02C44AC36AA1B562 /* NameMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7A773DDE504CBFE9032D0CE48AB10 /* NameMap.swift */; };
 		D5A3D21302572A8587DAF36E8F41C14A /* GMUStaticCluster.m in Sources */ = {isa = PBXBuildFile; fileRef = 691F2C4E0AEBE3A337555CA1E46D16F4 /* GMUStaticCluster.m */; };
@@ -211,13 +205,11 @@
 		D950CBF5C5D651E03A717914B31A3E0D /* SwiftProtobuf-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 95672CF174B5DD1977727A444DE9CB9B /* SwiftProtobuf-dummy.m */; };
 		DA46CA61776C370B6CFCF4B6BFF7FE60 /* NegotiationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C11153A78A700293CAFE8D8C28DEE7 /* NegotiationResponse.swift */; };
 		DB9C382F3C4E2881A2986B401B02A236 /* FieldTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1324E7237889C917065AD008839F7D95 /* FieldTypes.swift */; };
-		DC44DABB26CF3EC06DD950EE501511A9 /* DigifidelMapView.xib in Sources */ = {isa = PBXBuildFile; fileRef = 83035B2282F0B5AD5F139B22419FC2F9 /* DigifidelMapView.xib */; };
 		DD2D5A58F978CD0C3282F9133D4CED61 /* Message+AnyAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F208EB184A361B8EE791BA48C9201A /* Message+AnyAdditions.swift */; };
 		DF54AA5D141F6DA35392C2A3BB52E8CE /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6967798B9D9D645C1F08A0C835080EA0 /* StringUtils.swift */; };
 		E164887A4423C11F2033F170802A9616 /* GMUPolygon.h in Headers */ = {isa = PBXBuildFile; fileRef = EBBDFA4EA2EA56A753FAE29250D4A606 /* GMUPolygon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2056052ECD79BE9B0BAFD11EE0A603A /* CustomClusterRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C18ED1A37482C9CCD3977445404BBC5 /* CustomClusterRenderer.swift */; };
 		E20A8BDAC4FA338FF6446BDA6087579B /* GMUWeightedLatLng.m in Sources */ = {isa = PBXBuildFile; fileRef = 588A3B4B9777C0886ABCA498BD04B243 /* GMUWeightedLatLng.m */; };
-		E2A34D186EB7504C2AE0332E3D45734D /* InitCampaign.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC46B4525E218ABA3D855B0D393860D4 /* InitCampaign.pb.swift */; };
 		E3D5A602420A045B491D820E48182E12 /* type.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2B5A29ECACBB38DA332CEC3EA48FD4 /* type.pb.swift */; };
 		E82D64349298A88A32F972A09C7FF61E /* ReconnectableConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8CBDA855DAF80CC871653B3C736561 /* ReconnectableConnection.swift */; };
 		EADB7F2801AC4C88FE318E9886B6309D /* HttpClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB8D1016A7EC090614E290D0AC1122 /* HttpClientProtocol.swift */; };
@@ -228,7 +220,6 @@
 		EEBB9A967CB9D2AD8F7B5B6F89E42984 /* LooootMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65E95CD0A9D005EA383EA2B74CC490A5 /* LooootMapView.xib */; };
 		F0EA9790345AB0DB99FB5637342C4B7B /* Visitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6DEFD7F07F5A3A874E100634779E1E /* Visitor.swift */; };
 		F1FE5D013AA7185B205FE363609632C7 /* TextFormatDecodingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4357D2289DC8EA234C1E98F4E4B8462A /* TextFormatDecodingError.swift */; };
-		F23898043EB6469A088EE1C2CB003D1B /* WalletProto.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C68C6AAD8880C973C93812D515A3B3B /* WalletProto.pb.swift */; };
 		F392E884092DA2F48BB3C7C53B5ADDAF /* GMUDefaultClusterRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 107592CF53A3B3FD31DD7A20C741C904 /* GMUDefaultClusterRenderer.m */; };
 		F4EB6D0524D93B685A3E1D2B9F5A2A7B /* DefaultHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9B20CD2EB19966C51022823891A220 /* DefaultHttpClient.swift */; };
 		F794EBEC481DAA40F67FFF3D2F799C8F /* GMSMarker+GMUClusteritem.m in Sources */ = {isa = PBXBuildFile; fileRef = 101A752316CA810680D01289558BC4DC /* GMSMarker+GMUClusteritem.m */; };
@@ -377,7 +368,6 @@
 		3A2C34D4EE02543451CE649B801B2CDB /* GMUSimpleClusterAlgorithm.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUSimpleClusterAlgorithm.h; path = src/Clustering/Algo/GMUSimpleClusterAlgorithm.h; sourceTree = "<group>"; };
 		3B3425D6E0265DED2821778D2B785AD5 /* GMUClusterIconGenerator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUClusterIconGenerator.h; path = src/Clustering/View/GMUClusterIconGenerator.h; sourceTree = "<group>"; };
 		3CC3497C2609C10ECC33286AC98FC566 /* GMUDefaultClusterIconGenerator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMUDefaultClusterIconGenerator.m; path = src/Clustering/View/GMUDefaultClusterIconGenerator.m; sourceTree = "<group>"; };
-		3D9F43BDB2F4993430185C38E20CF76B /* ProtoResponse.pb.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ProtoResponse.pb.swift; path = DigifidelPod/Classes/ProtoResponse.pb.swift; sourceTree = "<group>"; };
 		3DC4DABA1365AF39D9780D541740DE90 /* BinaryEncodingSizeVisitor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BinaryEncodingSizeVisitor.swift; path = Sources/SwiftProtobuf/BinaryEncodingSizeVisitor.swift; sourceTree = "<group>"; };
 		3E0F8BD2A4AE1F2C86EA60EB6C9DC8D8 /* TextFormatEncoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextFormatEncoder.swift; path = Sources/SwiftProtobuf/TextFormatEncoder.swift; sourceTree = "<group>"; };
 		3E6D0A5979644B4F6609363A5C6DBC7D /* MathUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MathUtils.swift; path = Sources/SwiftProtobuf/MathUtils.swift; sourceTree = "<group>"; };
@@ -394,7 +384,6 @@
 		49E086FA01E63582DEBCA180D6A411BF /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4ADB6080E7B907A8C60EF2410F7055B6 /* DigifidelPod-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DigifidelPod-prefix.pch"; sourceTree = "<group>"; };
 		4B27C1C03231DE01756021055691A210 /* GMUGradient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMUGradient.m; path = src/Heatmap/GMUGradient.m; sourceTree = "<group>"; };
-		4BD74417F11A43CD29F2D3755AE129EA /* CampaignProto.pb.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CampaignProto.pb.swift; path = DigifidelPod/Classes/CampaignProto.pb.swift; sourceTree = "<group>"; };
 		4BF7A773DDE504CBFE9032D0CE48AB10 /* NameMap.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NameMap.swift; path = Sources/SwiftProtobuf/NameMap.swift; sourceTree = "<group>"; };
 		4CBAC9271C801D7CAC2D9F00EBBCE9A6 /* GMUFeature.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMUFeature.m; path = src/Geometry/Model/GMUFeature.m; sourceTree = "<group>"; };
 		4DBF2279A2056A2B8F8385B4019CF0EE /* LooootMapView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LooootMapView.swift; path = DigifidelPod/Classes/LooootMapView.swift; sourceTree = "<group>"; };
@@ -417,18 +406,15 @@
 		5F7B7B9C6C9EA12C4DFF484D8DD2219E /* GMUGroundOverlay.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMUGroundOverlay.m; path = src/Geometry/Model/GMUGroundOverlay.m; sourceTree = "<group>"; };
 		5FD21D8DB7796B79CDBD73C97BABB256 /* Pods_DigifidelPod_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DigifidelPod_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		632353AEF9862D2A7185104D223FC959 /* Pods-DigifidelPod_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DigifidelPod_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		63BE7F031A02157906A048E7B8E7A570 /* ProtoClientManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ProtoClientManager.swift; path = DigifidelPod/Classes/ProtoClientManager.swift; sourceTree = "<group>"; };
 		65E95CD0A9D005EA383EA2B74CC490A5 /* LooootMapView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = LooootMapView.xib; path = DigifidelPod/Classes/LooootMapView.xib; sourceTree = "<group>"; };
 		670836D0B809E251663D70195FEED1A6 /* SwiftProtobuf-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftProtobuf-prefix.pch"; sourceTree = "<group>"; };
 		67891F517AADEA202476374E2ED493B4 /* empty.pb.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = empty.pb.swift; path = Sources/SwiftProtobuf/empty.pb.swift; sourceTree = "<group>"; };
-		67DEF10015B1D964734998E9A64DA539 /* SessionProto.pb.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionProto.pb.swift; path = DigifidelPod/Classes/SessionProto.pb.swift; sourceTree = "<group>"; };
 		6866E763E8436D40342A9C3C107EB53D /* Google_Protobuf_FieldMask+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Google_Protobuf_FieldMask+Extensions.swift"; path = "Sources/SwiftProtobuf/Google_Protobuf_FieldMask+Extensions.swift"; sourceTree = "<group>"; };
 		691F2C4E0AEBE3A337555CA1E46D16F4 /* GMUStaticCluster.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMUStaticCluster.m; path = src/Clustering/GMUStaticCluster.m; sourceTree = "<group>"; };
 		6967798B9D9D645C1F08A0C835080EA0 /* StringUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StringUtils.swift; path = Sources/SwiftProtobuf/StringUtils.swift; sourceTree = "<group>"; };
 		6B1B30489597814AED35331B9CDACBD3 /* GMUGeoJSONParser.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMUGeoJSONParser.m; path = src/Geometry/GMUGeoJSONParser.m; sourceTree = "<group>"; };
 		6B99BB6B577D4937D86BF26107452F96 /* UnsafeBufferPointer+Shims.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UnsafeBufferPointer+Shims.swift"; path = "Sources/SwiftProtobuf/UnsafeBufferPointer+Shims.swift"; sourceTree = "<group>"; };
 		6C60715193F10FBC84739E597E1929FE /* field_mask.pb.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = field_mask.pb.swift; path = Sources/SwiftProtobuf/field_mask.pb.swift; sourceTree = "<group>"; };
-		6C68C6AAD8880C973C93812D515A3B3B /* WalletProto.pb.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WalletProto.pb.swift; path = DigifidelPod/Classes/WalletProto.pb.swift; sourceTree = "<group>"; };
 		6C8A25A761627E89778E7A5368351082 /* GMUWeightedLatLng.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUWeightedLatLng.h; path = src/Heatmap/GMUWeightedLatLng.h; sourceTree = "<group>"; };
 		6C8CC56960075DE56B7A7478C385A1AB /* Google_Protobuf_ListValue+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Google_Protobuf_ListValue+Extensions.swift"; path = "Sources/SwiftProtobuf/Google_Protobuf_ListValue+Extensions.swift"; sourceTree = "<group>"; };
 		6D0DE6DAE6418DF3BD3DDA6BFB07ABFF /* TextFormatEncodingVisitor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextFormatEncodingVisitor.swift; path = Sources/SwiftProtobuf/TextFormatEncodingVisitor.swift; sourceTree = "<group>"; };
@@ -450,14 +436,11 @@
 		7D2AB1BD9C589E626773B1A6603415F7 /* SwiftProtobuf-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftProtobuf-umbrella.h"; sourceTree = "<group>"; };
 		7D95E63663644EF7533594E647B419AA /* GMULineString.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMULineString.m; path = src/Geometry/Model/GMULineString.m; sourceTree = "<group>"; };
 		7F49CE9F4D5E60BB1F57F882136146DE /* GMUPoint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMUPoint.m; path = src/Geometry/Model/GMUPoint.m; sourceTree = "<group>"; };
-		7F6717EF6CF4054B81B75F9578948C3A /* DigifidelMapView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DigifidelMapView.swift; path = DigifidelPod/Classes/DigifidelMapView.swift; sourceTree = "<group>"; };
 		7FA6FFCDB7D7C282DBF618FA6F4E3F1A /* SignalRError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SignalRError.swift; path = Sources/SignalRClient/SignalRError.swift; sourceTree = "<group>"; };
 		80A9E3C3363051AF160C85B8B111C6A0 /* GMUDefaultClusterRenderer+Testing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GMUDefaultClusterRenderer+Testing.h"; path = "src/Clustering/View/GMUDefaultClusterRenderer+Testing.h"; sourceTree = "<group>"; };
 		819A3D7221F0F63237226EF440944322 /* TransportType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransportType.swift; path = Sources/SignalRClient/TransportType.swift; sourceTree = "<group>"; };
-		83035B2282F0B5AD5F139B22419FC2F9 /* DigifidelMapView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = DigifidelMapView.xib; path = DigifidelPod/Classes/DigifidelMapView.xib; sourceTree = "<group>"; };
 		8329F37D99B5250B3BE60857A7F78D43 /* WebsocketsTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebsocketsTransport.swift; path = Sources/SignalRClient/WebsocketsTransport.swift; sourceTree = "<group>"; };
 		8333D7BCFD0C66F789117175B5BC4E80 /* Google-Maps-iOS-Utils-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Google-Maps-iOS-Utils-dummy.m"; sourceTree = "<group>"; };
-		83D2323E51A3477440503C013470F6B4 /* MapToken.pb.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MapToken.pb.swift; path = DigifidelPod/Classes/MapToken.pb.swift; sourceTree = "<group>"; };
 		84E9936819A326D8A5BD9CD7B475DE33 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		852DF46D7EB7EFD07959F5B635928EE6 /* Varint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Varint.swift; path = Sources/SwiftProtobuf/Varint.swift; sourceTree = "<group>"; };
 		8635F747EE246209E68EFA9A749BEAD1 /* GQTPoint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GQTPoint.h; path = src/QuadTree/GQTPoint.h; sourceTree = "<group>"; };
@@ -498,6 +481,8 @@
 		A99B1AC6330AD97494D3DD5A77C9F536 /* Google_Protobuf_Wrappers+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Google_Protobuf_Wrappers+Extensions.swift"; path = "Sources/SwiftProtobuf/Google_Protobuf_Wrappers+Extensions.swift"; sourceTree = "<group>"; };
 		A9E1F01E39004757AA7A789ACDAEAD81 /* GMUGeometryCollection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUGeometryCollection.h; path = src/Geometry/Model/GMUGeometryCollection.h; sourceTree = "<group>"; };
 		AA31C67B2B7D71DE522E1303A0854136 /* Pods-DigifidelPod_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DigifidelPod_Tests-dummy.m"; sourceTree = "<group>"; };
+		AACF0839257103FE0029BE73 /* DigifidelMapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DigifidelMapView.xib; path = DigifidelPod/Classes/DigifidelMapView.xib; sourceTree = "<group>"; };
+		AACF083A257103FE0029BE73 /* DigifidelMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DigifidelMapView.swift; path = DigifidelPod/Classes/DigifidelMapView.swift; sourceTree = "<group>"; };
 		AC549DEE0B18EACCBE93F6BE27AC2B50 /* SignalRService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SignalRService.swift; path = DigifidelPod/Classes/SignalRService.swift; sourceTree = "<group>"; };
 		AD8CBDA855DAF80CC871653B3C736561 /* ReconnectableConnection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReconnectableConnection.swift; path = Sources/SignalRClient/ReconnectableConnection.swift; sourceTree = "<group>"; };
 		AE8B2B33F84834C97D9186160ED8A43C /* BinaryDecoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BinaryDecoder.swift; path = Sources/SwiftProtobuf/BinaryDecoder.swift; sourceTree = "<group>"; };
@@ -508,11 +493,9 @@
 		B217AE6961F8178FDE11CF2B11D67E33 /* GMUClusterManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUClusterManager.h; path = src/Clustering/GMUClusterManager.h; sourceTree = "<group>"; };
 		B6A57E22540D41718348D1F991DCD9FB /* ExtensibleMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExtensibleMessage.swift; path = Sources/SwiftProtobuf/ExtensibleMessage.swift; sourceTree = "<group>"; };
 		B6AEE7CBD164941C389A9F25A87A4CFE /* Pods-DigifidelPod_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-DigifidelPod_Tests.modulemap"; sourceTree = "<group>"; };
-		B884051B4076690C7139DA1F27A35750 /* RewardClaim.pb.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RewardClaim.pb.swift; path = DigifidelPod/Classes/RewardClaim.pb.swift; sourceTree = "<group>"; };
 		B8C37C0E6FF51A3948CED4A8B2698983 /* BinaryEncodingVisitor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BinaryEncodingVisitor.swift; path = Sources/SwiftProtobuf/BinaryEncodingVisitor.swift; sourceTree = "<group>"; };
 		BB669B8238C3F87FC358C9FB837A7847 /* HttpConnection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpConnection.swift; path = Sources/SignalRClient/HttpConnection.swift; sourceTree = "<group>"; };
 		BBE10E316ED9D495C9D4C3DD01461AAB /* GMUKMLParser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUKMLParser.h; path = src/Geometry/GMUKMLParser.h; sourceTree = "<group>"; };
-		BC46B4525E218ABA3D855B0D393860D4 /* InitCampaign.pb.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InitCampaign.pb.swift; path = DigifidelPod/Classes/InitCampaign.pb.swift; sourceTree = "<group>"; };
 		BCF126E849FC4EC50FBB221750B4082E /* GMUClusterRenderer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUClusterRenderer.h; path = src/Clustering/View/GMUClusterRenderer.h; sourceTree = "<group>"; };
 		BE031F2EF6975CBEEFFBF01BBF64BC9D /* JSONHubProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSONHubProtocol.swift; path = Sources/SignalRClient/JSONHubProtocol.swift; sourceTree = "<group>"; };
 		C0011CC797A91C25E99F07777E768579 /* Google_Protobuf_Any+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Google_Protobuf_Any+Extensions.swift"; path = "Sources/SwiftProtobuf/Google_Protobuf_Any+Extensions.swift"; sourceTree = "<group>"; };
@@ -1000,22 +983,14 @@
 		83FF6A9581117F416B606460EDFFDB25 /* DigifidelPod */ = {
 			isa = PBXGroup;
 			children = (
+				AACF083A257103FE0029BE73 /* DigifidelMapView.swift */,
+				AACF0839257103FE0029BE73 /* DigifidelMapView.xib */,
 				5066A9F3256801EC00AD83AB /* LooootManager.swift */,
-				4BD74417F11A43CD29F2D3755AE129EA /* CampaignProto.pb.swift */,
 				5C18ED1A37482C9CCD3977445404BBC5 /* CustomClusterRenderer.swift */,
-				7F6717EF6CF4054B81B75F9578948C3A /* DigifidelMapView.swift */,
-				83035B2282F0B5AD5F139B22419FC2F9 /* DigifidelMapView.xib */,
 				C0810C5FB3587F08B476AD36450BB644 /* GMSMarkerExtension.swift */,
-				BC46B4525E218ABA3D855B0D393860D4 /* InitCampaign.pb.swift */,
 				4DBF2279A2056A2B8F8385B4019CF0EE /* LooootMapView.swift */,
 				65E95CD0A9D005EA383EA2B74CC490A5 /* LooootMapView.xib */,
-				83D2323E51A3477440503C013470F6B4 /* MapToken.pb.swift */,
-				63BE7F031A02157906A048E7B8E7A570 /* ProtoClientManager.swift */,
-				3D9F43BDB2F4993430185C38E20CF76B /* ProtoResponse.pb.swift */,
-				B884051B4076690C7139DA1F27A35750 /* RewardClaim.pb.swift */,
-				67DEF10015B1D964734998E9A64DA539 /* SessionProto.pb.swift */,
 				AC549DEE0B18EACCBE93F6BE27AC2B50 /* SignalRService.swift */,
-				6C68C6AAD8880C973C93812D515A3B3B /* WalletProto.pb.swift */,
 				187BAF32869CBF2043B1908289E79F7B /* Frameworks */,
 				291F3520308DB54F2C07E668C64B209A /* Pod */,
 				1B1D11A8C035EC99141537D53DCF25F5 /* Resources */,
@@ -1373,7 +1348,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				453E915E73D212EE240436A930F32B8D /* DigifidelMapView.xib in Resources */,
 				EEBB9A967CB9D2AD8F7B5B6F89E42984 /* LooootMapView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1389,6 +1363,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AACF083B257103FF0029BE73 /* DigifidelMapView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1475,22 +1450,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5066A9F4256801EC00AD83AB /* LooootManager.swift in Sources */,
-				D198E71D80809F0B34BBACC5D1ED9CF5 /* CampaignProto.pb.swift in Sources */,
 				E2056052ECD79BE9B0BAFD11EE0A603A /* CustomClusterRenderer.swift in Sources */,
-				80C750123A9B6FF9F4264B7DA893EC68 /* DigifidelMapView.swift in Sources */,
-				DC44DABB26CF3EC06DD950EE501511A9 /* DigifidelMapView.xib in Sources */,
 				884E02FD9404913D4593B5FE80245388 /* DigifidelPod-dummy.m in Sources */,
+				AACF083C257103FF0029BE73 /* DigifidelMapView.swift in Sources */,
 				C28338011D15CE0144F437FEE8B88322 /* GMSMarkerExtension.swift in Sources */,
-				E2A34D186EB7504C2AE0332E3D45734D /* InitCampaign.pb.swift in Sources */,
 				1693481174D2B6A5676D4375921DA00E /* LooootMapView.swift in Sources */,
 				F9AB9026CC1099369167494694EFEF6A /* LooootMapView.xib in Sources */,
-				B68996C1AC72E9C05C14351AF14210A9 /* MapToken.pb.swift in Sources */,
-				2A6D863BA54C8E85F4E7DA5385EBECED /* ProtoClientManager.swift in Sources */,
-				70AA6FE878E4F4E7CEC93248CF9A6F62 /* ProtoResponse.pb.swift in Sources */,
-				434A523FB1C4BC8948CB01B5B820A3DD /* RewardClaim.pb.swift in Sources */,
-				9408FBAE8ACE3E566DB017B3227B2DBC /* SessionProto.pb.swift in Sources */,
 				358C451DAEDFCA91EE83919B03700812 /* SignalRService.swift in Sources */,
-				F23898043EB6469A088EE1C2CB003D1B /* WalletProto.pb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
