@@ -1,5 +1,4 @@
 import XCTest
-import DigifidelPod
 
 class Tests: XCTestCase {
     
