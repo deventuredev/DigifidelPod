@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DigifidelPod'
-  s.version          = '2.7.0'
-  s.summary          = 'The pod of Digifidel 2.7.0'
+  s.version          = '2.7.1'
+  s.summary          = 'The pod of Digifidel 2.7.1'
 
 #   This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/deventuredev/DigifidelPod'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'deventuredev@gmail.com' => 'razvan.tamazlicariu@deventure.co' }
+  s.author           = { 'deventuredev@gmail.com' => 'mihai.ionascut@deventure.co' }
   s.source           = { :git => 'https://github.com/deventuredev/DigifidelPod.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
@@ -47,5 +47,5 @@ Pod::Spec.new do |s|
   s.dependency 'SwiftSignalRClient'
 
   # s.dependency 'AFNetworking', '~> 2.3'
-  s.vendored_frameworks = 'Loooot.framework'
+  s.vendored_frameworks = 'Loooot.xcframework'
 end
