@@ -9,6 +9,10 @@ public class LooootManager : BaseLooootManager, MapViewDelegate {
     {
         get
         {
+            if(BaseLooootManager.sharedInstance.protoHttpManagerDelegate == nil)
+            {
+                BaseLooootManager.sharedInstance.protoHttpManagerDelegate = ProtoClientManager.shared
+            }
             return BaseLooootManager.sharedInstance
         }
     }
