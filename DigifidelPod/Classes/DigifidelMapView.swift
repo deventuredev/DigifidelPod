@@ -73,6 +73,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("DigifidelBundle.bundle")
         let bundle = Bundle(url: bundleURL!)
         loadViewFromNib(bundle: bundle!)
+        
         initLocalViews()
         baseInit()
         initViews()
@@ -638,7 +639,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         let currentTimeAsISO = df.string(from: Date())
         let proximity = getProximity(getCampaignId: tokenSelected.getCampaignId())
         
-        BaseLooootManager.sharedInstance.getHttpClient().claimToken(reward: tokenSelected, proximity: proximity, claimedAt: currentTimeAsISO,
+        BaseLooootManager.sharedInstance.getProtoHttpClient().claimToken(reward: tokenSelected, proximity: proximity, claimedAt: currentTimeAsISO,
                                                         lat: latAtClaimedTime!, lng: lngAtClaimedTime!, completion: { (data, isSuccessful) -> () in
             if data != nil {
                 if !isSuccessful || data!.getStatusCode() == ResponseCode.errorCannotClaimTokensBecauseOfProximity

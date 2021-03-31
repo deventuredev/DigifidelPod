@@ -22,7 +22,7 @@ pod 'DigifidelPod'
 
 ## Author
 
-deventuredev@gmail.com, razvan.tamazlicariu@deventure.com
+deventuredev@gmail.com, mihai.ionascut@deventure.co, daniel.sabau@deventure.co
 
 ## License
 

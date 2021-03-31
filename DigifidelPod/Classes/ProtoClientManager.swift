@@ -7,13 +7,8 @@ import Loooot
 public class ProtoClientManager: ProtoHttpManagerDelegate {
     public static var shared: ProtoHttpManagerDelegate! { get { return ProtoClientManager() } }
     
-    //Local
-    private let webApiProductionUrl = "http://84.232.230.195:182/"
-    private let webProductionUrl = "http://84.232.230.195:145/api/"
-    
-    //Production
-//    private let webApiProductionUrl = "https://loooot.app/webapi3/"
-//    private let webProductionUrl = "https://loooot.app/api/"
+    private let webApiProductionUrl = "https://loooot.app/webapi3/"
+    private let webProductionUrl = "https://loooot.app/api/"
     
     private let httpMethodPost = "POST"
     private let httpMethodGet = "GET"
