@@ -384,6 +384,9 @@ extension NSNotification.Name {
   public static let removeCampaign: Foundation.Notification.Name
   public static let networkReachabilityChanged: Foundation.Notification.Name
 }
+extension UIImage {
+  public class func colorForShadowBar(color: UIKit.UIColor) -> UIKit.UIImage
+}
 @objc @_inheritsConvenienceInitializers @IBDesignable public class ErrorView : UIKit.UIView {
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
