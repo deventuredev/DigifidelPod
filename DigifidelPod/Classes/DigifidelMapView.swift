@@ -69,6 +69,9 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
         let frameworkBundle = Bundle(for: DigifidelMapView.self)
         let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("DigifidelBundle.bundle")
         let bundle = Bundle(url: bundleURL!)
