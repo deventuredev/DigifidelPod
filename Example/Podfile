@@ -1,6 +1,0 @@
-use_frameworks!
-target 'DigifidelPod_Tests' do
-  pod 'DigifidelPod', :path => '../'
-  
-  
-end
