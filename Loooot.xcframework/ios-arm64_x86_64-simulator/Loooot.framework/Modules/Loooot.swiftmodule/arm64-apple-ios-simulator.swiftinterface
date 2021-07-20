@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
 // swift-module-flags: -target arm64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Loooot
 import ARKit
 import AVFoundation
@@ -57,7 +57,7 @@ public class ThemeImages {
   public func getLocationPermissionImage() -> UIKit.UIImage
   public func setLocationPermissionImage(name: Swift.String)
   public func getLocationDeniedImage() -> UIKit.UIImage
-  public func setlocationDeniedImage(name: Swift.String)
+  public func setLocationDeniedImage(name: Swift.String)
   public func getNoInternetImage() -> UIKit.UIImage
   public func setNoInternetImage(name: Swift.String)
   public func getImagePlaceholder() -> UIKit.UIImage
@@ -77,7 +77,7 @@ public class ThemeImages {
   public func getEmptyCampaignImage() -> UIKit.UIImage
   public func setEmptyCampaignImage(name: Swift.String)
   public func getEmptyTokenListImage() -> UIKit.UIImage
-  public func getEmptyTokenListImage(name: Swift.String)
+  public func setEmptyTokenListImage(name: Swift.String)
   public func getEmptyWalletImage() -> UIKit.UIImage
   public func setEmptyWalletImage(name: Swift.String)
   public func getNotificationsImage() -> UIKit.UIImage
@@ -113,9 +113,9 @@ extension UIWindow {
   public func setNavigationBarTitle(title: Swift.String)
   public func setDelegateView(view: Loooot.RewardDetailsDelegate)
   public func setRewardIds(rewardId: Swift.Int64?, rewardTypeId: Swift.Int64)
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 public protocol RewardDetailsViewInitializeDelegate {
   func setNavigationBarTitle(title: Swift.String)
@@ -223,10 +223,10 @@ extension FloatingPoint {
   public func setSubtitleTextColor(color: Swift.Int)
   public func setMessageTextColor(color: Swift.Int)
   public func setArrowTintColor(color: Swift.Int)
-  @objc deinit
   @available(iOS 3.0, *)
   @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 public class ARItem {
   public init(id: Swift.Int64, name: Swift.String, location: CoreLocation.CLLocationCoordinate2D, image: UIKit.UIImage?, groupId: Swift.Int64, campaignId: Swift.Int64)
@@ -252,10 +252,10 @@ public class ARItem {
   public func setRewardTypeTextColor(color: Swift.Int)
   public func setTitleTextColor(color: Swift.Int)
   public func setSubtitleTextColor(color: Swift.Int)
-  @objc deinit
   @available(iOS 3.0, *)
   @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @IBDesignable public class SimpleItemTableViewCell : UIKit.UITableViewCell {
   public static let Identifier: Swift.String
@@ -267,10 +267,10 @@ public class ARItem {
   public func setTitleTextColor(color: Swift.Int)
   public func setSubtitleTextColor(color: Swift.Int)
   public func setArrowTintColor(color: Swift.Int)
-  @objc deinit
   @available(iOS 3.0, *)
   @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 public protocol LNTouchDelegate : AnyObject {
   func locationNodeTouched(node: Loooot.AnnotationNode)
@@ -414,10 +414,10 @@ extension UIImage {
   public func setTitleTextColor(color: Swift.Int)
   public func setSubtitleTextColor(color: Swift.Int)
   public func setMessageTextColor(color: Swift.Int)
-  @objc deinit
   @available(iOS 3.0, *)
   @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 public enum ReachabilityError : Swift.Error {
   case failedToCreateWithAddress(Darwin.sockaddr, Swift.Int32)
@@ -434,30 +434,18 @@ extension NSNotification.Name {
 public class Reachability {
   public typealias NetworkReachable = (Loooot.Reachability) -> ()
   public typealias NetworkUnreachable = (Loooot.Reachability) -> ()
-  @available(*, unavailable, renamed: "Connection")
-  public enum NetworkStatus : Swift.CustomStringConvertible {
-    case notReachable, reachableViaWiFi, reachableViaWWAN
-    public var description: Swift.String {
-      get
-    }
-    public static func == (a: Loooot.Reachability.NetworkStatus, b: Loooot.Reachability.NetworkStatus) -> Swift.Bool
-    public var hashValue: Swift.Int {
-      get
-    }
-    public func hash(into hasher: inout Swift.Hasher)
-  }
   public enum Connection : Swift.CustomStringConvertible {
-    @available(*, deprecated, renamed: "unavailable")
-    case none
     case unavailable, wifi, cellular
     public var description: Swift.String {
       get
     }
+    @available(*, deprecated, renamed: "unavailable")
+    public static let none: Loooot.Reachability.Connection
     public static func == (a: Loooot.Reachability.Connection, b: Loooot.Reachability.Connection) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public var whenReachable: Loooot.Reachability.NetworkReachable?
   public var whenUnreachable: Loooot.Reachability.NetworkUnreachable?
@@ -519,6 +507,7 @@ extension SceneLocationEstimate {
   public static let verve: Swift.Int
   public static let spar: Swift.Int
   public static let heineken: Swift.Int
+  public static let mtn: Swift.Int
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @IBDesignable public class CampaignTableViewCell : UIKit.UITableViewCell {
@@ -530,10 +519,10 @@ extension SceneLocationEstimate {
   public func setSubtitleTextColor(color: Swift.Int)
   public func setMessageTextColor(color: Swift.Int)
   public func setArrowTintColor(color: Swift.Int)
-  @objc deinit
   @available(iOS 3.0, *)
   @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 public protocol WalletViewDelegate {
   func onWalletItemClicked(walletItem: Loooot.WalletList)
@@ -578,8 +567,8 @@ public protocol WalletViewDelegate {
   public var id: Swift.Int64?
   public init(view: UIKit.UIView?, image: UIKit.UIImage?, id: Swift.Int64?)
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc open class LocationNode : SceneKit.SCNNode {
   public var location: CoreLocation.CLLocation!
@@ -665,14 +654,13 @@ extension Int {
     get
   }
 }
-@objc @_inheritsConvenienceInitializers public class WelcomeViewController : UIKit.UIViewController {
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class WelcomeViewController : UIKit.UIViewController {
   public static let StoryboardName: Swift.String
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc override dynamic public func viewDidLoad()
   @objc deinit
-  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
 }
-@objc @_inheritsConvenienceInitializers public class RewardListViewController : UIKit.UIViewController, Loooot.RewardsTableViewDelegate, Loooot.MenuActionDelegate {
+@objc @_inheritsConvenienceInitializers public class RewardListViewController : UIKit.UIViewController, Loooot.RewardsTableViewDelegate, Loooot.MenuActionDelegate, UIKit.UITabBarDelegate {
   public static let StoryboardName: Swift.String
   @objc override dynamic public func viewDidLoad()
   @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
@@ -681,9 +669,9 @@ extension Int {
   @objc override dynamic public func viewWillTransition(to size: CoreGraphics.CGSize, with coordinator: UIKit.UIViewControllerTransitionCoordinator)
   public func dismissMenu()
   public func onRewardClicked(rewardTypeId: Swift.Int64, rewardName: Swift.String)
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 extension DispatchQueue {
   public static func background(delay: Swift.Double = 0.0, background: (() -> Swift.Void)? = nil, completion: (() -> Swift.Void)? = nil)
@@ -692,10 +680,10 @@ public enum LocationEstimateMethod {
   case coreLocationDataOnly
   case mostRelevantEstimate
   public static func == (a: Loooot.LocationEstimateMethod, b: Loooot.LocationEstimateMethod) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 @_hasMissingDesignatedInitializers final public class SceneLocationManager {
   final public var locationEstimateMethod: Loooot.LocationEstimateMethod
@@ -722,8 +710,8 @@ public typealias BoxBuilder = (CoreGraphics.CGFloat) -> SceneKit.SCNBox
   final public let boxBuilder: Loooot.BoxBuilder
   public init(polyline: MapKit.MKPolyline, altitude: CoreLocation.CLLocationDistance, boxBuilder: Loooot.BoxBuilder? = nil)
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @objc deinit
   override public init(location: CoreLocation.CLLocation?)
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @IBDesignable public class LoadingView : UIKit.UIView {
   @objc override dynamic public var layer: QuartzCore.CAShapeLayer {
@@ -739,9 +727,9 @@ public typealias BoxBuilder = (CoreGraphics.CGFloat) -> SceneKit.SCNBox
     set
   }
   public func setStrokeColor(color: Swift.Int)
-  @objc deinit
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 public class Campaign {
   public init()
@@ -796,9 +784,9 @@ public protocol CampaignListViewDelegate {
   public func onHomePressed()
   @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
   @objc override dynamic public func tabBar(_ tabBar: UIKit.UITabBar, didSelect item: UIKit.UITabBarItem)
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 @_hasMissingDesignatedInitializers public class GetRewardsModel {
   public func getPlayerId() -> Swift.Int64
@@ -962,9 +950,9 @@ extension CLLocationCoordinate2D {
   @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
   @objc override dynamic public func viewDidLayoutSubviews()
   @objc public func locationManager(_ manager: CoreLocation.CLLocationManager, didChangeAuthorization status: CoreLocation.CLAuthorizationStatus)
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 public class StartSessionResponse {
   public init(sessionId: Swift.Int64!)
@@ -980,7 +968,6 @@ public class StartSessionResponse {
   public func getThemeImages() -> Loooot.ThemeImages
   public func getPrimaryColor() -> Swift.Int
   public func getSecondaryColor() -> Swift.Int
-  public func getAccentColor() -> Swift.Int
   public func getTextColor() -> Swift.Int
   public func getPrimaryBackgroundColor() -> Swift.Int
   public func getCellBackgroundColor() -> Swift.Int
@@ -991,8 +978,12 @@ public class StartSessionResponse {
   public func getDisabledColor() -> Swift.Int
   public func getErrorColor() -> Swift.Int
   public func getClusterColor() -> Swift.Int
+  public func getToolbarBackgroundColor() -> Swift.Int
   public func getToolbarTextColor() -> Swift.Int
   public func getToolbarBackColor() -> Swift.Int
+  public func getNavBarBackgroundColor() -> Swift.Int
+  public func getNavBarUnselectedColor() -> Swift.Int
+  public func getNavBarSelectedColor() -> Swift.Int
   public func getCameraPermissionImage() -> UIKit.UIImage
   public func getCameraDeniedImage() -> UIKit.UIImage
   public func getLocationPermissionImage() -> UIKit.UIImage
@@ -1063,13 +1054,11 @@ public class ClaimRewardModel {
 }
 public class ThemeColor {
   public init()
-  public init(primaryColor: Swift.Int, secondaryColor: Swift.Int, accentColor: Swift.Int, textColor: Swift.Int, primaryBackgroundColor: Swift.Int, cellBackgroundColor: Swift.Int, primaryButtonBackgroundColor: Swift.Int, primaryButtonTextColor: Swift.Int, secondaryButtonBackgroundColor: Swift.Int, secondaryButtonTextColor: Swift.Int, disabledColor: Swift.Int, errorColor: Swift.Int, clusterColor: Swift.Int, toolbarTextColor: Swift.Int, toolbarBackColor: Swift.Int)
+  public init(primaryColor: Swift.Int, secondaryColor: Swift.Int, textColor: Swift.Int, primaryBackgroundColor: Swift.Int, cellBackgroundColor: Swift.Int, primaryButtonBackgroundColor: Swift.Int, primaryButtonTextColor: Swift.Int, secondaryButtonBackgroundColor: Swift.Int, secondaryButtonTextColor: Swift.Int, disabledColor: Swift.Int, errorColor: Swift.Int, clusterColor: Swift.Int, toolbarBackgroundColor: Swift.Int, toolbarTextColor: Swift.Int, toolbarBackColor: Swift.Int, navBarBackgroundColor: Swift.Int, navBarUnselectedColor: Swift.Int, navBarSelectedColor: Swift.Int)
   public func getPrimaryColor() -> Swift.Int
   public func setPrimaryColor(color: Swift.Int)
   public func getSecondaryColor() -> Swift.Int
   public func setSecondaryColor(color: Swift.Int)
-  public func getAccentColor() -> Swift.Int
-  public func setAccentColor(color: Swift.Int)
   public func getTextColor() -> Swift.Int
   public func setTextColor(color: Swift.Int)
   public func getPrimaryBackgroundColor() -> Swift.Int
@@ -1090,10 +1079,18 @@ public class ThemeColor {
   public func setErrorColor(color: Swift.Int)
   public func getClusterColor() -> Swift.Int
   public func setClusterColor(color: Swift.Int)
+  public func getToolbarBackgroundColor() -> Swift.Int
+  public func setToolbarBackgroundColor(color: Swift.Int)
   public func getToolbarTextColor() -> Swift.Int
   public func setToolbarTextColor(color: Swift.Int)
   public func getToolbarBackColor() -> Swift.Int
   public func setToolbarBackColor(color: Swift.Int)
+  public func getNavBarBackgroundColor() -> Swift.Int
+  public func setNavBarBackgroundColor(color: Swift.Int)
+  public func getNavBarUnselectedColor() -> Swift.Int
+  public func setNavBarUnselectedColor(color: Swift.Int)
+  public func getNavBarSelectedColor() -> Swift.Int
+  public func setNavBarSelectedColor(color: Swift.Int)
   @objc deinit
 }
 public protocol ProtoHttpManagerDelegate {
@@ -1121,9 +1118,18 @@ public protocol ProtoHttpManagerDelegate {
   @objc override dynamic public func viewDidLoad()
   @objc override dynamic public func viewDidLayoutSubviews()
   @objc public func webViewDidFinishLoad(_ webView: UIKit.UIWebView)
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class FontHelper {
+  public static func initRegularFont(fontName: Swift.String)
+  public static func initBoldFont(fontName: Swift.String)
+  public static func setRegularFont(label: UIKit.UILabel?, ofSize: CoreGraphics.CGFloat)
+  public static func setBoldFont(label: UIKit.UILabel?, ofSize: CoreGraphics.CGFloat)
+  public static func getToolbarFont() -> UIKit.UIFont
+  public static func getBottomNavigationFont() -> UIKit.UIFont
+  @objc deinit
 }
 public protocol MenuDelegate {
   func getMenuViewController() -> UIKit.UIViewController?
@@ -1284,8 +1290,10 @@ public class Ad {
 }
 extension UINavigationBar {
   public func setUpNavigationBarWithLogo()
-  public func setUpNavigationBarWithMenuButton()
-  public func setUpNavigationBarWithBackButton()
+  public func setUpNavigationBarWithMenuButtonAndTitle(title: Swift.String = "")
+  public func setUpNavigationBarWithMenuButtonAndLogo()
+  public func setUpNavigationBarWithBackButtonAndTitle(title: Swift.String = "")
+  public func setUpNavigationBarWithBackButtonAndLogo()
 }
 @objc @_inheritsConvenienceInitializers public class MapReward : ObjectiveC.NSObject {
   public var position: CoreLocation.CLLocationCoordinate2D
@@ -1391,12 +1399,14 @@ public class SimpleItemModel {
   public static let rewardListViewNoRewardsText: Swift.String
   public static let rewardListViewNoRewardsSuggestionText: Swift.String
   public static let rewardListViewYourPrizes: Swift.String
+  public static let rewardListButtonText: Swift.String
   public static let walletViewEmptyText: Swift.String
   public static let walletViewExpiresText: Swift.String
   public static let walletViewEmptySuggestionText: Swift.String
   public static let walletViewYourAvailableCoupons: Swift.String
-  public static let looootViewControllerHome: Swift.String
+  public static let looootViewControllerMap: Swift.String
   public static let looootViewControllerWallet: Swift.String
+  public static let looootViewControllerHome: Swift.String
   public static let looootViewControllerCampaigns: Swift.String
   public static let looootViewControllerFAQ: Swift.String
   public static let couponDetailsViewRedeemButton: Swift.String
@@ -1412,7 +1422,7 @@ public class SimpleItemModel {
   public static let errorFailedToInitializeLoooot: Swift.String
   public static let errorTokenAlreadyClaimed: Swift.String
   public static let welcomeButton: Swift.String
-  public static let returnToDigicel: Swift.String
+  public static let returnToMainApp: Swift.String
   public static let welcomeMessage: Swift.String
   public static let termsAndConditionsTitle: Swift.String
   public static let termsAndConditionsDenyButton: Swift.String
@@ -1523,8 +1533,9 @@ public class WalletList : Loooot.RewardTypeList {
   public func setRedeemtokenDialogMessage(text: Swift.String)
   public func setRedeemtokenDialogDecline(text: Swift.String)
   public func setRedeemTokenDialogConfirm(text: Swift.String)
-  public func setLooootViewControllerHomeText(text: Swift.String)
+  public func setLooootViewControllerMapText(text: Swift.String)
   public func setLooootViewControllerWalletText(text: Swift.String)
+  public func setLooootViewControllerHomeText(text: Swift.String)
   public func setLooootViewControllerCampaignsText(text: Swift.String)
   public func setLooootViewControllerFAQText(text: Swift.String)
   public func setErrorText(text: Swift.String)
@@ -1532,7 +1543,7 @@ public class WalletList : Loooot.RewardTypeList {
   public func setErrorTokenAlreadyClaimedText(text: Swift.String)
   public func setWelcomeMessageText(text: Swift.String)
   public func setWelcomeButtonText(text: Swift.String)
-  public func setReturnToDigicelButtonText(text: Swift.String)
+  public func setReturnToMainAppButtonText(text: Swift.String)
   public func setTermsAndConditionsTitleText(text: Swift.String)
   public func setTermsAndConditionsDenyButtonText(text: Swift.String)
   public func setTermsAndConditionsAcceptButtonText(text: Swift.String)
@@ -1598,10 +1609,10 @@ open class SceneLocationView : ARKit.ARSCNView {
     case orientationTracking
     case worldTracking
     public static func == (a: Loooot.SceneLocationView.ARTrackingType, b: Loooot.SceneLocationView.ARTrackingType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   weak public var locationViewDelegate: Loooot.SceneLocationViewDelegate?
   weak public var locationEstimateDelegate: Loooot.SceneLocationViewEstimateDelegate?
@@ -1688,10 +1699,10 @@ extension SceneLocationView {
   public func setTitleTextColor(color: Swift.Int)
   public func setSubtitleTextColor(color: Swift.Int)
   public func setMessageTextColor(color: Swift.Int)
-  @objc deinit
   @available(iOS 3.0, *)
   @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 public class MapRewardType {
   public init(json: [Swift.String : Any])
@@ -1713,9 +1724,9 @@ public class MapRewardType {
   public var campaignId: Swift.Int64!
   public var campaignName: Swift.String!
   @objc override dynamic public func viewDidLoad()
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 extension UIView {
   public func showAutoDismissAlertWithOneButton(title: Swift.String, message: Swift.String, style: UIKit.UIAlertController.Style = .alert, buttonTitle: Swift.String, buttonStyle: UIKit.UIAlertAction.Style = .default, dismissAfterSeconds: Swift.Int = 10)
@@ -1724,9 +1735,9 @@ extension UIView {
   public static let StoryboardName: Swift.String
   public var ad: Loooot.Ad!
   @objc override dynamic public func viewDidLoad()
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 public enum ScalingScheme {
   case normal
@@ -1784,10 +1795,6 @@ public class EndSessionModel {
 extension SCNVector3 {
   public func distance(to anotherVector: SceneKit.SCNVector3) -> Swift.Float
 }
-@available(*, unavailable, renamed: "Connection")
-extension Loooot.Reachability.NetworkStatus : Swift.Equatable {}
-@available(*, unavailable, renamed: "Connection")
-extension Loooot.Reachability.NetworkStatus : Swift.Hashable {}
 extension Loooot.Reachability.Connection : Swift.Equatable {}
 extension Loooot.Reachability.Connection : Swift.Hashable {}
 extension Loooot.LocationEstimateMethod : Swift.Equatable {}
