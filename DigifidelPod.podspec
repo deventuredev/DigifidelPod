@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DigifidelPod'
-  s.version          = '2.8.4'
-  s.summary          = 'The pod of Digifidel 2.8.4'
+  s.version          = '2.8.5'
+  s.summary          = 'The pod of Digifidel 2.8.5'
 
 #   This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -41,7 +41,7 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.static_framework = true
-  s.dependency 'GoogleMaps', '~> 4.2.0'
+  s.dependency 'GoogleMaps', '< 3.10'
   s.dependency 'Google-Maps-iOS-Utils', '~> 3.8.0'
   s.dependency 'SwiftSignalRClient', '~> 0.8.0'
   s.dependency 'SwiftProtobuf', '~> 1.0'
