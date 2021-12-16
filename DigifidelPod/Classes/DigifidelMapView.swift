@@ -71,7 +71,11 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
-        loadViewFromNib(bundle: Bundle.main)
+        let frameworkBundle = Bundle(for: DigifidelMapView.self)
+        let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("DigifidelBundle.bundle")
+        let bundle = Bundle(url: bundleURL!)
+        loadViewFromNib(bundle: bundle!)
+
         initLocalViews()
         baseInit()
         initViews()
