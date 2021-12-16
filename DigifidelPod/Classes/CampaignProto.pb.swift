@@ -81,6 +81,8 @@ struct AdDisplayedModelProto {
 
   var currentTime: String = String()
 
+  var languageID: Int64 = 0
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -236,6 +238,7 @@ extension AdDisplayedModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     1: .same(proto: "playerId"),
     2: .same(proto: "adId"),
     3: .same(proto: "currentTime"),
+    4: .standard(proto: "language_id"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -247,6 +250,7 @@ extension AdDisplayedModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
       case 1: try { try decoder.decodeSingularInt64Field(value: &self.playerID) }()
       case 2: try { try decoder.decodeSingularInt64Field(value: &self.adID) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.currentTime) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.languageID) }()
       default: break
       }
     }
@@ -262,6 +266,9 @@ extension AdDisplayedModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     if !self.currentTime.isEmpty {
       try visitor.visitSingularStringField(value: self.currentTime, fieldNumber: 3)
     }
+    if self.languageID != 0 {
+      try visitor.visitSingularInt64Field(value: self.languageID, fieldNumber: 4)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -269,6 +276,7 @@ extension AdDisplayedModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     if lhs.playerID != rhs.playerID {return false}
     if lhs.adID != rhs.adID {return false}
     if lhs.currentTime != rhs.currentTime {return false}
+    if lhs.languageID != rhs.languageID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

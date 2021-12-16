@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,6 +23,7 @@
                 <outlet property="errorView" destination="dQw-Vr-pOm" id="1Gv-lH-aIr"/>
                 <outlet property="loadingView" destination="fK2-uh-YAo" id="kfE-fk-lZC"/>
                 <outlet property="mapOverlay" destination="DgP-vM-Xx0" id="LlQ-KK-MhS"/>
+                <outlet property="mapTypeImageView" destination="f9l-d1-dBZ" id="Zi8-dt-SLm"/>
                 <outlet property="mapView" destination="Q0u-r7-MtL" id="Kau-EJ-XqM"/>
                 <outlet property="tokenCloseView" destination="YRU-Dz-4f8" id="q9H-p7-QbX"/>
                 <outlet property="tokenCollectedButtonContainer" destination="7MA-fq-77I" id="0GQ-Un-oRG"/>
@@ -41,6 +43,13 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f9l-d1-dBZ">
+                    <rect key="frame" x="20" y="780" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="AFX-6e-9mA"/>
+                        <constraint firstAttribute="height" constant="50" id="Tsa-vf-cgk"/>
+                    </constraints>
+                </imageView>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DgP-vM-Xx0">
                     <rect key="frame" x="0.0" y="17" width="414" height="862"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -170,6 +179,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="Q0u-r7-MtL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0VI-dj-Vuf"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="f9l-d1-dBZ" secondAttribute="bottom" constant="32" id="5cc-82-SYK"/>
                 <constraint firstItem="fK2-uh-YAo" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="6rE-Qv-Z8j"/>
                 <constraint firstItem="9j1-2e-Yor" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="6yl-Oy-49r"/>
                 <constraint firstItem="deI-9H-Poa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="8JU-Qi-lF7"/>
@@ -177,6 +187,7 @@
                 <constraint firstItem="hX5-In-fOj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="AYR-qb-EiF"/>
                 <constraint firstItem="deI-9H-Poa" firstAttribute="top" secondItem="j1f-GN-jUf" secondAttribute="bottom" constant="20" id="BLL-Gp-741"/>
                 <constraint firstItem="NAf-mY-isk" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="FNf-VQ-VYc"/>
+                <constraint firstItem="f9l-d1-dBZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="GDa-Oq-r4e"/>
                 <constraint firstItem="0WN-NB-Waz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="GyO-N7-jHb"/>
                 <constraint firstItem="dQw-Vr-pOm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="HUv-2d-uvC"/>
                 <constraint firstItem="Q0u-r7-MtL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="MTq-VV-SZx"/>

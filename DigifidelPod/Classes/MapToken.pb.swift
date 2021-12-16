@@ -37,6 +37,8 @@ struct GetTokensModelProto {
 
   var sessionID: Int64 = 0
 
+  var languageID: Int64 = 0
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -64,6 +66,8 @@ struct MapTokenTypeProtoModel {
   var campaignID: Int64 = 0
 
   var name: String = String()
+
+  var name2: String = String()
 
   var imageURL: String = String()
 
@@ -101,6 +105,8 @@ struct TokenTypeDetailsModelProto {
 
   var name: String = String()
 
+  var name2: String = String()
+
   var message: String = String()
 
   var imageURL: String = String()
@@ -134,6 +140,8 @@ struct TokenTypeModelProto {
   var id: Int64 = 0
 
   var name: String = String()
+
+  var name2: String = String()
 
   var campaignNames: [String] = []
 
@@ -177,6 +185,8 @@ struct ClaimModelProto {
 
   var clientID: Int64 = 0
 
+  var languageID: Int64 = 0
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -190,6 +200,8 @@ struct GetAllTokensModelProto {
   var userID: Int64 = 0
 
   var campaignIDList: [Int64] = []
+
+  var languageID: Int64 = 0
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -219,6 +231,7 @@ extension GetTokensModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     4: .standard(proto: "campaign_id_list"),
     5: .standard(proto: "latest_update"),
     6: .standard(proto: "session_id"),
+    7: .standard(proto: "language_id"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -233,6 +246,7 @@ extension GetTokensModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
       case 4: try { try decoder.decodeRepeatedInt64Field(value: &self.campaignIDList) }()
       case 5: try { try decoder.decodeSingularStringField(value: &self.latestUpdate) }()
       case 6: try { try decoder.decodeSingularInt64Field(value: &self.sessionID) }()
+      case 7: try { try decoder.decodeSingularInt64Field(value: &self.languageID) }()
       default: break
       }
     }
@@ -257,6 +271,9 @@ extension GetTokensModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     if self.sessionID != 0 {
       try visitor.visitSingularInt64Field(value: self.sessionID, fieldNumber: 6)
     }
+    if self.languageID != 0 {
+      try visitor.visitSingularInt64Field(value: self.languageID, fieldNumber: 7)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -267,6 +284,7 @@ extension GetTokensModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     if lhs.campaignIDList != rhs.campaignIDList {return false}
     if lhs.latestUpdate != rhs.latestUpdate {return false}
     if lhs.sessionID != rhs.sessionID {return false}
+    if lhs.languageID != rhs.languageID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -310,8 +328,9 @@ extension MapTokenTypeProtoModel: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     1: .same(proto: "id"),
     2: .standard(proto: "campaign_id"),
     3: .same(proto: "name"),
-    4: .standard(proto: "image_url"),
-    5: .same(proto: "minifiedTokenList"),
+    4: .same(proto: "name2"),
+    5: .standard(proto: "image_url"),
+    6: .same(proto: "minifiedTokenList"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -323,8 +342,9 @@ extension MapTokenTypeProtoModel: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       case 1: try { try decoder.decodeSingularInt64Field(value: &self.id) }()
       case 2: try { try decoder.decodeSingularInt64Field(value: &self.campaignID) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.name) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self.imageURL) }()
-      case 5: try { try decoder.decodeRepeatedMessageField(value: &self.minifiedTokenList) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.name2) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.imageURL) }()
+      case 6: try { try decoder.decodeRepeatedMessageField(value: &self.minifiedTokenList) }()
       default: break
       }
     }
@@ -340,11 +360,14 @@ extension MapTokenTypeProtoModel: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     if !self.name.isEmpty {
       try visitor.visitSingularStringField(value: self.name, fieldNumber: 3)
     }
+    if !self.name2.isEmpty {
+      try visitor.visitSingularStringField(value: self.name2, fieldNumber: 4)
+    }
     if !self.imageURL.isEmpty {
-      try visitor.visitSingularStringField(value: self.imageURL, fieldNumber: 4)
+      try visitor.visitSingularStringField(value: self.imageURL, fieldNumber: 5)
     }
     if !self.minifiedTokenList.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.minifiedTokenList, fieldNumber: 5)
+      try visitor.visitRepeatedMessageField(value: self.minifiedTokenList, fieldNumber: 6)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -353,6 +376,7 @@ extension MapTokenTypeProtoModel: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     if lhs.id != rhs.id {return false}
     if lhs.campaignID != rhs.campaignID {return false}
     if lhs.name != rhs.name {return false}
+    if lhs.name2 != rhs.name2 {return false}
     if lhs.imageURL != rhs.imageURL {return false}
     if lhs.minifiedTokenList != rhs.minifiedTokenList {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -415,16 +439,17 @@ extension TokenTypeDetailsModelProto: SwiftProtobuf.Message, SwiftProtobuf._Mess
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .same(proto: "name"),
-    3: .same(proto: "message"),
-    4: .same(proto: "imageUrl"),
-    5: .same(proto: "redeemType"),
-    6: .same(proto: "promotionDescription"),
-    7: .same(proto: "redemtionRules"),
-    8: .same(proto: "companyLogoUrl"),
-    9: .same(proto: "promotionImageUrl"),
-    10: .same(proto: "qrContent"),
-    11: .same(proto: "status"),
-    12: .same(proto: "campaignId"),
+    3: .same(proto: "name2"),
+    4: .same(proto: "message"),
+    5: .same(proto: "imageUrl"),
+    6: .same(proto: "redeemType"),
+    7: .same(proto: "promotionDescription"),
+    8: .same(proto: "redemtionRules"),
+    9: .same(proto: "companyLogoUrl"),
+    10: .same(proto: "promotionImageUrl"),
+    11: .same(proto: "qrContent"),
+    12: .same(proto: "status"),
+    13: .same(proto: "campaignId"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -435,16 +460,17 @@ extension TokenTypeDetailsModelProto: SwiftProtobuf.Message, SwiftProtobuf._Mess
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularInt64Field(value: &self.id) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.name) }()
-      case 3: try { try decoder.decodeSingularStringField(value: &self.message) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self.imageURL) }()
-      case 5: try { try decoder.decodeSingularInt32Field(value: &self.redeemType) }()
-      case 6: try { try decoder.decodeSingularStringField(value: &self.promotionDescription) }()
-      case 7: try { try decoder.decodeSingularStringField(value: &self.redemtionRules) }()
-      case 8: try { try decoder.decodeSingularStringField(value: &self.companyLogoURL) }()
-      case 9: try { try decoder.decodeSingularStringField(value: &self.promotionImageURL) }()
-      case 10: try { try decoder.decodeSingularStringField(value: &self.qrContent) }()
-      case 11: try { try decoder.decodeSingularInt32Field(value: &self.status) }()
-      case 12: try { try decoder.decodeSingularInt64Field(value: &self.campaignID) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.name2) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.message) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.imageURL) }()
+      case 6: try { try decoder.decodeSingularInt32Field(value: &self.redeemType) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.promotionDescription) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self.redemtionRules) }()
+      case 9: try { try decoder.decodeSingularStringField(value: &self.companyLogoURL) }()
+      case 10: try { try decoder.decodeSingularStringField(value: &self.promotionImageURL) }()
+      case 11: try { try decoder.decodeSingularStringField(value: &self.qrContent) }()
+      case 12: try { try decoder.decodeSingularInt32Field(value: &self.status) }()
+      case 13: try { try decoder.decodeSingularInt64Field(value: &self.campaignID) }()
       default: break
       }
     }
@@ -457,35 +483,38 @@ extension TokenTypeDetailsModelProto: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if !self.name.isEmpty {
       try visitor.visitSingularStringField(value: self.name, fieldNumber: 2)
     }
+    if !self.name2.isEmpty {
+      try visitor.visitSingularStringField(value: self.name2, fieldNumber: 3)
+    }
     if !self.message.isEmpty {
-      try visitor.visitSingularStringField(value: self.message, fieldNumber: 3)
+      try visitor.visitSingularStringField(value: self.message, fieldNumber: 4)
     }
     if !self.imageURL.isEmpty {
-      try visitor.visitSingularStringField(value: self.imageURL, fieldNumber: 4)
+      try visitor.visitSingularStringField(value: self.imageURL, fieldNumber: 5)
     }
     if self.redeemType != 0 {
-      try visitor.visitSingularInt32Field(value: self.redeemType, fieldNumber: 5)
+      try visitor.visitSingularInt32Field(value: self.redeemType, fieldNumber: 6)
     }
     if !self.promotionDescription.isEmpty {
-      try visitor.visitSingularStringField(value: self.promotionDescription, fieldNumber: 6)
+      try visitor.visitSingularStringField(value: self.promotionDescription, fieldNumber: 7)
     }
     if !self.redemtionRules.isEmpty {
-      try visitor.visitSingularStringField(value: self.redemtionRules, fieldNumber: 7)
+      try visitor.visitSingularStringField(value: self.redemtionRules, fieldNumber: 8)
     }
     if !self.companyLogoURL.isEmpty {
-      try visitor.visitSingularStringField(value: self.companyLogoURL, fieldNumber: 8)
+      try visitor.visitSingularStringField(value: self.companyLogoURL, fieldNumber: 9)
     }
     if !self.promotionImageURL.isEmpty {
-      try visitor.visitSingularStringField(value: self.promotionImageURL, fieldNumber: 9)
+      try visitor.visitSingularStringField(value: self.promotionImageURL, fieldNumber: 10)
     }
     if !self.qrContent.isEmpty {
-      try visitor.visitSingularStringField(value: self.qrContent, fieldNumber: 10)
+      try visitor.visitSingularStringField(value: self.qrContent, fieldNumber: 11)
     }
     if self.status != 0 {
-      try visitor.visitSingularInt32Field(value: self.status, fieldNumber: 11)
+      try visitor.visitSingularInt32Field(value: self.status, fieldNumber: 12)
     }
     if self.campaignID != 0 {
-      try visitor.visitSingularInt64Field(value: self.campaignID, fieldNumber: 12)
+      try visitor.visitSingularInt64Field(value: self.campaignID, fieldNumber: 13)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -493,6 +522,7 @@ extension TokenTypeDetailsModelProto: SwiftProtobuf.Message, SwiftProtobuf._Mess
   static func ==(lhs: TokenTypeDetailsModelProto, rhs: TokenTypeDetailsModelProto) -> Bool {
     if lhs.id != rhs.id {return false}
     if lhs.name != rhs.name {return false}
+    if lhs.name2 != rhs.name2 {return false}
     if lhs.message != rhs.message {return false}
     if lhs.imageURL != rhs.imageURL {return false}
     if lhs.redeemType != rhs.redeemType {return false}
@@ -513,9 +543,10 @@ extension TokenTypeModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .same(proto: "name"),
-    3: .same(proto: "campaignNames"),
-    4: .same(proto: "tokenImageURL"),
-    5: .same(proto: "rewardType"),
+    3: .same(proto: "name2"),
+    4: .same(proto: "campaignNames"),
+    5: .same(proto: "tokenImageURL"),
+    6: .same(proto: "rewardType"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -526,9 +557,10 @@ extension TokenTypeModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularInt64Field(value: &self.id) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.name) }()
-      case 3: try { try decoder.decodeRepeatedStringField(value: &self.campaignNames) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self.tokenImageURL) }()
-      case 5: try { try decoder.decodeSingularInt32Field(value: &self.rewardType) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.name2) }()
+      case 4: try { try decoder.decodeRepeatedStringField(value: &self.campaignNames) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.tokenImageURL) }()
+      case 6: try { try decoder.decodeSingularInt32Field(value: &self.rewardType) }()
       default: break
       }
     }
@@ -541,14 +573,17 @@ extension TokenTypeModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     if !self.name.isEmpty {
       try visitor.visitSingularStringField(value: self.name, fieldNumber: 2)
     }
+    if !self.name2.isEmpty {
+      try visitor.visitSingularStringField(value: self.name2, fieldNumber: 3)
+    }
     if !self.campaignNames.isEmpty {
-      try visitor.visitRepeatedStringField(value: self.campaignNames, fieldNumber: 3)
+      try visitor.visitRepeatedStringField(value: self.campaignNames, fieldNumber: 4)
     }
     if !self.tokenImageURL.isEmpty {
-      try visitor.visitSingularStringField(value: self.tokenImageURL, fieldNumber: 4)
+      try visitor.visitSingularStringField(value: self.tokenImageURL, fieldNumber: 5)
     }
     if self.rewardType != 0 {
-      try visitor.visitSingularInt32Field(value: self.rewardType, fieldNumber: 5)
+      try visitor.visitSingularInt32Field(value: self.rewardType, fieldNumber: 6)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -556,6 +591,7 @@ extension TokenTypeModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   static func ==(lhs: TokenTypeModelProto, rhs: TokenTypeModelProto) -> Bool {
     if lhs.id != rhs.id {return false}
     if lhs.name != rhs.name {return false}
+    if lhs.name2 != rhs.name2 {return false}
     if lhs.campaignNames != rhs.campaignNames {return false}
     if lhs.tokenImageURL != rhs.tokenImageURL {return false}
     if lhs.rewardType != rhs.rewardType {return false}
@@ -580,6 +616,7 @@ extension ClaimModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     11: .same(proto: "claimedAt"),
     12: .same(proto: "campaignProximity"),
     13: .same(proto: "clientId"),
+    14: .standard(proto: "language_id"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -601,6 +638,7 @@ extension ClaimModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
       case 11: try { try decoder.decodeSingularStringField(value: &self.claimedAt) }()
       case 12: try { try decoder.decodeSingularInt32Field(value: &self.campaignProximity) }()
       case 13: try { try decoder.decodeSingularInt64Field(value: &self.clientID) }()
+      case 14: try { try decoder.decodeSingularInt64Field(value: &self.languageID) }()
       default: break
       }
     }
@@ -646,6 +684,9 @@ extension ClaimModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     if self.clientID != 0 {
       try visitor.visitSingularInt64Field(value: self.clientID, fieldNumber: 13)
     }
+    if self.languageID != 0 {
+      try visitor.visitSingularInt64Field(value: self.languageID, fieldNumber: 14)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -663,6 +704,7 @@ extension ClaimModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     if lhs.claimedAt != rhs.claimedAt {return false}
     if lhs.campaignProximity != rhs.campaignProximity {return false}
     if lhs.clientID != rhs.clientID {return false}
+    if lhs.languageID != rhs.languageID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -673,6 +715,7 @@ extension GetAllTokensModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "userId"),
     2: .same(proto: "campaignIdList"),
+    3: .standard(proto: "language_id"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -683,6 +726,7 @@ extension GetAllTokensModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularInt64Field(value: &self.userID) }()
       case 2: try { try decoder.decodeRepeatedInt64Field(value: &self.campaignIDList) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.languageID) }()
       default: break
       }
     }
@@ -695,12 +739,16 @@ extension GetAllTokensModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     if !self.campaignIDList.isEmpty {
       try visitor.visitPackedInt64Field(value: self.campaignIDList, fieldNumber: 2)
     }
+    if self.languageID != 0 {
+      try visitor.visitSingularInt64Field(value: self.languageID, fieldNumber: 3)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: GetAllTokensModelProto, rhs: GetAllTokensModelProto) -> Bool {
     if lhs.userID != rhs.userID {return false}
     if lhs.campaignIDList != rhs.campaignIDList {return false}
+    if lhs.languageID != rhs.languageID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

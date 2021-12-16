@@ -5,10 +5,12 @@ import GoogleMaps
 import Loooot
 import GoogleMapsUtils
 import SwiftSignalRClient
+import MapKit
 
 @IBDesignable
 public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManagerDelegate, GMUClusterRendererDelegate, SignalRCallback {
     @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var mapTypeImageView: UIImageView!
     @IBOutlet weak var mapOverlay: UIView!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var tokenCollectedView: UIView!
@@ -69,11 +71,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let frameworkBundle = Bundle(for: DigifidelMapView.self)
-        let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("DigifidelBundle.bundle")
-        let bundle = Bundle(url: bundleURL!)
-        loadViewFromNib(bundle: bundle!)
-        
+        loadViewFromNib(bundle: Bundle.main)
         initLocalViews()
         baseInit()
         initViews()
@@ -94,11 +92,11 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             return
         }
         
-        let newRoom = "\(BaseLooootManager.sharedInstance.getClienId())-\(currentLatLongIdentifier.description)"
+        let newRoom = "\(BaseLooootManager.sharedInstance.getClientId())-\(currentLatLongIdentifier.description)"
         signalRService?.changeRoomByLatLongIdentifier(oldRoom: "", newRoom: newRoom)
 
         if BaseLooootManager.sharedInstance.isDebugMode() {
-            debugString[4] = "oldRoom: \(BaseLooootManager.sharedInstance.getClienId())-"
+            debugString[4] = "oldRoom: \(BaseLooootManager.sharedInstance.getClientId())-"
             debugString[5] = "newRoom: \(newRoom)"
             debugString[8] = "SignalR ConnectionId:" + (signalRService?.getConnectionId())!
             refreshDebugString()
@@ -112,6 +110,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     }
     
     public func connectionWillReconnect(error: Error?) {
+        
     }
     
     public func connectionDidReconnect() {
@@ -136,6 +135,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     public override func changeMapFrame(size: CGSize)
     {
         frame = CGRect(x: 0, y: 0, width: size.width, height: size.height - 48)
+       
     }
     
     public override func initLocalViews() {
@@ -208,20 +208,22 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         tokenCollectedDetails.textColor = UIColor(hex: ThemeManager.shared.getTextColor())
         tokenCollectedButton!.setTitle(BaseLooootManager.sharedInstance.getTranslationManager().getTranslation(key: TranslationConstants.mapViewConfirm), for: UIButton.State.normal)
         
-        //               #if DIGIFIDEL
-        //
-        //               tokenCollectedButtonLeftConstraint.isActive = false
-        //               tokenCollectedButtonRightConstraint.isActive = false
-        //
-        //               #endif
-        
         tokenCollectedView.isHidden = true
         setUpDebugLayout()
+        
+        mapTypeImageView.layer.cornerRadius = 4
+        mapTypeImageView.layer.borderColor = UIColor(hex: ThemeManager.shared.getNavBarBackgroundColor()).cgColor
+        mapTypeImageView.layer.borderWidth = 1
+        mapTypeImageView.image = ThemeManager.shared.getMapTypeSatelliteViewImage()
+        let mapTypeTap = UITapGestureRecognizer(target: self, action: #selector(onChangeMapType(tapGestureRecognizer:)))
+        mapTypeImageView.addGestureRecognizer(mapTypeTap)
         
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(onCloseTokenCollected(tapGestureRecognizer:)))
         tokenCloseView.addGestureRecognizer(singleTap)
         tokenCollectedClose.addGestureRecognizer(singleTap)
-        AdManager.shared.setViewForBanner(bannerView: adBannerViewLocal!, viewHeightConstraint: cHeightAdBannerViewLocal!)
+        // Ads are stopped. Remove next line to show back
+        //AdManager.shared.setViewForBanner(bannerView: adBannerViewLocal!, viewHeightConstraint: cHeightAdBannerViewLocal!)
+        adBannerViewLocal?.isHidden = true
         
         //TODO: Until further changes this will remain
         cTokenCollectedCloseViewHeight.constant = 0
@@ -240,6 +242,17 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     override public func onHomePressed() {
         signalRService?.stop()
         signalRService = nil
+    }
+    
+    @objc private func onChangeMapType(tapGestureRecognizer: UITapGestureRecognizer) {
+        if mapView.mapType == GMSMapViewType.normal {
+            mapTypeImageView.image = ThemeManager.shared.getMapTypeMapViewImage()
+            mapView.mapType = GMSMapViewType.satellite
+        }
+        else {
+            mapTypeImageView.image = ThemeManager.shared.getMapTypeSatelliteViewImage()
+            mapView.mapType = GMSMapViewType.normal
+        }
     }
     
     @objc private func onCloseTokenCollected(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -596,19 +609,17 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         }
     }
     
-    public override func onArItemCollected(reward: MapReward?, arItem: ARItem)
-    {
+    public override func onArItemCollected(reward: MapReward?, arItem: ARItem) {
+        if reward == nil {
+            let model = SignalRService.TokenNotifyPlayerModel(tokenId: arItem.getId(), groupId: arItem.getGroupId(), campaignId: arItem.getCampaignId())
+            onTokenCollectedSignal(data: model)
+            setTokenCollected(message: "", collectionRules: ResponseHelper.getMessage(responseCode: ResponseCode.errorTokenAlreadyClaimed), isError: true)
+            setOverlayHidden(isHidden: false)
+            claimTokenBusy = false
+            return
+        }
        
-       if reward == nil{
-        let model = SignalRService.TokenNotifyPlayerModel(tokenId: arItem.getId(), groupId: arItem.getGroupId(), campaignId: arItem.getCampaignId())
-        onTokenCollectedSignal(data: model)
-        setTokenCollected(message: "", collectionRules: ResponseHelper.getMessage(responseCode: ResponseCode.errorTokenAlreadyClaimed), isError: true)
-        setOverlayHidden(isHidden: false)
-        claimTokenBusy = false
-        return
-       }
-       
-       onTokenClicked()
+        onTokenClicked()
     }
     
     public override func onTokenClicked() {
@@ -702,17 +713,17 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                     self.setTokenCollected(message: reward.getMessage()!, collectionRules: "", isError: false)
                 }
                 
-                if reward.getRedeemType() == RedeemType.wallet {
+                if reward.getRedeemType() == RedeemType.wallet || reward.getRedeemType() == RedeemType.raffle {
                     for campaignMinified in BaseLooootManager.sharedInstance.getCampaignMinifiedList() {
                         if self.tokenSelected.getCampaignId() == campaignMinified.getId() {
-                            let claimedToken = WalletList(id: self.tokenSelected.getRewardTypeId(), name: self.tokenSelected.getName(), rewardImageUrl: self.tokenSelected.getImageUrl(), mapRewardId: self.tokenSelected.getId(), expirationDate: reward.getExpirationDate(), campaignName: campaignMinified.getName())
+                            let claimedToken = WalletList(id: self.tokenSelected.getRewardTypeId(), name: self.tokenSelected.getName(), name2: self.tokenSelected.getName2(), rewardImageUrl: self.tokenSelected.getImageUrl(), rewardType: Int(reward.getRedeemType()!), mapRewardId: self.tokenSelected.getId(), expirationDate: reward.getExpirationDate(), campaignName: campaignMinified.getName())
                             NotificationCenter.default.post(name: .rewardRedeemed, object: self, userInfo: [NotificationCenterDataConstants.rewardRedeemKey: claimedToken])
                             break
                         }
                     }
                 }
                 
-                let claimTokenSignalRModel = ClaimTokenSignalRModel(companyId: BaseLooootManager.sharedInstance.getClienId(), latitude: self.tokenSelected.getLatitude(), longitude: self.tokenSelected.getLongitude(), tokenId: self.tokenSelected.getId(), groupId: self.tokenSelected.getGroupId(), campaignId: self.tokenSelected.getCampaignId())
+                let claimTokenSignalRModel = ClaimTokenSignalRModel(companyId: BaseLooootManager.sharedInstance.getClientId(), latitude: self.tokenSelected.getLatitude(), longitude: self.tokenSelected.getLongitude(), tokenId: self.tokenSelected.getId(), groupId: self.tokenSelected.getGroupId(), campaignId: self.tokenSelected.getCampaignId())
                 self.claimTokenSignalR(claimTokenSignalRModel: claimTokenSignalRModel)
                 
                 if BaseLooootManager.sharedInstance.getShouldGetTokensAfterClaim() {
@@ -754,7 +765,6 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         signalRService?.onClaimToken(claimTokenModel: claimTokenSignalRModel)
         let model = SignalRService.TokenNotifyPlayerModel(tokenId: claimTokenSignalRModel.getTokenId(), groupId: claimTokenSignalRModel.getGroupId(), campaignId: claimTokenSignalRModel.getCampaignId())
         onTokenCollectedSignal(data: model)
-        
     }
     
     public override func startSignalRService() {

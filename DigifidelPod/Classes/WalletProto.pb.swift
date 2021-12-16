@@ -31,6 +31,8 @@ struct WalletModelProto {
 
   var name: String = String()
 
+  var name2: String = String()
+
   var imageURL: String = String()
 
   var expirationDate: String = String()
@@ -52,10 +54,11 @@ extension WalletModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     1: .same(proto: "id"),
     2: .same(proto: "mapTokenId"),
     3: .same(proto: "name"),
-    4: .same(proto: "imageUrl"),
-    5: .same(proto: "expirationDate"),
-    6: .same(proto: "campaignName"),
-    7: .same(proto: "rewardType"),
+    4: .same(proto: "name2"),
+    5: .same(proto: "imageUrl"),
+    6: .same(proto: "expirationDate"),
+    7: .same(proto: "campaignName"),
+    8: .same(proto: "rewardType"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -67,10 +70,11 @@ extension WalletModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
       case 1: try { try decoder.decodeSingularInt64Field(value: &self.id) }()
       case 2: try { try decoder.decodeSingularInt64Field(value: &self.mapTokenID) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.name) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self.imageURL) }()
-      case 5: try { try decoder.decodeSingularStringField(value: &self.expirationDate) }()
-      case 6: try { try decoder.decodeSingularStringField(value: &self.campaignName) }()
-      case 7: try { try decoder.decodeSingularInt32Field(value: &self.rewardType) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.name2) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.imageURL) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.expirationDate) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.campaignName) }()
+      case 8: try { try decoder.decodeSingularInt32Field(value: &self.rewardType) }()
       default: break
       }
     }
@@ -86,17 +90,20 @@ extension WalletModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     if !self.name.isEmpty {
       try visitor.visitSingularStringField(value: self.name, fieldNumber: 3)
     }
+    if !self.name2.isEmpty {
+      try visitor.visitSingularStringField(value: self.name2, fieldNumber: 4)
+    }
     if !self.imageURL.isEmpty {
-      try visitor.visitSingularStringField(value: self.imageURL, fieldNumber: 4)
+      try visitor.visitSingularStringField(value: self.imageURL, fieldNumber: 5)
     }
     if !self.expirationDate.isEmpty {
-      try visitor.visitSingularStringField(value: self.expirationDate, fieldNumber: 5)
+      try visitor.visitSingularStringField(value: self.expirationDate, fieldNumber: 6)
     }
     if !self.campaignName.isEmpty {
-      try visitor.visitSingularStringField(value: self.campaignName, fieldNumber: 6)
+      try visitor.visitSingularStringField(value: self.campaignName, fieldNumber: 7)
     }
     if self.rewardType != 0 {
-      try visitor.visitSingularInt32Field(value: self.rewardType, fieldNumber: 7)
+      try visitor.visitSingularInt32Field(value: self.rewardType, fieldNumber: 8)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -105,6 +112,7 @@ extension WalletModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     if lhs.id != rhs.id {return false}
     if lhs.mapTokenID != rhs.mapTokenID {return false}
     if lhs.name != rhs.name {return false}
+    if lhs.name2 != rhs.name2 {return false}
     if lhs.imageURL != rhs.imageURL {return false}
     if lhs.expirationDate != rhs.expirationDate {return false}
     if lhs.campaignName != rhs.campaignName {return false}

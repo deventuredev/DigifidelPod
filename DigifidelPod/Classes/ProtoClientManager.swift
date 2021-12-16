@@ -7,8 +7,13 @@ import Loooot
 public class ProtoClientManager: ProtoHttpManagerDelegate {
     public static var shared: ProtoHttpManagerDelegate! { get { return ProtoClientManager() } }
     
-    private let webApiProductionUrl = "https://loooot.app/webapi3/"
-    private let webProductionUrl = "https://loooot.app/api/"
+    //Local
+    private let webApiProductionUrl = "http://84.232.230.195:182/"
+    private let webProductionUrl = "http://84.232.230.195:145/api/"
+    
+    //Production
+//    private let webApiProductionUrl = "https://loooot.app/webapi3/"
+//    private let webProductionUrl = "https://loooot.app/api/"
     
     private let httpMethodPost = "POST"
     private let httpMethodGet = "GET"
@@ -38,7 +43,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
         if !termsAndConditionsUrl.isEmpty {
             return termsAndConditionsUrl
         }
-        let url = "\(webProductionUrl)\(EndPoint.downloadTerms)?\(StringConstants.clientId)=\(BaseLooootManager.sharedInstance.getClienId())"
+        let url = "\(webProductionUrl)\(EndPoint.downloadTerms)?\(StringConstants.clientId)=\(BaseLooootManager.sharedInstance.getClientId())&\(StringConstants.languageId)=\(BaseLooootManager.sharedInstance.getCurrentLanguageId())"
         print(url)
         return url
     }
@@ -47,7 +52,56 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
         if !faqUrl.isEmpty {
             return faqUrl
         }
-        return "\(webProductionUrl)\(EndPoint.faq)?\(StringConstants.clientId)=\(BaseLooootManager.sharedInstance.getClienId())"
+        return "\(webProductionUrl)\(EndPoint.faq)?\(StringConstants.clientId)=\(BaseLooootManager.sharedInstance.getClientId())&\(StringConstants.languageId)=\(BaseLooootManager.sharedInstance.getCurrentLanguageId())"
+    }
+    
+    public func getLanguagesByClient(clientId: Int64, completion: @escaping (_ data: Array<LanguageModel>?, _ isSuccessful: Bool) -> Void) {
+        let parameters = [
+            StringConstants.clientId: String(clientId)
+        ]
+        
+        let url = generateQueryUrl(apiEndpoint: EndPoint.getLanguagesByClient, parameters: parameters)
+        let urlRequest = createURLRequest(url: url, method: httpMethodGet)
+        let task = urlSession.dataTask(with: urlRequest) { (data, response, error) in
+            
+            do
+            {
+                if(data == nil)
+                {
+                    DispatchQueue.main.async {
+                        completion(nil, false)
+                    }
+                    return
+                }
+                let protoModel = try GetLanguagesResponseProto.init(serializedData: data!)
+
+                if protoModel.response.success
+                {
+                    var languages = Array<LanguageModel>()
+                    for protoLanguage in protoModel.data {
+                        let language = LanguageModel(id: protoLanguage.id, name: protoLanguage.name, iso2: protoLanguage.iso2)
+                        languages.append(language)
+                    }
+                    
+                    DispatchQueue.main.async {
+                        completion(languages, true)
+                    }
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    completion(nil, false)
+                }
+            }
+            catch let error
+            {
+                DispatchQueue.main.async {
+                    completion(nil, false)
+                }
+                print(error.localizedDescription)
+            }
+        }
+        task.resume()
     }
     
     public func setTermsAndConditionsUrl(url: String) {
@@ -56,6 +110,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
     
     public func initializeLooootManager(playerIdentifier: String, clientId: Int64, completion: @escaping (_ data: InitResponse?, _ isSuccessful: Bool) -> Void) {
         let parameters = [
+            StringConstants.languageId: String(LooootManager.shared.getCurrentLanguageId()),
             StringConstants.playerIdentifier: playerIdentifier,
             StringConstants.clientId: String(clientId)
         ]
@@ -120,9 +175,8 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
     }
 
     public func startSession(currentTime: String, completion: @escaping (_ data: StartSessionResponse?, _ isSuccessful: Bool) -> Void) {
-
         var startSessionModelProto = StartSessionModelProto()
-        startSessionModelProto.clientID = BaseLooootManager.sharedInstance.getClienId()
+        startSessionModelProto.clientID = BaseLooootManager.sharedInstance.getClientId()
         startSessionModelProto.playerID = BaseLooootManager.sharedInstance.getPlayerId()
         startSessionModelProto.campaignIDList = BaseLooootManager.sharedInstance.getCampaignIdList()
         startSessionModelProto.latitude = BaseLooootManager.sharedInstance.getCurrentLatitude()!
@@ -198,8 +252,9 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
     
     public func getCampaigns(completion: @escaping (Array<Campaign>?, Bool) -> Void) {
         let parameters = [
+            StringConstants.languageId: String(LooootManager.shared.getCurrentLanguageId()),
             StringConstants.playerId: BaseLooootManager.sharedInstance.getPlayerId().description,
-            StringConstants.clientId: String(BaseLooootManager.sharedInstance.getClienId()),
+            StringConstants.clientId: String(BaseLooootManager.sharedInstance.getClientId()),
             StringConstants.playerIdentifier: BaseLooootManager.sharedInstance.getPlayerIdentifier()
         ]
         
@@ -267,6 +322,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
     
     public func getTokensMinifiedList(campaignId: Int64, completion: @escaping (Array<RewardTypeList>?, Bool) -> Void) {
         let parameters = [
+            StringConstants.languageId: String(LooootManager.shared.getCurrentLanguageId()),
             StringConstants.campaignId: campaignId.description
         ]
         
@@ -296,6 +352,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
                         let tok = RewardTypeList(
                             id: protoToken.id,
                             name: protoToken.name,
+                            name2: protoToken.name2,
                             campaignNames: protoToken.campaignNames,
                             rewardImageUrl: protoToken.tokenImageURL,
                             rewardType: Int(protoToken.rewardType))
@@ -335,6 +392,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
         protoPost.campaignIDList = BaseLooootManager.sharedInstance.getCampaignIdList()
         protoPost.latestUpdate = currentTimeAsISO
         protoPost.sessionID = BaseLooootManager.sharedInstance.getSessionId()!
+        protoPost.languageID = LooootManager.shared.getCurrentLanguageId()
         let data:Data = try! protoPost.serializedData()
         
         let url = generateQueryUrl(apiEndpoint: EndPoint.getTokensByLocation, parameters: emptyParameters)
@@ -368,6 +426,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
                                 latitude: minimisedMapToken.latitude,
                                 longitude: minimisedMapToken.longitude,
                                 name: mapTokenType.name,
+                                name2: mapTokenType.name2,
                                 imageUrl: mapTokenType.imageURL)
                             mapTokenList.append(mapToken)
                         }
@@ -399,6 +458,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
         var protoPost = GetAllTokensModelProto()
         protoPost.userID = BaseLooootManager.sharedInstance.getPlayerId()
         protoPost.campaignIDList = BaseLooootManager.sharedInstance.getCampaignIdList()
+        protoPost.languageID = LooootManager.shared.getCurrentLanguageId()
         let data:Data = try! protoPost.serializedData()
         
         let url = generateQueryUrl(apiEndpoint: EndPoint.getTokens, parameters: emptyParameters)
@@ -430,6 +490,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
                         tmpReward.setRewardImageUrl(rewardImageUrl: item.tokenImageURL)
                         tmpReward.setCampaignNames(campaignNames: item.campaignNames)
                         tmpReward.setName(name: item.name)
+                        tmpReward.setName2(name2: item.name2)
                         list.append(tmpReward)
                     }
                     
@@ -457,6 +518,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
     
     public func getTokenTypeById(tokenTypeId: Int64, completion: @escaping (RewardTypeDetails?, Bool) -> Void) {
         let parameters = [
+            StringConstants.languageId: String(LooootManager.shared.getCurrentLanguageId()),
             StringConstants.tokenTypeId: tokenTypeId.description
         ]
         
@@ -484,6 +546,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
                     let rewardTypeDetails = RewardTypeDetails()
                     rewardTypeDetails.setId(id: item.id)
                     rewardTypeDetails.setName(name: item.name)
+                    rewardTypeDetails.setName2(name2: item.name2)
                     rewardTypeDetails.setMessage(message: item.message)
                     rewardTypeDetails.setImageUrl(imageUrl: item.imageURL)
                     rewardTypeDetails.setRedeemType(redeemType: Int(item.redeemType))
@@ -517,22 +580,22 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
     }
     
     public func claimToken(reward: MapReward, proximity: Int, claimedAt: String, lat: Double, lng: Double, completion: @escaping (WebResponse<RewardClaimResponse>?, Bool) -> Void) {
-        
-        var p = ClaimModelProto()
-        p.clientID = BaseLooootManager.sharedInstance.getClienId()
-        p.tokenID = reward.getId()
-        p.userID =  BaseLooootManager.sharedInstance.getPlayerId()
-        p.campaignID = reward.getCampaignId()
-        p.playerLatitude = lat
-        p.playerLongitude = lng
-        p.tokenLatitude = reward.getLatitude()
-        p.tokenLongitude = reward.getLongitude()
-        p.claimedAt = claimedAt
-        p.campaignProximity = Int32(proximity)
-        p.tokenTypeID = reward.getRewardTypeId()
-        p.sessionID = BaseLooootManager.sharedInstance.getSessionId()!
-        p.groupID = reward.getGroupId()
-        let data:Data = try! p.serializedData()
+        var model = ClaimModelProto()
+        model.clientID = BaseLooootManager.sharedInstance.getClientId()
+        model.tokenID = reward.getId()
+        model.userID =  BaseLooootManager.sharedInstance.getPlayerId()
+        model.campaignID = reward.getCampaignId()
+        model.playerLatitude = lat
+        model.playerLongitude = lng
+        model.tokenLatitude = reward.getLatitude()
+        model.tokenLongitude = reward.getLongitude()
+        model.claimedAt = claimedAt
+        model.campaignProximity = Int32(proximity)
+        model.tokenTypeID = reward.getRewardTypeId()
+        model.sessionID = BaseLooootManager.sharedInstance.getSessionId()!
+        model.groupID = reward.getGroupId()
+        model.languageID = LooootManager.shared.getCurrentLanguageId()
+        let data:Data = try! model.serializedData()
         
         let url = generateQueryUrl(apiEndpoint: EndPoint.claimToken, parameters: emptyParameters)
         let urlRequest = createURLRequest(url: url, method: httpMethodPost, body: data)
@@ -594,6 +657,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
     
     public func redeemToken(tokenId: Int64, redeemedAt: String, completion: @escaping (RewardTypeDetails?, Bool) -> Void) {
         let parameters = [
+            StringConstants.languageId: String(LooootManager.shared.getCurrentLanguageId()),
             StringConstants.userId: BaseLooootManager.sharedInstance.getPlayerId().description,
             StringConstants.tokenId: tokenId.description,
             StringConstants.redeemedAt: redeemedAt
@@ -621,6 +685,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
                     let reward = RewardTypeDetails()
                     reward.setId(id: Int64(item.id))
                     reward.setName(name: item.name)
+                    reward.setName2(name2: item.name2)
                     reward.setMessage(message: item.message)
                     reward.setImageUrl(imageUrl: item.imageURL)
                     reward.setRedeemType(redeemType: Int(item.redeemType))
@@ -652,8 +717,9 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
     
     public func getWallet(completion: @escaping (Array<WalletList>?, Bool) -> Void) {
         let parameters = [
+            StringConstants.languageId: String(LooootManager.shared.getCurrentLanguageId()),
             StringConstants.userId: BaseLooootManager.sharedInstance.getPlayerId().description,
-            StringConstants.clientId: String(BaseLooootManager.sharedInstance.getClienId())
+            StringConstants.clientId: String(BaseLooootManager.sharedInstance.getClientId())
         ]
         
         let url = generateQueryUrl(apiEndpoint: EndPoint.getWallet, parameters: parameters)
@@ -679,10 +745,9 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
                     
                     var walletTokens = Array<WalletList>()
                     for item in protoModel.dataList {
-                        let tmpWallet = WalletList(id: item.id, name: item.name, rewardImageUrl: item.imageURL, mapRewardId: item.mapTokenID, expirationDate: Date.init(), campaignName: item.campaignName)
-                          let expirationDate = df.date(from: item.expirationDate)
-                        if expirationDate != nil
-                        {
+                        let tmpWallet = WalletList(id: item.id, name: item.name, name2: item.name2, rewardImageUrl: item.imageURL, rewardType: Int(item.rewardType), mapRewardId: item.mapTokenID, expirationDate: Date.init(), campaignName: item.campaignName)
+                        let expirationDate = df.date(from: item.expirationDate)
+                        if expirationDate != nil {
                             tmpWallet.setExpirationDate(expirationDate: expirationDate!)
                         }
                         walletTokens.append(tmpWallet)
@@ -710,8 +775,9 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
     
     public func getNextAd(adImageId: Int64, completion: @escaping (Ad?, Bool) -> Void) {
         let parameters = [
+            StringConstants.languageId: String(LooootManager.shared.getCurrentLanguageId()),
             StringConstants.userId: BaseLooootManager.sharedInstance.getPlayerId().description,
-            StringConstants.clientId: String(BaseLooootManager.sharedInstance.getClienId()),
+            StringConstants.clientId: String(BaseLooootManager.sharedInstance.getClientId()),
             StringConstants.lastAdImageId: adImageId.description
         ]
         
@@ -770,6 +836,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
         adDisplayProto.adID = adDisplayedModel.getAdId()
         adDisplayProto.currentTime = adDisplayedModel.getCurrentISOTime()
         adDisplayProto.playerID = adDisplayedModel.getPlayerId()
+        adDisplayProto.languageID = LooootManager.shared.getCurrentLanguageId()
         
         let data:Data = try! adDisplayProto.serializedData()
         let url = generateQueryUrl(apiEndpoint: EndPoint.adShown, parameters: emptyParameters)
@@ -799,10 +866,8 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
         task.resume()
     }
     
-    private func getRequestTime(endpoint:String, time:Date, success:Bool)
-    {
-        if !BaseLooootManager.sharedInstance.isDebugMode()
-        {
+    private func getRequestTime(endpoint:String, time:Date, success:Bool) {
+        if !BaseLooootManager.sharedInstance.isDebugMode() {
             return
         }
         let executionTime = Date().timeIntervalSince(time)
