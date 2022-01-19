@@ -113,11 +113,7 @@ struct TokenTypeDetailsModelProto {
 
   var redeemType: Int32 = 0
 
-  var promotionDescription: String = String()
-
   var redemtionRules: String = String()
-
-  var companyLogoURL: String = String()
 
   var promotionImageURL: String = String()
 
@@ -443,13 +439,11 @@ extension TokenTypeDetailsModelProto: SwiftProtobuf.Message, SwiftProtobuf._Mess
     4: .same(proto: "message"),
     5: .same(proto: "imageUrl"),
     6: .same(proto: "redeemType"),
-    7: .same(proto: "promotionDescription"),
-    8: .same(proto: "redemtionRules"),
-    9: .same(proto: "companyLogoUrl"),
-    10: .same(proto: "promotionImageUrl"),
-    11: .same(proto: "qrContent"),
-    12: .same(proto: "status"),
-    13: .same(proto: "campaignId"),
+    7: .same(proto: "redemtionRules"),
+    8: .same(proto: "promotionImageUrl"),
+    9: .same(proto: "qrContent"),
+    10: .same(proto: "status"),
+    11: .same(proto: "campaignId"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -464,13 +458,11 @@ extension TokenTypeDetailsModelProto: SwiftProtobuf.Message, SwiftProtobuf._Mess
       case 4: try { try decoder.decodeSingularStringField(value: &self.message) }()
       case 5: try { try decoder.decodeSingularStringField(value: &self.imageURL) }()
       case 6: try { try decoder.decodeSingularInt32Field(value: &self.redeemType) }()
-      case 7: try { try decoder.decodeSingularStringField(value: &self.promotionDescription) }()
-      case 8: try { try decoder.decodeSingularStringField(value: &self.redemtionRules) }()
-      case 9: try { try decoder.decodeSingularStringField(value: &self.companyLogoURL) }()
-      case 10: try { try decoder.decodeSingularStringField(value: &self.promotionImageURL) }()
-      case 11: try { try decoder.decodeSingularStringField(value: &self.qrContent) }()
-      case 12: try { try decoder.decodeSingularInt32Field(value: &self.status) }()
-      case 13: try { try decoder.decodeSingularInt64Field(value: &self.campaignID) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.redemtionRules) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self.promotionImageURL) }()
+      case 9: try { try decoder.decodeSingularStringField(value: &self.qrContent) }()
+      case 10: try { try decoder.decodeSingularInt32Field(value: &self.status) }()
+      case 11: try { try decoder.decodeSingularInt64Field(value: &self.campaignID) }()
       default: break
       }
     }
@@ -495,26 +487,20 @@ extension TokenTypeDetailsModelProto: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if self.redeemType != 0 {
       try visitor.visitSingularInt32Field(value: self.redeemType, fieldNumber: 6)
     }
-    if !self.promotionDescription.isEmpty {
-      try visitor.visitSingularStringField(value: self.promotionDescription, fieldNumber: 7)
-    }
     if !self.redemtionRules.isEmpty {
-      try visitor.visitSingularStringField(value: self.redemtionRules, fieldNumber: 8)
-    }
-    if !self.companyLogoURL.isEmpty {
-      try visitor.visitSingularStringField(value: self.companyLogoURL, fieldNumber: 9)
+      try visitor.visitSingularStringField(value: self.redemtionRules, fieldNumber: 7)
     }
     if !self.promotionImageURL.isEmpty {
-      try visitor.visitSingularStringField(value: self.promotionImageURL, fieldNumber: 10)
+      try visitor.visitSingularStringField(value: self.promotionImageURL, fieldNumber: 8)
     }
     if !self.qrContent.isEmpty {
-      try visitor.visitSingularStringField(value: self.qrContent, fieldNumber: 11)
+      try visitor.visitSingularStringField(value: self.qrContent, fieldNumber: 9)
     }
     if self.status != 0 {
-      try visitor.visitSingularInt32Field(value: self.status, fieldNumber: 12)
+      try visitor.visitSingularInt32Field(value: self.status, fieldNumber: 10)
     }
     if self.campaignID != 0 {
-      try visitor.visitSingularInt64Field(value: self.campaignID, fieldNumber: 13)
+      try visitor.visitSingularInt64Field(value: self.campaignID, fieldNumber: 11)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -526,9 +512,7 @@ extension TokenTypeDetailsModelProto: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if lhs.message != rhs.message {return false}
     if lhs.imageURL != rhs.imageURL {return false}
     if lhs.redeemType != rhs.redeemType {return false}
-    if lhs.promotionDescription != rhs.promotionDescription {return false}
     if lhs.redemtionRules != rhs.redemtionRules {return false}
-    if lhs.companyLogoURL != rhs.companyLogoURL {return false}
     if lhs.promotionImageURL != rhs.promotionImageURL {return false}
     if lhs.qrContent != rhs.qrContent {return false}
     if lhs.status != rhs.status {return false}

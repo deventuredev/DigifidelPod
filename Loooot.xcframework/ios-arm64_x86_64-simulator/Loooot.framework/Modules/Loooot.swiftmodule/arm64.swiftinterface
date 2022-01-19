@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
 // swift-module-flags: -target arm64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Loooot
 import ARKit
 import AVFoundation
@@ -127,6 +127,8 @@ public protocol RewardDetailsDelegate {
 @objc @_inheritsConvenienceInitializers @IBDesignable @_Concurrency.MainActor(unsafe) public class RewardDetailsView : UIKit.UIView {
   @_Concurrency.MainActor(unsafe) public var viewInitializeDelegate: Loooot.RewardDetailsViewInitializeDelegate?
   @_Concurrency.MainActor(unsafe) public var delegate: Loooot.RewardDetailsDelegate?
+  @_Concurrency.MainActor(unsafe) public var ticketNumber: Swift.String?
+  @_Concurrency.MainActor(unsafe) public var expirationDate: Foundation.Date?
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @_Concurrency.MainActor(unsafe) public func setById(rewardId: Swift.Int64?, typeId: Swift.Int64)
@@ -225,6 +227,7 @@ extension Swift.FloatingPoint {
   @_Concurrency.MainActor(unsafe) public func setSubtitleTextColor(color: Swift.Int)
   @_Concurrency.MainActor(unsafe) public func setMessageTextColor(color: Swift.Int)
   @_Concurrency.MainActor(unsafe) public func setArrowTintColor(color: Swift.Int)
+  @_Concurrency.MainActor(unsafe) public func hideArrow(isHidden: Swift.Bool)
   @available(iOS 3.0, *)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
@@ -321,7 +324,7 @@ public class MinifiedMapReward {
   @objc deinit
 }
 public protocol RewardsTableViewDelegate {
-  func onRewardClicked(rewardTypeId: Swift.Int64, rewardName: Swift.String)
+  func onRewardClicked(rewardTypeId: Swift.Int64, rewardName: Swift.String, redeemType: Swift.Int)
 }
 @objc @_inheritsConvenienceInitializers @IBDesignable @_Concurrency.MainActor(unsafe) public class RewardListView : UIKit.UIView, UIKit.UITableViewDataSource, UIKit.UITableViewDelegate {
   @_Concurrency.MainActor(unsafe) public var delegate: Loooot.RewardsTableViewDelegate?
@@ -505,6 +508,8 @@ extension Loooot.SceneLocationEstimate {
 @_hasMissingDesignatedInitializers public class LanguageIdentifier {
   public static let english: Swift.Int64
   public static let french: Swift.Int64
+  public static let romanian: Swift.Int64
+  public static let german: Swift.Int64
   public static let creole: Swift.Int64
   @objc deinit
 }
@@ -675,7 +680,7 @@ public class LanguageModel {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLayoutSubviews()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewWillTransition(to size: CoreGraphics.CGSize, with coordinator: UIKit.UIViewControllerTransitionCoordinator)
   @_Concurrency.MainActor(unsafe) public func dismissMenu()
-  @_Concurrency.MainActor(unsafe) public func onRewardClicked(rewardTypeId: Swift.Int64, rewardName: Swift.String)
+  @_Concurrency.MainActor(unsafe) public func onRewardClicked(rewardTypeId: Swift.Int64, rewardName: Swift.String, redeemType: Swift.Int)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
@@ -739,7 +744,7 @@ public typealias BoxBuilder = (_ distance: CoreGraphics.CGFloat) -> SceneKit.SCN
 }
 public class Campaign {
   public init()
-  public init(id: Swift.Int64, name: Swift.String, proximity: Swift.Int, startDate: Foundation.Date, endDate: Foundation.Date, rewardsAvailable: Swift.Int, companyLogoUrl: Swift.String?)
+  public init(id: Swift.Int64, name: Swift.String, proximity: Swift.Int, startDate: Foundation.Date, endDate: Foundation.Date, rewardsAvailable: Swift.Int)
   public init(json: [Swift.String : Any])
   public func getId() -> Swift.Int64
   public func setId(id: Swift.Int64)
@@ -753,8 +758,6 @@ public class Campaign {
   public func setEndDate(endDate: Foundation.Date)
   public func getRemainingRewards() -> Swift.Int
   public func setRemainingRewards(remainingRewards: Swift.Int)
-  public func getCompanyLogoUrl() -> Swift.String?
-  public func setCompanyLogoUrl(companyLogoUrl: Swift.String?)
   public func toExtendedItemModel() -> Loooot.ExtendedItemModel
   @objc deinit
 }
@@ -820,21 +823,27 @@ public protocol CampaignListViewDelegate {
   public func setExpirationDate(expirationDate: Foundation.Date)
   public func getRedeemType() -> Swift.Int?
   public func setRedeemType(redeemType: Swift.Int)
+  public func getQrContent() -> Swift.String?
+  public func setQrContent(qrContent: Swift.String?)
   @objc deinit
 }
 public class ExtendedItemModel {
-  public init(title: Swift.String!, subtitle: Swift.String!, description: Swift.String!, pictureUrl: Swift.String!)
-  public init(title: Swift.String!, subtitle: Swift.String!, description: Swift.String!, pictureUrl: Swift.String!, rewardType: Swift.Int)
+  public init(title: Swift.String!, subtitle: Swift.String!, description: Swift.String!, pictureUrl: Swift.String?)
+  public init(title: Swift.String!, subtitle: Swift.String!, description: Swift.String!, pictureUrl: Swift.String?, rewardType: Swift.Int, qrContent: Swift.String?, expirationDate: Foundation.Date?)
   public func getTitle() -> Swift.String!
   public func setTitle(title: Swift.String)
   public func getSubtitle() -> Swift.String!
   public func setSubtitle(subtitle: Swift.String)
   public func getMessage() -> Swift.String!
   public func setMessage(message: Swift.String)
-  public func getPictureUrl() -> Swift.String!
-  public func setPictureUrl(pictureUrl: Swift.String)
+  public func getPictureUrl() -> Swift.String?
+  public func setPictureUrl(pictureUrl: Swift.String?)
   public func getRewardType() -> Swift.Int?
   public func setRewardType(rewardType: Swift.Int)
+  public func getQrContent() -> Swift.String?
+  public func setQrContent(qrContent: Swift.String)
+  public func getExpirationDate() -> Foundation.Date?
+  public func setExpirationDate(expirationDate: Foundation.Date)
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @IBDesignable @_Concurrency.MainActor(unsafe) public class PrimaryButton : UIKit.UIButton {
@@ -926,6 +935,7 @@ extension CoreLocation.CLLocationCoordinate2D {
   @_Concurrency.MainActor(unsafe) open func getErrorView() -> Loooot.ErrorView
   @_Concurrency.MainActor(unsafe) open func getLoadingView() -> Loooot.LoadingView
   @_Concurrency.MainActor(unsafe) open func getTokenCollectedView() -> UIKit.UIView
+  @_Concurrency.MainActor(unsafe) open func getTokenCollectedRewardNameLabel() -> UIKit.UILabel
   @_Concurrency.MainActor(unsafe) open func getTokenCollectedDetailsLabel() -> UIKit.UILabel
   @_Concurrency.MainActor(unsafe) open func getTokenCollectedImage() -> UIKit.UIImageView
   @_Concurrency.MainActor(unsafe) open func animateMapView(latitude: Swift.Double, longitude: Swift.Double, zoom: Swift.Float)
@@ -943,7 +953,7 @@ extension CoreLocation.CLLocationCoordinate2D {
   @_Concurrency.MainActor(unsafe) open func onTokenClicked()
   @_Concurrency.MainActor(unsafe) public func getClosestMarkers(tokens: inout Swift.Array<Loooot.MapReward>, lat: Swift.Double, lng: Swift.Double) -> Swift.Array<Loooot.MapReward>
   @_Concurrency.MainActor(unsafe) public func setOverlayHidden(isHidden: Swift.Bool)
-  @_Concurrency.MainActor(unsafe) public func setTokenCollected(message: Swift.String, collectionRules: Swift.String, isError: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) public func setTokenCollected(rewardName: Swift.String?, message: Swift.String, collectionRules: Swift.String, isError: Swift.Bool)
   @_Concurrency.MainActor(unsafe) public func refreshCampaigns()
   @_Concurrency.MainActor(unsafe) public func getProximity(getCampaignId: Swift.Int64) -> Swift.Int
   @_Concurrency.MainActor(unsafe) public func refreshDebugString()
@@ -1131,15 +1141,6 @@ public protocol ProtoHttpManagerDelegate {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
-@_hasMissingDesignatedInitializers public class FontHelper {
-  public static func initRegularFont(fontName: Swift.String)
-  public static func initBoldFont(fontName: Swift.String)
-  public static func setRegularFont(label: UIKit.UILabel?, ofSize: CoreGraphics.CGFloat)
-  public static func setBoldFont(label: UIKit.UILabel?, ofSize: CoreGraphics.CGFloat)
-  public static func getToolbarFont() -> UIKit.UIFont
-  public static func getBottomNavigationFont() -> UIKit.UIFont
-  @objc deinit
-}
 public protocol MenuDelegate {
   func getMenuViewController() -> UIKit.UIViewController?
   func onMenuOpened()
@@ -1205,7 +1206,7 @@ open class BaseLooootManager {
 }
 public class RewardTypeDetails {
   public init()
-  public init(id: Swift.Int64?, whitelabelId: Swift.Int64?, name: Swift.String?, name2: Swift.String?, message: Swift.String?, imageUrl: Swift.String?, redeemType: Swift.Int?, promotionDescription: Swift.String?, redemptionRules: Swift.String?, companyLogoUrl: Swift.String?, promotionImageUrl: Swift.String?, qrContent: Swift.String?, status: Swift.Int?)
+  public init(id: Swift.Int64?, whitelabelId: Swift.Int64?, name: Swift.String?, name2: Swift.String?, message: Swift.String?, imageUrl: Swift.String?, redeemType: Swift.Int?, redemptionRules: Swift.String?, promotionImageUrl: Swift.String?, qrContent: Swift.String?, status: Swift.Int?)
   public init(json: [Swift.String : Any])
   public func getId() -> Swift.Int64?
   public func setId(id: Swift.Int64?)
@@ -1221,12 +1222,8 @@ public class RewardTypeDetails {
   public func setImageUrl(imageUrl: Swift.String?)
   public func getRedeemType() -> Swift.Int?
   public func setRedeemType(redeemType: Swift.Int?)
-  public func getPromotionDescription() -> Swift.String?
-  public func setPromotionDescription(promotionDescription: Swift.String?)
   public func getRedemptionRules() -> Swift.String?
   public func setRedemptionRules(redemptionRules: Swift.String?)
-  public func getCompanyLogoUrl() -> Swift.String?
-  public func setCompanyLogoUrl(companyLogoUrl: Swift.String!)
   public func getPromotionImageUrl() -> Swift.String?
   public func setPromotionImageUrl(promotionImageUrl: Swift.String?)
   public func getQrContent() -> Swift.String?
@@ -1246,7 +1243,7 @@ public class RewardTypeDetails {
 }
 public class RewardTypeList {
   public init()
-  public init(id: Swift.Int64, name: Swift.String, name2: Swift.String, campaignNames: Swift.Array<Swift.String>?, rewardImageUrl: Swift.String, rewardType: Swift.Int)
+  public init(id: Swift.Int64, name: Swift.String, name2: Swift.String?, campaignNames: Swift.Array<Swift.String>?, rewardImageUrl: Swift.String, rewardType: Swift.Int)
   public init(json: [Swift.String : Any])
   public func getId() -> Swift.Int64
   public func setId(id: Swift.Int64)
@@ -1254,7 +1251,7 @@ public class RewardTypeList {
   public func setCampaignNames(campaignNames: Swift.Array<Swift.String>?)
   public func getName() -> Swift.String
   public func setName(name: Swift.String)
-  public func getName2() -> Swift.String
+  public func getName2() -> Swift.String?
   public func setName2(name2: Swift.String)
   public func getRewardImageUrl() -> Swift.String
   public func setRewardImageUrl(rewardImageUrl: Swift.String)
@@ -1264,7 +1261,6 @@ public class RewardTypeList {
   public func toSimpleItemModelWithRewardType() -> Swift.Array<Loooot.SimpleItemModel>
   public func toSimpleItemModel(campaignName: Swift.String) -> Loooot.SimpleItemModel
   public func toSimpleItemModelWithRewardType(campaignName: Swift.String) -> Loooot.SimpleItemModel
-  public func getTitleForItemModel() -> Swift.String
   @objc deinit
 }
 @objc @_Concurrency.MainActor(unsafe) open class LocationAnnotationNode : Loooot.LocationNode {
@@ -1304,6 +1300,7 @@ public class Ad {
   @objc deinit
 }
 extension UIKit.UINavigationBar {
+  @_Concurrency.MainActor(unsafe) public func setUpNavigationBarWithTitle(title: Swift.String = "")
   @_Concurrency.MainActor(unsafe) public func setUpNavigationBarWithLogo()
   @_Concurrency.MainActor(unsafe) public func setUpNavigationBarWithMenuButtonAndTitle(title: Swift.String = "")
   @_Concurrency.MainActor(unsafe) public func setUpNavigationBarWithMenuButtonAndLogo()
@@ -1313,7 +1310,7 @@ extension UIKit.UINavigationBar {
 @objc @_inheritsConvenienceInitializers public class MapReward : ObjectiveC.NSObject {
   public var position: CoreLocation.CLLocationCoordinate2D
   @objc override dynamic public init()
-  public init(id: Swift.Int64, groupId: Swift.Int64, campaignId: Swift.Int64, rewardTypeId: Swift.Int64, latitude: Swift.Double, longitude: Swift.Double, name: Swift.String, name2: Swift.String, imageUrl: Swift.String)
+  public init(id: Swift.Int64, groupId: Swift.Int64, campaignId: Swift.Int64, rewardTypeId: Swift.Int64, latitude: Swift.Double, longitude: Swift.Double, name: Swift.String, name2: Swift.String?, imageUrl: Swift.String)
   public init(json: [Swift.String : Any])
   public func getId() -> Swift.Int64
   public func setId(id: Swift.Int64)
@@ -1329,10 +1326,11 @@ extension UIKit.UINavigationBar {
   public func setLongitude(longitude: Swift.Double)
   public func getName() -> Swift.String
   public func setName(name: Swift.String)
-  public func getName2() -> Swift.String
+  public func getName2() -> Swift.String?
   public func setName2(name2: Swift.String)
   public func getImageUrl() -> Swift.String
   public func setImageUrl(imageUrl: Swift.String)
+  public func getFullName() -> Swift.String
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class ResponseHelper {
@@ -1408,7 +1406,9 @@ public class SimpleItemModel {
   public static let redeemTOkenDialogMessage: Swift.String
   public static let redeemTokenDialogDecline: Swift.String
   public static let redeemTokenDialogConfirm: Swift.String
+  public static let couponDetailsViewTicketNumber: Swift.String
   public static let couponDetailsViewRedemptionRules: Swift.String
+  public static let couponDetailsViewRaffleDate: Swift.String
   public static let mapViewTooFarToCollectTokenTitle: Swift.String
   public static let mapViewTooFarToCollectTokenMessage: Swift.String
   public static let mapViewConfirm: Swift.String
@@ -1430,6 +1430,7 @@ public class SimpleItemModel {
   public static let couponDetailsViewTokenTitle: Swift.String
   public static let couponDetailsViewCouponTitle: Swift.String
   public static let couponDetailsViewRaffleTitle: Swift.String
+  public static let couponDetailsViewRaffleTicketTitle: Swift.String
   public static let noInternetWarning: Swift.String
   public static let cameraPermissionDenied: Swift.String
   public static let accessLocationPermissionDenied: Swift.String
@@ -1502,7 +1503,7 @@ public class SimpleItemModel {
   @objc deinit
 }
 public class WalletList : Loooot.RewardTypeList {
-  public init(id: Swift.Int64, name: Swift.String, name2: Swift.String, rewardImageUrl: Swift.String, rewardType: Swift.Int, mapRewardId: Swift.Int64, expirationDate: Foundation.Date?, campaignName: Swift.String)
+  public init(id: Swift.Int64, name: Swift.String, name2: Swift.String?, rewardImageUrl: Swift.String, rewardType: Swift.Int, mapRewardId: Swift.Int64, expirationDate: Foundation.Date?, campaignName: Swift.String, qrContent: Swift.String?)
   override public init(json: [Swift.String : Any])
   public func getMapRewardId() -> Swift.Int64?
   public func setMapRewardId(mapRewardId: Swift.Int64)
@@ -1510,8 +1511,9 @@ public class WalletList : Loooot.RewardTypeList {
   public func setExpirationDate(expirationDate: Foundation.Date)
   public func getCampaignName() -> Swift.String
   public func setCampaignName(campaignName: Swift.String)
+  public func getQrContent() -> Swift.String?
+  public func setQrContent(qrContent: Swift.String?)
   public func toExtendedItemModel() -> Loooot.ExtendedItemModel
-  public func toExtendedItemModelWithRewardType() -> Loooot.ExtendedItemModel
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class TranslationManager {
@@ -1523,13 +1525,16 @@ public class WalletList : Loooot.RewardTypeList {
   public func setAppNameText(text: Swift.String)
   public func setCampaignListViewNoItemsText(text: Swift.String)
   public func setCampaignListViewNoItemsSuggestionText(text: Swift.String)
+  public func setCouponDetailsViewTicketNumberText(text: Swift.String)
   public func setCouponDetailsViewRedemptionRulesText(text: Swift.String)
+  public func setCouponDetailsViewRaffleDateText(text: Swift.String)
   public func setCouponDetailsViewRedeemButtonText(text: Swift.String)
-  public func setCouponDetailsRewardsLeftSingle(text: Swift.String)
-  public func setCouponDetailsRewardsLeftPlural(text: Swift.String)
-  public func setCouponDetailsViewTokenTitle(text: Swift.String)
-  public func setCouponDetailsViewCouponTitle(text: Swift.String)
-  public func setCouponDetailsViewRaffleTitle(text: Swift.String)
+  public func setCouponDetailsRewardsLeftSingleText(text: Swift.String)
+  public func setCouponDetailsRewardsLeftPluralText(text: Swift.String)
+  public func setCouponDetailsViewTokenTitleText(text: Swift.String)
+  public func setCouponDetailsViewCouponTitleText(text: Swift.String)
+  public func setCouponDetailsViewRaffleTitleText(text: Swift.String)
+  public func setCouponDetailsViewRaffleTicketTitleText(text: Swift.String)
   public func setNoInternetWarningText(text: Swift.String)
   public func setCameraPermissionDeniedText(text: Swift.String)
   public func setAccessLocationPermissionDeniedText(text: Swift.String)
@@ -1543,11 +1548,11 @@ public class WalletList : Loooot.RewardTypeList {
   public func setWalletViewEmptyText(text: Swift.String)
   public func setWalletViewEmptySuggestionText(text: Swift.String)
   public func setWalletViewExpiresText(text: Swift.String)
-  public func setRedeemTokenDialogTitle(text: Swift.String)
-  public func setRedeemtokenDialogAlert(text: Swift.String)
-  public func setRedeemtokenDialogMessage(text: Swift.String)
-  public func setRedeemtokenDialogDecline(text: Swift.String)
-  public func setRedeemTokenDialogConfirm(text: Swift.String)
+  public func setRedeemTokenDialogTitleText(text: Swift.String)
+  public func setRedeemtokenDialogAlertText(text: Swift.String)
+  public func setRedeemtokenDialogMessageText(text: Swift.String)
+  public func setRedeemtokenDialogDeclineText(text: Swift.String)
+  public func setRedeemTokenDialogConfirmText(text: Swift.String)
   public func setLooootViewControllerMapText(text: Swift.String)
   public func setLooootViewControllerWalletText(text: Swift.String)
   public func setLooootViewControllerHomeText(text: Swift.String)
@@ -1596,6 +1601,12 @@ public class StringWrapper {
   public init(json: [Swift.String : Any])
   public func getValue() -> Swift.String
   public func setValue(value: Swift.String)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class LooootConfig {
+  public static let clientId: Swift.Int64
+  public static let webApiProductionUrl: Swift.String
+  public static let webProductionUrl: Swift.String
   @objc deinit
 }
 public class StartSessionModel {
@@ -1724,7 +1735,7 @@ public class MapRewardType {
   public func setCampaignId(campaignId: Swift.Int64)
   public func getName() -> Swift.String
   public func setName(name: Swift.String)
-  public func getName2() -> Swift.String
+  public func getName2() -> Swift.String?
   public func setName2(name2: Swift.String)
   public func getImageUrl() -> Swift.String
   public func setImageUrl(imageUrl: Swift.String)

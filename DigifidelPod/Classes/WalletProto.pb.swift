@@ -41,6 +41,8 @@ struct WalletModelProto {
 
   var rewardType: Int32 = 0
 
+  var qrContent: String = String()
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -59,6 +61,7 @@ extension WalletModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     6: .same(proto: "expirationDate"),
     7: .same(proto: "campaignName"),
     8: .same(proto: "rewardType"),
+    9: .same(proto: "qrContent"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -75,6 +78,7 @@ extension WalletModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
       case 6: try { try decoder.decodeSingularStringField(value: &self.expirationDate) }()
       case 7: try { try decoder.decodeSingularStringField(value: &self.campaignName) }()
       case 8: try { try decoder.decodeSingularInt32Field(value: &self.rewardType) }()
+      case 9: try { try decoder.decodeSingularStringField(value: &self.qrContent) }()
       default: break
       }
     }
@@ -105,6 +109,9 @@ extension WalletModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     if self.rewardType != 0 {
       try visitor.visitSingularInt32Field(value: self.rewardType, fieldNumber: 8)
     }
+    if !self.qrContent.isEmpty {
+      try visitor.visitSingularStringField(value: self.qrContent, fieldNumber: 9)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -117,6 +124,7 @@ extension WalletModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     if lhs.expirationDate != rhs.expirationDate {return false}
     if lhs.campaignName != rhs.campaignName {return false}
     if lhs.rewardType != rhs.rewardType {return false}
+    if lhs.qrContent != rhs.qrContent {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -7,14 +7,6 @@ import Loooot
 public class ProtoClientManager: ProtoHttpManagerDelegate {
     public static var shared: ProtoHttpManagerDelegate! { get { return ProtoClientManager() } }
     
-    //Local
-    private let webApiProductionUrl = "http://84.232.230.195:182/"
-    private let webProductionUrl = "http://84.232.230.195:145/api/"
-    
-    //Production
-//    private let webApiProductionUrl = "https://loooot.app/webapi3/"
-//    private let webProductionUrl = "https://loooot.app/api/"
-    
     private let httpMethodPost = "POST"
     private let httpMethodGet = "GET"
     private let applicationPROTOBUFF = "application/x-protobuf; charset=UTF-8"
@@ -29,7 +21,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
     private var faqUrl = ""
     
     private func getWebApiUrl() -> String {
-        return webApiProductionUrl
+        return LooootConfig.webApiProductionUrl
     }
     
     private init() {
@@ -43,7 +35,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
         if !termsAndConditionsUrl.isEmpty {
             return termsAndConditionsUrl
         }
-        let url = "\(webProductionUrl)\(EndPoint.downloadTerms)?\(StringConstants.clientId)=\(BaseLooootManager.sharedInstance.getClientId())&\(StringConstants.languageId)=\(BaseLooootManager.sharedInstance.getCurrentLanguageId())"
+        let url = "\(LooootConfig.webProductionUrl)\(EndPoint.downloadTerms)?\(StringConstants.clientId)=\(BaseLooootManager.sharedInstance.getClientId())&\(StringConstants.languageId)=\(BaseLooootManager.sharedInstance.getCurrentLanguageId())"
         print(url)
         return url
     }
@@ -52,7 +44,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
         if !faqUrl.isEmpty {
             return faqUrl
         }
-        return "\(webProductionUrl)\(EndPoint.faq)?\(StringConstants.clientId)=\(BaseLooootManager.sharedInstance.getClientId())&\(StringConstants.languageId)=\(BaseLooootManager.sharedInstance.getCurrentLanguageId())"
+        return "\(LooootConfig.webProductionUrl)\(EndPoint.faq)?\(StringConstants.clientId)=\(BaseLooootManager.sharedInstance.getClientId())&\(StringConstants.languageId)=\(BaseLooootManager.sharedInstance.getCurrentLanguageId())"
     }
     
     public func getLanguagesByClient(clientId: Int64, completion: @escaping (_ data: Array<LanguageModel>?, _ isSuccessful: Bool) -> Void) {
@@ -287,7 +279,6 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
                         tmpCampaign.setName(name: campaignProto.name)
                         tmpCampaign.setProximity(proximity: Int(campaignProto.proximity))
                         tmpCampaign.setRemainingRewards(remainingRewards: Int(campaignProto.tokensAvailable))
-                        tmpCampaign.setCompanyLogoUrl(companyLogoUrl: campaignProto.companyLogoURL)
                         let endDate = df.date(from: campaignProto.endDate)
                         if endDate != nil {
                             tmpCampaign.setEndDate(endDate: endDate!)
@@ -550,8 +541,6 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
                     rewardTypeDetails.setMessage(message: item.message)
                     rewardTypeDetails.setImageUrl(imageUrl: item.imageURL)
                     rewardTypeDetails.setRedeemType(redeemType: Int(item.redeemType))
-                    rewardTypeDetails.setPromotionDescription(promotionDescription: item.promotionDescription)
-                    rewardTypeDetails.setCompanyLogoUrl(companyLogoUrl: item.companyLogoURL)
                     rewardTypeDetails.setPromotionImageUrl(promotionImageUrl: item.promotionImageURL)
                     rewardTypeDetails.setQrContent(qrContent: item.qrContent)
                     rewardTypeDetails.setStatus(status: Int(item.status))
@@ -623,6 +612,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
                     rewardClaimResponse.setMessage(message: protoModel.data.message)
                     rewardClaimResponse.setRedeemType(redeemType: Int(protoModel.data.redeemType))
                     rewardClaimResponse.setRuleLimitMessage(ruleLimitMessage: protoModel.data.ruleLimitMessage)
+                    rewardClaimResponse.setQrContent(qrContent: protoModel.data.qrContent)
                     let df = DateFormatter()
                     df.dateFormat = StringConstants.ISODateFormat
                     
@@ -680,7 +670,6 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
                 let protoModel = try RedeemResponseProto.init(serializedData: data!)
                 self.getRequestTime(endpoint: EndPoint.redeemToken, time: startRequest, success: protoModel.response.success)
                 if protoModel.response.success {
-                    
                     let item = protoModel.data
                     let reward = RewardTypeDetails()
                     reward.setId(id: Int64(item.id))
@@ -689,8 +678,6 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
                     reward.setMessage(message: item.message)
                     reward.setImageUrl(imageUrl: item.imageURL)
                     reward.setRedeemType(redeemType: Int(item.redeemType))
-                    reward.setPromotionDescription(promotionDescription: item.promotionDescription)
-                    reward.setCompanyLogoUrl(companyLogoUrl: item.companyLogoURL)
                     reward.setPromotionImageUrl(promotionImageUrl: item.promotionImageURL)
                     reward.setQrContent(qrContent: item.qrContent)
                     reward.setStatus(status: Int(item.status))
@@ -745,7 +732,7 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
                     
                     var walletTokens = Array<WalletList>()
                     for item in protoModel.dataList {
-                        let tmpWallet = WalletList(id: item.id, name: item.name, name2: item.name2, rewardImageUrl: item.imageURL, rewardType: Int(item.rewardType), mapRewardId: item.mapTokenID, expirationDate: Date.init(), campaignName: item.campaignName)
+                        let tmpWallet = WalletList(id: item.id, name: item.name, name2: item.name2, rewardImageUrl: item.imageURL, rewardType: Int(item.rewardType), mapRewardId: item.mapTokenID, expirationDate: Date.init(), campaignName: item.campaignName, qrContent: item.qrContent)
                         let expirationDate = df.date(from: item.expirationDate)
                         if expirationDate != nil {
                             tmpWallet.setExpirationDate(expirationDate: expirationDate!)

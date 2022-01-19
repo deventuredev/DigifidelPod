@@ -14,6 +14,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     @IBOutlet weak var mapOverlay: UIView!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var tokenCollectedView: UIView!
+    @IBOutlet weak var tokenCollectedRewardName: UILabel!
     @IBOutlet weak var tokenCollectedImage: UIImageView!
     @IBOutlet weak var tokenCollectedDetails: UILabel!
     @IBOutlet weak var tokenCloseView: UIView!
@@ -209,6 +210,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         tokenCollectedView.layer.cornerRadius = 4
         tokenCollectedView.backgroundColor = UIColor(hex: ThemeManager.shared.getPrimaryBackgroundColor())
         tokenCollectedClose.tintColor = UIColor(hex: ThemeManager.shared.getPrimaryColor())
+        tokenCollectedRewardName.textColor = UIColor(hex: ThemeManager.shared.getTextColor())
         tokenCollectedDetails.textColor = UIColor(hex: ThemeManager.shared.getTextColor())
         tokenCollectedButton!.setTitle(BaseLooootManager.sharedInstance.getTranslationManager().getTranslation(key: TranslationConstants.mapViewConfirm), for: UIButton.State.normal)
         
@@ -617,7 +619,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         if reward == nil {
             let model = SignalRService.TokenNotifyPlayerModel(tokenId: arItem.getId(), groupId: arItem.getGroupId(), campaignId: arItem.getCampaignId())
             onTokenCollectedSignal(data: model)
-            setTokenCollected(message: "", collectionRules: ResponseHelper.getMessage(responseCode: ResponseCode.errorTokenAlreadyClaimed), isError: true)
+            setTokenCollected(rewardName: nil, message: "", collectionRules: ResponseHelper.getMessage(responseCode: ResponseCode.errorTokenAlreadyClaimed), isError: true)
             setOverlayHidden(isHidden: false)
             claimTokenBusy = false
             return
@@ -634,12 +636,12 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
 
         let reward = looootMarker
         removeMarker(mapReward: reward!.mapReward)
-       
+
         if BaseLooootManager.sharedInstance.isDebugMode() {
             debugString[3] = "Selected token id: \(tokenSelected.getId().description)"
             refreshDebugString()
         }
-        
+
         claimToken()
     }
     
@@ -662,7 +664,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                     let model = SignalRService.TokenNotifyPlayerModel(tokenId: self.tokenSelected.getId(), groupId: self.tokenSelected.getGroupId(), campaignId: self.tokenSelected.getCampaignId())
                     self.onTokenCollectedSignal(data: model)
                     
-                    self.setTokenCollected(message: "", collectionRules: ResponseHelper.getMessage(responseCode: data!.getStatusCode()), isError: true)
+                    self.setTokenCollected(rewardName: nil, message: "", collectionRules: ResponseHelper.getMessage(responseCode: data!.getStatusCode()), isError: true)
                     self.setOverlayHidden(isHidden: false)
                     self.claimTokenBusy = false
                     return
@@ -671,7 +673,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                 let reward = data!.getData()
                 if data!.getStatusCode() == ResponseCode.errorCampaignNotAvailable
                 {
-                    self.setTokenCollected(message: "", collectionRules: ResponseHelper.getMessage(responseCode: data!.getStatusCode()), isError: true)
+                    self.setTokenCollected(rewardName: nil, message: "", collectionRules: ResponseHelper.getMessage(responseCode: data!.getStatusCode()), isError: true)
                     self.setOverlayHidden(isHidden: false)
                     self.claimTokenBusy = false
                     
@@ -693,14 +695,14 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                         self.tokenSelected.getCampaignId())
                     self.onTokenCollectedSignal(data: model)
                     
-                    self.setTokenCollected(message: (reward.getMessage()!), collectionRules: "", isError: true)
+                    self.setTokenCollected(rewardName: self.tokenSelected.getFullName(), message: (reward.getMessage()!), collectionRules: "", isError: true)
                     self.setOverlayHidden(isHidden: false)
                     self.claimTokenBusy = false
                     return
                 }
                 
                 if ResponseCode.limitReached(statusCode: data!.getStatusCode()) {
-                    self.setTokenCollected(message: (reward.getMessage()!), collectionRules: (reward.getRuleLimitMessage()!), isError: true)
+                    self.setTokenCollected(rewardName: self.tokenSelected.getFullName(), message: (reward.getMessage()!), collectionRules: (reward.getRuleLimitMessage()!), isError: true)
                     
                     var campaignMinifiedList = BaseLooootManager.sharedInstance.getCampaignMinifiedList()
                     for position in 0...campaignMinifiedList.count - 1 {
@@ -714,13 +716,13 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                     self.removeMapTokens(campaignId: self.tokenSelected.getCampaignId())
                 }
                 else {
-                    self.setTokenCollected(message: reward.getMessage()!, collectionRules: "", isError: false)
+                    self.setTokenCollected(rewardName: self.tokenSelected.getFullName(), message: reward.getMessage()!, collectionRules: "", isError: false)
                 }
                 
                 if reward.getRedeemType() == RedeemType.wallet || reward.getRedeemType() == RedeemType.raffle {
                     for campaignMinified in BaseLooootManager.sharedInstance.getCampaignMinifiedList() {
                         if self.tokenSelected.getCampaignId() == campaignMinified.getId() {
-                            let claimedToken = WalletList(id: self.tokenSelected.getRewardTypeId(), name: self.tokenSelected.getName(), name2: self.tokenSelected.getName2(), rewardImageUrl: self.tokenSelected.getImageUrl(), rewardType: Int(reward.getRedeemType()!), mapRewardId: self.tokenSelected.getId(), expirationDate: reward.getExpirationDate(), campaignName: campaignMinified.getName())
+                            let claimedToken = WalletList(id: self.tokenSelected.getRewardTypeId(), name: self.tokenSelected.getName(), name2: self.tokenSelected.getName2(), rewardImageUrl: self.tokenSelected.getImageUrl(), rewardType: Int(reward.getRedeemType()!), mapRewardId: self.tokenSelected.getId(), expirationDate: reward.getExpirationDate(), campaignName: campaignMinified.getName(), qrContent: reward.getQrContent())
                             NotificationCenter.default.post(name: .rewardRedeemed, object: self, userInfo: [NotificationCenterDataConstants.rewardRedeemKey: claimedToken])
                             break
                         }
@@ -791,6 +793,10 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     
     public override func getTokenCollectedView() -> UIView {
         return tokenCollectedView
+    }
+    
+    public override func getTokenCollectedRewardNameLabel() -> UILabel {
+        return tokenCollectedRewardName
     }
     
     public override func getTokenCollectedDetailsLabel() -> UILabel {

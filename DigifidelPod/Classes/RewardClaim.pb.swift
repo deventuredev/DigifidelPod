@@ -33,6 +33,8 @@ struct RewardClaimProto {
 
   var redeemType: Int32 = 0
 
+  var qrContent: String = String()
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -47,6 +49,7 @@ extension RewardClaimProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     2: .standard(proto: "rule_limit_message"),
     3: .same(proto: "expirationDate"),
     4: .standard(proto: "redeem_type"),
+    5: .same(proto: "qrContent"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -59,6 +62,7 @@ extension RewardClaimProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
       case 2: try { try decoder.decodeSingularStringField(value: &self.ruleLimitMessage) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.expirationDate) }()
       case 4: try { try decoder.decodeSingularInt32Field(value: &self.redeemType) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.qrContent) }()
       default: break
       }
     }
@@ -77,6 +81,9 @@ extension RewardClaimProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     if self.redeemType != 0 {
       try visitor.visitSingularInt32Field(value: self.redeemType, fieldNumber: 4)
     }
+    if !self.qrContent.isEmpty {
+      try visitor.visitSingularStringField(value: self.qrContent, fieldNumber: 5)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -85,6 +92,7 @@ extension RewardClaimProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     if lhs.ruleLimitMessage != rhs.ruleLimitMessage {return false}
     if lhs.expirationDate != rhs.expirationDate {return false}
     if lhs.redeemType != rhs.redeemType {return false}
+    if lhs.qrContent != rhs.qrContent {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

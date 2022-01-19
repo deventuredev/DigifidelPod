@@ -37,8 +37,6 @@ struct CampaignModelProto {
 
   var tokensAvailable: Int32 = 0
 
-  var companyLogoURL: String = String()
-
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -99,7 +97,6 @@ extension CampaignModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     4: .same(proto: "StartDate"),
     5: .same(proto: "EndDate"),
     6: .same(proto: "TokensAvailable"),
-    7: .same(proto: "CompanyLogoUrl"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -114,7 +111,6 @@ extension CampaignModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
       case 4: try { try decoder.decodeSingularStringField(value: &self.startDate) }()
       case 5: try { try decoder.decodeSingularStringField(value: &self.endDate) }()
       case 6: try { try decoder.decodeSingularInt32Field(value: &self.tokensAvailable) }()
-      case 7: try { try decoder.decodeSingularStringField(value: &self.companyLogoURL) }()
       default: break
       }
     }
@@ -139,9 +135,6 @@ extension CampaignModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     if self.tokensAvailable != 0 {
       try visitor.visitSingularInt32Field(value: self.tokensAvailable, fieldNumber: 6)
     }
-    if !self.companyLogoURL.isEmpty {
-      try visitor.visitSingularStringField(value: self.companyLogoURL, fieldNumber: 7)
-    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -152,7 +145,6 @@ extension CampaignModelProto: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     if lhs.startDate != rhs.startDate {return false}
     if lhs.endDate != rhs.endDate {return false}
     if lhs.tokensAvailable != rhs.tokensAvailable {return false}
-    if lhs.companyLogoURL != rhs.companyLogoURL {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
