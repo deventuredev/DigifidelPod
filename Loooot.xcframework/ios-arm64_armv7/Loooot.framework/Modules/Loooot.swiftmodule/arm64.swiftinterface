@@ -373,12 +373,19 @@ public class PermissionModel {
 public protocol HomeBarButtonDelegate {
   func onHomePressed()
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class CustomBottomNavigation : UIKit.UITabBar {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class CustomTabBar : UIKit.UITabBar {
   @_Concurrency.MainActor(unsafe) public var homeBarButtonDelegate: Loooot.HomeBarButtonDelegate?
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @_Concurrency.MainActor(unsafe) public init(frame: CoreGraphics.CGRect, initialiseMannually: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) public init(frame: CoreGraphics.CGRect, initialiseManually: Swift.Bool)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) public func disableTabsBesidesHome()
+  @_Concurrency.MainActor(unsafe) public func getMapTabPosition() -> Swift.Int
+  @_Concurrency.MainActor(unsafe) public func getWalletTabPosition() -> Swift.Int
+  @_Concurrency.MainActor(unsafe) public func getCampaignsTabPosition() -> Swift.Int
+  @_Concurrency.MainActor(unsafe) public func getFAQTabPosition() -> Swift.Int
+  @_Concurrency.MainActor(unsafe) public func getMenuTabPosition() -> Swift.Int
+  @objc @_Concurrency.MainActor(unsafe) public func onHomeClick()
   @objc deinit
 }
 extension Foundation.NSNotification.Name {
@@ -391,6 +398,7 @@ extension Foundation.NSNotification.Name {
 }
 extension UIKit.UIImage {
   public class func colorForShadowBar(color: UIKit.UIColor) -> UIKit.UIImage
+  public class func createSelectionIndicator(color: UIKit.UIColor, size: CoreGraphics.CGSize, lineWidth: CoreGraphics.CGFloat) -> UIKit.UIImage
 }
 @objc @_inheritsConvenienceInitializers @IBDesignable @_Concurrency.MainActor(unsafe) public class ErrorView : UIKit.UIView {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
@@ -605,9 +613,6 @@ public class ClaimTokenSignalRModel {
   public func toJson() -> Swift.String
   @objc deinit
 }
-extension UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) public func applyGradient(colors: [CoreGraphics.CGColor])
-}
 @_hasMissingDesignatedInitializers public class SceneLocationEstimate {
   final public let location: CoreLocation.CLLocation
   final public let position: SceneKit.SCNVector3
@@ -672,14 +677,11 @@ public class LanguageModel {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class RewardListViewController : UIKit.UIViewController, Loooot.RewardsTableViewDelegate, Loooot.MenuActionDelegate, UIKit.UITabBarDelegate {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class RewardListViewController : UIKit.UIViewController, Loooot.RewardsTableViewDelegate {
   @_Concurrency.MainActor(unsafe) public static let StoryboardName: Swift.String
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLayoutSubviews()
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewWillTransition(to size: CoreGraphics.CGSize, with coordinator: UIKit.UIViewControllerTransitionCoordinator)
-  @_Concurrency.MainActor(unsafe) public func dismissMenu()
   @_Concurrency.MainActor(unsafe) public func onRewardClicked(rewardTypeId: Swift.Int64, rewardName: Swift.String, redeemType: Swift.Int)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
@@ -787,12 +789,12 @@ public protocol CampaignListViewDelegate {
   @_Concurrency.MainActor(unsafe) public func setEmptyListSuggestionText(text: Swift.String)
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class LooootViewController : UIKit.UITabBarController, Loooot.HomeBarButtonDelegate {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class LooootViewController : UIKit.UIViewController, UIKit.UITabBarDelegate, Loooot.HomeBarButtonDelegate {
   @_Concurrency.MainActor(unsafe) public static let StoryboardName: Swift.String
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLayoutSubviews()
+  @_Concurrency.MainActor(unsafe) @objc public func tabBar(_ tabBar: UIKit.UITabBar, didSelect item: UIKit.UITabBarItem)
   @_Concurrency.MainActor(unsafe) public func onHomePressed()
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func tabBar(_ tabBar: UIKit.UITabBar, didSelect item: UIKit.UITabBarItem)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
@@ -850,7 +852,6 @@ public class ExtendedItemModel {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
-  @_Concurrency.MainActor(unsafe) public func setGradient()
   @_Concurrency.MainActor(unsafe) public func setButtonBackgroundColor(color: Swift.Int)
   @objc deinit
 }
@@ -865,7 +866,6 @@ public class ExtendedItemModel {
 @objc @_inheritsConvenienceInitializers @IBDesignable @_Concurrency.MainActor(unsafe) public class SecondaryButton : UIKit.UIButton {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
   @_Concurrency.MainActor(unsafe) public func setButtonBackgroundColor(color: Swift.Int)
   @objc deinit
 }
@@ -936,8 +936,13 @@ extension CoreLocation.CLLocationCoordinate2D {
   @_Concurrency.MainActor(unsafe) open func getLoadingView() -> Loooot.LoadingView
   @_Concurrency.MainActor(unsafe) open func getTokenCollectedView() -> UIKit.UIView
   @_Concurrency.MainActor(unsafe) open func getTokenCollectedRewardNameLabel() -> UIKit.UILabel
+  @_Concurrency.MainActor(unsafe) open func getConstraintTokenCollectedRewardNameTop() -> UIKit.NSLayoutConstraint
   @_Concurrency.MainActor(unsafe) open func getTokenCollectedDetailsLabel() -> UIKit.UILabel
   @_Concurrency.MainActor(unsafe) open func getTokenCollectedImage() -> UIKit.UIImageView
+  @_Concurrency.MainActor(unsafe) open func getTokenCollectedButtonContainer() -> UIKit.UIView
+  @_Concurrency.MainActor(unsafe) open func getConstraintTokenCollectedButtonContainerTop() -> UIKit.NSLayoutConstraint
+  @_Concurrency.MainActor(unsafe) open func getConstraintTokenCollectedButtonContainerBottom() -> UIKit.NSLayoutConstraint
+  @_Concurrency.MainActor(unsafe) open func getTokenCollectedButton() -> Loooot.PrimaryButton
   @_Concurrency.MainActor(unsafe) open func animateMapView(latitude: Swift.Double, longitude: Swift.Double, zoom: Swift.Float)
   @_Concurrency.MainActor(unsafe) open func getDebugTextLabel() -> UIKit.UILabel
   @_Concurrency.MainActor(unsafe) open func getMapOverlay() -> UIKit.UIView
@@ -1049,27 +1054,6 @@ public class ClaimRewardModel {
   public func toJson() -> Swift.String
   @objc deinit
 }
-@_hasMissingDesignatedInitializers public class HttpClientManager {
-  public static let shared: Loooot.HttpClientManager
-  public func getTermsAndConditionsUrl() -> Swift.String
-  public func getFAQUrl() -> Swift.String
-  public func setTermsAndConditionsUrl(url: Swift.String)
-  public func initializeLooootManager(playerIdentifier: Swift.String, clientId: Swift.Int64, completion: @escaping (_ data: Loooot.InitResponse?, _ isSuccessful: Swift.Bool) -> Swift.Void)
-  public func startSession(currentTime: Swift.String, completion: @escaping (_ data: Loooot.StartSessionResponse?, _ isSuccessful: Swift.Bool) -> Swift.Void)
-  public func endSession(currentTime: Swift.String)
-  public func getCampaigns(completion: @escaping (_ data: Swift.Array<Loooot.Campaign>?, _ isSuccessful: Swift.Bool) -> Swift.Void)
-  public func getTokensMinifiedList(campaignId: Swift.Int64, completion: @escaping (_ data: Swift.Array<Loooot.RewardTypeList>?, _ isSuccessful: Swift.Bool) -> Swift.Void)
-  public func getTokensByLocation(completion: @escaping (_ data: Swift.Array<Loooot.MapReward>?, _ isSuccessful: Swift.Bool) -> Swift.Void)
-  public func getAllTokens(completion: @escaping (_ data: Swift.Array<Loooot.RewardTypeList>?, _ isSuccessful: Swift.Bool) -> Swift.Void)
-  public func getTokenTypeById(tokenTypeId: Swift.Int64, completion: @escaping (_ data: Loooot.RewardTypeDetails?, _ isSuccessful: Swift.Bool) -> Swift.Void)
-  public func claimToken(reward: Loooot.MapReward, proximity: Swift.Int, claimedAt: Swift.String, lat: Swift.Double, lng: Swift.Double, completion: @escaping (_ data: Loooot.WebResponse<Loooot.RewardClaimResponse>?, _ isSuccessful: Swift.Bool) -> Swift.Void)
-  public func redeemToken(tokenId: Swift.Int64, redeemedAt: Swift.String, completion: @escaping (_ data: Loooot.RewardTypeDetails?, _ isSuccessful: Swift.Bool) -> Swift.Void)
-  public func getWallet(completion: @escaping (_ data: Swift.Array<Loooot.WalletList>?, _ isSuccessful: Swift.Bool) -> Swift.Void)
-  public func getNextAd(adImageId: Swift.Int64, completion: @escaping (_ data: Loooot.Ad?, _ isSuccessful: Swift.Bool) -> Swift.Void)
-  public func adShown(adDisplayedModel: Loooot.AdDisplayedModel)
-  public func adTapped(adDisplayedModel: Loooot.AdDisplayedModel)
-  @objc deinit
-}
 public class ThemeColor {
   public init()
   public init(primaryColor: Swift.Int, secondaryColor: Swift.Int, textColor: Swift.Int, primaryBackgroundColor: Swift.Int, cellBackgroundColor: Swift.Int, primaryButtonBackgroundColor: Swift.Int, primaryButtonTextColor: Swift.Int, secondaryButtonBackgroundColor: Swift.Int, secondaryButtonTextColor: Swift.Int, disabledColor: Swift.Int, errorColor: Swift.Int, clusterColor: Swift.Int, toolbarBackgroundColor: Swift.Int, toolbarTextColor: Swift.Int, toolbarBackColor: Swift.Int, navBarBackgroundColor: Swift.Int, navBarUnselectedColor: Swift.Int, navBarSelectedColor: Swift.Int)
@@ -1146,6 +1130,9 @@ public protocol MenuDelegate {
   func onMenuOpened()
   func onMenuClosed()
 }
+public protocol MenuTabBarDelegate {
+  func getMenuViewController() -> UIKit.UIViewController?
+}
 public protocol MenuActionDelegate {
   func dismissMenu()
 }
@@ -1159,6 +1146,7 @@ open class BaseLooootManager {
   public static let sharedInstance: Loooot.BaseLooootManager
   public static let googleMapsApiKey: Swift.String
   public var menuDelegate: Loooot.MenuDelegate?
+  public var menuTabBarDelegate: Loooot.MenuTabBarDelegate?
   public var menuActionDelegate: Loooot.MenuActionDelegate?
   public var homeDelegate: Loooot.HomeDelegate?
   public var mapViewDelegate: Loooot.MapViewDelegate?
@@ -1166,7 +1154,6 @@ open class BaseLooootManager {
   public init()
   public static func initialize(playerIdentifier: Swift.String, clientId: Swift.Int64, completion: @escaping (_ isSuccessful: Swift.Bool) -> Swift.Void)
   public func getBundle() -> Foundation.Bundle
-  public func getHttpClient() -> Loooot.HttpClientManager
   public func getProtoHttpClient() -> Loooot.ProtoHttpManagerDelegate
   public func getTranslationManager() -> Loooot.TranslationManager
   public func startLoooot(viewController: UIKit.UIViewController, playerIdentifier: Swift.String)
@@ -1426,6 +1413,7 @@ public class SimpleItemModel {
   public static let looootViewControllerHome: Swift.String
   public static let looootViewControllerCampaigns: Swift.String
   public static let looootViewControllerFAQ: Swift.String
+  public static let looootViewControllerMenu: Swift.String
   public static let couponDetailsViewRedeemButton: Swift.String
   public static let couponDetailsViewTokenTitle: Swift.String
   public static let couponDetailsViewCouponTitle: Swift.String
@@ -1558,6 +1546,7 @@ public class WalletList : Loooot.RewardTypeList {
   public func setLooootViewControllerHomeText(text: Swift.String)
   public func setLooootViewControllerCampaignsText(text: Swift.String)
   public func setLooootViewControllerFAQText(text: Swift.String)
+  public func setLooootViewControllerMenuText(text: Swift.String)
   public func setErrorText(text: Swift.String)
   public func setErrorFailedToInitializeLooootText(text: Swift.String)
   public func setErrorTokenAlreadyClaimedText(text: Swift.String)
@@ -1754,6 +1743,7 @@ public class MapRewardType {
 }
 extension UIKit.UIView {
   @_Concurrency.MainActor(unsafe) public func showAutoDismissAlertWithOneButton(title: Swift.String, message: Swift.String, style: UIKit.UIAlertController.Style = .alert, buttonTitle: Swift.String, buttonStyle: UIKit.UIAlertAction.Style = .default, dismissAfterSeconds: Swift.Int = 10)
+  @_Concurrency.MainActor(unsafe) public func setDigifidelBackground()
 }
 @objc @_inheritsConvenienceInitializers @IBDesignable @_Concurrency.MainActor(unsafe) public class AdInterstitialViewController : UIKit.UIViewController {
   @_Concurrency.MainActor(unsafe) public static let StoryboardName: Swift.String
@@ -1816,8 +1806,18 @@ public class EndSessionModel {
   public func toJson() -> Swift.String
   @objc deinit
 }
+@_hasMissingDesignatedInitializers public class BackgroundHelper {
+  public static var shared: Loooot.BackgroundHelper
+  public func getBackground() -> QuartzCore.CALayer
+  public func getBackgroundInternal() -> QuartzCore.CALayer
+  @objc deinit
+}
 extension SceneKit.SCNVector3 {
   public func distance(to anotherVector: SceneKit.SCNVector3) -> Swift.Float
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class DigifidelBackgroundHelper : Loooot.BackgroundHelper {
+  override public func getBackgroundInternal() -> QuartzCore.CALayer
+  @objc deinit
 }
 extension Loooot.Reachability.Connection : Swift.Equatable {}
 extension Loooot.Reachability.Connection : Swift.Hashable {}

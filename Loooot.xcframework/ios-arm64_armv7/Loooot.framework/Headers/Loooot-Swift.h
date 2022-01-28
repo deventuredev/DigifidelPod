@@ -295,11 +295,12 @@ SWIFT_CLASS("_TtC6Loooot21CampaignTableViewCell")
 @end
 
 
-SWIFT_CLASS("_TtC6Loooot22CustomBottomNavigation")
-@interface CustomBottomNavigation : UITabBar
+SWIFT_CLASS("_TtC6Loooot12CustomTabBar")
+@interface CustomTabBar : UITabBar
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)layoutSubviews;
+- (void)onHomeClick;
 @end
 
 
@@ -422,9 +423,9 @@ SWIFT_CLASS("_TtC6Loooot15LocationService")
 @class UITabBarItem;
 
 SWIFT_CLASS("_TtC6Loooot20LooootViewController")
-@interface LooootViewController : UITabBarController
+@interface LooootViewController : UIViewController <UITabBarDelegate>
 - (void)viewDidLoad;
-- (void)viewWillAppear:(BOOL)animated;
+- (void)viewDidLayoutSubviews;
 - (void)tabBar:(UITabBar * _Nonnull)tabBar didSelectItem:(UITabBarItem * _Nonnull)item;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
@@ -512,15 +513,12 @@ SWIFT_CLASS("_TtC6Loooot14RewardListView")
 - (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
 @end
 
-@protocol UIViewControllerTransitionCoordinator;
 
 SWIFT_CLASS("_TtC6Loooot24RewardListViewController")
-@interface RewardListViewController : UIViewController <UITabBarDelegate>
+@interface RewardListViewController : UIViewController
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
-- (void)viewDidAppear:(BOOL)animated;
 - (void)viewDidLayoutSubviews;
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -604,7 +602,6 @@ SWIFT_CLASS("_TtC6Loooot15SecondaryButton")
 @interface SecondaryButton : UIButton
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (void)layoutSubviews;
 @end
 
 
@@ -628,7 +625,6 @@ SWIFT_CLASS("_TtC6Loooot32TermsAndConditionsViewController")
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
-
 
 
 
@@ -964,11 +960,12 @@ SWIFT_CLASS("_TtC6Loooot21CampaignTableViewCell")
 @end
 
 
-SWIFT_CLASS("_TtC6Loooot22CustomBottomNavigation")
-@interface CustomBottomNavigation : UITabBar
+SWIFT_CLASS("_TtC6Loooot12CustomTabBar")
+@interface CustomTabBar : UITabBar
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)layoutSubviews;
+- (void)onHomeClick;
 @end
 
 
@@ -1091,9 +1088,9 @@ SWIFT_CLASS("_TtC6Loooot15LocationService")
 @class UITabBarItem;
 
 SWIFT_CLASS("_TtC6Loooot20LooootViewController")
-@interface LooootViewController : UITabBarController
+@interface LooootViewController : UIViewController <UITabBarDelegate>
 - (void)viewDidLoad;
-- (void)viewWillAppear:(BOOL)animated;
+- (void)viewDidLayoutSubviews;
 - (void)tabBar:(UITabBar * _Nonnull)tabBar didSelectItem:(UITabBarItem * _Nonnull)item;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
@@ -1181,15 +1178,12 @@ SWIFT_CLASS("_TtC6Loooot14RewardListView")
 - (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
 @end
 
-@protocol UIViewControllerTransitionCoordinator;
 
 SWIFT_CLASS("_TtC6Loooot24RewardListViewController")
-@interface RewardListViewController : UIViewController <UITabBarDelegate>
+@interface RewardListViewController : UIViewController
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
-- (void)viewDidAppear:(BOOL)animated;
 - (void)viewDidLayoutSubviews;
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -1273,7 +1267,6 @@ SWIFT_CLASS("_TtC6Loooot15SecondaryButton")
 @interface SecondaryButton : UIButton
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (void)layoutSubviews;
 @end
 
 
@@ -1297,7 +1290,6 @@ SWIFT_CLASS("_TtC6Loooot32TermsAndConditionsViewController")
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
-
 
 
 
