@@ -48,7 +48,7 @@ extension Loooot.SceneLocationView {
   @_Concurrency.MainActor(unsafe) @objc dynamic public func renderer(_ renderer: SceneKit.SCNSceneRenderer, willRenderScene scene: SceneKit.SCNScene, atTime time: Foundation.TimeInterval)
 }
 public class ThemeImages {
-  public init(logo: Swift.String, cameraPermission: Swift.String, cameraPermissionDenied: Swift.String, locationPermission: Swift.String, locationPermissionDenied: Swift.String, noInternet: Swift.String, placeholderImage: Swift.String, campaignTab: Swift.String, homeTab: Swift.String, walletTab: Swift.String, startExperience: Swift.String, emptyCampaignList: Swift.String, emptyTokenList: Swift.String, emptyWallet: Swift.String, pinTab: Swift.String, faqTab: Swift.String, mapTypeMapView: Swift.String, mapTypeSatelliteView: Swift.String)
+  public init(logo: Swift.String, cameraPermission: Swift.String, cameraPermissionDenied: Swift.String, locationPermission: Swift.String, locationPermissionDenied: Swift.String, noInternet: Swift.String, placeholderImage: Swift.String, campaignTab: Swift.String, homeTab: Swift.String, walletTab: Swift.String, startExperience: Swift.String, emptyCampaignList: Swift.String, emptyTokenList: Swift.String, emptyWallet: Swift.String, pinTab: Swift.String, faqTab: Swift.String, mapTypeMapView: Swift.String, mapTypeSatelliteView: Swift.String, back: Swift.String)
   public func getAppLogo() -> UIKit.UIImage
   public func setAppLogo(name: Swift.String)
   public func getCameraPermissionImage() -> UIKit.UIImage
@@ -82,6 +82,7 @@ public class ThemeImages {
   public func getEmptyWalletImage() -> UIKit.UIImage
   public func setEmptyWalletImage(name: Swift.String)
   public func getBackIcon() -> UIKit.UIImage
+  public func setBackIcon(name: Swift.String)
   public func getMenuIcon() -> UIKit.UIImage
   public func getMapTypeMapViewImage() -> UIKit.UIImage
   public func getMapTypeSatelliteViewImage() -> UIKit.UIImage
@@ -132,13 +133,13 @@ public protocol RewardDetailsDelegate {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @_Concurrency.MainActor(unsafe) public func setById(rewardId: Swift.Int64?, typeId: Swift.Int64)
-  @_Concurrency.MainActor(unsafe) public func setViewBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setRedeemButtonTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setRedeemButtonColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setDescriptionTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setTokenNameTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setRedemptionTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setLoadingViewColor(color: Swift.Int)
+  @_Concurrency.MainActor(unsafe) public func setViewBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setRedeemButtonTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setRedeemButtonColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setDescriptionTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setTokenNameTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setRedemptionTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setLoadingViewColor(color: UIKit.UIColor)
   @_Concurrency.MainActor(unsafe) public func setRedeemButtonText(text: Swift.String)
   @_Concurrency.MainActor(unsafe) public func setRedemptionRulesText(text: Swift.String)
   @objc deinit
@@ -220,13 +221,13 @@ extension Swift.FloatingPoint {
   @_Concurrency.MainActor(unsafe) public static let Identifier: Swift.String
   @objc override dynamic public func awakeFromNib()
   @_Concurrency.MainActor(unsafe) public func setData(extendedItemModel: Loooot.ExtendedItemModel)
-  @_Concurrency.MainActor(unsafe) public func setViewBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setPictureBorderColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setPictureBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setTitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setSubtitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setMessageTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setArrowTintColor(color: Swift.Int)
+  @_Concurrency.MainActor(unsafe) public func setViewBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setPictureBorderColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setPictureBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setTitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setSubtitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setMessageTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setArrowTintColor(color: UIKit.UIColor)
   @_Concurrency.MainActor(unsafe) public func hideArrow(isHidden: Swift.Bool)
   @available(iOS 3.0, *)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
@@ -253,25 +254,29 @@ public class ARItem {
   @_Concurrency.MainActor(unsafe) public static let Identifier: Swift.String
   @objc override dynamic public func awakeFromNib()
   @_Concurrency.MainActor(unsafe) public func setData(simpleItemModel: Loooot.SimpleItemModel)
-  @_Concurrency.MainActor(unsafe) public func setViewBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setRewardTypeTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setTitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setSubtitleTextColor(color: Swift.Int)
+  @_Concurrency.MainActor(unsafe) public func setViewBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setPictureContainerBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setRewardTypeTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setTitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setSubtitleTextColor(color: UIKit.UIColor)
   @available(iOS 3.0, *)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
+extension UIKit.UILabel {
+  @_Concurrency.MainActor(unsafe) public func calculateNumberOfLines(text: Swift.String?) -> Swift.Int
+}
 @objc @_inheritsConvenienceInitializers @IBDesignable @_Concurrency.MainActor(unsafe) public class SimpleItemTableViewCell : UIKit.UITableViewCell {
   @_Concurrency.MainActor(unsafe) public static let Identifier: Swift.String
   @objc override dynamic public func awakeFromNib()
   @_Concurrency.MainActor(unsafe) public func setData(simpleItemModel: Loooot.SimpleItemModel)
-  @_Concurrency.MainActor(unsafe) public func setViewBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setPictureBorderColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setPictureBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setTitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setSubtitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setArrowTintColor(color: Swift.Int)
+  @_Concurrency.MainActor(unsafe) public func setViewBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setPictureBorderColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setPictureBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setTitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setSubtitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setArrowTintColor(color: UIKit.UIColor)
   @available(iOS 3.0, *)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
@@ -337,17 +342,17 @@ public protocol RewardsTableViewDelegate {
   @_Concurrency.MainActor(unsafe) public func setTokens(tokens: Swift.Array<Loooot.RewardTypeList>!)
   @_Concurrency.MainActor(unsafe) public func getTokens() -> Swift.Array<Loooot.RewardTypeList>
   @_Concurrency.MainActor(unsafe) public func initTokenList(campaignId: Swift.Int64, campaignName: Swift.String)
-  @_Concurrency.MainActor(unsafe) public func setRewardsTableBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setEmptyRewardListTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setEmptyRewardListSuggestionTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setLoadingViewColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellPictureBorderColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellPictureBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellRewardTypeTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellTitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellSubtitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellArrowTintColor(color: Swift.Int)
+  @_Concurrency.MainActor(unsafe) public func setRewardsTableBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setEmptyRewardListTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setEmptyRewardListSuggestionTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setLoadingViewColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellPictureBorderColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellPictureBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellRewardTypeTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellTitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellSubtitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellArrowTintColor(color: UIKit.UIColor)
   @_Concurrency.MainActor(unsafe) public func setEmptyListText(text: Swift.String)
   @_Concurrency.MainActor(unsafe) public func setEmptyListSuggestionText(text: Swift.String)
   @objc deinit
@@ -405,8 +410,8 @@ extension UIKit.UIImage {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @_Concurrency.MainActor(unsafe) public func setImage(image: UIKit.UIImage)
   @_Concurrency.MainActor(unsafe) public func setMessage(message: Swift.String)
-  @_Concurrency.MainActor(unsafe) public func setViewBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setMessageTextColor(color: Swift.Int)
+  @_Concurrency.MainActor(unsafe) public func setViewBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setMessageTextColor(color: UIKit.UIColor)
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @IBDesignable @_Concurrency.MainActor(unsafe) public class AdBannerView : UIKit.UIView {
@@ -423,10 +428,10 @@ extension UIKit.UIImage {
   @_Concurrency.MainActor(unsafe) public static let Identifier: Swift.String
   @objc override dynamic public func awakeFromNib()
   @_Concurrency.MainActor(unsafe) public func setData(extendedItemModel: Loooot.ExtendedItemModel)
-  @_Concurrency.MainActor(unsafe) public func setViewBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setTitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setSubtitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setMessageTextColor(color: Swift.Int)
+  @_Concurrency.MainActor(unsafe) public func setViewBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setTitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setSubtitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setMessageTextColor(color: UIKit.UIColor)
   @available(iOS 3.0, *)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
@@ -525,11 +530,11 @@ extension Loooot.SceneLocationEstimate {
   @_Concurrency.MainActor(unsafe) public static let Identifier: Swift.String
   @objc override dynamic public func awakeFromNib()
   @_Concurrency.MainActor(unsafe) public func setData(extendedItemModel: Loooot.ExtendedItemModel)
-  @_Concurrency.MainActor(unsafe) public func setViewBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setTitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setSubtitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setMessageTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setArrowTintColor(color: Swift.Int)
+  @_Concurrency.MainActor(unsafe) public func setViewBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setTitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setSubtitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setMessageTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setArrowTintColor(color: UIKit.UIColor)
   @available(iOS 3.0, *)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
@@ -549,18 +554,18 @@ public protocol WalletViewDelegate {
   @_Concurrency.MainActor(unsafe) public func removeRewardFromWallet(rewardIdToRemove: Swift.Int64)
   @_Concurrency.MainActor(unsafe) public func setWalletTokens(walletList: Swift.Array<Loooot.WalletList>!)
   @_Concurrency.MainActor(unsafe) public func getWalletTokens() -> Swift.Array<Loooot.RewardTypeList>
-  @_Concurrency.MainActor(unsafe) public func setWalletBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setEmptyWalletTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setEmptyWalletSuggestionTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setLoadingViewColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellPictureBorderColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellPictureBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellRewardTypeTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellTitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellSubtitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellMessageTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellArrowTintColor(color: Swift.Int)
+  @_Concurrency.MainActor(unsafe) public func setWalletBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setEmptyWalletTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setEmptyWalletSuggestionTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setLoadingViewColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellPictureBorderColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellPictureBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellRewardTypeTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellTitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellSubtitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellMessageTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellArrowTintColor(color: UIKit.UIColor)
   @_Concurrency.MainActor(unsafe) public func setEmptyWalletText(text: Swift.String)
   @_Concurrency.MainActor(unsafe) public func setEmptyWalletSuggestionText(text: Swift.String)
   @objc deinit
@@ -739,7 +744,7 @@ public typealias BoxBuilder = (_ distance: CoreGraphics.CGFloat) -> SceneKit.SCN
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public func setStrokeColor(color: Swift.Int)
+  @_Concurrency.MainActor(unsafe) public func setStrokeColor(color: UIKit.UIColor)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
@@ -776,15 +781,15 @@ public protocol CampaignListViewDelegate {
   @_Concurrency.MainActor(unsafe) @objc public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
   @_Concurrency.MainActor(unsafe) public func setCampaigns(campaings: Swift.Array<Loooot.Campaign>!)
   @_Concurrency.MainActor(unsafe) public func getCampaigns() -> Swift.Array<Loooot.Campaign>
-  @_Concurrency.MainActor(unsafe) public func setCampaignsTableBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setEmptyCampaignListTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setEmptyCampaignListSuggestionTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setLoadingViewColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellTitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellSubtitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellMessageTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setCellArrowTintColor(color: Swift.Int)
+  @_Concurrency.MainActor(unsafe) public func setCampaignsTableBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setEmptyCampaignListTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setEmptyCampaignListSuggestionTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setLoadingViewColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellTitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellSubtitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellMessageTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setCellArrowTintColor(color: UIKit.UIColor)
   @_Concurrency.MainActor(unsafe) public func setEmptyListText(text: Swift.String)
   @_Concurrency.MainActor(unsafe) public func setEmptyListSuggestionText(text: Swift.String)
   @objc deinit
@@ -813,6 +818,12 @@ public protocol CampaignListViewDelegate {
   public func getSessionId() -> Swift.Int64
   public func setSessionId(sessionId: Swift.Int64)
   public func toJson() -> Swift.String
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @IBDesignable @_Concurrency.MainActor(unsafe) public class GradientUIView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class RewardClaimResponse {
@@ -852,7 +863,7 @@ public class ExtendedItemModel {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
-  @_Concurrency.MainActor(unsafe) public func setButtonBackgroundColor(color: Swift.Int)
+  @_Concurrency.MainActor(unsafe) public func setButtonBackgroundColor(color: UIKit.UIColor)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class GeofenceHelper {
@@ -866,7 +877,7 @@ public class ExtendedItemModel {
 @objc @_inheritsConvenienceInitializers @IBDesignable @_Concurrency.MainActor(unsafe) public class SecondaryButton : UIKit.UIButton {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @_Concurrency.MainActor(unsafe) public func setButtonBackgroundColor(color: Swift.Int)
+  @_Concurrency.MainActor(unsafe) public func setButtonBackgroundColor(color: UIKit.UIColor)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class RedeemType {
@@ -946,6 +957,14 @@ extension CoreLocation.CLLocationCoordinate2D {
   @_Concurrency.MainActor(unsafe) open func animateMapView(latitude: Swift.Double, longitude: Swift.Double, zoom: Swift.Float)
   @_Concurrency.MainActor(unsafe) open func getDebugTextLabel() -> UIKit.UILabel
   @_Concurrency.MainActor(unsafe) open func getMapOverlay() -> UIKit.UIView
+  @_Concurrency.MainActor(unsafe) open func getInfoDialogView() -> UIKit.UIView
+  @_Concurrency.MainActor(unsafe) open func getInfoDialogTitleLabel() -> UIKit.UILabel
+  @_Concurrency.MainActor(unsafe) open func getConstraintInfoDialogTitleTop() -> UIKit.NSLayoutConstraint
+  @_Concurrency.MainActor(unsafe) open func getInfoDialogMessageLabel() -> UIKit.UILabel
+  @_Concurrency.MainActor(unsafe) open func getInfoDialogButtonContainer() -> UIKit.UIView
+  @_Concurrency.MainActor(unsafe) open func getConstraintInfoDialogButtonContainerTop() -> UIKit.NSLayoutConstraint
+  @_Concurrency.MainActor(unsafe) open func getConstraintInfoDialogButtonContainerBottom() -> UIKit.NSLayoutConstraint
+  @_Concurrency.MainActor(unsafe) open func getInfoDialogButton() -> Loooot.PrimaryButton
   @_Concurrency.MainActor(unsafe) public func getMarkerSize() -> CoreGraphics.CGSize
   @_Concurrency.MainActor(unsafe) open func setMarkerSize(size: CoreGraphics.CGSize)
   @_Concurrency.MainActor(unsafe) public func setShouldSaveZoomLevel(shouldSaveZoomLevel: Swift.Bool)
@@ -988,24 +1007,25 @@ public class StartSessionResponse {
   public func setThemeColor(theme: Loooot.ThemeColor)
   public func setThemeImages(theme: Loooot.ThemeImages)
   public func getThemeImages() -> Loooot.ThemeImages
-  public func getPrimaryColor() -> Swift.Int
-  public func getSecondaryColor() -> Swift.Int
-  public func getTextColor() -> Swift.Int
-  public func getPrimaryBackgroundColor() -> Swift.Int
-  public func getCellBackgroundColor() -> Swift.Int
-  public func getPrimaryButtonBackgroundColor() -> Swift.Int
-  public func getPrimaryButtonTextColor() -> Swift.Int
-  public func getSecondaryButtonBackgroundColor() -> Swift.Int
-  public func getSecondaryButtonTextColor() -> Swift.Int
-  public func getDisabledColor() -> Swift.Int
-  public func getErrorColor() -> Swift.Int
-  public func getClusterColor() -> Swift.Int
-  public func getToolbarBackgroundColor() -> Swift.Int
-  public func getToolbarTextColor() -> Swift.Int
-  public func getToolbarBackColor() -> Swift.Int
-  public func getNavBarBackgroundColor() -> Swift.Int
-  public func getNavBarUnselectedColor() -> Swift.Int
-  public func getNavBarSelectedColor() -> Swift.Int
+  public func getPrimaryColor() -> UIKit.UIColor
+  public func getSecondaryColor() -> UIKit.UIColor
+  public func getPrimaryTextColor() -> UIKit.UIColor
+  public func getSecondaryTextColor() -> UIKit.UIColor
+  public func getPrimaryBackgroundColor() -> UIKit.UIColor
+  public func getCellBackgroundColor() -> UIKit.UIColor
+  public func getPrimaryButtonBackgroundColor() -> UIKit.UIColor
+  public func getPrimaryButtonTextColor() -> UIKit.UIColor
+  public func getSecondaryButtonBackgroundColor() -> UIKit.UIColor
+  public func getSecondaryButtonTextColor() -> UIKit.UIColor
+  public func getDisabledColor() -> UIKit.UIColor
+  public func getErrorColor() -> UIKit.UIColor
+  public func getClusterColor() -> UIKit.UIColor
+  public func getToolbarBackgroundColor() -> UIKit.UIColor
+  public func getToolbarTextColor() -> UIKit.UIColor
+  public func getToolbarBackColor() -> UIKit.UIColor
+  public func getNavBarBackgroundColor() -> UIKit.UIColor
+  public func getNavBarUnselectedColor() -> UIKit.UIColor
+  public func getNavBarSelectedColor() -> UIKit.UIColor
   public func getCameraPermissionImage() -> UIKit.UIImage
   public func getCameraDeniedImage() -> UIKit.UIImage
   public func getLocationPermissionImage() -> UIKit.UIImage
@@ -1056,43 +1076,45 @@ public class ClaimRewardModel {
 }
 public class ThemeColor {
   public init()
-  public init(primaryColor: Swift.Int, secondaryColor: Swift.Int, textColor: Swift.Int, primaryBackgroundColor: Swift.Int, cellBackgroundColor: Swift.Int, primaryButtonBackgroundColor: Swift.Int, primaryButtonTextColor: Swift.Int, secondaryButtonBackgroundColor: Swift.Int, secondaryButtonTextColor: Swift.Int, disabledColor: Swift.Int, errorColor: Swift.Int, clusterColor: Swift.Int, toolbarBackgroundColor: Swift.Int, toolbarTextColor: Swift.Int, toolbarBackColor: Swift.Int, navBarBackgroundColor: Swift.Int, navBarUnselectedColor: Swift.Int, navBarSelectedColor: Swift.Int)
-  public func getPrimaryColor() -> Swift.Int
-  public func setPrimaryColor(color: Swift.Int)
-  public func getSecondaryColor() -> Swift.Int
-  public func setSecondaryColor(color: Swift.Int)
-  public func getTextColor() -> Swift.Int
-  public func setTextColor(color: Swift.Int)
-  public func getPrimaryBackgroundColor() -> Swift.Int
-  public func setPrimaryBackgroundColor(color: Swift.Int)
-  public func getCellBackgroundColor() -> Swift.Int
-  public func setCellBackgroundColor(color: Swift.Int)
-  public func getPrimaryButtonBackgroundColor() -> Swift.Int
-  public func setPrimaryButtonBackgroundColor(color: Swift.Int)
-  public func getPrimaryButtonTextColor() -> Swift.Int
-  public func setPrimaryButtonTextColor(color: Swift.Int)
-  public func getSecondaryButtonBackgroundColor() -> Swift.Int
-  public func setSecondaryButtonBackgroundColor(color: Swift.Int)
-  public func getSecondaryButtonTextColor() -> Swift.Int
-  public func setSecondaryButtonTextColor(color: Swift.Int)
-  public func getDisabledColor() -> Swift.Int
-  public func setDisabledColor(color: Swift.Int)
-  public func getErrorColor() -> Swift.Int
-  public func setErrorColor(color: Swift.Int)
-  public func getClusterColor() -> Swift.Int
-  public func setClusterColor(color: Swift.Int)
-  public func getToolbarBackgroundColor() -> Swift.Int
-  public func setToolbarBackgroundColor(color: Swift.Int)
-  public func getToolbarTextColor() -> Swift.Int
-  public func setToolbarTextColor(color: Swift.Int)
-  public func getToolbarBackColor() -> Swift.Int
-  public func setToolbarBackColor(color: Swift.Int)
-  public func getNavBarBackgroundColor() -> Swift.Int
-  public func setNavBarBackgroundColor(color: Swift.Int)
-  public func getNavBarUnselectedColor() -> Swift.Int
-  public func setNavBarUnselectedColor(color: Swift.Int)
-  public func getNavBarSelectedColor() -> Swift.Int
-  public func setNavBarSelectedColor(color: Swift.Int)
+  public init(primaryColor: UIKit.UIColor, secondaryColor: UIKit.UIColor, primaryTextColor: UIKit.UIColor, secondaryTextColor: UIKit.UIColor, primaryBackgroundColor: UIKit.UIColor, cellBackgroundColor: UIKit.UIColor, primaryButtonBackgroundColor: UIKit.UIColor, primaryButtonTextColor: UIKit.UIColor, secondaryButtonBackgroundColor: UIKit.UIColor, secondaryButtonTextColor: UIKit.UIColor, disabledColor: UIKit.UIColor, errorColor: UIKit.UIColor, clusterColor: UIKit.UIColor, toolbarBackgroundColor: UIKit.UIColor, toolbarTextColor: UIKit.UIColor, toolbarBackColor: UIKit.UIColor, navBarBackgroundColor: UIKit.UIColor, navBarUnselectedColor: UIKit.UIColor, navBarSelectedColor: UIKit.UIColor)
+  public func getPrimaryColor() -> UIKit.UIColor
+  public func setPrimaryColor(color: UIKit.UIColor)
+  public func getSecondaryColor() -> UIKit.UIColor
+  public func setSecondaryColor(color: UIKit.UIColor)
+  public func getPrimaryTextColor() -> UIKit.UIColor
+  public func setPrimaryTextColor(color: UIKit.UIColor)
+  public func getSecondaryTextColor() -> UIKit.UIColor
+  public func setSecondaryTextColor(color: UIKit.UIColor)
+  public func getPrimaryBackgroundColor() -> UIKit.UIColor
+  public func setPrimaryBackgroundColor(color: UIKit.UIColor)
+  public func getCellBackgroundColor() -> UIKit.UIColor
+  public func setCellBackgroundColor(color: UIKit.UIColor)
+  public func getPrimaryButtonBackgroundColor() -> UIKit.UIColor
+  public func setPrimaryButtonBackgroundColor(color: UIKit.UIColor)
+  public func getPrimaryButtonTextColor() -> UIKit.UIColor
+  public func setPrimaryButtonTextColor(color: UIKit.UIColor)
+  public func getSecondaryButtonBackgroundColor() -> UIKit.UIColor
+  public func setSecondaryButtonBackgroundColor(color: UIKit.UIColor)
+  public func getSecondaryButtonTextColor() -> UIKit.UIColor
+  public func setSecondaryButtonTextColor(color: UIKit.UIColor)
+  public func getDisabledColor() -> UIKit.UIColor
+  public func setDisabledColor(color: UIKit.UIColor)
+  public func getErrorColor() -> UIKit.UIColor
+  public func setErrorColor(color: UIKit.UIColor)
+  public func getClusterColor() -> UIKit.UIColor
+  public func setClusterColor(color: UIKit.UIColor)
+  public func getToolbarBackgroundColor() -> UIKit.UIColor
+  public func setToolbarBackgroundColor(color: UIKit.UIColor)
+  public func getToolbarTextColor() -> UIKit.UIColor
+  public func setToolbarTextColor(color: UIKit.UIColor)
+  public func getToolbarBackColor() -> UIKit.UIColor
+  public func setToolbarBackColor(color: UIKit.UIColor)
+  public func getNavBarBackgroundColor() -> UIKit.UIColor
+  public func setNavBarBackgroundColor(color: UIKit.UIColor)
+  public func getNavBarUnselectedColor() -> UIKit.UIColor
+  public func setNavBarUnselectedColor(color: UIKit.UIColor)
+  public func getNavBarSelectedColor() -> UIKit.UIColor
+  public func setNavBarSelectedColor(color: UIKit.UIColor)
   @objc deinit
 }
 public protocol ProtoHttpManagerDelegate {
@@ -1156,6 +1178,7 @@ open class BaseLooootManager {
   public func getBundle() -> Foundation.Bundle
   public func getProtoHttpClient() -> Loooot.ProtoHttpManagerDelegate
   public func getTranslationManager() -> Loooot.TranslationManager
+  public func getFontHelper() -> Loooot.FontHelper
   public func startLoooot(viewController: UIKit.UIViewController, playerIdentifier: Swift.String)
   public func startLoooot(viewController: UIKit.UIViewController, playerIdentifier: Swift.String, clientId: Swift.Int64)
   public func endSession()
@@ -1248,6 +1271,19 @@ public class RewardTypeList {
   public func toSimpleItemModelWithRewardType() -> Swift.Array<Loooot.SimpleItemModel>
   public func toSimpleItemModel(campaignName: Swift.String) -> Loooot.SimpleItemModel
   public func toSimpleItemModelWithRewardType(campaignName: Swift.String) -> Loooot.SimpleItemModel
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class FontHelper {
+  public static let shared: Loooot.FontHelper
+  public func initSemiboldFont(fontName: Swift.String) -> Loooot.FontHelper
+  public func initBoldFont(fontName: Swift.String) -> Loooot.FontHelper
+  public func initTitleFont(fontName: Swift.String) -> Loooot.FontHelper
+  public func setSemiboldFont(label: UIKit.UILabel?, ofSize: CoreGraphics.CGFloat)
+  public func setSemiboldFont(button: UIKit.UIButton?, ofSize: CoreGraphics.CGFloat)
+  public func setBoldFont(label: UIKit.UILabel?, ofSize: CoreGraphics.CGFloat)
+  public func setBoldFont(button: UIKit.UIButton?, ofSize: CoreGraphics.CGFloat)
+  public func setTitleFont(label: UIKit.UILabel?, ofSize: CoreGraphics.CGFloat)
+  public func getTabBarFont() -> UIKit.UIFont
   @objc deinit
 }
 @objc @_Concurrency.MainActor(unsafe) open class LocationAnnotationNode : Loooot.LocationNode {
@@ -1390,7 +1426,7 @@ public class SimpleItemModel {
   public static let campaignListViewNoItemsSuggestion: Swift.String
   public static let redeemTokenDialogTitle: Swift.String
   public static let redeemTokenDialogAlert: Swift.String
-  public static let redeemTOkenDialogMessage: Swift.String
+  public static let redeemTokenDialogMessage: Swift.String
   public static let redeemTokenDialogDecline: Swift.String
   public static let redeemTokenDialogConfirm: Swift.String
   public static let couponDetailsViewTicketNumber: Swift.String
@@ -1448,6 +1484,7 @@ public class SimpleItemModel {
   public static let permissionLocationDeniedDetails: Swift.String
   public static let permissionLocationButton: Swift.String
   public static let permissionDeniedButton: Swift.String
+  public static let moreDetails: Swift.String
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class ImageCacher {
@@ -1705,11 +1742,12 @@ extension Loooot.SceneLocationView {
   @_Concurrency.MainActor(unsafe) public static let Identifier: Swift.String
   @objc override dynamic public func awakeFromNib()
   @_Concurrency.MainActor(unsafe) public func setData(extendedItemModel: Loooot.ExtendedItemModel)
-  @_Concurrency.MainActor(unsafe) public func setViewBackgroundColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setRewardTypeTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setTitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setSubtitleTextColor(color: Swift.Int)
-  @_Concurrency.MainActor(unsafe) public func setMessageTextColor(color: Swift.Int)
+  @_Concurrency.MainActor(unsafe) public func setViewBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setPictureContainerBackgroundColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setRewardTypeTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setTitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setSubtitleTextColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func setMessageTextColor(color: UIKit.UIColor)
   @available(iOS 3.0, *)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)

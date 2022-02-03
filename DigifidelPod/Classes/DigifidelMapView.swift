@@ -15,10 +15,19 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var tokenCollectedView: UIView!
     @IBOutlet weak var tokenCollectedRewardName: UILabel!
+    @IBOutlet weak var constraintTokenCollectedRewardNameTop: NSLayoutConstraint!
     @IBOutlet weak var tokenCollectedImage: UIImageView!
     @IBOutlet weak var tokenCollectedDetails: UILabel!
     @IBOutlet weak var tokenCloseView: UIView!
     @IBOutlet weak var tokenCollectedClose: UIImageView!
+    @IBOutlet weak var infoDialogView: UIView!
+    @IBOutlet weak var infoDialogTitle: UILabel!
+    @IBOutlet weak var cnsInfoDialogTitleTop: NSLayoutConstraint!
+    @IBOutlet weak var infoDialogMessage: UILabel!
+    @IBOutlet weak var infoDialogButtonContainer: UIView!
+    @IBOutlet weak var cnsInfoDialogButtonContainerTop: NSLayoutConstraint!
+    @IBOutlet weak var cnsInfoDialogButtonContainerBottom: NSLayoutConstraint!
+    @IBOutlet weak var cnsInfoDialogButtonContainerWidth: NSLayoutConstraint!
     @IBOutlet weak var adBannerView: UIView!
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var debugLayoutText: UILabel!
@@ -28,6 +37,8 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     @IBOutlet weak var debugLayoutEndSession: UIButton!
     
     @IBOutlet weak var tokenCollectedButtonContainer: UIView!
+    @IBOutlet weak var constraintTokenCollectedButtonContainerTop: NSLayoutConstraint!
+    @IBOutlet weak var constraintTokenCollectedButtonContainerBottom: NSLayoutConstraint!
     
     @IBOutlet weak var cHeightAdBannerView: NSLayoutConstraint!
     
@@ -58,6 +69,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     private var loadingViewLocal: LoadingView?
     private var cHeightAdBannerViewLocal: NSLayoutConstraint?
     private var tokenCollectedButton: PrimaryButton?
+    private var infoDialogButton: PrimaryButton?
     private var signalRService: SignalRService?
     
     private var currentPolygon: GMSPolygon!
@@ -177,15 +189,20 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         loadingViewLocal = LoadingView(frame: CGRect(x: screenBounds.width/2 - 25, y:screenBounds.height/2 - 25, width: 50, height: 50))
         getView().addSubview(loadingViewLocal!)
         loadingView.isHidden = true
+        
         var buttonWidth = screenBounds.width
-        if screenBounds.height < screenBounds.width
-        {
+        if screenBounds.height < screenBounds.width {
             buttonWidth = screenBounds.height
         }
         tokenCollectedButton = PrimaryButton(frame: CGRect(x: 0, y:0, width: buttonWidth - 144, height:40))
         cTokenCollectedCloseWidth.constant = buttonWidth - 144
         tokenCollectedButtonContainer.addSubview(tokenCollectedButton!)
         tokenCollectedButton?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onCloseTokenCollected(tapGestureRecognizer:))))
+        
+        infoDialogButton = PrimaryButton(frame: CGRect(x: 0, y:0, width: buttonWidth - 144, height:40))
+        cnsInfoDialogButtonContainerWidth.constant = buttonWidth - 144
+        infoDialogButtonContainer.addSubview(infoDialogButton!)
+        infoDialogButton?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onCloseInfoDialog(tapGestureRecognizer:))))
     }
     
     /**
@@ -206,19 +223,26 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             mapView.setMinZoom(BaseMapView.minimumZoom, maxZoom: BaseMapView.maximumZoom)
         }
         
-        mapOverlay.backgroundColor = UIColor(hex: ThemeManager.shared.getCellBackgroundColor(), alpha: 0.6)
+        mapOverlay.backgroundColor = UIColor(hex: 0x000000, alpha: 0.6)
         tokenCollectedView.layer.cornerRadius = 4
-        tokenCollectedView.backgroundColor = UIColor(hex: ThemeManager.shared.getPrimaryBackgroundColor())
-        tokenCollectedClose.tintColor = UIColor(hex: ThemeManager.shared.getPrimaryColor())
-        tokenCollectedRewardName.textColor = UIColor(hex: ThemeManager.shared.getTextColor())
-        tokenCollectedDetails.textColor = UIColor(hex: ThemeManager.shared.getTextColor())
+        tokenCollectedView.backgroundColor = ThemeManager.shared.getPrimaryBackgroundColor()
+        tokenCollectedClose.tintColor = ThemeManager.shared.getPrimaryColor()
+        tokenCollectedRewardName.textColor = ThemeManager.shared.getPrimaryTextColor()
+        tokenCollectedDetails.textColor = ThemeManager.shared.getPrimaryTextColor()
         tokenCollectedButton!.setTitle(BaseLooootManager.sharedInstance.getTranslationManager().getTranslation(key: TranslationConstants.mapViewConfirm), for: UIButton.State.normal)
-        
         tokenCollectedView.isHidden = true
+        
+        infoDialogView.layer.cornerRadius = 4
+        infoDialogView.backgroundColor = ThemeManager.shared.getPrimaryBackgroundColor()
+        infoDialogTitle.textColor = ThemeManager.shared.getPrimaryTextColor()
+        infoDialogMessage.textColor = ThemeManager.shared.getPrimaryTextColor()
+        infoDialogButton!.setTitle(BaseLooootManager.sharedInstance.getTranslationManager().getTranslation(key: TranslationConstants.mapViewConfirm), for: UIButton.State.normal)
+        infoDialogView.isHidden = true
+        
         setUpDebugLayout()
         
         mapTypeImageView.layer.cornerRadius = 4
-        mapTypeImageView.layer.borderColor = UIColor(hex: ThemeManager.shared.getNavBarBackgroundColor()).cgColor
+        mapTypeImageView.layer.borderColor = ThemeManager.shared.getNavBarBackgroundColor().cgColor
         mapTypeImageView.layer.borderWidth = 1
         mapTypeImageView.image = ThemeManager.shared.getMapTypeSatelliteViewImage()
         let mapTypeTap = UITapGestureRecognizer(target: self, action: #selector(onChangeMapType(tapGestureRecognizer:)))
@@ -265,6 +289,11 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         self.onCloseTokenCollectedAction(tapGestureRecognizer: tapGestureRecognizer)
     }
     
+    @objc private func onCloseInfoDialog(tapGestureRecognizer: UITapGestureRecognizer) {
+        infoDialogView.isHidden = true
+        mapOverlay.isHidden = true
+    }
+    
     private func setUpDebugLayout() {
         debugLayoutText.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0.8)
         
@@ -285,8 +314,8 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
      - parameters:
      - color: The new color.
      */
-    public func setCollectedViewBackgroundColor(color: Int) {
-        tokenCollectedView.backgroundColor = UIColor(hex: color)
+    public func setCollectedViewBackgroundColor(color: UIColor) {
+        tokenCollectedView.backgroundColor = color
     }
     
     /**
@@ -295,8 +324,8 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
      - parameters:
      - color: The new color.
      */
-    public func setMapOverlayColor(color: Int) {
-        mapOverlay.backgroundColor = UIColor(hex: color)
+    public func setMapOverlayColor(color: UIColor) {
+        mapOverlay.backgroundColor = color
     }
     
     /**
@@ -305,8 +334,8 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
      - parameters:
      - color: The new color.
      */
-    public func setTokenCloseColor(color: Int) {
-        tokenCollectedClose.backgroundColor = UIColor(hex: color)
+    public func setTokenCloseColor(color: UIColor) {
+        tokenCollectedClose.backgroundColor = color
     }
     
     /**
@@ -315,8 +344,8 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
      - parameters:
      - color: The new color.
      */
-    public func setTokenClaimTextColor(color: Int) {
-        tokenCollectedDetails.textColor = UIColor(hex: color)
+    public func setTokenClaimTextColor(color: UIColor) {
+        tokenCollectedDetails.textColor = color
     }
     
     /**
@@ -325,8 +354,8 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
      - parameters:
      - color: The new color.
      */
-    public func setAddToWalletButtonTextColor(color: Int) {
-        tokenCollectedButton!.setTitleColor(UIColor(hex: color), for: UIButton.State.normal)
+    public func setAddToWalletButtonTextColor(color: UIColor) {
+        tokenCollectedButton!.setTitleColor(color, for: UIButton.State.normal)
     }
     
     /**
@@ -335,8 +364,8 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
      - parameters:
      - color: The new color.
      */
-    public func setAddToWalletButtonColor(color: Int) {
-        tokenCollectedButton!.backgroundColor = UIColor(hex: color)
+    public func setAddToWalletButtonColor(color: UIColor) {
+        tokenCollectedButton!.backgroundColor = color
     }
     
     /**
@@ -345,7 +374,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
      - parameters:
      - color: The new color.
      */
-    public func setLoadingViewColor(color: Int) {
+    public func setLoadingViewColor(color: UIColor) {
         getLoadingView().setStrokeColor(color: color)
     }
     
@@ -356,7 +385,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
             UIView.AutoresizingMask.flexibleWidth,
             UIView.AutoresizingMask.flexibleHeight
         ]
-        let iconGenerator = GMUDefaultClusterIconGenerator(buckets: [999], backgroundColors: [UIColor(hex: ThemeManager.shared.getClusterColor())])
+        let iconGenerator = GMUDefaultClusterIconGenerator(buckets: [999], backgroundColors: [ThemeManager.shared.getClusterColor()])
         let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
         let renderer = CustomClusterRenderer(mapView: mapView, clusterIconGenerator: iconGenerator)
         renderer.delegate = self
@@ -373,22 +402,22 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     }
     
     private func initializeSignalRService() {
-        if signalRConnectRetryCount >= 5
-        {
+        if signalRConnectRetryCount >= 5 {
             return
         }
-        if !(signalRService?.isConnected ?? false)
-        {
+        if !(signalRService?.isConnected ?? false) {
             signalRConnectRetryCount += 1
             signalRService = SignalRService.shared(callback: self)
             signalRService?.start()
         }
-        else
-        {
+        else {
             signalRConnectRetryCount = 0
-            
         }
-      
+    }
+    
+    private func addToWallet(campaignName: String, expirationDate: Date?, redeemType: Int, qrContent: String?) {
+        let claimedToken = WalletList(id: self.tokenSelected.getRewardTypeId(), name: self.tokenSelected.getName(), name2: self.tokenSelected.getName2(), rewardImageUrl: self.tokenSelected.getImageUrl(), rewardType: redeemType, mapRewardId: self.tokenSelected.getId(), expirationDate: expirationDate, campaignName: campaignName, qrContent: qrContent)
+        NotificationCenter.default.post(name: .rewardRedeemed, object: self, userInfo: [NotificationCenterDataConstants.rewardRedeemKey: claimedToken])
     }
     
     public override func removeMarker(mapReward: MapReward) {
@@ -671,8 +700,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                 }
                 
                 let reward = data!.getData()
-                if data!.getStatusCode() == ResponseCode.errorCampaignNotAvailable
-                {
+                if data!.getStatusCode() == ResponseCode.errorCampaignNotAvailable {
                     self.setTokenCollected(rewardName: nil, message: "", collectionRules: ResponseHelper.getMessage(responseCode: data!.getStatusCode()), isError: true)
                     self.setOverlayHidden(isHidden: false)
                     self.claimTokenBusy = false
@@ -707,6 +735,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                     var campaignMinifiedList = BaseLooootManager.sharedInstance.getCampaignMinifiedList()
                     for position in 0...campaignMinifiedList.count - 1 {
                         if campaignMinifiedList[position].getId() == self.tokenSelected.getCampaignId() {
+                            self.addToWallet(campaignName: campaignMinifiedList[position].getName(), expirationDate: reward.getExpirationDate(), redeemType: reward.getRedeemType()!, qrContent: reward.getQrContent())
                             campaignMinifiedList.remove(at: position)
                             break
                         }
@@ -722,8 +751,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
                 if reward.getRedeemType() == RedeemType.wallet || reward.getRedeemType() == RedeemType.raffle {
                     for campaignMinified in BaseLooootManager.sharedInstance.getCampaignMinifiedList() {
                         if self.tokenSelected.getCampaignId() == campaignMinified.getId() {
-                            let claimedToken = WalletList(id: self.tokenSelected.getRewardTypeId(), name: self.tokenSelected.getName(), name2: self.tokenSelected.getName2(), rewardImageUrl: self.tokenSelected.getImageUrl(), rewardType: Int(reward.getRedeemType()!), mapRewardId: self.tokenSelected.getId(), expirationDate: reward.getExpirationDate(), campaignName: campaignMinified.getName(), qrContent: reward.getQrContent())
-                            NotificationCenter.default.post(name: .rewardRedeemed, object: self, userInfo: [NotificationCenterDataConstants.rewardRedeemKey: claimedToken])
+                            self.addToWallet(campaignName: campaignMinified.getName(), expirationDate: reward.getExpirationDate(), redeemType: reward.getRedeemType()!, qrContent: reward.getQrContent())
                             break
                         }
                     }
@@ -799,12 +827,32 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
         return tokenCollectedRewardName
     }
     
+    override public func getConstraintTokenCollectedRewardNameTop() -> NSLayoutConstraint {
+        return constraintTokenCollectedRewardNameTop
+    }
+    
     public override func getTokenCollectedDetailsLabel() -> UILabel {
         return tokenCollectedDetails
     }
     
     public override func getTokenCollectedImage() -> UIImageView {
         return tokenCollectedImage
+    }
+    
+    public override func getTokenCollectedButtonContainer() -> UIView {
+        return tokenCollectedButtonContainer
+    }
+    
+    public override func getConstraintTokenCollectedButtonContainerTop() -> NSLayoutConstraint {
+        return constraintTokenCollectedButtonContainerTop
+    }
+    
+    public override func getConstraintTokenCollectedButtonContainerBottom() -> NSLayoutConstraint {
+        return constraintTokenCollectedButtonContainerBottom
+    }
+    
+    public override func getTokenCollectedButton() -> PrimaryButton {
+        return tokenCollectedButton!
     }
     
     public override func animateMapView(latitude: Double, longitude: Double, zoom: Float) {
@@ -822,6 +870,38 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     
     public override func getMapOverlay() -> UIView {
         return mapOverlay
+    }
+    
+    public override func getInfoDialogView() -> UIView {
+        return infoDialogView
+    }
+    
+    public override func getInfoDialogTitleLabel() -> UILabel {
+        return infoDialogTitle
+    }
+    
+    public override func getConstraintInfoDialogTitleTop() -> NSLayoutConstraint {
+        return cnsInfoDialogTitleTop
+    }
+    
+    public override func getInfoDialogMessageLabel() -> UILabel {
+        return infoDialogMessage
+    }
+    
+    public override func getInfoDialogButtonContainer() -> UIView {
+        return infoDialogButtonContainer
+    }
+    
+    public override func getConstraintInfoDialogButtonContainerTop() -> NSLayoutConstraint {
+        return cnsInfoDialogButtonContainerTop
+    }
+    
+    public override func getConstraintInfoDialogButtonContainerBottom() -> NSLayoutConstraint {
+        return cnsInfoDialogButtonContainerBottom
+    }
+    
+    public override func getInfoDialogButton() -> PrimaryButton {
+        return infoDialogButton!
     }
     
     public func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
@@ -893,8 +973,7 @@ public class DigifidelMapView : BaseMapView, GMSMapViewDelegate, GMUClusterManag
     }
 }
 
-public class LooootMarker: NSObject, GMUClusterItem
-{
+public class LooootMarker: NSObject, GMUClusterItem {
     // Need to be public for GMUClusterItem.
     public var position: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     public var mapReward: MapReward

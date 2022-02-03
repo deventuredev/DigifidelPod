@@ -352,6 +352,15 @@ SWIFT_CLASS("_TtC6Loooot25ExtendedItemTableViewCell")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+IB_DESIGNABLE
+SWIFT_CLASS("_TtC6Loooot14GradientUIView")
+@interface GradientUIView : UIView
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (void)layoutSubviews;
+@end
+
 @class CAShapeLayer;
 
 /// This UIView is used to display a continuous circular loading bar.
@@ -562,18 +571,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didRemoveNode:(SCNNode * _Nonnull)node forAnchor:(ARAnchor * _Nonnull)anchor;
 @end
 
-@class SCNScene;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface SceneLocationView (SWIFT_EXTENSION(Loooot))
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didRenderScene:(SCNScene * _Nonnull)scene atTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer updateAtTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didApplyAnimationsAtTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didSimulatePhysicsAtTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didApplyConstraintsAtTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer willRenderScene:(SCNScene * _Nonnull)scene atTime:(NSTimeInterval)time;
-@end
-
 @class ARSession;
 @class ARCamera;
 
@@ -585,6 +582,18 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)sessionInterruptionEnded:(ARSession * _Nonnull)session;
 - (BOOL)sessionShouldAttemptRelocalization:(ARSession * _Nonnull)session SWIFT_WARN_UNUSED_RESULT SWIFT_AVAILABILITY(ios,introduced=11.3);
 - (void)session:(ARSession * _Nonnull)session didOutputAudioSampleBuffer:(CMSampleBufferRef _Nonnull)audioSampleBuffer;
+@end
+
+@class SCNScene;
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface SceneLocationView (SWIFT_EXTENSION(Loooot))
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didRenderScene:(SCNScene * _Nonnull)scene atTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer updateAtTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didApplyAnimationsAtTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didSimulatePhysicsAtTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didApplyConstraintsAtTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer willRenderScene:(SCNScene * _Nonnull)scene atTime:(NSTimeInterval)time;
 @end
 
 
@@ -625,6 +634,7 @@ SWIFT_CLASS("_TtC6Loooot32TermsAndConditionsViewController")
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 
@@ -1017,6 +1027,15 @@ SWIFT_CLASS("_TtC6Loooot25ExtendedItemTableViewCell")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+IB_DESIGNABLE
+SWIFT_CLASS("_TtC6Loooot14GradientUIView")
+@interface GradientUIView : UIView
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (void)layoutSubviews;
+@end
+
 @class CAShapeLayer;
 
 /// This UIView is used to display a continuous circular loading bar.
@@ -1227,18 +1246,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didRemoveNode:(SCNNode * _Nonnull)node forAnchor:(ARAnchor * _Nonnull)anchor;
 @end
 
-@class SCNScene;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface SceneLocationView (SWIFT_EXTENSION(Loooot))
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didRenderScene:(SCNScene * _Nonnull)scene atTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer updateAtTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didApplyAnimationsAtTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didSimulatePhysicsAtTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didApplyConstraintsAtTime:(NSTimeInterval)time;
-- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer willRenderScene:(SCNScene * _Nonnull)scene atTime:(NSTimeInterval)time;
-@end
-
 @class ARSession;
 @class ARCamera;
 
@@ -1250,6 +1257,18 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)sessionInterruptionEnded:(ARSession * _Nonnull)session;
 - (BOOL)sessionShouldAttemptRelocalization:(ARSession * _Nonnull)session SWIFT_WARN_UNUSED_RESULT SWIFT_AVAILABILITY(ios,introduced=11.3);
 - (void)session:(ARSession * _Nonnull)session didOutputAudioSampleBuffer:(CMSampleBufferRef _Nonnull)audioSampleBuffer;
+@end
+
+@class SCNScene;
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface SceneLocationView (SWIFT_EXTENSION(Loooot))
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didRenderScene:(SCNScene * _Nonnull)scene atTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer updateAtTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didApplyAnimationsAtTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didSimulatePhysicsAtTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer didApplyConstraintsAtTime:(NSTimeInterval)time;
+- (void)renderer:(id <SCNSceneRenderer> _Nonnull)renderer willRenderScene:(SCNScene * _Nonnull)scene atTime:(NSTimeInterval)time;
 @end
 
 
@@ -1290,6 +1309,7 @@ SWIFT_CLASS("_TtC6Loooot32TermsAndConditionsViewController")
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 
