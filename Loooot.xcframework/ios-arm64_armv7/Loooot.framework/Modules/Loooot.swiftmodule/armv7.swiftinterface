@@ -521,9 +521,8 @@ extension Loooot.SceneLocationEstimate {
 @_hasMissingDesignatedInitializers public class LanguageIdentifier {
   public static let english: Swift.Int64
   public static let french: Swift.Int64
-  public static let romanian: Swift.Int64
-  public static let german: Swift.Int64
   public static let creole: Swift.Int64
+  public static func checkIfLanguageIdentifierExists(_ languageIdentifier: Swift.Int64) -> Swift.Bool
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @IBDesignable @_Concurrency.MainActor(unsafe) public class CampaignTableViewCell : UIKit.UITableViewCell {
@@ -1278,6 +1277,9 @@ public class RewardTypeList {
   public func initSemiboldFont(fontName: Swift.String) -> Loooot.FontHelper
   public func initBoldFont(fontName: Swift.String) -> Loooot.FontHelper
   public func initTitleFont(fontName: Swift.String) -> Loooot.FontHelper
+  public func getSemiboldFont(ofSize: CoreGraphics.CGFloat) -> UIKit.UIFont?
+  public func getBoldFont(ofSize: CoreGraphics.CGFloat) -> UIKit.UIFont?
+  public func getTitleFont(ofSize: CoreGraphics.CGFloat) -> UIKit.UIFont?
   public func setSemiboldFont(label: UIKit.UILabel?, ofSize: CoreGraphics.CGFloat)
   public func setSemiboldFont(button: UIKit.UIButton?, ofSize: CoreGraphics.CGFloat)
   public func setBoldFont(label: UIKit.UILabel?, ofSize: CoreGraphics.CGFloat)
