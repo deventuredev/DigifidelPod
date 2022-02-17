@@ -1123,6 +1123,7 @@ public protocol ProtoHttpManagerDelegate {
   func getLanguagesByClient(completion: @escaping (_ data: Swift.Array<Loooot.LanguageModel>?, _ isSuccessful: Swift.Bool) -> Swift.Void)
   func getLanguagesByClient(clientId: Loooot.LooootClientIdEnum, completion: @escaping (_ data: Swift.Array<Loooot.LanguageModel>?, _ isSuccessful: Swift.Bool) -> Swift.Void)
   func setTermsAndConditionsUrl(url: Swift.String)
+  func resetTermsAndConditionsAndFAQUrl()
   func initializeLooootManager(playerIdentifier: Swift.String, clientId: Swift.Int64, completion: @escaping (_ data: Loooot.InitResponse?, _ isSuccessful: Swift.Bool) -> Swift.Void)
   func startSession(currentTime: Swift.String, completion: @escaping (_ data: Loooot.StartSessionResponse?, _ isSuccessful: Swift.Bool) -> Swift.Void)
   func endSession(currentTime: Swift.String)
@@ -1212,6 +1213,7 @@ open class BaseLooootManager {
   public func getCampaignIdList() -> Swift.Array<Swift.Int64>
   public func dismissMenu()
   public func getCurrentLanguageId() -> Swift.Int64
+  public func resetLooootManagerData()
   @objc deinit
 }
 public class RewardTypeDetails {

@@ -47,6 +47,11 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
         return "\(LooootConfig.webProductionUrl)\(EndPoint.faq)?\(StringConstants.clientId)=\(BaseLooootManager.sharedInstance.getClientId())&\(StringConstants.languageId)=\(BaseLooootManager.sharedInstance.getCurrentLanguageId())"
     }
     
+    public func resetTermsAndConditionsAndFAQUrl() {
+        termsAndConditionsUrl = ""
+        faqUrl = ""
+    }
+    
     /**
      This method is used to return available languages of the app based on the default client id, which is LooootClientIdEnum.default.
      
