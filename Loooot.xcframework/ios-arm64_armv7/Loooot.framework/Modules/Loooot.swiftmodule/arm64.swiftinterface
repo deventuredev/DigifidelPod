@@ -1120,7 +1120,8 @@ public protocol ProtoHttpManagerDelegate {
   static var shared: Loooot.ProtoHttpManagerDelegate! { get }
   func getTermsAndConditionsUrl() -> Swift.String
   func getFAQUrl() -> Swift.String
-  func getLanguagesByClient(clientId: Swift.Int64, completion: @escaping (_ data: Swift.Array<Loooot.LanguageModel>?, _ isSuccessful: Swift.Bool) -> Swift.Void)
+  func getLanguagesByClient(completion: @escaping (_ data: Swift.Array<Loooot.LanguageModel>?, _ isSuccessful: Swift.Bool) -> Swift.Void)
+  func getLanguagesByClient(clientId: Loooot.LooootClientIdEnum, completion: @escaping (_ data: Swift.Array<Loooot.LanguageModel>?, _ isSuccessful: Swift.Bool) -> Swift.Void)
   func setTermsAndConditionsUrl(url: Swift.String)
   func initializeLooootManager(playerIdentifier: Swift.String, clientId: Swift.Int64, completion: @escaping (_ data: Loooot.InitResponse?, _ isSuccessful: Swift.Bool) -> Swift.Void)
   func startSession(currentTime: Swift.String, completion: @escaping (_ data: Loooot.StartSessionResponse?, _ isSuccessful: Swift.Bool) -> Swift.Void)
@@ -1179,7 +1180,7 @@ open class BaseLooootManager {
   public func getTranslationManager() -> Loooot.TranslationManager
   public func getFontHelper() -> Loooot.FontHelper
   public func startLoooot(viewController: UIKit.UIViewController, playerIdentifier: Swift.String)
-  public func startLoooot(viewController: UIKit.UIViewController, playerIdentifier: Swift.String, clientId: Swift.Int64)
+  public func startLoooot(viewController: UIKit.UIViewController, playerIdentifier: Swift.String, clientId: Loooot.LooootClientIdEnum)
   public func endSession()
   public func getPlayerIdentifier() -> Swift.String
   public func setPlayerIdentifier(playerIdentifier: Swift.String)
@@ -1543,9 +1544,24 @@ public class WalletList : Loooot.RewardTypeList {
   public func toExtendedItemModel() -> Loooot.ExtendedItemModel
   @objc deinit
 }
+public enum LooootClientIdEnum : Swift.Int64 {
+  case rubyGoHaiti
+  case rubyGoJamaica
+  case rubyGoTrinidadAndTobago
+  case rubyGoStLucia
+  public static var `default`: Loooot.LooootClientIdEnum {
+    get
+  }
+  public init?(rawValue: Swift.Int64)
+  public typealias RawValue = Swift.Int64
+  public var rawValue: Swift.Int64 {
+    get
+  }
+}
 @_hasMissingDesignatedInitializers public class TranslationManager {
   public static let shared: Loooot.TranslationManager
   public func initTranslations()
+  public func resetTranslations()
   public func setCurrentLanguageIdentifier(languageIdentifier: Swift.Int64)
   public func getCurrentLanguageIdentifier() -> Swift.Int64
   public func getTranslation(key: Swift.String) -> Swift.String
@@ -1632,7 +1648,6 @@ public class StringWrapper {
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class LooootConfig {
-  public static let clientId: Swift.Int64
   public static let webApiProductionUrl: Swift.String
   public static let webProductionUrl: Swift.String
   @objc deinit
@@ -1863,6 +1878,9 @@ extension Loooot.Reachability.Connection : Swift.Equatable {}
 extension Loooot.Reachability.Connection : Swift.Hashable {}
 extension Loooot.LocationEstimateMethod : Swift.Equatable {}
 extension Loooot.LocationEstimateMethod : Swift.Hashable {}
+extension Loooot.LooootClientIdEnum : Swift.Equatable {}
+extension Loooot.LooootClientIdEnum : Swift.Hashable {}
+extension Loooot.LooootClientIdEnum : Swift.RawRepresentable {}
 @available(iOS 11.0, *)
 extension Loooot.SceneLocationView.ARTrackingType : Swift.Equatable {}
 @available(iOS 11.0, *)

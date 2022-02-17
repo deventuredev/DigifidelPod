@@ -47,9 +47,30 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
         return "\(LooootConfig.webProductionUrl)\(EndPoint.faq)?\(StringConstants.clientId)=\(BaseLooootManager.sharedInstance.getClientId())&\(StringConstants.languageId)=\(BaseLooootManager.sharedInstance.getCurrentLanguageId())"
     }
     
-    public func getLanguagesByClient(clientId: Int64, completion: @escaping (_ data: Array<LanguageModel>?, _ isSuccessful: Bool) -> Void) {
+    /**
+     This method is used to return available languages of the app based on the default client id, which is LooootClientIdEnum.default.
+     
+     - parameters:
+        - completion: The block to execute once the request has finished.
+        - data: The data of type Array? of LanguageModel returned by the api call.
+        - isSuccessful: True if the api call has ended successfully, false otherwise.
+     */
+    public func getLanguagesByClient(completion: @escaping (_ data: Array<LanguageModel>?, _ isSuccessful: Bool) -> Void) {
+        getLanguagesByClient(clientId: LooootClientIdEnum.default, completion: completion)
+    }
+    
+    /**
+     This method is used to return available languages of the app based on the clientId.
+     
+     - parameters:
+        - clientId: The client id based on which available languages will be returned.
+        - completion: The block to execute once the request has finished.
+        - data: The data of type Array? of LanguageModel returned by the api call.
+        - isSuccessful: True if the api call has ended successfully, false otherwise.
+     */
+    public func getLanguagesByClient(clientId: LooootClientIdEnum, completion: @escaping (_ data: Array<LanguageModel>?, _ isSuccessful: Bool) -> Void) {
         let parameters = [
-            StringConstants.clientId: String(clientId)
+            StringConstants.clientId: String(clientId.rawValue)
         ]
         
         let url = generateQueryUrl(apiEndpoint: EndPoint.getLanguagesByClient, parameters: parameters)
