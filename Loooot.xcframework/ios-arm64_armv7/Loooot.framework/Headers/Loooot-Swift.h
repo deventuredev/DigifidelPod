@@ -192,6 +192,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 @import ARKit;
 @import CoreGraphics;
+@import CoreImage;
 @import CoreLocation;
 @import CoreMedia;
 @import Foundation;
@@ -259,6 +260,19 @@ SWIFT_CLASS("_TtC6Loooot11BaseMapView")
 @interface BaseMapView : UIView
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class CIImage;
+
+SWIFT_CLASS("_TtC6Loooot21CIEANBarcodeGenerator")
+@interface CIEANBarcodeGenerator : CIFilter
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nonnull attributes;
++ (void)register;
+- (void)setInputMessageWithMessage:(NSString * _Nonnull)message;
+@property (nonatomic, readonly, strong) CIImage * _Nullable outputImage;
+- (void)setDefaults;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -867,6 +881,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 @import ARKit;
 @import CoreGraphics;
+@import CoreImage;
 @import CoreLocation;
 @import CoreMedia;
 @import Foundation;
@@ -934,6 +949,19 @@ SWIFT_CLASS("_TtC6Loooot11BaseMapView")
 @interface BaseMapView : UIView
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class CIImage;
+
+SWIFT_CLASS("_TtC6Loooot21CIEANBarcodeGenerator")
+@interface CIEANBarcodeGenerator : CIFilter
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nonnull attributes;
++ (void)register;
+- (void)setInputMessageWithMessage:(NSString * _Nonnull)message;
+@property (nonatomic, readonly, strong) CIImage * _Nullable outputImage;
+- (void)setDefaults;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 

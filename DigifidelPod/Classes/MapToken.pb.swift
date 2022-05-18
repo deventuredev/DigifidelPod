@@ -123,6 +123,10 @@ struct TokenTypeDetailsModelProto {
 
   var campaignID: Int64 = 0
 
+  var couponDisplayType: Int32 = 0
+
+  var couponBarcodeType: Int32 = 0
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -215,6 +219,18 @@ struct TokenTypeByIdModel {
 
   init() {}
 }
+
+#if swift(>=5.5) && canImport(_Concurrency)
+extension GetTokensModelProto: @unchecked Sendable {}
+extension MapTokenTypeProtoList: @unchecked Sendable {}
+extension MapTokenTypeProtoModel: @unchecked Sendable {}
+extension MinifiedMapTokenProtoModel: @unchecked Sendable {}
+extension TokenTypeDetailsModelProto: @unchecked Sendable {}
+extension TokenTypeModelProto: @unchecked Sendable {}
+extension ClaimModelProto: @unchecked Sendable {}
+extension GetAllTokensModelProto: @unchecked Sendable {}
+extension TokenTypeByIdModel: @unchecked Sendable {}
+#endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
@@ -444,6 +460,8 @@ extension TokenTypeDetailsModelProto: SwiftProtobuf.Message, SwiftProtobuf._Mess
     9: .same(proto: "qrContent"),
     10: .same(proto: "status"),
     11: .same(proto: "campaignId"),
+    12: .same(proto: "couponDisplayType"),
+    13: .same(proto: "couponBarcodeType"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -463,6 +481,8 @@ extension TokenTypeDetailsModelProto: SwiftProtobuf.Message, SwiftProtobuf._Mess
       case 9: try { try decoder.decodeSingularStringField(value: &self.qrContent) }()
       case 10: try { try decoder.decodeSingularInt32Field(value: &self.status) }()
       case 11: try { try decoder.decodeSingularInt64Field(value: &self.campaignID) }()
+      case 12: try { try decoder.decodeSingularInt32Field(value: &self.couponDisplayType) }()
+      case 13: try { try decoder.decodeSingularInt32Field(value: &self.couponBarcodeType) }()
       default: break
       }
     }
@@ -502,6 +522,12 @@ extension TokenTypeDetailsModelProto: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if self.campaignID != 0 {
       try visitor.visitSingularInt64Field(value: self.campaignID, fieldNumber: 11)
     }
+    if self.couponDisplayType != 0 {
+      try visitor.visitSingularInt32Field(value: self.couponDisplayType, fieldNumber: 12)
+    }
+    if self.couponBarcodeType != 0 {
+      try visitor.visitSingularInt32Field(value: self.couponBarcodeType, fieldNumber: 13)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -517,6 +543,8 @@ extension TokenTypeDetailsModelProto: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if lhs.qrContent != rhs.qrContent {return false}
     if lhs.status != rhs.status {return false}
     if lhs.campaignID != rhs.campaignID {return false}
+    if lhs.couponDisplayType != rhs.couponDisplayType {return false}
+    if lhs.couponBarcodeType != rhs.couponBarcodeType {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

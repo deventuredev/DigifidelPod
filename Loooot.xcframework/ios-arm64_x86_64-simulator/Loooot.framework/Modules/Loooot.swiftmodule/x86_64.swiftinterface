@@ -215,6 +215,7 @@ extension Swift.FloatingPoint {
   public static let adShown: Swift.String
   public static let adTapped: Swift.String
   public static let getLanguagesByClient: Swift.String
+  public static let getClients: Swift.String
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @IBDesignable @_Concurrency.MainActor(unsafe) public class ExtendedItemTableViewCell : UIKit.UITableViewCell {
@@ -597,6 +598,12 @@ public protocol WalletViewDelegate {
   @_Concurrency.MainActor(unsafe) public var scalingScheme: Loooot.ScalingScheme
   @_Concurrency.MainActor(unsafe) public init(location: CoreLocation.CLLocation?)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class CouponBarcodeType {
+  public static let choose: Swift.Int
+  public static let code128: Swift.Int
+  public static let ean13: Swift.Int
   @objc deinit
 }
 public class ClaimTokenSignalRModel {
@@ -1120,6 +1127,7 @@ public protocol ProtoHttpManagerDelegate {
   static var shared: Loooot.ProtoHttpManagerDelegate! { get }
   func getTermsAndConditionsUrl() -> Swift.String
   func getFAQUrl() -> Swift.String
+  func getClients(_ term: Swift.String, completion: @escaping (_ data: Swift.Array<Loooot.ClientModel>?, _ isSuccessful: Swift.Bool) -> Swift.Void)
   func getLanguagesByClient(completion: @escaping (_ data: Swift.Array<Loooot.LanguageModel>?, _ isSuccessful: Swift.Bool) -> Swift.Void)
   func getLanguagesByClient(clientId: Loooot.LooootClientIdEnum, completion: @escaping (_ data: Swift.Array<Loooot.LanguageModel>?, _ isSuccessful: Swift.Bool) -> Swift.Void)
   func setTermsAndConditionsUrl(url: Swift.String)
@@ -1146,6 +1154,24 @@ public protocol ProtoHttpManagerDelegate {
   @_Concurrency.MainActor(unsafe) @objc public func webViewDidFinishLoad(_ webView: UIKit.UIWebView)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objcMembers public class CIEANBarcodeGeneratorConstructor : CoreImage.CIFilterConstructor {
+  @objc public func filter(withName name: Swift.String) -> CoreImage.CIFilter?
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class CIEANBarcodeGenerator : CoreImage.CIFilter {
+  @objc override dynamic public var attributes: [Swift.String : Any] {
+    @objc get
+  }
+  @objc public class func register()
+  @objc public func setInputMessage(message: Swift.String)
+  @objc override dynamic public var outputImage: CoreImage.CIImage? {
+    @objc get
+  }
+  @objc override dynamic public func setDefaults()
+  @objc override dynamic public init()
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
 public protocol MenuDelegate {
@@ -1218,7 +1244,7 @@ open class BaseLooootManager {
 }
 public class RewardTypeDetails {
   public init()
-  public init(id: Swift.Int64?, whitelabelId: Swift.Int64?, name: Swift.String?, name2: Swift.String?, message: Swift.String?, imageUrl: Swift.String?, redeemType: Swift.Int?, redemptionRules: Swift.String?, promotionImageUrl: Swift.String?, qrContent: Swift.String?, status: Swift.Int?)
+  public init(id: Swift.Int64?, whitelabelId: Swift.Int64?, name: Swift.String?, name2: Swift.String?, message: Swift.String?, imageUrl: Swift.String?, redeemType: Swift.Int?, redemptionRules: Swift.String?, promotionImageUrl: Swift.String?, qrContent: Swift.String?, status: Swift.Int?, couponDisplayType: Swift.Int?, couponBarcodeType: Swift.Int?)
   public init(json: [Swift.String : Any])
   public func getId() -> Swift.Int64?
   public func setId(id: Swift.Int64?)
@@ -1243,6 +1269,10 @@ public class RewardTypeDetails {
   public func getStatus() -> Swift.Int?
   public func setStatus(status: Swift.Int?)
   public func getFullName() -> Swift.String
+  public func setCouponDisplayType(couponDisplayType: Swift.Int?)
+  public func getCouponDisplayType() -> Swift.Int?
+  public func setCouponBarcodeType(couponBarcodeType: Swift.Int?)
+  public func getCouponBarcodeType() -> Swift.Int?
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class NotificationCenterDataConstants {
@@ -1524,6 +1554,14 @@ public class SimpleItemModel {
   public static let redeemedAt: Swift.String
   public static let sessionId: Swift.String
   public static let languageId: Swift.String
+  public static let term: Swift.String
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class CouponDisplayType {
+  public static let choose: Swift.Int
+  public static let qrCode: Swift.Int
+  public static let barcode: Swift.Int
+  public static let digits: Swift.Int
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class PermissionModelHelper {
@@ -1867,6 +1905,15 @@ public class EndSessionModel {
   public static var shared: Loooot.BackgroundHelper
   public func getBackground() -> QuartzCore.CALayer
   public func getBackgroundInternal() -> QuartzCore.CALayer
+  @objc deinit
+}
+public class ClientModel {
+  public init()
+  public init(id: Swift.Int64, name: Swift.String)
+  public func getId() -> Swift.Int64
+  public func setId(id: Swift.Int64)
+  public func getName() -> Swift.String
+  public func setName(name: Swift.String)
   @objc deinit
 }
 extension SceneKit.SCNVector3 {

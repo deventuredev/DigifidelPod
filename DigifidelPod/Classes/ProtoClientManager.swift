@@ -51,7 +51,56 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
         termsAndConditionsUrl = ""
         faqUrl = ""
     }
-    
+
+    public func getClients(_ term: String, completion: @escaping (Array<ClientModel>?, Bool) -> Void) {
+        let parameters = [
+            StringConstants.term: term
+        ]
+        
+        let url = generateQueryUrl(apiEndpoint: EndPoint.getClients, parameters: parameters)
+        let urlRequest = createURLRequest(url: url, method: httpMethodGet)
+        let task = urlSession.dataTask(with: urlRequest) { (data, response, error) in
+            
+            do
+            {
+                if(data == nil)
+                {
+                    DispatchQueue.main.async {
+                        completion(nil, false)
+                    }
+                    return
+                }
+                let protoModel = try GetLanguagesResponseProto.init(serializedData: data!)
+
+                if protoModel.response.success
+                {
+                    var languages = Array<ClientModel>()
+                    for protoLanguage in protoModel.data {
+                        let language = ClientModel(id: protoLanguage.id, name: protoLanguage.name)
+                        languages.append(language)
+                    }
+                    
+                    DispatchQueue.main.async {
+                        completion(languages, true)
+                    }
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    completion(nil, false)
+                }
+            }
+            catch let error
+            {
+                DispatchQueue.main.async {
+                    completion(nil, false)
+                }
+                print(error.localizedDescription)
+            }
+        }
+        task.resume()
+    }
+
     /**
      This method is used to return available languages of the app based on the default client id, which is LooootClientIdEnum.default.
      
@@ -571,6 +620,8 @@ public class ProtoClientManager: ProtoHttpManagerDelegate {
                     rewardTypeDetails.setQrContent(qrContent: item.qrContent)
                     rewardTypeDetails.setStatus(status: Int(item.status))
                     rewardTypeDetails.setRedemptionRules(redemptionRules: item.redemtionRules)
+                    rewardTypeDetails.setCouponDisplayType(couponDisplayType: Int(item.couponDisplayType))
+                    rewardTypeDetails.setCouponBarcodeType(couponBarcodeType: Int(item.couponBarcodeType))
                     
                     DispatchQueue.main.async {
                         completion(rewardTypeDetails, true)
